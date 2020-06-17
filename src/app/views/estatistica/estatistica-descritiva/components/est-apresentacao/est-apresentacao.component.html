@@ -1,0 +1,67 @@
+<est-base-view>
+<!--Conteúdo teórico -->
+  <div class="row content-container col-12 row px-0 align-items-center justify-content-center">
+ 
+    <h3 class="text-center"><strong>Apresentação de Dados</strong></h3>
+      <br><br><br>
+      <!-- Explicação -->
+      <p class="p-justify"> O objetivo da <strong>apresentação de dados</strong> é exibir dados 
+        de uma pesquisa.
+      </p>
+      <p class="p-justify"> Toda a característica que, observada em uma unidade de pesquisa, 
+        pode variar de unidade para unidade é chamada de Variável. Exemplos: idade, 
+        nota das provas, entre outras. As variáveis são subdivididas em qualitativas e 
+        quantitativas. 
+      </p>
+
+      <!-- Variáveis Qualitativas-->
+      <p class="p-justify"> <strong>Variáveis Qualitativas:</strong> As variáveis qualitativas (ou categóricas) 
+        são aquelas que representam uma classificação dos indivíduos que pode ser nominal ou ordinal.
+      </p>
+      <ul>
+        <li>
+          <span style="color: rgb(18, 76, 184);">Variáveis nominais:</span> não existe ordenação dentre as categorias. 
+          <strong>Exemplos:</strong> cor dos olhos, fumante/não fumante, doente/sadio.
+        </li>
+        <li>
+          <span style="color: rgb(18, 76, 184);">Variáveis ordinais:</span> existe uma ordenação entre as categorias. 
+          <strong>Exemplos:</strong> escolaridade (1º, 2º, 3º graus), estágio da doença 
+          (inicial, intermediário, terminal).
+        </li>
+      </ul>
+
+      <!-- Variáveis Quantitativas-->
+      <p class="p-justify"> <strong>Variáveis Quantitativas:</strong>  As variáveis quantitativas são 
+        aquelas que podem ser descritas por números, sendo estas classificadas entre contínuas e 
+        discretas.
+      </p>
+    
+      <ul>
+        <li>
+          <span style="color: rgb(18, 76, 184);">Variáveis discretas:</span> a variável é avaliada em números que são resultados de contagens. 
+           <strong>Exemplos:</strong> número de filhos, número de bactérias por litro de leite.
+        </li>
+        <li>
+          <span style="color: rgb(18, 76, 184);">Variáveis contínuas:</span> a variável é avaliada em números que são resultados de 
+          medições e, por isso, podem assumir valores com casas decimais. 
+          <strong>Exemplos:</strong> massa (balança), altura (régua).
+        </li>
+      </ul>
+
+  </div>
+
+  <!--Mini menu lateral-->
+  <div class="rightbar px-3 vh-100">
+    <div class="row content-container col-12 row px-0 align-items-center justify-content-center">
+        <div class="principalDiv">
+         <div class="textDiv">
+           <p class="p-justify"><strong> Dados podem ser apresentados na forma de uma tabela, ou gráfico.
+            Escolha abaixo a propriedade que deseja acessar:</strong> 
+            </p>
+         </div>
+            <est-btn *ngFor="let button of buttons; let i = index" [name]="button.title" [route]="button.route"></est-btn>
+        </div>
+    </div>
+  </div>
+
+</est-base-view>

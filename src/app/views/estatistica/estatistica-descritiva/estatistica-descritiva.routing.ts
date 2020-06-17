@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 // Componentes
 import { EstDefinicaoComponent } from './components/est-definicao/est-definicao.component';
+import { EstApresentacaoComponent } from './components/est-apresentacao/est-apresentacao.component'
 import { EstReferenciasComponent } from './components/est-referencias/est-referencias.component';
 import { EstViewComponent } from './components/est-view/est-view.component';
 
@@ -20,6 +21,10 @@ const routes: Routes = [{
       {
         path: 'est_definicao',
         component: EstDefinicaoComponent
+      },
+      {
+        path: 'est_apresentacao',
+        component: EstApresentacaoComponent
       },
       {
         path: 'est_referencias',

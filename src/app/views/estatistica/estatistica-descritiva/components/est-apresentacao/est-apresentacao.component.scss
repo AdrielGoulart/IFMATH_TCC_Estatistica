@@ -1,0 +1,22 @@
+@import '../../../../../../assets/styles/theme';
+
+.rightbar {
+    height: calc(100vh - 80px) !important;
+
+    .principalDiv{
+        position: relative; 
+        transform: translateY(50%); 
+        width: 50%;
+    }
+    
+    .textDiv{
+        background-color: coral; 
+        border-radius: 20%; 
+        //Permite que quando o texto estiver ultrapassando o tamanho da div
+        //ele aumente a div para o texto não sair para fora
+        float: left; 
+        text-align: center;
+    }
+}
+
+
