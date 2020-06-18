@@ -1,7 +1,7 @@
 @import '../../../../../../assets/styles/theme';
 
 .rightbar {
-    height: calc(100vh - 450px) !important;
+    height: calc(100vh - 80px) !important;
     //Borda do lado esquerdo da telas
     border-left: 1px solid $background-color-orange;
     //Esse é a propriedade que cria aquele scroll dentro desse componente
