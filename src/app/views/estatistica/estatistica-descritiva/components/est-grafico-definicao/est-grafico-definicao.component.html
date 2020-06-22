@@ -1,0 +1,57 @@
+<section class="definition">
+  <!-- Estatística Descritiva -->
+  <div class="row definition__group mt-4">
+
+    <div class="col-12">
+      <h3 class="text-center">Gráficos</h3>
+      <br>
+      <!-- Explicação -->
+      <p class="p-justify"> Os <strong>gráficos</strong> estatísticos são ferramentas 
+        para descrição de dados, uma vez que possuem a capacidade de transmitir várias informações 
+        ao leitor, em apenas uma figura. Escolha abaixo o tipo de gráfico que deseja acessar:
+      </p>
+
+    </div>
+
+      <div class="container">
+        <div class="row">
+
+          <div class="col-sm">
+            <div class="leftDiv">
+            <div class="textDiv ">
+              <p> <strong> Variáveis Qualitativas</strong> </p>
+            </div>
+            <est-btn *ngFor="let grafico of graficosQuali; let i = index" [name]="grafico.title" [route]="grafico.route"></est-btn>
+          </div>
+        </div>
+
+        <!--Variáveis Quantitativas-->
+          <div class="col-sm rigthDiv">
+            <div class="textDiv ">
+              <p> <strong> Variáveis Quantitativas</strong> </p>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <div class="rigthDiv">
+                  <div class="textDiv ">
+                    <p> <strong> Discretas</strong> </p>
+                  </div>
+                  <est-btn *ngFor="let grafico of graficosQuantDis; let i = index" [name]="grafico.title" [route]="grafico.route"></est-btn>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="rigthDiv">
+                  <div class="textDiv ">
+                    <p> <strong> Contínuas</strong> </p>
+                  </div>
+                  <est-btn *ngFor="let grafico of graficosQuantCont; let i = index" [name]="grafico.title" [route]="grafico.route"></est-btn>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+
+  </div>
+</section>

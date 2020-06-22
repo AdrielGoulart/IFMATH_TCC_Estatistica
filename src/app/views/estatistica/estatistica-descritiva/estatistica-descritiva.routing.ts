@@ -6,6 +6,7 @@ import { EstDefinicaoComponent } from './components/est-definicao/est-definicao.
 import { EstApresentacaoComponent } from './components/est-apresentacao/est-apresentacao.component'
 import { EstReferenciasComponent } from './components/est-referencias/est-referencias.component';
 import { EstViewComponent } from './components/est-view/est-view.component';
+import { EstGraficoDefinicaoComponent } from './components/est-grafico-definicao/est-grafico-definicao.component'
 
 const routes: Routes = [{
   
@@ -18,6 +19,7 @@ const routes: Routes = [{
           pathMatch: 'full',
       },
       
+      //Rotas menu lateral principal
       {
         path: 'est_definicao',
         component: EstDefinicaoComponent
@@ -29,7 +31,12 @@ const routes: Routes = [{
       {
         path: 'est_referencias',
         component: EstReferenciasComponent
-      }
+      },
+      //Rotas Gráficos
+      {
+        path: 'est_graficos',
+        component: EstGraficoDefinicaoComponent
+      },
   
   ]
 }];

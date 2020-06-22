@@ -12,6 +12,8 @@ import { EstSidebarComponent } from './components/est-sidebar/est-sidebar.compon
 import { EstDefinicaoComponent } from './components/est-definicao/est-definicao.component';
 import { EstReferenciasComponent } from './components/est-referencias/est-referencias.component';
 import { EstApresentacaoComponent } from './components/est-apresentacao/est-apresentacao.component';
+//Gráficos
+import { EstGraficoDefinicaoComponent } from './components/est-grafico-definicao/est-grafico-definicao.component';
 
 @NgModule({
   imports: [
@@ -27,7 +29,7 @@ import { EstApresentacaoComponent } from './components/est-apresentacao/est-apre
     EstSidebarComponent, 
     EstDefinicaoComponent, 
     EstReferenciasComponent, 
-    EstApresentacaoComponent
+    EstApresentacaoComponent, EstGraficoDefinicaoComponent
   ]
 })
 export class EstatisticaDescritivaModule { }

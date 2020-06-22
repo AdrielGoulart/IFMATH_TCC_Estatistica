@@ -1,0 +1,24 @@
+@import '../../../../../../assets/styles/theme';
+
+
+.leftDiv{
+    position: relative; 
+    background-color: white;
+    border: 0.5px solid;
+    border-color: coral;
+}
+
+.rigthDiv{
+    position: relative;  
+    background-color: white;
+    border: 0.5px solid;
+    border-color: coral;
+    bottom: 3%;
+}
+
+.textDiv{
+    //Permite que quando o texto estiver ultrapassando o tamanho da div
+    //ele aumente a div para o texto não sair para fora
+    //float: left; 
+    text-align: center;
+}
