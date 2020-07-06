@@ -18,8 +18,8 @@ import { EstGraficoDefinicaoComponent } from './components/est-grafico-definicao
 import { EstGraficoSetoresComponent } from './components/est-grafico-setores/est-grafico-setores.component';
 //import { WjChartModule } from '@grapecity/wijmo.angular2.chart';
 //import { WjChartAnimationModule } from '@grapecity/wijmo.angular2.chart.animation';
-import { WjChartModule } from 'wijmo/wijmo.angular2.chart';
-import { WjChartAnimationModule } from 'wijmo/wijmo.angular2.chart.animation';
+//import { WjChartModule } from 'wijmo/wijmo.angular2.chart';
+//import { WjChartAnimationModule } from 'wijmo/wijmo.angular2.chart.animation';
 
 @NgModule({
   imports: [
@@ -29,8 +29,8 @@ import { WjChartAnimationModule } from 'wijmo/wijmo.angular2.chart.animation';
     CoreModule,
     EstSharedModule,
     EstatisticaDescritivaRouting,
-    WjChartModule,
-    WjChartAnimationModule 
+    //WjChartModule,
+    //WjChartAnimationModule 
   ],
   declarations: [
     EstViewComponent, 
