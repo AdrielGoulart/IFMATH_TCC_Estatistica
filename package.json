@@ -12,7 +12,7 @@
   },
   "engines": {
     "node": "10.16.2",
-    "npm":"6.14.5"
+    "npm": "6.14.5"
   },
   "private": true,
   "dependencies": {
@@ -27,6 +27,7 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "@grapecity/wijmo.all": "^5.20201.680",
     "@types/mathjax": "0.0.34",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^4.3.1",
@@ -44,6 +45,7 @@
     "rxjs": "^5.5.6",
     "three": "^0.97.0",
     "three-spritetext": "^1.0.6",
+    "wijmo": "http://prerelease.componentone.com/wijmo5/npm-images/C1Wijmo-Enterprise-Eval-AMD-5.20163.254.tgz",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 //Components
 import { EstBaseViewComponent } from './components/est-base-view/est-base-view.component';
 import { EstBtnComponent } from './components/est-btn/est-btn.component';
+import { EstRightbarComponent } from './components/est-rightbar/est-rightbar.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { EstBtnComponent } from './components/est-btn/est-btn.component';
     RouterModule
   ],
   exports:[EstBaseViewComponent, EstBtnComponent],
-  declarations: [EstBaseViewComponent, EstBtnComponent]
+  declarations: [EstBaseViewComponent, EstBtnComponent, EstRightbarComponent]
 })
 export class EstSharedModule { }

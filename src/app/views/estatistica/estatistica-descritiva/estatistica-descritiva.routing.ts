@@ -6,7 +6,9 @@ import { EstDefinicaoComponent } from './components/est-definicao/est-definicao.
 import { EstApresentacaoComponent } from './components/est-apresentacao/est-apresentacao.component'
 import { EstReferenciasComponent } from './components/est-referencias/est-referencias.component';
 import { EstViewComponent } from './components/est-view/est-view.component';
+//Gráficos
 import { EstGraficoDefinicaoComponent } from './components/est-grafico-definicao/est-grafico-definicao.component'
+import { EstGraficoSetoresComponent } from './components/est-grafico-setores/est-grafico-setores.component';
 
 const routes: Routes = [{
   
@@ -36,6 +38,10 @@ const routes: Routes = [{
       {
         path: 'est_graficos',
         component: EstGraficoDefinicaoComponent
+      },
+      {
+        path: 'est_graficos_setores',
+        component: EstGraficoSetoresComponent
       },
   
   ]
