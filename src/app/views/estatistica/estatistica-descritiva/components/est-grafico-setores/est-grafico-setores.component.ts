@@ -31,7 +31,7 @@ export class EstGraficoSetoresComponent implements OnInit{
     this.chartOptions = {
       series: [44, 55, 13, 43, 22, 20, 100, 12, 33, 60],
       chart: {
-        width: 440,
+        width: 400,
         type: "pie"
       },
       labels: ["Team A", "Team B", "Team C", "Team D", "Team E", "Team F", "Team G"],
@@ -39,16 +39,15 @@ export class EstGraficoSetoresComponent implements OnInit{
                '#A0522D','#FFFF00','#A9A9A9'],
       responsive: [
         {
-          breakpoint: 480,
+          breakpoint: 360,
           options: {
             chart: {
               width: 200,
-              fill:{ colors: ["#1A73E8", "#B32824","#fff","#ggg"]}
             },
             legend: {
               position: "bottom"
-            }
-          }
+            },
+          },
         }
       ],
       plotOptions:{
