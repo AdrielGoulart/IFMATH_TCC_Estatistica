@@ -31,7 +31,7 @@ export class EstGraficoSetoresComponent implements OnInit{
     this.chartOptions = {
       series: [44, 55, 13, 43, 22, 20, 100, 12, 33, 60],
       chart: {
-        width: 380,
+        width: 440,
         type: "pie"
       },
       labels: ["Team A", "Team B", "Team C", "Team D", "Team E", "Team F", "Team G"],
@@ -50,7 +50,10 @@ export class EstGraficoSetoresComponent implements OnInit{
             }
           }
         }
-      ]
+      ],
+      plotOptions:{
+     
+      } 
     };
 
     var chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
