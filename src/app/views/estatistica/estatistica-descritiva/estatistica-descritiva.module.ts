@@ -16,7 +16,7 @@ import { EstApresentacaoComponent } from './components/est-apresentacao/est-apre
 //Gráficos
 import { EstGraficoDefinicaoComponent } from './components/est-grafico-definicao/est-grafico-definicao.component';
 import { EstGraficoSetoresComponent } from './components/est-grafico-setores/est-grafico-setores.component';
-
+import { NgApexchartsModule } from 'ng-apexcharts';
 //import { WjChartModule } from '@grapecity/wijmo.angular2.chart';
 //import { WjChartAnimationModule } from '@grapecity/wijmo.angular2.chart.animation';
 //import { WjChartModule } from 'wijmo/wijmo.angular2.chart';
@@ -30,7 +30,7 @@ import { EstGraficoSetoresComponent } from './components/est-grafico-setores/est
     CoreModule,
     EstSharedModule,
     EstatisticaDescritivaRouting,
-  
+    NgApexchartsModule
     //WjChartModule,
     //WjChartAnimationModule 
   ],
