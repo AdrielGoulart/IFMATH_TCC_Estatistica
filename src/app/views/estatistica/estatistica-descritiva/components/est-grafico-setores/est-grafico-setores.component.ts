@@ -51,7 +51,7 @@ export class EstGraficoSetoresComponent implements OnInit{
         }
       ],
       plotOptions:{
-     
+        
       } 
     };
 
