@@ -16,7 +16,8 @@ declare var ApexCharts: any;
   styleUrls: ['./est-grafico-setores.component.scss']
 })
 export class EstGraficoSetoresComponent implements OnInit{
-  
+  public radius = 25;
+  public errorInput: boolean = false;
   public chartOptions: Partial<ApexOptions>;
 
   public pieChartLabels = ['Sales Q1', 'Sales Q2', 'Sales Q3', 'Sales Q4'];
