@@ -16,28 +16,39 @@ declare var ApexCharts: any;
   styleUrls: ['./est-grafico-setores.component.scss']
 })
 export class EstGraficoSetoresComponent implements OnInit{
+
   public radius = 25;
   public errorInput: boolean = false;
   public chartOptions: Partial<ApexOptions>;
+  public chart: ApexCharts;
+  public chartColors: string[] = ['#F44336','#E91E63', '#9C27B0','#00FF7F',
+                                  '#FFA500','#1E90FF','#008000',
+                                  '#A0522D','#FFFF00','#A9A9A9']
 
-  public pieChartLabels = ['Sales Q1', 'Sales Q2', 'Sales Q3', 'Sales Q4'];
-  public pieChartData = [120, 150, 180, 90];
-  public pieChartType = 'pie';
+  public varQual: string[] = ['azul', 'amarelo', 'vermelho', 'verde', 'preto'];
+  public varQualInput: string = '';
+  public quantidade: number[] = [44, 55, 13, 43, 22, 20, 100, 12, 33, 60];
+  public quantInput: string = '';
+  public title: string = 'Exemplo Gráfico de Setores';
+  public fonteDados: string = 'Dados Fictícios';
+  public nomeVariavel: string = 'cor';
+  public firstTime: boolean = true;
+  public button: Object[] = [{ title: "Ver a tabela equivalente", route: "est_graficos_setores_tab" }];
   
   constructor() {
   }
 
   ngOnInit() {
 
+    
     this.chartOptions = {
       series: [44, 55, 13, 43, 22, 20, 100, 12, 33, 60],
       chart: {
-        width: 400,
+        width: 420,
         type: "pie"
       },
-      labels: ["Team A", "Team B", "Team C", "Team D", "Team E", "Team F", "Team G"],
-      colors: ['#F44336','#E91E63', '#9C27B0','#00FF7F','#FFA500','#1E90FF','#008000',
-               '#A0522D','#FFFF00','#A9A9A9'],
+      labels: ["Team A", "Team B", "Team C", "Team D", "Team E", "Team F", "Team G", "Team H"],
+      colors: this.chartColors,
       responsive: [
         {
           breakpoint: 360,
@@ -45,19 +56,24 @@ export class EstGraficoSetoresComponent implements OnInit{
             chart: {
               width: 200,
             },
-            legend: {
-              position: "bottom"
-            },
           },
         }
       ],
       plotOptions:{
+        pie:{
         
+        
+        },
+        
+      },
+      title:{
+        text: this.title,
+        align: "center", 
       } 
     };
 
-    var chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
-    chart.render();
+    this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
+    this.chart.render();
     /*
     var options = {
       chart: {
@@ -145,6 +161,74 @@ export class EstGraficoSetoresComponent implements OnInit{
       
   });*/
 
+  }
+
+  /**
+   * Método Chamado toda vez que o valor da variável varQualInput
+   * for alterada
+   */
+  changeVarQual(){
+      this.cleanVariables();
+      this.varQual = [];
+      this.varQual = this.varQualInput.split('-');
+      this.updateChart();
+  }
+
+  changeQuant(){
+    this.cleanVariables();
+    this.quantidade = [];
+    var valores = this.quantInput.split('-');
+    for (let index = 0; index < valores.length; index++) {
+      this.quantidade[index] = Number(valores[index]);
+    }
+    this.updateChart();
+  }
+
+  removeElements(){
+    this.chart.destroy();
+  }
+
+  cleanVariables(){
+    if(this.firstTime){
+      this.quantidade = [];
+      this.varQual = [];
+      this.firstTime = false;
+    }
+  }
+
+  updateChart(){
+    this.removeElements()
+    this.chartOptions = {
+      series: this.quantidade,
+      chart: {
+        width: 400,
+        type: "pie"
+      },
+      labels: this.varQual,
+      colors: this.chartColors,
+      responsive: [
+        {
+          breakpoint: 360,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: "bottom"
+            },
+          },
+        }
+      ],
+      plotOptions:{
+      
+      },
+      title:{
+        text: this.title,
+        align: "center", 
+      },
+    };
+    this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
+    this.chart.render();
   }
 
 }

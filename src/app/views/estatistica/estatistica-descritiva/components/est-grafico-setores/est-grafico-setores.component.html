@@ -9,27 +9,32 @@
   <div class="form-group row input-container col-12">
     <label class="label" for="inputEmail3" >Título dos Dados:</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Título">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="Título"
+      [(ngModel)]="title" (ngModelChange)="updateChart()">
     </div><br><br>
 
     <label class="label" for="inputEmail3" >Nome da Variável:</label>
     <div class="col-sm-8">
-      <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="Título">
+      <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
+      [(ngModel)]="nomeVariavel">
     </div><br><br>
 
     <label class="label" for="inputEmail3" >Variáveis qualitativas:</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - as palavras">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - as palavras"
+      [(ngModel)]="varQualInput" (ngModelChange)="changeVarQual()">
     </div><br><br>
 
     <label class="label" for="inputEmail3" >Quantidades:</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Título">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
+      [(ngModel)]="quantInput" (ngModelChange)="changeQuant()">
     </div><br><br>
 
-    <label for="inputEmail3" >Fonte dos dados:</label>
+    <label class="label" for="inputEmail3" >Fonte dos dados:</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Título">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="Fonte"
+      [(ngModel)]="fonteDados">
     </div><br><br>
 
   </div>
@@ -61,7 +66,17 @@
           </div>
      
            <!-- Gráfico -->
-           <div id="chart"></div>
+           <div id="chart" style="width: max-content;"></div>
+           <div class="row">
+             <!-- Fonte dos dados -->
+            <div class="col-sm">
+              <label class="label1" for="inputEmail3" >Fonte: {{fonteDados}}</label>
+            </div>
+            <!-- Botão Tabela -->
+            <div class="col-sm-6">
+              <est-btn *ngFor="let buttons of button; let i = index" [name]="buttons.title"></est-btn>
+            </div>
+          </div>
           
     </div>
 
@@ -77,127 +92,127 @@
   </p>
   <hr>
 
-  <!-- Exemplo -->
-  <div class="accordion" id="accordionExample">
-    <div class="card">
-      <div class="card-header" id="headingPrincipal" data-toggle="collapse" data-target="#collapsePrincipal">
-        <h2 class="mb-0">
-          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsePrincipal"
-            aria-expanded="false" aria-controls="collapsePrincipal">
-            Cálculo = <ng-katex class="explicacao" equation="{{ radius * radius }}  \pi \ u.a. ">
-            </ng-katex>
-          </button>
-
-          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-            data-target="#collapsePrincipal"></i>
-        </h2>
-      </div>
-      <div id="collapsePrincipal" class="collapse" aria-labelledby="headingPrincipal" data-parent="#accordionExample">
-        <div class="card-body">
-          <div class="panel-group" id="accordion">
-            <!--Passo 1-->
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
-                    <p>
-                      <ng-katex class="explicacao"
-                        equation="\textcolor{black}{A_b = \pi \cdot \textcolor{red}{r} \textcolor{black}{^2}}">
-                      </ng-katex>
-                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                        data-target="#collapseGeratriz"></i>
-                    </p>
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseOne" class="panel-collapse collapse">
-                <div class="panel-body">
-                  Fórmula para o cálculo da base.
-                  <ul>
-                    <li>
-                      <ng-katex equation="\color{red}{ r }"></ng-katex> = raio
-                    </li>
-                  </ul>
+    <!-- Exemplo -->
+    <div *ngFor="let varQ of varQual; let i = index" class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingPrincipal" data-toggle="collapse" [attr.data-target] = "'#collapsePrincipal' + i">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" [attr.data-target] = "'#collapsePrincipal' + i"
+              aria-expanded="false" aria-controls="collapsePrincipal">
+              {{varQual[i]}} = <ng-katex class="explicacao" equation="{{ radius * radius }}  \pi \ u.a. ">
+              </ng-katex>
+            </button>
+  
+            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+            [attr.data-target] = "'#collapsePrincipal' + i"></i>
+          </h2>
+        </div>
+        <div [attr.id]="'collapsePrincipal' + i" class="collapse" aria-labelledby="headingPrincipal" data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="panel-group" id="accordion">
+              <!--Passo 1-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{A_b = \pi \cdot \textcolor{red}{r} \textcolor{black}{^2}}">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Fórmula para o cálculo da base.
+                    <ul>
+                      <li>
+                        <ng-katex equation="\color{red}{ r }"></ng-katex> = raio
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
-            <hr>
-            <!--Passo 2-->
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
-                    <p>
-                      <ng-katex class="explicacao"
-                        equation="\textcolor{black}{A_b = \pi \cdot \color{red}{ {{ radius }} } \color{black}{ ^2 } }">
-                      </ng-katex>
-                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                        data-target="#collapseGeratriz"></i>
-                    </p>
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseTwo" class="panel-collapse collapse">
-                <div class="panel-body">
-                  Substitui-se o valor de <ng-katex equation="r"></ng-katex>
-                  (<ng-katex equation="\color{red}{ {{ radius }} }"></ng-katex>) na fórmula e
-                  elevamos ao quadrado.
+              <hr>
+              <!--Passo 2-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{A_b = \pi \cdot \color{red}{ {{ radius }} } \color{black}{ ^2 } }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Substitui-se o valor de <ng-katex equation="r"></ng-katex>
+                    (<ng-katex equation="\color{red}{ {{ radius }} }"></ng-katex>) na fórmula e
+                    elevamos ao quadrado.
+                  </div>
                 </div>
               </div>
-            </div>
-            <hr>
-            <!--Passo 3-->
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="">
-                    <p>
-                      <ng-katex class="explicacao"
-                        equation="\textcolor{black}{A_b = \pi \cdot \color{red}{ {{ radius * radius }} } }">
-                      </ng-katex>
-                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                        data-target="#collapseGeratriz"></i>
-                    </p>
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseThree" class="panel-collapse collapse">
-                <div class="panel-body">
-                  Multiplica-se o resultado do
-                  <ng-katex equation="\color{black}{ r^2 }"></ng-katex>
-                  (<ng-katex equation="\color{red}{ {{ radius * radius }} }"></ng-katex>)
-                  pelo valor de <ng-katex equation="\pi."></ng-katex>
+              <hr>
+              <!--Passo 3-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{A_b = \pi \cdot \color{red}{ {{ radius * radius }} } }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Multiplica-se o resultado do
+                    <ng-katex equation="\color{black}{ r^2 }"></ng-katex>
+                    (<ng-katex equation="\color{red}{ {{ radius * radius }} }"></ng-katex>)
+                    pelo valor de <ng-katex equation="\pi."></ng-katex>
+                  </div>
                 </div>
               </div>
-            </div>
-            <hr>
-            <!--Passo 4-->
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="">
-                    <p>
-                      <ng-katex class="explicacao"
-                        equation="\textcolor{black}{A_b = \color{red}{ {{ radius * radius }} } \color{black}{ \pi \ u.a.} }">
-                      </ng-katex>
-                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                        data-target="#collapseGeratriz"></i>
-                    </p>
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseFour" class="panel-collapse collapse">
-                <div class="panel-body">
-                  Resultado final em unidades de área (<ng-katex equation="u. a."></ng-katex>).
+              <hr>
+              <!--Passo 4-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{A_b = \color{red}{ {{ radius * radius }} } \color{black}{ \pi \ u.a.} }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Resultado final em unidades de área (<ng-katex equation="u. a."></ng-katex>).
+                  </div>
                 </div>
               </div>
+              <hr>
             </div>
-            <hr>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
 </div>
 
