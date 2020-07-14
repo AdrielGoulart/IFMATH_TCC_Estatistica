@@ -25,13 +25,13 @@ export class EstGraficoSetoresComponent implements OnInit {
     '#FFA500', '#1E90FF', '#008000',
     '#A0522D', '#FFFF00', '#A9A9A9']
 
-  public varQual: string[] = ['azul', 'amarelo', 'vermelho', 'verde', 'preto'];
+  public varQual: string[] = ['Azul', 'Amarelo', 'Vermelho', 'Verde', 'Preto'];
   public varQualInput: string = '';
   public quantidade: number[] = [12, 7, 4, 1, 7];
   public quantInput: string = '';
-  public title: string = 'Cor favorita dos alunos de 7 ano da escola XXY';
+  public title: string = 'Cor favorita dos alunos de 7° ano da escola XXY';
   public fonteDados: string = 'Dados Fictícios';
-  public nomeVariavel: string = 'cor';
+  public nomeVariavel: string = 'Cor';
   public firstTime: boolean = true;
   public qtdTotal: number = 0;
   public button: Object[] = [{ title: "Ver a tabela equivalente", route: "est_graficos_setores_tab" }];

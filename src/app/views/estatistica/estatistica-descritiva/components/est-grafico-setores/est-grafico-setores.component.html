@@ -77,14 +77,14 @@
       </div>
       <!-- Modal janela que vai aparecer-->
       <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog" role="document">
           <!-- Modal content-->
           <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">{{title}}</h5>
+            <div class="modal-header justify-content-center">
+              <b><h5 class="modal-title">{{title}}</h5></b>
             </div>
             <div class="modal-body">
-              <table class="table table-bordered">
+              <table class="table">
                 <thead class="table-info" style="text-align: center;">
                   <tr>
                     <th scope="col">{{nomeVariavel}}</th>
@@ -92,7 +92,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="table-warning" *ngFor="let element of varQual; let i = index" style="text-align: center;">
+                  <tr class="table-light" *ngFor="let element of varQual; let i = index" style="text-align: center;">
                     <th scope="row">{{element}}</th>
                     <td>{{quantidade[i]}}</td>
                   </tr>
@@ -107,7 +107,7 @@
               </table>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
             </div>
           </div>
         </div>
@@ -123,7 +123,7 @@
     <h3>Propriedades</h3>
     <p>
       O gráfico de setores, popularmente conhecido como gráfico de pizza, consiste
-      em representar informações na forma de setor circular. Para tanto, basta
+      em apresentar informações na forma de setor circular. Para tanto, basta
       considerar que 100% dos dados equivalem a um setor circular de 360° ou seja o
       ângulo de cada setor circular corresponde a uma porcentagem dos dados presentes no nosso problema.
     </p>
@@ -138,8 +138,8 @@
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
               [attr.data-target]="'#collapsePrincipal' + i" aria-expanded="false" aria-controls="collapsePrincipal">
               {{varQual[i]}} <ng-katex class="explicacao"
-                equation=" \approx {{ ((quantidade[i] * 100)/qtdTotal).toFixed(2)}} \% ,
-                                                                      \approx {{ ((quantidade[i] * 360)/qtdTotal).toFixed(2)}} \degree  ">
+                equation=" \approx {{ ((quantidade[i] * 100)/qtdTotal).toFixed(1)}} \% 
+                           \approx {{ ((quantidade[i] * 360)/qtdTotal).toFixed(1)}} \degree">
               </ng-katex>
             </button>
 
@@ -175,12 +175,13 @@
                     em questão.
                     <ul>
                       <li>
-                        No lado esquerdo temos a Quantidade total de dados(
-                        <ng-katex equation="\color{red}{ {{qtdTotal}} }"></ng-katex>)
+                        No lado esquerdo temos a quantidade total de dados(
+                        <ng-katex equation="\color{red}{ {{qtdTotal}} }"></ng-katex>) e a 
+                        quantidade de dados da região em questão (<ng-katex equation="\color{blue}{ {{quantidade[i]}} }"></ng-katex>).
                       </li>
                       <li>
-                        No lado direito temos a Quantidade de dados referente a região em questão(
-                        <ng-katex equation="\color{blue}{ {{quantidade[i]}} }"></ng-katex>)
+                        No lado direito temos o percentual associado à quantidade total (100%) e o 
+                        percentual que desejamos calcular (x).
                       </li>
                     </ul>
                   </div>
@@ -245,7 +246,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="">
                       <p>
                         <ng-katex class="explicacao"
-                          equation="\textcolor{black}{ x \approx {{ ((quantidade[i] * 100)/qtdTotal).toFixed(2)}} \% }">
+                          equation="\textcolor{black}{ x \approx {{ ((quantidade[i] * 100)/qtdTotal).toFixed(1)}} \% }">
                         </ng-katex>
                         <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                           data-target="#collapseGeratriz"></i>
@@ -284,11 +285,14 @@
                     em questão.
                     <ul>
                       <li>
-                        No lado esquerdo temos a Quantidade total de dados(
-                        <ng-katex equation="\color{red}{ {{qtdTotal}} }"></ng-katex>)
+                        No lado esquerdo temos a quantidade total de dados(
+                        <ng-katex equation="\color{red}{ {{qtdTotal}} }"></ng-katex>) e a 
+                        quantidade de dados da região em questão 
+                        (<ng-katex equation="\color{blue}{ {{quantidade[i]}} }"></ng-katex>).
                       </li>
                       <li>
-                        No lado direito temos os graus equivalentes ao ângulo em questão.
+                        No lado direito temos os graus associados à quantidade total (360º) 
+                        e os graus que desejamos calcular (<ng-katex equation="\color{black}{ \alpha }"></ng-katex>).
                       </li>
                     </ul>
                   </div>
@@ -312,8 +316,7 @@
                 </div>
                 <div id="collapseSix" class="panel-collapse collapse">
                   <div class="panel-body">
-                    Multiplicando em <ng-katex equation="\color{black}{ \alpha }"></ng-katex>
-                    temos o resultado acima.
+                    Multiplicando em x temos o resultado acima.
                     <ul>
                       <li>
                         Obeserve que as grandezas são diretamente proporcionais.
@@ -354,7 +357,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight" class="">
                       <p>
                         <ng-katex class="explicacao"
-                          equation="\textcolor{black}{ \alpha \approx {{ ((quantidade[i] * 360)/qtdTotal).toFixed(2)}} \degree }">
+                          equation="\textcolor{black}{ \alpha \approx {{ ((quantidade[i] * 360)/qtdTotal).toFixed(1)}} \degree }">
                         </ng-katex>
                         <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                           data-target="#collapseGeratriz"></i>
@@ -369,28 +372,6 @@
                 </div>
               </div>
               <hr>
-              <!--Passo 9 [attr.id]="'collapsePrincipal' + i"
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine" class="">
-                      <p>
-                        <ng-katex class="explicacao"
-                          equation="\textcolor{black}{ \alpha \approx {{ ((quantidade[i] * 360)/qtdTotal).toFixed(2)}} \degree }">
-                        </ng-katex>
-                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                          data-target="#collapseGeratriz"></i>
-                      </p>
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseNine" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    Efetuando a divisão obtemos a abertura do ângulo.
-                  </div>
-                </div>
-              </div>
-              <hr>-->
 
             </div>
           </div>
