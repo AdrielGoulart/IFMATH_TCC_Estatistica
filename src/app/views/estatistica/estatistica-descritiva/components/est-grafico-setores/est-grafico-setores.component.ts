@@ -29,7 +29,7 @@ export class EstGraficoSetoresComponent implements OnInit {
   public varQualInput: string = '';
   public quantidade: number[] = [12, 7, 4, 1, 7];
   public quantInput: string = '';
-  public title: string = 'Exemplo Gráfico de Setores';
+  public title: string = 'Cor favorita dos alunos de 7 ano da escola XXY';
   public fonteDados: string = 'Dados Fictícios';
   public nomeVariavel: string = 'cor';
   public firstTime: boolean = true;

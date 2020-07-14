@@ -71,10 +71,48 @@
       <div class="col-sm">
         <label class="label1" for="inputEmail3">Fonte: {{fonteDados}}</label>
       </div>
-      <!-- Botão Tabela -->
+      <!-- Botão Tabela--> 
       <div class="col-sm-6">
-        <est-btn *ngFor="let buttons of button; let i = index" [name]="buttons.title"></est-btn>
+        <button  style="height: 90%; background-color: coral;" type="button" class="btn" data-toggle="modal" data-target="#myModal">Ver a tabela equivalente</button>
       </div>
+      <!-- Modal janela que vai aparecer-->
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">{{title}}</h5>
+            </div>
+            <div class="modal-body">
+              <table class="table table-bordered">
+                <thead class="table-info" style="text-align: center;">
+                  <tr>
+                    <th scope="col">{{nomeVariavel}}</th>
+                    <th scope="col">Frequência (fi)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="table-warning" *ngFor="let element of varQual; let i = index" style="text-align: center;">
+                    <th scope="row">{{element}}</th>
+                    <td>{{quantidade[i]}}</td>
+                  </tr>
+                  <tr class="table-info" style="text-align: center;">
+                    <th scope="row">Total</th>
+                    <td>{{qtdTotal}}</td>
+                  </tr>
+                  <tr class="table-light" style="text-align: left;">
+                    <th scope="row">Fonte: {{fonteDados}}</th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -99,7 +137,8 @@
           <h2 class="mb-0">
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
               [attr.data-target]="'#collapsePrincipal' + i" aria-expanded="false" aria-controls="collapsePrincipal">
-              {{varQual[i]}} <ng-katex class="explicacao" equation=" \approx {{ ((quantidade[i] * 100)/qtdTotal).toFixed(2)}} \% ,
+              {{varQual[i]}} <ng-katex class="explicacao"
+                equation=" \approx {{ ((quantidade[i] * 100)/qtdTotal).toFixed(2)}} \% ,
                                                                       \approx {{ ((quantidade[i] * 360)/qtdTotal).toFixed(2)}} \degree  ">
               </ng-katex>
             </button>
