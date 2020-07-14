@@ -7,46 +7,45 @@
 
   <!--Inputs-->
   <div class="form-group row input-container col-12">
-    <label class="label" for="inputEmail3" >Título dos Dados:</label>
+    <label class="label" for="inputEmail3">Título dos Dados:</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Título"
-      [(ngModel)]="title" (ngModelChange)="updateChart()">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="Título" [(ngModel)]="title"
+        (ngModelChange)="updateChart()">
     </div><br><br>
 
-    <label class="label" for="inputEmail3" >Nome da Variável:</label>
+    <label class="label" for="inputEmail3">Nome da Variável:</label>
     <div class="col-sm-8">
       <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
-      [(ngModel)]="nomeVariavel">
+        [(ngModel)]="nomeVariavel">
     </div><br><br>
 
-    <label class="label" for="inputEmail3" >Variáveis qualitativas:</label>
+    <label class="label" for="inputEmail3">Variáveis qualitativas:</label>
     <div class="col-sm-8">
       <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - as palavras"
-      [(ngModel)]="varQualInput" (ngModelChange)="changeVarQual()">
+        [(ngModel)]="varQualInput" (ngModelChange)="changeVarQual()">
     </div><br><br>
 
-    <label class="label" for="inputEmail3" >Quantidades:</label>
+    <label class="label" for="inputEmail3">Quantidades:</label>
     <div class="col-sm-8">
       <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
-      [(ngModel)]="quantInput" (ngModelChange)="changeQuant()">
+        [(ngModel)]="quantInput" (ngModelChange)="changeQuant()">
     </div><br><br>
 
-    <label class="label" for="inputEmail3" >Fonte dos dados:</label>
+    <label class="label" for="inputEmail3">Fonte dos dados:</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Fonte"
-      [(ngModel)]="fonteDados">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="Fonte" [(ngModel)]="fonteDados">
     </div><br><br>
 
   </div>
- 
 
-    <div class="row content-container col-12 row px-0 align-items-center justify-content-center text-justify">
 
-        <!--Propriedades
+  <div class="row content-container col-12 row px-0 align-items-center justify-content-center text-justify">
+
+    <!--Propriedades
         <div id="divChart">
             <canvas id="estChart"></canvas>
         </div>-->
-        <!--CanvasJS
+    <!--CanvasJS
         <div id="chartContainer" style="height: 300px; width: 100%;"></div>
 
           <div id="chart">
@@ -58,56 +57,59 @@
             ></apx-chart>
           </div>-->
 
-         <!-- Entradas -->
-          <div class=" mt-4">
-            <div [className]="errorInput === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'" role="alert">
-              O número de n variáveis deve ser menor que <b>10</b>.
-            </div>
-          </div>
-     
-           <!-- Gráfico -->
-           <div id="chart" style="width: max-content;"></div>
-           <div class="row">
-             <!-- Fonte dos dados -->
-            <div class="col-sm">
-              <label class="label1" for="inputEmail3" >Fonte: {{fonteDados}}</label>
-            </div>
-            <!-- Botão Tabela -->
-            <div class="col-sm-6">
-              <est-btn *ngFor="let buttons of button; let i = index" [name]="buttons.title"></est-btn>
-            </div>
-          </div>
-          
+    <!-- Entradas -->
+    <div class=" mt-4">
+      <div [className]="errorInput === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'" role="alert">
+        O número de n variáveis deve ser menor que <b>10</b>.
+      </div>
     </div>
 
-<!--Propriedades-->    
-<div class="rightbar px-3 vh-100">
+    <!-- Gráfico -->
+    <div id="chart" style="width: max-content;"></div>
+    <div class="row">
+      <!-- Fonte dos dados -->
+      <div class="col-sm">
+        <label class="label1" for="inputEmail3">Fonte: {{fonteDados}}</label>
+      </div>
+      <!-- Botão Tabela -->
+      <div class="col-sm-6">
+        <est-btn *ngFor="let buttons of button; let i = index" [name]="buttons.title"></est-btn>
+      </div>
+    </div>
 
-  <h3>Propriedades</h3>
-  <p>
-    O gráfico de setores, popularmente conhecido como gráfico de pizza, consiste 
-    em representar informações na forma de setor circular. Para tanto, basta 
-    considerar que 100% dos dados equivalem a um setor circular de 360° ou seja o 
-    ângulo de cada setor circular corresponde a uma porcentagem dos dados presentes no nosso problema.
-  </p>
-  <hr>
+  </div>
+
+  <!--Propriedades-->
+  <div class="rightbar px-3 vh-100">
+
+    <h3>Propriedades</h3>
+    <p>
+      O gráfico de setores, popularmente conhecido como gráfico de pizza, consiste
+      em representar informações na forma de setor circular. Para tanto, basta
+      considerar que 100% dos dados equivalem a um setor circular de 360° ou seja o
+      ângulo de cada setor circular corresponde a uma porcentagem dos dados presentes no nosso problema.
+    </p>
+    <hr>
 
     <!-- Exemplo -->
     <div *ngFor="let varQ of varQual; let i = index" class="accordion" id="accordionExample">
       <div class="card">
-        <div class="card-header" id="headingPrincipal" data-toggle="collapse" [attr.data-target] = "'#collapsePrincipal' + i">
+        <div class="card-header" id="headingPrincipal" data-toggle="collapse"
+          [attr.data-target]="'#collapsePrincipal' + i">
           <h2 class="mb-0">
-            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" [attr.data-target] = "'#collapsePrincipal' + i"
-              aria-expanded="false" aria-controls="collapsePrincipal">
-              {{varQual[i]}} = <ng-katex class="explicacao" equation="{{ radius * radius }}  \pi \ u.a. ">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+              [attr.data-target]="'#collapsePrincipal' + i" aria-expanded="false" aria-controls="collapsePrincipal">
+              {{varQual[i]}} <ng-katex class="explicacao" equation=" \approx {{ ((quantidade[i] * 100)/qtdTotal).toFixed(2)}} \% ,
+                                                                      \approx {{ ((quantidade[i] * 360)/qtdTotal).toFixed(2)}} \degree  ">
               </ng-katex>
             </button>
-  
+
             <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-            [attr.data-target] = "'#collapsePrincipal' + i"></i>
+              [attr.data-target]="'#collapsePrincipal' + i"></i>
           </h2>
         </div>
-        <div [attr.id]="'collapsePrincipal' + i" class="collapse" aria-labelledby="headingPrincipal" data-parent="#accordionExample">
+        <div [attr.id]="'collapsePrincipal' + i" class="collapse" aria-labelledby="headingPrincipal"
+          data-parent="#accordionExample">
           <div class="card-body">
             <div class="panel-group" id="accordion">
               <!--Passo 1-->
@@ -116,8 +118,11 @@
                   <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
                       <p>
-                        <ng-katex class="explicacao"
-                          equation="\textcolor{black}{A_b = \pi \cdot \textcolor{red}{r} \textcolor{black}{^2}}">
+                        <ng-katex class="explicacao" equation="\textcolor{black}{  
+                      \begin{matrix}
+                          {{qtdTotal}} & \text{------} & 100 \% \\
+                          {{quantidade[i]}} & \text{------} & x
+                       \end{matrix} }">
                         </ng-katex>
                         <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                           data-target="#collapseGeratriz"></i>
@@ -127,10 +132,16 @@
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse">
                   <div class="panel-body">
-                    Fórmula para o cálculo da base.
+                    Utilizamos regra de três para determinar o percentual correspondente à região
+                    em questão.
                     <ul>
                       <li>
-                        <ng-katex equation="\color{red}{ r }"></ng-katex> = raio
+                        No lado esquerdo temos a Quantidade total de dados(
+                        <ng-katex equation="\color{red}{ {{qtdTotal}} }"></ng-katex>)
+                      </li>
+                      <li>
+                        No lado direito temos a Quantidade de dados referente a região em questão(
+                        <ng-katex equation="\color{blue}{ {{quantidade[i]}} }"></ng-katex>)
                       </li>
                     </ul>
                   </div>
@@ -144,7 +155,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
                       <p>
                         <ng-katex class="explicacao"
-                          equation="\textcolor{black}{A_b = \pi \cdot \color{red}{ {{ radius }} } \color{black}{ ^2 } }">
+                          equation="\textcolor{black}{ {{qtdTotal}}x = {{quantidade[i]}}\cdot 100\% }">
                         </ng-katex>
                         <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                           data-target="#collapseGeratriz"></i>
@@ -154,9 +165,12 @@
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse">
                   <div class="panel-body">
-                    Substitui-se o valor de <ng-katex equation="r"></ng-katex>
-                    (<ng-katex equation="\color{red}{ {{ radius }} }"></ng-katex>) na fórmula e
-                    elevamos ao quadrado.
+                    Multiplicando em X temos o resultado acima
+                    <ul>
+                      <li>
+                        Observe que as grandezas são diretamente proporcionais
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -168,7 +182,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="">
                       <p>
                         <ng-katex class="explicacao"
-                          equation="\textcolor{black}{A_b = \pi \cdot \color{red}{ {{ radius * radius }} } }">
+                          equation="\textcolor{black}{ x =  \dfrac{ {{ quantidade[i] * 100}} }{ {{qtdTotal}} }   }">
                         </ng-katex>
                         <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                           data-target="#collapseGeratriz"></i>
@@ -178,10 +192,9 @@
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse">
                   <div class="panel-body">
-                    Multiplica-se o resultado do
-                    <ng-katex equation="\color{black}{ r^2 }"></ng-katex>
-                    (<ng-katex equation="\color{red}{ {{ radius * radius }} }"></ng-katex>)
-                    pelo valor de <ng-katex equation="\pi."></ng-katex>
+                    Após realizar a multiplicação no passo anterior, passamos o número
+                    <ng-katex class="explicacao" equation="\textcolor{black}{ {{qtdTotal}} }">
+                    </ng-katex> dividindo.
                   </div>
                 </div>
               </div>
@@ -193,7 +206,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="">
                       <p>
                         <ng-katex class="explicacao"
-                          equation="\textcolor{black}{A_b = \color{red}{ {{ radius * radius }} } \color{black}{ \pi \ u.a.} }">
+                          equation="\textcolor{black}{ x \approx {{ ((quantidade[i] * 100)/qtdTotal).toFixed(2)}} \% }">
                         </ng-katex>
                         <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                           data-target="#collapseGeratriz"></i>
@@ -203,17 +216,149 @@
                 </div>
                 <div id="collapseFour" class="panel-collapse collapse">
                   <div class="panel-body">
-                    Resultado final em unidades de área (<ng-katex equation="u. a."></ng-katex>).
+                    Efetuando a divisão obtemos o percentual equivalente.
                   </div>
                 </div>
               </div>
               <hr>
+              <!--Passo 5-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" class="">
+                      <p>
+                        <ng-katex class="explicacao" equation="\textcolor{black}{  
+                    \begin{matrix}
+                        {{qtdTotal}} & \text{------} & 100 \degree \\
+                        {{quantidade[i]}} & \text{------} & \alpha
+                     \end{matrix} }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Utilizamos regra de três para determinar o percentual correspondente à região
+                    em questão.
+                    <ul>
+                      <li>
+                        No lado esquerdo temos a Quantidade total de dados(
+                        <ng-katex equation="\color{red}{ {{qtdTotal}} }"></ng-katex>)
+                      </li>
+                      <li>
+                        No lado direito temos os graus equivalentes ao ângulo em questão.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!--Passo 6-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{ {{qtdTotal}} \alpha = {{quantidade[i]}}\cdot 360\degree }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseSix" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Multiplicando em <ng-katex equation="\color{black}{ \alpha }"></ng-katex>
+                    temos o resultado acima.
+                    <ul>
+                      <li>
+                        Obeserve que as grandezas são diretamente proporcionais.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!--Passo 7-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{ \alpha =  \dfrac{ {{ quantidade[i] * 360}} }{ {{qtdTotal}} }   }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseSeven" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Após realizar a multiplicação no passo anterior, passamos o número
+                    <ng-katex class="explicacao" equation="\textcolor{black}{ {{qtdTotal}} }">
+                    </ng-katex> dividindo.
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!--Passo 8-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{ \alpha \approx {{ ((quantidade[i] * 360)/qtdTotal).toFixed(2)}} \degree }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseEight" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Efetuando a divisão obtemos a abertura do ângulo.
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!--Passo 9 [attr.id]="'collapsePrincipal' + i"
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{ \alpha \approx {{ ((quantidade[i] * 360)/qtdTotal).toFixed(2)}} \degree }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseNine" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Efetuando a divisão obtemos a abertura do ângulo.
+                  </div>
+                </div>
+              </div>
+              <hr>-->
+
             </div>
           </div>
         </div>
       </div>
     </div>
 
-</div>
+  </div>
 
 </est-base-view>

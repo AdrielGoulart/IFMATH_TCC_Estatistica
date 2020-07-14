@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 //import { Chart } from 'chart.js'
 //ApexCharts
 import { ApexOptions } from 'apexcharts';
- 
+
 //CnavasJS
 declare var CanvasJS: any;
 
@@ -15,39 +15,40 @@ declare var ApexCharts: any;
   templateUrl: './est-grafico-setores.component.html',
   styleUrls: ['./est-grafico-setores.component.scss']
 })
-export class EstGraficoSetoresComponent implements OnInit{
+export class EstGraficoSetoresComponent implements OnInit {
 
   public radius = 25;
   public errorInput: boolean = false;
   public chartOptions: Partial<ApexOptions>;
   public chart: ApexCharts;
-  public chartColors: string[] = ['#F44336','#E91E63', '#9C27B0','#00FF7F',
-                                  '#FFA500','#1E90FF','#008000',
-                                  '#A0522D','#FFFF00','#A9A9A9']
+  public chartColors: string[] = ['#F44336', '#E91E63', '#9C27B0', '#00FF7F',
+    '#FFA500', '#1E90FF', '#008000',
+    '#A0522D', '#FFFF00', '#A9A9A9']
 
   public varQual: string[] = ['azul', 'amarelo', 'vermelho', 'verde', 'preto'];
   public varQualInput: string = '';
-  public quantidade: number[] = [44, 55, 13, 43, 22, 20, 100, 12, 33, 60];
+  public quantidade: number[] = [12, 7, 4, 1, 7];
   public quantInput: string = '';
   public title: string = 'Exemplo Gráfico de Setores';
   public fonteDados: string = 'Dados Fictícios';
   public nomeVariavel: string = 'cor';
   public firstTime: boolean = true;
+  public qtdTotal: number = 0;
   public button: Object[] = [{ title: "Ver a tabela equivalente", route: "est_graficos_setores_tab" }];
-  
+
   constructor() {
   }
 
   ngOnInit() {
 
-    
+
     this.chartOptions = {
-      series: [44, 55, 13, 43, 22, 20, 100, 12, 33, 60],
+      series: this.quantidade,
       chart: {
         width: 420,
         type: "pie"
       },
-      labels: ["Team A", "Team B", "Team C", "Team D", "Team E", "Team F", "Team G", "Team H"],
+      labels: this.varQual,
       colors: this.chartColors,
       responsive: [
         {
@@ -59,21 +60,23 @@ export class EstGraficoSetoresComponent implements OnInit{
           },
         }
       ],
-      plotOptions:{
-        pie:{
-        
-        
+      plotOptions: {
+        pie: {
+          
+
         },
-        
+
       },
-      title:{
+      title: {
         text: this.title,
-        align: "center", 
-      } 
+        align: "center",
+      }
     };
 
     this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
     this.chart.render();
+
+    this.somaQuant();
     /*
     var options = {
       chart: {
@@ -138,7 +141,7 @@ export class EstGraficoSetoresComponent implements OnInit{
       }]
     });
     chart.render();*/
-    
+
 
     /*
     var myChart = new Chart("estChart", {
@@ -167,36 +170,44 @@ export class EstGraficoSetoresComponent implements OnInit{
    * Método Chamado toda vez que o valor da variável varQualInput
    * for alterada
    */
-  changeVarQual(){
-      this.cleanVariables();
-      this.varQual = [];
-      this.varQual = this.varQualInput.split('-');
-      this.updateChart();
+  changeVarQual() {
+    this.cleanVariables();
+    this.varQual = [];
+    this.varQual = this.varQualInput.split('-');
+    this.updateChart();
   }
 
-  changeQuant(){
+  changeQuant() {
     this.cleanVariables();
     this.quantidade = [];
     var valores = this.quantInput.split('-');
     for (let index = 0; index < valores.length; index++) {
       this.quantidade[index] = Number(valores[index]);
     }
+    this.somaQuant();
     this.updateChart();
   }
 
-  removeElements(){
+  removeElements() {
     this.chart.destroy();
   }
 
-  cleanVariables(){
-    if(this.firstTime){
+  cleanVariables() {
+    if (this.firstTime) {
       this.quantidade = [];
       this.varQual = [];
       this.firstTime = false;
     }
   }
 
-  updateChart(){
+  somaQuant() {
+    this.qtdTotal = this.quantidade.reduce(function (total, numero) {
+      return total + numero;
+    }, 0);
+    console.log(this.qtdTotal);
+  }
+
+  updateChart() {
     this.removeElements()
     this.chartOptions = {
       series: this.quantidade,
@@ -219,12 +230,12 @@ export class EstGraficoSetoresComponent implements OnInit{
           },
         }
       ],
-      plotOptions:{
-      
+      plotOptions: {
+
       },
-      title:{
+      title: {
         text: this.title,
-        align: "center", 
+        align: "center",
       },
     };
     this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
