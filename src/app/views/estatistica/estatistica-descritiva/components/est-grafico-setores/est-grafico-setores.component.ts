@@ -17,7 +17,6 @@ declare var ApexCharts: any;
 })
 export class EstGraficoSetoresComponent implements OnInit {
 
-  public radius = 25;
   public errorInput: boolean = false;
   public chartOptions: Partial<ApexOptions>;
   public chart: ApexCharts;
@@ -204,7 +203,7 @@ export class EstGraficoSetoresComponent implements OnInit {
     this.qtdTotal = this.quantidade.reduce(function (total, numero) {
       return total + numero;
     }, 0);
-    console.log(this.qtdTotal);
+    //console.log(this.qtdTotal);
   }
 
   updateChart() {

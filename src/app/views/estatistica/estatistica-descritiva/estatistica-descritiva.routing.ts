@@ -9,6 +9,7 @@ import { EstViewComponent } from './components/est-view/est-view.component';
 //Gráficos
 import { EstGraficoDefinicaoComponent } from './components/est-grafico-definicao/est-grafico-definicao.component'
 import { EstGraficoSetoresComponent } from './components/est-grafico-setores/est-grafico-setores.component';
+import {  EstGraficoBarrasComponent } from './components/est-grafico-barras/est-grafico-barras.component';
 
 const routes: Routes = [{
   
@@ -42,6 +43,10 @@ const routes: Routes = [{
       {
         path: 'est_graficos_setores',
         component: EstGraficoSetoresComponent
+      },
+      {
+        path: 'est_graficos_barras',
+        component: EstGraficoBarrasComponent
       },
   
   ]

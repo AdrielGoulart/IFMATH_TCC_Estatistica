@@ -1,0 +1,189 @@
+<est-base-view>
+  <div class="btn-container mt-2 row align-items-center justify-content-center">
+    <div class=" col-12 text-center">
+      <h3 class="text-center">Gráfico de Barras</h3>
+    </div>
+  </div>
+
+  <!--Inputs-->
+  <div class="form-group row input-container col-12">
+    <label class="label" for="inputEmail3">Título dos Dados:</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="Título" [(ngModel)]="title"
+        (ngModelChange)="updateChart()">
+    </div><br><br>
+
+    <label class="label" for="inputEmail3">Nome da Variável:</label>
+    <div class="col-sm-8">
+      <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
+        [(ngModel)]="nomeVariavel">
+    </div><br><br>
+
+    <label class="label" for="inputEmail3">Variáveis qualitativas:</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - as palavras"
+        [(ngModel)]="varQualInput" (ngModelChange)="changeVarQual()">
+    </div><br><br>
+
+    <label class="label" for="inputEmail3">Quantidades:</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
+        [(ngModel)]="quantInput" (ngModelChange)="changeQuant()">
+    </div><br><br>
+
+    <label class="label" for="inputEmail3">Fonte dos dados:</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="Fonte" [(ngModel)]="fonteDados">
+    </div><br><br>
+
+  </div>
+
+
+  <div class="row content-container col-12 row px-0 align-items-center justify-content-center text-justify">
+
+    <!--Propriedades
+        <div id="divChart">
+            <canvas id="estChart"></canvas>
+        </div>-->
+    <!--CanvasJS
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
+          <div id="chart">
+            <apx-chart
+              [series]="chartOptions.series"
+              [chart]="chartOptions.chart"
+              [labels]="chartOptions.labels"
+              [responsive]="chartOptions.responsive"
+            ></apx-chart>
+          </div>-->
+
+    <!-- Entradas -->
+    <div class=" mt-4">
+      <div [className]="errorInput === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'" role="alert">
+        O número de n variáveis deve ser menor que <b>10</b>.
+      </div>
+    </div>
+
+    <!-- Gráfico -->
+    <div id="chart" style="width: 100%;"></div>
+    <div class="row col-12">
+      <!-- Fonte dos dados -->
+      <div class="col-sm">
+        <label class="label1" for="inputEmail3">Fonte: {{fonteDados}}</label>
+      </div>
+      <!-- Botão Tabela--> 
+      <div class="col-sm-4">
+        <button  style="height: 90%; background-color: coral;" type="button" class="btn" data-toggle="modal" data-target="#myModal">Ver a tabela equivalente</button>
+      </div>
+      <!-- Modal janela que vai aparecer-->
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header justify-content-center">
+              <b><h5 class="modal-title">{{title}}</h5></b>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead class="table-info" style="text-align: center;">
+                  <tr>
+                    <th scope="col">{{nomeVariavel}}</th>
+                    <th scope="col">Frequência (fi)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="table-light" *ngFor="let element of varQual; let i = index" style="text-align: center;">
+                    <th scope="row">{{element}}</th>
+                    <td>{{quantidade[i]}}</td>
+                  </tr>
+                  <tr class="table-info" style="text-align: center;">
+                    <th scope="row">Total</th>
+                    <td>{{qtdTotal}}</td>
+                  </tr>
+                  <tr class="table-light" style="text-align: left;">
+                    <th scope="row">Fonte: {{fonteDados}}</th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!--Propriedades-->
+  <div class="rightbar px-3 vh-100">
+
+    <h3>Propriedades</h3>
+    <p>
+      O gráfico de barras apresenta dados categorizados em barras retangulares horizontais 
+      nos quais os retângulos correspondentes a cada categoria é proporcional ao número de 
+      observações na respectiva categoria. O gráfico de barras é utilizado para realizar 
+      comparações entre as categorias de uma variável qualitativa.
+    </p>
+    <hr>
+
+    <!-- Exemplo -->
+    <div *ngFor="let varQ of varQual; let i = index" class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingPrincipal" data-toggle="collapse"
+          [attr.data-target]="'#collapsePrincipal' + i">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+              [attr.data-target]="'#collapsePrincipal' + i" aria-expanded="false" aria-controls="collapsePrincipal">
+              {{varQual[i]}} = <ng-katex class="explicacao"
+                equation=" {{quantidade[i]}}">
+              </ng-katex> Unidades
+            </button>
+
+            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+              [attr.data-target]="'#collapsePrincipal' + i"></i>
+          </h2>
+        </div>
+        <div [attr.id]="'collapsePrincipal' + i" class="collapse" aria-labelledby="headingPrincipal"
+          data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="panel-group" id="accordion">
+              <!--Passo 1-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                      <p>
+                        <ng-katex class="explicacao" equation="\textcolor{black}{  
+                      \begin{matrix}
+                          Base = {{quantidade[i]}} \text{ unidades} \\
+                          Altura = 1 \text{ unidade}
+                       \end{matrix} }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Desenhamos um retângulo alinhado à esquerda, com base 
+                    <ng-katex equation="\color{blue}{ {{quantidade[i]}} }"></ng-katex> unidades e 
+                    altura 1.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</est-base-view>
