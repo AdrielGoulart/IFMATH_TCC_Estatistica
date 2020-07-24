@@ -12,12 +12,11 @@ declare var ApexCharts: any;
 export class EstGraficoBarrasComponent implements OnInit {
 
   public errorInput: boolean = false;
+  public errorInputVar: boolean = false;
+  public errorInputQtd: boolean = false;
+  public noError: boolean = false;
   public chartOptions: Partial<ApexOptions>;
   public chart: ApexCharts;
-  public chartColors: string[] = ['#F44336', '#E91E63', '#9C27B0', '#00FF7F',
-    '#FFA500', '#1E90FF', '#008000',
-    '#A0522D', '#FFFF00', '#A9A9A9']
-
   public varQual: string[] = ['Azul', 'Amarelo', 'Vermelho', 'Verde', 'Preto'];
   public varQualInput: string = '';
   public quantidade: number[] = [12, 7, 4, 1, 7];
@@ -28,7 +27,6 @@ export class EstGraficoBarrasComponent implements OnInit {
   public firstTime: boolean = true;
   public qtdTotal: number = 0;
   public button: Object[] = [{ title: "Ver a tabela equivalente", route: "est_graficos_setores_tab" }];
-
 
 
   constructor() { }
@@ -55,7 +53,7 @@ export class EstGraficoBarrasComponent implements OnInit {
         text: this.title,
         align: "center",
       },
-      
+
       //Esse faz com que desapareça os números de dentro da barra
       dataLabels: {
         enabled: false
@@ -80,6 +78,7 @@ export class EstGraficoBarrasComponent implements OnInit {
     this.cleanVariables();
     this.varQual = [];
     this.varQual = this.varQualInput.split('-');
+    this.verifyInputs();
     this.updateChart();
   }
 
@@ -90,6 +89,7 @@ export class EstGraficoBarrasComponent implements OnInit {
     for (let index = 0; index < valores.length; index++) {
       this.quantidade[index] = Number(valores[index]);
     }
+    this.verifyInputs();
     this.somaQuant();
     this.updateChart();
   }
@@ -113,39 +113,68 @@ export class EstGraficoBarrasComponent implements OnInit {
     //console.log(this.qtdTotal);
   }
 
-  updateChart() {
-    this.removeElements()
-    this.chartOptions = {
-      series: [
-        {
-          name: "quantidade",
-          data: this.quantidade
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 400
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true
-        }
-      },
-      title: {
-        text: this.title,
-        align: "center",
-      },
-      
-      //Esse faz com que desapareça os números de dentro da barra
-      dataLabels: {
-        enabled: false
-      },
-      xaxis: {
-        categories: this.varQual,
+  /**
+  * Método responsável por controlar o 
+  * aparecimento das mensagens de erro no html
+  */
+  verifyInputs() {
+    if (this.quantidade.length <= 10 && this.varQual.length <= 10) {
+      this.errorInput = false;
+      if (this.quantidade.length < this.varQual.length) {
+        this.errorInputVar = false;
+        this.errorInputQtd = true;
+        this.noError = false;
+      } else if (this.quantidade.length > this.varQual.length) {
+        this.errorInputQtd = false;
+        this.errorInputVar = true;
+        this.noError = false;
+      } else {
+        this.errorInputQtd = false;
+        this.errorInputVar = false;
+        this.noError = true;
       }
-    };
-    this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
-    this.chart.render();
+    } else {
+      this.errorInput = true;
+      this.errorInputQtd = false;
+      this.errorInputVar = false;
+    }
+  }
+
+  updateChart() {
+    if (this.noError && !(this.errorInput)) {
+      this.removeElements()
+      this.chartOptions = {
+        series: [
+          {
+            name: "quantidade",
+            data: this.quantidade
+          }
+        ],
+        chart: {
+          type: "bar",
+          height: 400
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true
+          }
+        },
+        title: {
+          text: this.title,
+          align: "center",
+        },
+
+        //Esse faz com que desapareça os números de dentro da barra
+        dataLabels: {
+          enabled: false
+        },
+        xaxis: {
+          categories: this.varQual,
+        }
+      };
+      this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
+      this.chart.render();
+    }
   }
 
 }

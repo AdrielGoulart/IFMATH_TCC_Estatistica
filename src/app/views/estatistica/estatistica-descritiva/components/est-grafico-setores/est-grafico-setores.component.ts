@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 //ChartJS
 //import { Chart } from 'chart.js'
 //ApexCharts
@@ -18,6 +18,9 @@ declare var ApexCharts: any;
 export class EstGraficoSetoresComponent implements OnInit {
 
   public errorInput: boolean = false;
+  public errorInputVar: boolean = false;
+  public errorInputQtd: boolean = false;
+  public noError: boolean = false;
   public chartOptions: Partial<ApexOptions>;
   public chart: ApexCharts;
   public chartColors: string[] = ['#F44336', '#E91E63', '#9C27B0', '#00FF7F',
@@ -61,7 +64,7 @@ export class EstGraficoSetoresComponent implements OnInit {
       ],
       plotOptions: {
         pie: {
-          
+
 
         },
 
@@ -173,6 +176,7 @@ export class EstGraficoSetoresComponent implements OnInit {
     this.cleanVariables();
     this.varQual = [];
     this.varQual = this.varQualInput.split('-');
+    this.verifyInputs();
     this.updateChart();
   }
 
@@ -183,6 +187,7 @@ export class EstGraficoSetoresComponent implements OnInit {
     for (let index = 0; index < valores.length; index++) {
       this.quantidade[index] = Number(valores[index]);
     }
+    this.verifyInputs();
     this.somaQuant();
     this.updateChart();
   }
@@ -206,39 +211,68 @@ export class EstGraficoSetoresComponent implements OnInit {
     //console.log(this.qtdTotal);
   }
 
-  updateChart() {
-    this.removeElements()
-    this.chartOptions = {
-      series: this.quantidade,
-      chart: {
-        width: 400,
-        type: "pie"
-      },
-      labels: this.varQual,
-      colors: this.chartColors,
-      responsive: [
-        {
-          breakpoint: 360,
-          options: {
-            chart: {
-              width: 200,
-            },
-            legend: {
-              position: "bottom"
-            },
-          },
-        }
-      ],
-      plotOptions: {
+    /**
+  * Método responsável por controlar o 
+  * aparecimento das mensagens de erro no html
+  */
+ verifyInputs() {
+  if (this.quantidade.length <= 10 && this.varQual.length <= 10) {
+    this.errorInput = false;
+    if (this.quantidade.length < this.varQual.length) {
+      this.errorInputVar = false;
+      this.errorInputQtd = true;
+      this.noError = false;
+    } else if (this.quantidade.length > this.varQual.length) {
+      this.errorInputQtd = false;
+      this.errorInputVar = true;
+      this.noError = false;
+    } else {
+      this.errorInputQtd = false;
+      this.errorInputVar = false;
+      this.noError = true;
+    }
+  } else {
+    this.errorInput = true;
+    this.errorInputQtd = false;
+    this.errorInputVar = false;
+  }
+}
 
-      },
-      title: {
-        text: this.title,
-        align: "center",
-      },
-    };
-    this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
-    this.chart.render();
+  updateChart() {
+    if (this.noError && !(this.errorInput)) {
+      this.removeElements()
+      this.chartOptions = {
+        series: this.quantidade,
+        chart: {
+          width: 400,
+          type: "pie"
+        },
+        labels: this.varQual,
+        colors: this.chartColors,
+        responsive: [
+          {
+            breakpoint: 360,
+            options: {
+              chart: {
+                width: 200,
+              },
+              legend: {
+                position: "bottom"
+              },
+            },
+          }
+        ],
+        plotOptions: {
+
+        },
+        title: {
+          text: this.title,
+          align: "center",
+        },
+      };
+      this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
+      this.chart.render();
+    }
   }
 
 }

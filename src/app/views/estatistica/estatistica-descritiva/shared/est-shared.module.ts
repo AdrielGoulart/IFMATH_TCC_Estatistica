@@ -7,13 +7,14 @@ import { EstBaseViewComponent } from './components/est-base-view/est-base-view.c
 import { EstBtnComponent } from './components/est-btn/est-btn.component';
 import { EstRightbarComponent } from './components/est-rightbar/est-rightbar.component';
 import { EstChartComponent } from './components/est-chart/est-chart.component';
+import { EstFormMsgErrorComponent } from './components/est-form-msg-error/est-form-msg-error.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule
   ],
-  exports:[EstBaseViewComponent, EstBtnComponent],
-  declarations: [EstBaseViewComponent, EstBtnComponent, EstRightbarComponent, EstChartComponent]
+  exports:[EstBaseViewComponent, EstBtnComponent, EstFormMsgErrorComponent],
+  declarations: [EstBaseViewComponent, EstBtnComponent, EstRightbarComponent, EstChartComponent, EstFormMsgErrorComponent]
 })
 export class EstSharedModule { }
