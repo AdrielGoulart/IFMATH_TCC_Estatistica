@@ -17,10 +17,7 @@ import { EstApresentacaoComponent } from './components/est-apresentacao/est-apre
 import { EstGraficoDefinicaoComponent } from './components/est-grafico-definicao/est-grafico-definicao.component';
 import { EstGraficoSetoresComponent } from './components/est-grafico-setores/est-grafico-setores.component';
 import { EstGraficoBarrasComponent } from './components/est-grafico-barras/est-grafico-barras.component';
-//import { WjChartModule } from '@grapecity/wijmo.angular2.chart';
-//import { WjChartAnimationModule } from '@grapecity/wijmo.angular2.chart.animation';
-//import { WjChartModule } from 'wijmo/wijmo.angular2.chart';
-//import { WjChartAnimationModule } from 'wijmo/wijmo.angular2.chart.animation';
+import { EstGraficoColunasComponent } from './components/est-grafico-colunas/est-grafico-colunas.component';
 
 @NgModule({
   imports: [
@@ -30,8 +27,6 @@ import { EstGraficoBarrasComponent } from './components/est-grafico-barras/est-g
     CoreModule,
     EstSharedModule,
     EstatisticaDescritivaRouting,
-    //WjChartModule,
-    //WjChartAnimationModule 
   ],
   declarations: [
     EstViewComponent, 
@@ -41,7 +36,8 @@ import { EstGraficoBarrasComponent } from './components/est-grafico-barras/est-g
     EstApresentacaoComponent, 
     EstGraficoDefinicaoComponent, 
     EstGraficoSetoresComponent, 
-    EstGraficoBarrasComponent
+    EstGraficoBarrasComponent, 
+    EstGraficoColunasComponent
   ]
 })
 export class EstatisticaDescritivaModule { }
