@@ -1,0 +1,16 @@
+.list-group-item:first-child {
+    border-radius: 0 !important;
+  }
+  
+  .active {
+    z-index: 2;
+    color: #fff;
+    background-color: coral !important;
+    border-color: coral !important;
+  }
+  
+  #selecionado:hover {
+    color: #fff;
+    background-color: coral;
+  }
+  

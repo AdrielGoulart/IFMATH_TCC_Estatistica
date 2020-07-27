@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import pt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 //ChartJS
 //import { Chart } from 'chart.js'
 //ApexCharts
@@ -42,7 +44,7 @@ export class EstGraficoSetoresComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    registerLocaleData(pt);
 
     this.chartOptions = {
       series: this.quantidade,

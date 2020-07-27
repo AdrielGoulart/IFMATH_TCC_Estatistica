@@ -175,8 +175,8 @@
           <h2 class="mb-0">
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
               [attr.data-target]="'#collapsePrincipal' + i" aria-expanded="false" aria-controls="collapsePrincipal">
-              {{varQual[i]}} <ng-katex class="explicacao" equation=" \approx {{ ((quantidade[i] * 100)/qtdTotal).toFixed(1)}} \% 
-                           \approx {{ ((quantidade[i] * 360)/qtdTotal).toFixed(1)}} \degree">
+              {{varQual[i]}} <ng-katex class="explicacao" equation=" \approx {{ (((quantidade[i] * 100)/qtdTotal).toFixed(1)) | number:'':'pt' }} \% 
+                           \approx {{ (((quantidade[i] * 360)/qtdTotal).toFixed(1)) | number:'':'pt' }} \degree">
               </ng-katex>
             </button>
 
@@ -284,7 +284,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="">
                       <p>
                         <ng-katex class="explicacao"
-                          equation="\textcolor{black}{ x \approx {{ ((quantidade[i] * 100)/qtdTotal).toFixed(1)}} \% }">
+                          equation="\textcolor{black}{ x \approx {{ (((quantidade[i] * 100)/qtdTotal).toFixed(1)) | number:'':'pt' }} \% }">
                         </ng-katex>
                         <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                           data-target="#collapseGeratriz"></i>
@@ -395,7 +395,7 @@
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight" class="">
                       <p>
                         <ng-katex class="explicacao"
-                          equation="\textcolor{black}{ \alpha \approx {{ ((quantidade[i] * 360)/qtdTotal).toFixed(1)}} \degree }">
+                          equation="\textcolor{black}{ \alpha \approx {{ (((quantidade[i] * 360)/qtdTotal).toFixed(1)) | number:'':'pt' }} \degree }">
                         </ng-katex>
                         <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                           data-target="#collapseGeratriz"></i>
