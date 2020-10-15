@@ -54,39 +54,53 @@
 
     <!--Inputs-->
     
-    <label class="label" for="inputEmail3">Título dos Dados:</label>
-    <div class="col-sm-8">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="label">Título dos Dados: </label>
+      </div>
       <input type="text" class="form-control" id="inputEmail3" placeholder="Título" [(ngModel)]="title"
         (ngModelChange)="updateChart()">
-    </div><br><br>
+    </div>
 
-    <label class="label" for="inputEmail3">Nome da Variável:</label>
-    <div class="col-sm-8">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="label">Nome da Variável: </label>
+      </div>
       <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
         [(ngModel)]="nomeVariavel">
-    </div><br><br>
+    </div>
 
-    <label class="label" for="inputEmail3">Variáveis qualitativas:</label>
-    <div class="col-sm-8">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <label class="label">Variáveis qualitativas:</label>
+      </div>
+      <div class="col mb-3">
       <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - as palavras"
         [(ngModel)]="varQualInput" (ngModelChange)="changeVarQual()">
-      <est-form-msg-error [mostrarErro]="errorInputVar" msgErro="O número de variáveis deve ser igual ao do campo quantidades">
+      <est-form-msg-error class="mb-3" style="margin-left: auto;" [mostrarErro]="errorInputVar" msgErro="O número de variáveis deve ser igual ao do campo quantidades">
       </est-form-msg-error>
-    </div><br><br>
+    </div>
+    </div>
 
-    <label class="label" for="inputEmail3">Quantidades:</label>
-    <div class="col-sm-8">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="label" id="basic-addon1">Quantidades: </label>
+      </div>
+      <div class="col mb-2">
       <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
-        [(ngModel)]="quantInput" (ngModelChange)="changeQuant()">
-        <est-form-msg-error [mostrarErro]="errorInputQtd" msgErro="O número de quantidades deve ser igual ao do campo variáveis">
-        </est-form-msg-error>
-    </div><br><br>
+        [(ngModel)]="quantInput" (ngModelChange)="changeQuant()" aria-describedby="basic-addon1">
+      <est-form-msg-error style="margin-left: auto;" [mostrarErro]="errorInputQtd" msgErro="O número de quantidades deve ser igual ao do campo variáveis">
+      </est-form-msg-error>
+    </div>
+    </div>
 
-    <label class="label" for="inputEmail3">Fonte dos dados:</label>
-    <div class="col-sm-8">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="label">Fonte dos dados:</label>
+      </div>
       <input type="text" class="form-control" id="inputEmail3" placeholder="Fonte" [(ngModel)]="fonteDados">
-    </div><br><br>
-
+    </div>
+    
   </div>
 
 
@@ -103,11 +117,11 @@
     <div id="chart" style="width: max-content;"></div>
     <div class="row col-12">
       <!-- Fonte dos dados -->
-      <div class="col-sm">
+      <div class="col-8">
         <label class="label1" for="inputEmail3">Fonte: {{fonteDados}}</label>
       </div>
       <!-- Botão Tabela-->
-      <div class="col-sm-4">
+      <div class="col-4">
         <button style="height: 90%; background-color: coral;" type="button" class="btn" data-toggle="modal"
           data-target="#myModal">Ver a tabela equivalente</button>
       </div>

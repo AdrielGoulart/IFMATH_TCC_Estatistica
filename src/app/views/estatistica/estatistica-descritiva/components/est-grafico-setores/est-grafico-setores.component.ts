@@ -22,7 +22,7 @@ export class EstGraficoSetoresComponent implements OnInit {
   public errorInput: boolean = false;
   public errorInputVar: boolean = false;
   public errorInputQtd: boolean = false;
-  public noError: boolean = false;
+  public noError: boolean = true;
   public chartOptions: Partial<ApexOptions>;
   public chart: ApexCharts;
   public chartColors: string[] = ['#F44336', '#E91E63', '#9C27B0', '#00FF7F',
