@@ -38,7 +38,12 @@ export class EstGraficoSetoresComponent implements OnInit {
   public nomeVariavel: string = 'Cor';
   public firstTime: boolean = true;
   public qtdTotal: number = 0;
-  public button: Object[] = [{ title: "Ver a tabela equivalente", route: "est_graficos_setores_tab" }];
+
+  //teste
+ buttons: Object[] = [
+  { title: "Gráficos", route: "est_graficos" },
+  { title: "Tabelas", route: "est_tabelas" }
+];
 
   constructor() {
   }

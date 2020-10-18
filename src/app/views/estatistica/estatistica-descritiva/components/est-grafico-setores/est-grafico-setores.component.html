@@ -5,9 +5,9 @@
     </div>
   </div>
 
- 
+
   <div class="form-group row input-container col-12">
- <!--Inputs
+    <!--Inputs
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <label class="label">Título dos Dados: </label>
@@ -53,7 +53,7 @@
 
 
     <!--Inputs-->
-    
+
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <label class="label">Título dos Dados: </label>
@@ -75,11 +75,12 @@
         <label class="label">Variáveis qualitativas:</label>
       </div>
       <div class="col mb-3">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - as palavras"
-        [(ngModel)]="varQualInput" (ngModelChange)="changeVarQual()">
-      <est-form-msg-error class="mb-3" style="margin-left: auto;" [mostrarErro]="errorInputVar" msgErro="O número de variáveis deve ser igual ao do campo quantidades">
-      </est-form-msg-error>
-    </div>
+        <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - as palavras"
+          [(ngModel)]="varQualInput" (ngModelChange)="changeVarQual()">
+        <est-form-msg-error class="mb-3" style="margin-left: auto;" [mostrarErro]="errorInputVar"
+          msgErro="O número de variáveis deve ser igual ao do campo quantidades">
+        </est-form-msg-error>
+      </div>
     </div>
 
     <div class="input-group mb-3">
@@ -87,11 +88,12 @@
         <label class="label" id="basic-addon1">Quantidades: </label>
       </div>
       <div class="col mb-2">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
-        [(ngModel)]="quantInput" (ngModelChange)="changeQuant()" aria-describedby="basic-addon1">
-      <est-form-msg-error style="margin-left: auto;" [mostrarErro]="errorInputQtd" msgErro="O número de quantidades deve ser igual ao do campo variáveis">
-      </est-form-msg-error>
-    </div>
+        <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
+          [(ngModel)]="quantInput" (ngModelChange)="changeQuant()" aria-describedby="basic-addon1">
+        <est-form-msg-error style="margin-left: auto;" [mostrarErro]="errorInputQtd"
+          msgErro="O número de quantidades deve ser igual ao do campo variáveis">
+        </est-form-msg-error>
+      </div>
     </div>
 
     <div class="input-group mb-3">
@@ -100,21 +102,23 @@
       </div>
       <input type="text" class="form-control" id="inputEmail3" placeholder="Fonte" [(ngModel)]="fonteDados">
     </div>
-    
+
   </div>
 
 
   <div class="row content-container col-12 row px-0 align-items-center justify-content-center text-justify">
 
     <!-- Entradas -->
-    <div class=" mt-4">
+    <div class="mt-4">
       <div [className]="errorInput === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'" role="alert">
         O número de n variáveis deve ser menor que <b>10</b>.
       </div>
+
+      <!-- Gráfico -->
+      <div id="chart" style="width: max-content;"></div>
+
     </div>
 
-    <!-- Gráfico -->
-    <div id="chart" style="width: max-content;"></div>
     <div class="row col-12">
       <!-- Fonte dos dados -->
       <div class="col-8">
@@ -122,8 +126,7 @@
       </div>
       <!-- Botão Tabela-->
       <div class="col-4">
-        <button style="height: 90%; background-color: coral;" type="button" class="btn" data-toggle="modal"
-          data-target="#myModal">Ver a tabela equivalente</button>
+        <est-btn-grafico [name]="'Ver Tabela Equivalente'" [modalTarget]="'#myModal'"></est-btn-grafico>
       </div>
       <!-- Modal janela que vai aparecer-->
       <div id="myModal" class="modal fade" role="dialog">
