@@ -1,151 +1,137 @@
 <est-base-view>
-  <div class="btn-container mt-2 row align-items-center justify-content-center">
-    <div class=" col-12 text-center">
-      <h3 class="text-center">Gráfico de Barras Múltiplas</h3>
-    </div>
-  </div>
 
-  <!--Inputs-->
-  <div class="form-group row input-container col-12">
-
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="label">Título dos Dados: </label>
+  <div class="scroll-center">
+    <div class="btn-container mt-2 row align-items-center justify-content-center">
+      <div class=" col-12 text-center">
+        <h3 class="text-center">Gráfico de Barras Múltiplas</h3>
       </div>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Título" [(ngModel)]="title"
-        (ngModelChange)="updateChart()">
     </div>
 
-    <!--Vou ter que usar essa forma de input, tenho que adequar as mensagens de erro-->
-    <!--Classificação da primeira variável-->
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="label">Classificação da primeira variável: </label>
-      </div>
-      <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
-        [(ngModel)]="classifVar1Input">
-    </div>
+    <!--Inputs-->
+    <div class="form-group row input-container col-12">
 
-    <!--Nomes das variáveis-->
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="label">Insira os/as {{classifVar1Input}}: </label>
-      </div>
-      <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
-        [(ngModel)]="nomeVariavel">
-    </div>
-
-     <!--Classificação das demais variáveis-->
-     <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="label">Classificação das demais variáveis </label>
-      </div>
-      <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
-        [(ngModel)]="classifVar2Input">
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          <strong>Oloco, meu!</strong> Olha esse alerta animado, como é chique!
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Título dos Dados: </label>
         </div>
+        <input type="text" class="form-control" id="inputEmail3" placeholder="Título" [(ngModel)]="title"
+          (ngModelChange)="updateChart()">
+      </div>
+      <!--Vou ter que usar essa forma de input, tenho que adequar as mensagens de erro-->
+      <!--Classificação da primeira variável-->
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Classificação da primeira variável: </label>
+        </div>
+        <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
+          [(ngModel)]="classifVar1Input">
+      </div>
+
+      <!--Nomes das variáveis-->
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Insira os/as <b>{{classifVar1Input}}:</b> </label>
+        </div>
+        <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
+          [(ngModel)]="nomeVariavel">
+      </div>
+
+      <!--Classificação das demais variáveis-->
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Classificação das demais variáveis </label>
+        </div>
+        <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
+          [(ngModel)]="classifVar2Input">
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Insira os/as <b>{{classifVar2Input}}:</b> </label>
+        </div>
+        <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
+          [(ngModel)]="classifVarVal2Input" (ngModelChange)="updateNgFor()">
+      </div>
+
+      <!-- Aqui vai estar todos os inputs gerados dinâmicamente -->
+      <div *ngFor="let valores of classifVarVal2; let i = index" class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Insira a quantidade de <b>{{valores}}</b></label>
+        </div>
+        <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
+          [(ngModel)]="nomeVariavel">
+      </div>
+
+      <!--Fonte dos dados-->
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Fonte dos dados:</label>
+        </div>
+        <input type="text" class="form-control" id="inputEmail3" placeholder="Fonte" [(ngModel)]="fonteDados">
+      </div>
+
     </div>
 
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="label">Insira os/as {{classifVar2Input}}: </label>
+    <div class="row content-container col-12 row px-0 align-items-center justify-content-center text-justify">
+      <!-- Entradas -->
+      <div class=" mt-4">
+        <div [className]="errorInput === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'" role="alert">
+          O número de n variáveis deve ser menor que <b>10</b>.
+        </div>
       </div>
-      <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
-        [(ngModel)]="nomeVariavel">
-    </div>
 
-    <!--OLHAR ESSE AQUI AMANHÃ-->
-    <div class="input-group mb-3">
-    <label class="label" for="inputEmail3">Variáveis qualitativas:</label>
-    <div class="col-sm">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - as palavras"
-        [(ngModel)]="varQualInput" (ngModelChange)="changeVarQual()">
-        <est-form-msg-error [mostrarErro]="errorInputVar" msgErro="O número de variáveis deve ser igual ao do campo quantidades">
-        </est-form-msg-error>
-    </div></div><br><br>
+      <!-- Gráfico -->
+      <div id="chart" style="width: 100%;"></div>
 
-    <div class="input-group mb-3">
-    <label class="label" for="inputEmail3">Quantidades:</label>
-    <div class="col-sm">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
-        [(ngModel)]="quantInput" (ngModelChange)="changeQuant()">
-        <est-form-msg-error [mostrarErro]="errorInputQtd" msgErro="O número de quantidades deve ser igual ao do campo variáveis">
-        </est-form-msg-error>
-    </div></div><br><br>
-
-    <!--Fonte dos dados-->
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="label">Fonte dos dados:</label>
-      </div>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Fonte" [(ngModel)]="fonteDados">
-    </div>
-
-  </div>
-
-
-  <div class="row content-container col-12 row px-0 align-items-center justify-content-center text-justify">
-
-    <!-- Entradas -->
-    <div class=" mt-4">
-      <div [className]="errorInput === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'" role="alert">
-        O número de n variáveis deve ser menor que <b>10</b>.
-      </div>
-    </div>
-
-    <!-- Gráfico -->
-    <div id="chart" style="width: 100%;"></div>
-    <div class="row col-12">
-      <!-- Fonte dos dados -->
-      <div class="col-sm">
-        <label class="label1" for="inputEmail3">Fonte: {{fonteDados}}</label>
-      </div>
-      <!-- Botão Tabela--> 
-      <div class="col-sm-4">
-        <button  style="height: 90%; background-color: coral;" type="button" class="btn" data-toggle="modal" data-target="#myModal">Ver a tabela equivalente</button>
-      </div>
-      <!-- Modal janela que vai aparecer-->
-      <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog" role="document">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header justify-content-center">
-              <b><h5 class="modal-title">{{title}}</h5></b>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead class="table-info" style="text-align: center;">
-                  <tr>
-                    <th scope="col">{{nomeVariavel}}</th>
-                    <th scope="col">Frequência (fi)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="table-light" *ngFor="let element of varQual; let i = index" style="text-align: center;">
-                    <th scope="row">{{element}}</th>
-                    <td>{{quantidade[i]}}</td>
-                  </tr>
-                  <tr class="table-info" style="text-align: center;">
-                    <th scope="row">Total</th>
-                    <td>{{qtdTotal}}</td>
-                  </tr>
-                  <tr class="table-light" style="text-align: left;">
-                    <th scope="row">Fonte: {{fonteDados}}</th>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+      <div class="row col-12">
+        <!-- Fonte dos dados -->
+        <div class="col-8">
+          <label class="label1" for="inputEmail3">Fonte: {{fonteDados}}</label>
+        </div>
+        <!-- Botão Tabela-->
+        <div class="col-4">
+          <est-btn-grafico [name]="'Ver Tabela Equivalente'" [modalTarget]="'#myModal'"></est-btn-grafico>
+        </div>
+        <!-- Modal janela que vai aparecer-->
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog" role="document">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header justify-content-center">
+                <b>
+                  <h5 class="modal-title">{{title}}</h5>
+                </b>
+              </div>
+              <div class="modal-body">
+                <table class="table">
+                  <thead class="table-info" style="text-align: center;">
+                    <tr>
+                      <th scope="col">{{nomeVariavel}}</th>
+                      <th scope="col">Frequência (fi)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="table-light" *ngFor="let element of varQual; let i = index" style="text-align: center;">
+                      <th scope="row">{{element}}</th>
+                      <td>{{quantidade[i]}}</td>
+                    </tr>
+                    <tr class="table-info" style="text-align: center;">
+                      <th scope="row">Total</th>
+                      <td>{{qtdTotal}}</td>
+                    </tr>
+                    <tr class="table-light" style="text-align: left;">
+                      <th scope="row">Fonte: {{fonteDados}}</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
 
   </div>
@@ -155,11 +141,11 @@
 
     <h3>Propriedades</h3>
     <p>
-      O gráfico de colunas apresenta dados categorizados em barras retangulares 
-      verticais nos quais os retângulos correspondentes a cada categoria é proporcional 
-      ao número de observações na respectiva categoria. O gráfico de colunas é utilizado 
-      para realizar comparações entre as categorias de uma variável qualitativa ou 
-      quantitativa discreta. 
+      O gráfico de colunas apresenta dados categorizados em barras retangulares
+      verticais nos quais os retângulos correspondentes a cada categoria é proporcional
+      ao número de observações na respectiva categoria. O gráfico de colunas é utilizado
+      para realizar comparações entre as categorias de uma variável qualitativa ou
+      quantitativa discreta.
     </p>
     <hr>
 
@@ -171,8 +157,7 @@
           <h2 class="mb-0">
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
               [attr.data-target]="'#collapsePrincipal' + i" aria-expanded="false" aria-controls="collapsePrincipal">
-              {{varQual[i]}} = <ng-katex class="explicacao"
-                equation=" {{quantidade[i]}}">
+              {{varQual[i]}} = <ng-katex class="explicacao" equation=" {{quantidade[i]}}">
               </ng-katex> Unidades
             </button>
 
@@ -205,7 +190,7 @@
                 <div id="collapseOne" class="panel-collapse collapse">
                   <div class="panel-body">
                     Desenhamos um retângulo alinhado abaixo, medindo uma unidade de base e
-                    <ng-katex equation="\color{blue}{ {{quantidade[i]}} }"></ng-katex> unidades de 
+                    <ng-katex equation="\color{blue}{ {{quantidade[i]}} }"></ng-katex> unidades de
                     altura.
                   </div>
                 </div>
@@ -221,4 +206,3 @@
   </div>
 
 </est-base-view>
-

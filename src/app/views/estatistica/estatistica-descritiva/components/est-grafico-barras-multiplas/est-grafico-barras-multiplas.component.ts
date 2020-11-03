@@ -27,10 +27,18 @@ export class EstGraficoBarrasMultiplasComponent implements OnInit {
   public firstTime: boolean = true;
   public qtdTotal: number = 0;
 ///////////////
+
+  //Variáveis para pegar os nomes básicos das duas Variáveis
   public classifVar1Input: string = 'Regiões';
   public classifVar2Input: string = 'Produtos';
-  public classifVarVal1: string[] = [];
-  public classifVarVal2: string[] = [];
+
+  //Campos para pegar os valores do Input
+  public classifVarVal1Input: string = "";
+  public classifVarVal2Input: string = "Grãos - Frutas - Legumes -Outros";
+
+  //Vetores para os valores digitados
+  public classifVarVal1: string[] = ["Norte","Nordeste","Centro Oeste","Sudeste","Sul"];
+  public classifVarVal2: string[] = ["Grãos","Frutas","Legumes","Outros"];
 
 
   constructor() { }
@@ -198,6 +206,12 @@ export class EstGraficoBarrasMultiplasComponent implements OnInit {
       this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
       this.chart.render();
     }
+  }
+
+  updateNgFor(){
+    this.classifVarVal2 = [];
+    this.classifVarVal2 = this.classifVarVal2Input.split('-');
+    console.log(this.classifVarVal2);
   }
 
 }
