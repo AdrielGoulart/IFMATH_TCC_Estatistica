@@ -1,18 +1,22 @@
 <section class="ifmath-view">
 
   <div class="row mt-2">
-    
+
     <!-- Botões e conteúdo -->
     <div class="col-lg-7 col-12">
       <!-- Botões -->
       <div class="row justify-content-around">
         <ng-content select=".btn-container"></ng-content>
       </div>
-        <!-- Inputs -->
-        <div class="form-group row">
-          <ng-content select=".input-container"></ng-content>
-        </div>
-       <!-- Conteúdo abaixo dos botões -->
+      <!--Coloca os componentes centrais da tela sobre uma barra de rolagem-->
+      <div>
+        <ng-content select=".scroll-center"></ng-content>
+      </div>
+      <!-- Inputs -->
+      <div class="form-group row">
+        <ng-content select=".input-container"></ng-content>
+      </div>
+      <!-- Conteúdo abaixo dos botões -->
       <div class="row justify-content-center">
         <ng-content select=".content-container"></ng-content>
       </div>

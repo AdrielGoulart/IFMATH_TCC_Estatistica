@@ -1,0 +1,40 @@
+@import '../../../../../../assets/styles/theme';
+
+.scroll-center {
+    height: calc(100vh - 80px) !important;
+    //Esse é a propriedade que cria aquele scroll dentro desse componente
+    overflow-y: scroll;
+}
+
+/* Scroll para os itens do centro da tela */
+::-webkit-scrollbar-track {
+  background-color: #E8E9E9;
+  border-radius: 3px;
+}
+::-webkit-scrollbar {
+  width: 7px;
+  background: white;
+}
+::-webkit-scrollbar-thumb {
+  background: $background-color-orange;
+  border-radius: 3px;
+}
+
+/* Retira a linha vertical do meio da tela em versões com a tela menor que 800px*/
+@media only screen and (max-width: 991px) {
+    .scroll-center {
+        border: none;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        //overflow-y: hidden !important;
+        //overflow-x: hidden !important;
+    }
+
+    ::-webkit-scrollbar {
+        width: 7px;
+        background: white;
+        display: none;
+      }
+}
+
+
