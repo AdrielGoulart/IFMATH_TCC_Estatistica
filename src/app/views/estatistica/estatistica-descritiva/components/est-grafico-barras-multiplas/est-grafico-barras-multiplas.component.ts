@@ -1,8 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ApexOptions } from 'apexcharts';
+import pt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 
 //Apex Charts
 declare var ApexCharts: any;
+
+export class Series {
+
+  public name: string;
+  public data: number[];
+}
 
 @Component({
   selector: 'ifmath-est-grafico-barras-multiplas',
@@ -17,73 +25,102 @@ export class EstGraficoBarrasMultiplasComponent implements OnInit {
   public noError: boolean = false;
   public chartOptions: Partial<ApexOptions>;
   public chart: ApexCharts;
+  public chartColors: string[] = ['#FFFF00', '#424242', '#F44336', '#0000FF', '#008000', '#8B4513', '#800080', '#FF8000']
   public varQual: string[] = ['Azul', 'Amarelo', 'Vermelho', 'Verde', 'Preto'];
   public varQualInput: string = '';
+  //Inútil nessa tela
   public quantidade: number[] = [12, 7, 4, 1, 7];
   public quantInput: string = '';
-  public title: string = 'Cor favorita dos alunos de 7° ano da escola XXY';
+  public title: string = 'Produção agrícola por região, no ano de 2019, em milhões de toneladas';
   public fonteDados: string = 'Dados Fictícios';
   public nomeVariavel: string = 'Cor';
   public firstTime: boolean = true;
   public qtdTotal: number = 0;
-///////////////
+  ///////////////
 
   //Variáveis para pegar os nomes básicos das duas Variáveis
   public classifVar1Input: string = 'Regiões';
   public classifVar2Input: string = 'Produtos';
 
   //Campos para pegar os valores do Input
-  public classifVarVal1Input: string = "";
-  public classifVarVal2Input: string = "Grãos - Frutas - Legumes -Outros";
+  public classifVarVal1Input: string = "Norte - Nordeste - Centro Oeste - Sudeste - Sul";
+  public classifVarVal2Input: string = "Grãos - Frutas - Legumes - Outros";
 
   //Vetores para os valores digitados
-  public classifVarVal1: string[] = ["Norte","Nordeste","Centro Oeste","Sudeste","Sul"];
-  public classifVarVal2: string[] = ["Grãos","Frutas","Legumes","Outros"];
+  public classifVarVal1: string[] = ["Norte", "Nordeste", "Centro Oeste", "Sudeste", "Sul"];
+  public classifVarVal2: string[] = ["Grãos", "Frutas", "Legumes", "Outros"];
 
+  public inputSeries: string = "";
+
+  public chartSeries: Series[] = [
+    {
+      name: "Grãos",
+      data: [1.5, 2.4, 41, 64, 22]
+    },
+    {
+      name: "Frutas",
+      data: [44, 55, 41, 64, 22]
+    },
+    {
+      name: "Legumes",
+      data: [53, 32, 33, 52, 13]
+    },
+    {
+      name: "Outros",
+      data: [44, 55, 41, 64, 22]
+    },
+  ];
+
+  public chartDataSeries: string[] =
+    ["1.5 - 2.4 - 41 - 64 - 22",
+      "44 - 55 - 41 - 64 - 22",
+      "53 - 32 - 33 - 52 - 13",
+      "44 - 55 - 41 - 64 - 22"
+    ];
+
+  public series: ApexAxisChartSeries = this.chartSeries;
 
   constructor() { }
 
   ngOnInit() {
+    
+    registerLocaleData(pt);
+
     this.chartOptions = {
-      series: [
-        {
-          name: "quantidade",
-          data: this.quantidade
-        }
-      ],
+      series: this.series,
       chart: {
-        height: 350,
         type: "bar",
-      },
-      colors: [
-        "#008FFB",
-      ],
-      plotOptions: {
-        bar: {
-          columnWidth: "45%",
-          distributed: true
-        }
+        height: 650,
+        width: "100%",
       },
       title: {
         text: this.title,
         align: "center",
       },
-      dataLabels: {
-        enabled: false
-      },
-      legend: {
-        show: false
-      },
-      grid: {
-        show: false
-      },
-      xaxis: {
-        categories: this.varQual,
-        labels: {
-          style: {
-            fontSize: "12px"
+      colors: this.chartColors,
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          dataLabels: {
+            position: "top"
           }
         }
+      },
+      dataLabels: {
+        enabled: true,
+        offsetX: -6,
+        style: {
+          fontSize: "15px",
+          colors: ["#fff"]
+        }
+      },
+      stroke: {
+        show: true,
+        width: 1,
+        colors: ["#fff"]
+      },
+      xaxis: {
+        categories: this.classifVarVal1
       }
     };
     this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
@@ -163,55 +200,100 @@ export class EstGraficoBarrasMultiplasComponent implements OnInit {
   }
 
   updateChart() {
-    if (this.noError && !(this.errorInput)) {
-      this.removeElements()
-      this.chartOptions = {
-        series: [
-          {
-            name: "quantidade",
-            data: this.quantidade
-          }
-        ],
-        chart: {
-          height: 350,
-          type: "bar",
-        },
-        colors: [
-          "#008FFB",
-        ],
-        plotOptions: {
-          bar: {
-            columnWidth: "45%",
-            distributed: true
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        legend: {
-          show: false
-        },
-        grid: {
-          show: false
-        },
-        xaxis: {
-          categories: this.varQual,
-          labels: {
-            style: {
-              fontSize: "12px"
-            }
+    //if (this.noError && !(this.errorInput)) {
+    this.removeElements()
+    this.chartOptions = {
+      series: this.series,
+      chart: {
+        type: "bar",
+        height: 600,
+        width: "100%",
+      },
+      title: {
+        text: this.title,
+        align: "center",
+      },
+      colors: this.chartColors,
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          dataLabels: {
+            position: "top"
           }
         }
-      };
-      this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
-      this.chart.render();
+      },
+      dataLabels: {
+        enabled: true,
+        offsetX: -6,
+        style: {
+          fontSize: "15px",
+          colors: ["#fff"]
+        }
+      },
+      stroke: {
+        show: true,
+        width: 1,
+        colors: ["#fff"]
+      },
+      xaxis: {
+        categories: this.classifVarVal1
+      }
+    };
+    this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
+    this.chart.render();
+    //}
+  }
+
+  updateClassifVarVal1() {
+    this.classifVarVal1 = [];
+    this.classifVarVal1 = this.classifVarVal1Input.split('-');
+    this.updateChart();
+  }
+
+  updateClassifVarVal2() {
+    this.classifVarVal2 = [];
+    this.classifVarVal2 = this.classifVarVal2Input.split('-');
+    this.convertToChartSeries();
+    this.updateChart();
+  }
+
+  convertToChartSeries() {
+    this.series = [];
+    for (let index = 0; index < this.classifVarVal2.length; index++) {
+      var seri = new Series();
+      if (this.chartSeries[index] != undefined) {
+        seri.name = this.classifVarVal2[index];
+        seri.data = this.chartSeries[index].data;
+        this.series.push(seri);
+      } else {
+        seri.name = this.classifVarVal2[index];
+        var valor = 10;
+        this.inputSeries += valor;
+        seri.data = [];
+        for (let index = 0; index < this.classifVarVal2.length; index++) {
+          seri.data.push(valor);
+          valor += 10;
+          this.inputSeries += " - "+ valor
+        }
+        this.series.push(seri);
+        this.chartDataSeries.push(this.inputSeries);
+      }
+
     }
   }
 
-  updateNgFor(){
-    this.classifVarVal2 = [];
-    this.classifVarVal2 = this.classifVarVal2Input.split('-');
-    console.log(this.classifVarVal2);
+  updateChartSeries(index: number) {
+    this.series[index].data = this.chartDataSeries[index].split('-').map(function (item) {
+      return parseInt(item, 10);
+    });
+    this.updateChart();
+  }
+
+  /**
+   * Método para colocar as inicializações dos vetores da tela
+   */
+  initializeArrays() {
+
   }
 
 }

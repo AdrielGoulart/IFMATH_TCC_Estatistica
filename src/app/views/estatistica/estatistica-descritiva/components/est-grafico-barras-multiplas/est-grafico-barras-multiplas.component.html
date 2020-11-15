@@ -33,7 +33,7 @@
           <label class="label">Insira os/as <b>{{classifVar1Input}}:</b> </label>
         </div>
         <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
-          [(ngModel)]="nomeVariavel">
+          [(ngModel)]="classifVarVal1Input" (ngModelChange)="updateClassifVarVal1()">
       </div>
 
       <!--Classificação das demais variáveis-->
@@ -50,16 +50,16 @@
           <label class="label">Insira os/as <b>{{classifVar2Input}}:</b> </label>
         </div>
         <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
-          [(ngModel)]="classifVarVal2Input" (ngModelChange)="updateNgFor()">
+          [(ngModel)]="classifVarVal2Input" (ngModelChange)="updateClassifVarVal2()">
       </div>
 
       <!-- Aqui vai estar todos os inputs gerados dinâmicamente -->
-      <div *ngFor="let valores of classifVarVal2; let i = index" class="input-group mb-3">
+      <div *ngFor="let series of classifVarVal2; let i = index" class="input-group mb-3">
         <div class="input-group-prepend">
-          <label class="label">Insira a quantidade de <b>{{valores}}</b></label>
+          <label class="label">Insira a quantidade de <b>{{series}}</b></label>
         </div>
         <input class="input" type="text" class="form-control" id="inputEmail3" placeholder="variável"
-          [(ngModel)]="nomeVariavel">
+          [(ngModel)]="chartDataSeries[i]" (ngModelChange)="updateChartSeries(i)">
       </div>
 
       <!--Fonte dos dados-->
@@ -141,68 +141,68 @@
 
     <h3>Propriedades</h3>
     <p>
-      O gráfico de colunas apresenta dados categorizados em barras retangulares
-      verticais nos quais os retângulos correspondentes a cada categoria é proporcional
-      ao número de observações na respectiva categoria. O gráfico de colunas é utilizado
-      para realizar comparações entre as categorias de uma variável qualitativa ou
-      quantitativa discreta.
+      São gráficos de barras envolvendo múltiplas variáveis. Para efetuar uma
+      análise comparativa de várias distribuições, podemos construir um gráfico
+      de barras múltiplas. No eixo horizontal, colocamos as frequências relativas
+      em valores absolutos ou em formas de porcentagem, para facilitar a comparação.
     </p>
     <hr>
-
     <!-- Exemplo -->
-    <div *ngFor="let varQ of varQual; let i = index" class="accordion" id="accordionExample">
-      <div class="card">
-        <div class="card-header" id="headingPrincipal" data-toggle="collapse"
-          [attr.data-target]="'#collapsePrincipal' + i">
-          <h2 class="mb-0">
-            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-              [attr.data-target]="'#collapsePrincipal' + i" aria-expanded="false" aria-controls="collapsePrincipal">
-              {{varQual[i]}} = <ng-katex class="explicacao" equation=" {{quantidade[i]}}">
-              </ng-katex> Unidades
-            </button>
+    <div *ngFor="let variaveis of classifVarVal1; let ind = index" class="accordion" id="accordionExample">
+      <h3 style="color:rgb(10, 10, 179);">{{variaveis}}</h3>
+      <div *ngFor="let valores of classifVarVal2; let i = index" class="accordion" id="accordionExample1">
+        <div class="card">
+          <div class="card-header" id="headingPrincipal" data-toggle="collapse"
+            [attr.data-target]="'#collapsePrincipal' + i + ind">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                [attr.data-target]="'#collapsePrincipal' + i + ind" aria-expanded="false" aria-controls="collapsePrincipal">
+                {{valores}} = <ng-katex class="explicacao" equation=" {{chartSeries[i].data[ind] | number:'':'pt'}}">
+                </ng-katex> Unidades
+              </button>
 
-            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-              [attr.data-target]="'#collapsePrincipal' + i"></i>
-          </h2>
-        </div>
-        <div [attr.id]="'collapsePrincipal' + i" class="collapse" aria-labelledby="headingPrincipal"
-          data-parent="#accordionExample">
-          <div class="card-body">
-            <div class="panel-group" id="accordion">
-              <!--Passo 1-->
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
-                      <p>
-                        <ng-katex class="explicacao" equation="\textcolor{black}{  
+              <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                [attr.data-target]="'#collapsePrincipal' + i + ind"></i>
+            </h2>
+          </div>
+          <div [attr.id]="'collapsePrincipal' + i + ind" class="collapse" aria-labelledby="headingPrincipal"
+            data-parent="#accordionExample1">
+            <div class="card-body">
+              <div class="panel-group" id="accordion">
+                <!--Passo 1-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" [attr.href]="'#collapseOne'+ i + ind" class="">
+                        <p>
+                          <ng-katex class="explicacao" equation="\textcolor{black}{  
                       \begin{matrix}
-                          Base = 1 \text{ unidade} \\
-                          Altura = {{quantidade[i]}} \text{ unidades}
+                          Base = {{chartSeries[i].data[ind] | number:'':'pt'}} \text{ unidades} \\
+                          Altura = 1 \text{ unidade} 
                        \end{matrix} }">
-                        </ng-katex>
-                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                          data-target="#collapseGeratriz"></i>
-                      </p>
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    Desenhamos um retângulo alinhado abaixo, medindo uma unidade de base e
-                    <ng-katex equation="\color{blue}{ {{quantidade[i]}} }"></ng-katex> unidades de
-                    altura.
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div [attr.id]="'collapseOne'+ i + ind" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Desenhamos um retângulo alinhado a esquerda, medindo 
+                      <ng-katex equation="\color{blue}{ {{chartSeries[i].data[ind] | number:'':'pt'}} }"></ng-katex>
+                      unidades de base e uma unidade de altura.
+                      Os dados são unidos e há um espaço entre as/os {{classifVar1Input}}
+                    </div>
                   </div>
                 </div>
+                <hr>
               </div>
-              <hr>
-
             </div>
           </div>
         </div>
-      </div>
+      </div><br>
     </div>
-
   </div>
 
 </est-base-view>
