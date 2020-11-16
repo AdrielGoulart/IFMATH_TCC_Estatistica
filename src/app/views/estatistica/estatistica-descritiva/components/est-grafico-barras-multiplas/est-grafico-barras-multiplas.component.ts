@@ -259,23 +259,29 @@ export class EstGraficoBarrasMultiplasComponent implements OnInit {
 
   convertToChartSeries() {
     this.series = [];
+    var copyOfChartSeries = this.chartSeries;
+    this.chartSeries = [];
     for (let index = 0; index < this.classifVarVal2.length; index++) {
       var seri = new Series();
-      if (this.chartSeries[index] != undefined) {
+      if (copyOfChartSeries[index] != undefined) {
         seri.name = this.classifVarVal2[index];
-        seri.data = this.chartSeries[index].data;
+        seri.data = copyOfChartSeries[index].data;
         this.series.push(seri);
+        this.chartSeries.push(seri);
       } else {
         seri.name = this.classifVarVal2[index];
+        seri.data = [];
         var valor = 10;
         this.inputSeries += valor;
-        seri.data = [];
-        for (let index = 0; index < this.classifVarVal2.length; index++) {
-          seri.data.push(valor);
+        seri.data.push(valor);
+        for (let index = 1; index < this.classifVarVal1.length; index++) {
           valor += 10;
+          seri.data.push(valor);
           this.inputSeries += " - "+ valor
+          console.log("Valor:",valor," i: ",index);
         }
         this.series.push(seri);
+        this.chartSeries.push(seri);
         this.chartDataSeries.push(this.inputSeries);
       }
 

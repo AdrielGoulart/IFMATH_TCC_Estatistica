@@ -106,10 +106,18 @@
                 <table class="table">
                   <thead class="table-info" style="text-align: center;">
                     <tr>
+                      <th scope="col">Regiões</th>
+                      <th scope="col">Produtos</th>
+                      <th scope="col">Total</th>
+                    </tr>
+                  </thead>
+                  <!--Cria duas colunas em baixo dessa de cima
+                  <thead class="table-info" style="text-align: center;">
+                    <tr>
                       <th scope="col">{{nomeVariavel}}</th>
                       <th scope="col">Frequência (fi)</th>
                     </tr>
-                  </thead>
+                  </thead>-->
                   <tbody>
                     <tr class="table-light" *ngFor="let element of varQual; let i = index" style="text-align: center;">
                       <th scope="row">{{element}}</th>
