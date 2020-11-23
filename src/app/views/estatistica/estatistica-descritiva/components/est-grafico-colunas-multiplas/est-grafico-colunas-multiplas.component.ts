@@ -13,11 +13,11 @@ export class Series {
 }
 
 @Component({
-  selector: 'ifmath-est-grafico-barras-multiplas',
-  templateUrl: './est-grafico-barras-multiplas.component.html',
-  styleUrls: ['./est-grafico-barras-multiplas.component.scss']
+  selector: 'ifmath-est-grafico-colunas-multiplas',
+  templateUrl: './est-grafico-colunas-multiplas.component.html',
+  styleUrls: ['./est-grafico-colunas-multiplas.component.scss']
 })
-export class EstGraficoBarrasMultiplasComponent implements OnInit {
+export class EstGraficoColunasMultiplasComponent implements OnInit {
 
   public errorInput: boolean = false;
   public errorInputVar: boolean = false;
@@ -93,19 +93,14 @@ export class EstGraficoBarrasMultiplasComponent implements OnInit {
       colors: this.chartColors,
       plotOptions: {
         bar: {
-          horizontal: true,
+          horizontal: false,
           dataLabels: {
             position: "top"
           }
         }
       },
       dataLabels: {
-        enabled: true,
-        offsetX: -6,
-        style: {
-          fontSize: "15px",
-          colors: ["#fff"]
-        }
+        enabled: false,
       },
       stroke: {
         show: true,
