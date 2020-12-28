@@ -20,6 +20,7 @@ import { EstGraficoBarrasComponent } from './components/est-grafico-barras/est-g
 import { EstGraficoColunasComponent } from './components/est-grafico-colunas/est-grafico-colunas.component';
 import { EstGraficoBarrasMultiplasComponent } from './components/est-grafico-barras-multiplas/est-grafico-barras-multiplas.component';
 import { EstGraficoColunasMultiplasComponent } from './components/est-grafico-colunas-multiplas/est-grafico-colunas-multiplas.component';
+import { EstGraficoLinhasComponent } from './components/est-grafico-linhas/est-grafico-linhas.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { EstGraficoColunasMultiplasComponent } from './components/est-grafico-co
     EstGraficoBarrasComponent, 
     EstGraficoColunasComponent, 
     EstGraficoBarrasMultiplasComponent, 
-    EstGraficoColunasMultiplasComponent
+    EstGraficoColunasMultiplasComponent, 
+    EstGraficoLinhasComponent
   ]
 })
 export class EstatisticaDescritivaModule { }
