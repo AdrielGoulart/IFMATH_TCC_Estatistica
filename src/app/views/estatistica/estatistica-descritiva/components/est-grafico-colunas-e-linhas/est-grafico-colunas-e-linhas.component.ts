@@ -398,4 +398,8 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
     }
   }
 
+  changePeriodo() {
+
+  }
+
 }
