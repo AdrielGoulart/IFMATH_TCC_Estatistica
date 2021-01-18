@@ -37,13 +37,25 @@
   .btn {
     color: $background-color-orange;
     text-decoration: none;
-
   }
+}
 
+.label {
+  padding-top: 7px;
+  text-align: right;
+  margin-right: 10px;     
 }
 
 input[type="number"]{
   max-width: 90px;
 }
+
+   /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+   @media screen and (max-width: 600px) {
+    .input-group-prepend, .col-4 {
+      width: 100%;
+      margin-top: 0;
+    }
+  }
 
 

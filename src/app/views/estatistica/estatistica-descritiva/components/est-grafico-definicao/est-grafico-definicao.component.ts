@@ -18,7 +18,7 @@ export class EstGraficoDefinicaoComponent implements OnInit {
   graficosQuantDis: Object[] = [
     { title: "Gráfico de Colunas", route: "est_graficos_colunas" },
     { title: "Gráfico de Linhas", route: "est_graficos_linhas" },
-    { title: "Gráfico de Pontos", route: "est_graficos_colunas" },
+    { title: "Gráfico de Colunas e Linhas", route: "est_graficos_colunas_e_linhas" },
     { title: "Gráfico de Dispersão", route: "est_graficos_dispersao" },
   ];
 

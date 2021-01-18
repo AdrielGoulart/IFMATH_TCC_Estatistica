@@ -1,17 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import pt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { ApexOptions } from 'apexcharts';
 
-//Apex Charts
-declare var ApexCharts: any;
-
 @Component({
-  selector: 'ifmath-est-grafico-linhas',
-  templateUrl: './est-grafico-linhas.component.html',
-  styleUrls: ['./est-grafico-linhas.component.scss']
+  selector: 'ifmath-est-grafico-colunas-e-linhas',
+  templateUrl: './est-grafico-colunas-e-linhas.component.html',
+  styleUrls: ['./est-grafico-colunas-e-linhas.component.scss']
 })
-export class EstGraficoLinhasComponent implements OnInit {
+export class EstGraficoColunasELinhasComponent implements OnInit {
 
   public errorInput: boolean = false;
   public errorInputVar: boolean = false;
@@ -25,7 +22,8 @@ export class EstGraficoLinhasComponent implements OnInit {
   public quantInput: string = '';
   public title: string = 'Cor favorita dos alunos de 7° ano da escola XXY';
   public fonteDados: string = 'Dados Fictícios';
-  public nomeVariavel: string = 'Cor';
+  public nomeVariavel1: string = 'Lucro';
+  public nomeVariavel2: string = 'Preço Unitário';
   public firstTime: boolean = true;
   public qtdTotal: number = 0;
 
@@ -48,49 +46,67 @@ export class EstGraficoLinhasComponent implements OnInit {
   ngOnInit() {
 
     registerLocaleData(pt);
-    console.log(Date.now());
+    
     this.chartOptions = {
       series: [
         {
-          name: "Desktops",
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+          name: "Website Blog",
+          type: "column",
+          data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+        },
+        {
+          name: "Social Media",
+          type: "line",
+          data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
         }
       ],
       chart: {
+        height: 350,
         type: "line",
-        zoom: {
-          enabled: false
+        toolbar: {
+          tools:{
+            zoom: false,
+            zoomin: false,
+            zoomout: false,
+            pan: false,
+            reset: false
+          }
         }
-      },
-      dataLabels: {
-        enabled: false
       },
       stroke: {
-        curve: "straight"
+        width: [0, 4]
       },
       title: {
-        text: this.title,
-        align: "left"
+        text: "Traffic Sources"
       },
-      grid: {
-        row: {
-          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-          opacity: 0.5
-        }
+      dataLabels: {
+        enabled: true,
+        enabledOnSeries: [1]
       },
+      labels: [
+        "01 Jan 2001",
+        "02 Jan 2001",
+        "03 Jan 2001",
+        "04 Jan 2001",
+        "05 Jan 2001",
+        "06 Jan 2001",
+        "07 Jan 2001",
+        "08 Jan 2001",
+        "09 Jan 2001",
+        "10 Jan 2001",
+        "11 Jan 2001",
+        "12 Jan 2001"
+      ],
       xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep"
-        ]
-      }
+        type: "datetime"
+      },
+      yaxis: [
+        {
+        },
+        {
+          opposite: true,
+        }
+      ]
     };
 
     this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
@@ -381,29 +397,5 @@ export class EstGraficoLinhasComponent implements OnInit {
       this.getYears();
     }
   }
-
-  changePeriodo() {
-
-  }
-
-
-  /*
-
-  var dates = this.getDates(new Date(2013,10,22), new Date(2013,11,25));
-    console.log(dates);
-
-  getRangeOfDates(start, end, key, arr = [start.startOf(key)]) {
-    
-    if(start.isAfter(end)) throw new Error('start must precede end')
-    
-    const next = this.moment(start).add(1, key).startOf(key);
-    
-    
-    if(next.isAfter(end, key)) return arr;
-    
-  
-    return this.getRangeOfDates(next, end, key, arr.concat(next));
-    
-  }*/
 
 }
