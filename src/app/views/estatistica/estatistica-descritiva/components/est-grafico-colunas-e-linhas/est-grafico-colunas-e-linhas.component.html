@@ -123,9 +123,6 @@
         </div>
           <input type="text" class="form-control" id="inputEmail3" placeholder="Separe os períodos pela letra a"
             [(ngModel)]="periodoInput" (ngModelChange)="changePeriodo()" aria-describedby="basic-addon1">
-          <est-form-msg-error style="margin-left: auto;" [mostrarErro]="errorInputQtd"
-            msgErro="O número de quantidades deve ser igual ao do campo variáveis">
-          </est-form-msg-error>
       </div>
 
       <div class="input-group mb-3">
@@ -141,7 +138,7 @@
           <label class="label" id="basic-addon1">Quantidades: </label>
         </div>
           <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
-            [(ngModel)]="quantInput" (ngModelChange)="changeQuant()" aria-describedby="basic-addon1">
+            [(ngModel)]="qtdVariavel1Input" (ngModelChange)="changeQuant(1)" aria-describedby="basic-addon1">
       </div>
 
       <div class="input-group mb-3">
@@ -157,7 +154,7 @@
           <label class="label" id="basic-addon1">Quantidades: </label>
         </div>
           <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
-            [(ngModel)]="quantInput" (ngModelChange)="changeQuant()" aria-describedby="basic-addon1">
+            [(ngModel)]="qtdVariavel2Input" (ngModelChange)="changeQuant(2)" aria-describedby="basic-addon1">
       </div>
 
       <div class="input-group mb-3">
@@ -165,19 +162,12 @@
           <label class="label">Fonte dos dados:</label>
         </div>
           <input type="text" class="form-control" id="inputEmail3" placeholder="Fonte" [(ngModel)]="fonteDados">
-      </div>
+      </div><br><br><br><br>
 
     </div>
 
 
     <div class="row content-container col-12 row px-0 align-items-center justify-content-center text-justify">
-
-      <!-- Entradas -->
-      <div class="mt-4">
-        <div [className]="errorInput === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'" role="alert">
-          O número de n variáveis deve ser menor que <b>10</b>.
-        </div>
-      </div>
 
       <!-- Gráfico -->
       <div id="chart" style="width: 100%;"></div>
@@ -213,7 +203,7 @@
                     <tr class="table-light" *ngFor="let element of medidasVetChart; let i = index"
                       style="text-align: center;">
                       <th scope="row">{{element}}</th>
-                      <td>{{quantidade[i]}}</td>
+                      <td>{{quantidadeVar1[i]}}</td>
                     </tr>
                     <tr class="table-info" style="text-align: center;">
                       <th scope="row">Total</th>
@@ -239,9 +229,9 @@
 
     <h3>Propriedades</h3>
     <p>
-      O gráfico de linhas pode exibir dados ao longo do tempo e é, portanto, ideal
-      para mostrar tendências em dados. Para construir este gráfico, associamos as
-      datas às quantidades e posteriormente unimos os pontos através de uma linha.
+      O gráfico de colunas e linhas pode ser utilizado quando queremos
+      relacionar duas variáveis. Neste gráfico apresentamos o gráfico de
+      colunas integrado ao gráfico de linhas.
     </p>
     <hr>
 

@@ -20,12 +20,10 @@ export class EstGraficoLinhasComponent implements OnInit {
   public chartOptions: Partial<ApexOptions>;
   public chart: ApexCharts;
 
-  public varQualInput: string = '';
   public quantidade: number[] = [12, 7, 4, 1, 7];
   public quantInput: string = '';
-  public title: string = 'Cor favorita dos alunos de 7° ano da escola XXY';
-  public fonteDados: string = 'Dados Fictícios';
-  public nomeVariavel: string = 'Cor';
+  public title: string = 'Número de Infectados pelo COVID-19 em Lages';
+  public fonteDados: string = 'Secretaria da Saúde - Município de Lages';
   public firstTime: boolean = true;
   public qtdTotal: number = 0;
 

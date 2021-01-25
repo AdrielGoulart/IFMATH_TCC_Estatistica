@@ -14,16 +14,18 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
   public errorInputVar: boolean = false;
   public errorInputQtd: boolean = false;
   public noError: boolean = true;
+
   public chartOptions: Partial<ApexOptions>;
   public chart: ApexCharts;
 
-  public varQualInput: string = '';
-  public quantidade: number[] = [12, 7, 4, 1, 7];
-  public quantInput: string = '';
   public title: string = 'Cor favorita dos alunos de 7° ano da escola XXY';
   public fonteDados: string = 'Dados Fictícios';
   public nomeVariavel1: string = 'Lucro';
   public nomeVariavel2: string = 'Preço Unitário';
+  public qtdVariavel1Input: string = '';
+  public qtdVariavel2Input: string = '';
+  public quantidadeVar1: number[] = [550, 600, 500, 400, 420, 480, 300, 100];
+  public quantidadeVar2: number[] = [205, 250, 271, 302, 351, 470, 718, 974];
   public firstTime: boolean = true;
   public qtdTotal: number = 0;
 
@@ -34,7 +36,7 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
   public dataAtual: Date = new Date;
   public anos: string[] = [];
 
-  public medidasVetChart: string[] = ["13 h","14 h","15 h","16 h","17 h"];
+  public medidasVetChart: string[] = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago"];
   public medidas: Object[] = [{ nome: "Horas" }, { nome: "Dias" }, { nome: "Semanas" }, { nome: "Meses" }, { nome: "Anos" }]
   public medidaAtual: string = 'Horas';
 
@@ -46,102 +48,26 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
   ngOnInit() {
 
     registerLocaleData(pt);
-    
-    this.chartOptions = {
-      series: [
-        {
-          name: "Website Blog",
-          type: "column",
-          data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
-        },
-        {
-          name: "Social Media",
-          type: "line",
-          data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
-        }
-      ],
-      chart: {
-        height: 350,
-        type: "line",
-        toolbar: {
-          tools:{
-            zoom: false,
-            zoomin: false,
-            zoomout: false,
-            pan: false,
-            reset: false
-          }
-        }
-      },
-      stroke: {
-        width: [0, 4]
-      },
-      title: {
-        text: "Traffic Sources"
-      },
-      dataLabels: {
-        enabled: true,
-        enabledOnSeries: [1]
-      },
-      labels: [
-        "01 Jan 2001",
-        "02 Jan 2001",
-        "03 Jan 2001",
-        "04 Jan 2001",
-        "05 Jan 2001",
-        "06 Jan 2001",
-        "07 Jan 2001",
-        "08 Jan 2001",
-        "09 Jan 2001",
-        "10 Jan 2001",
-        "11 Jan 2001",
-        "12 Jan 2001"
-      ],
-      xaxis: {
-        type: "datetime"
-      },
-      yaxis: [
-        {
-        },
-        {
-          opposite: true,
-        }
-      ]
-    };
-
-    this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
-    this.chart.render();
-
-    this.somaQuant();
+    this.InicializeChart();
   }
 
-  changeQuant() {
-    this.cleanVariables();
-    this.quantidade = [];
-    var valores = this.quantInput.split('-');
-    for (let index = 0; index < valores.length; index++) {
-      this.quantidade[index] = Number(valores[index]);
+  changeQuant(op: number) {
+
+    if (op == 1) {
+      this.quantidadeVar1 = [];
+      var valores = this.qtdVariavel1Input.split('-');
+      for (let index = 0; index < valores.length; index++) {
+        this.quantidadeVar1[index] = Number(valores[index]);
+      }
+    }else{
+      this.quantidadeVar2 = [];
+      var valores = this.qtdVariavel2Input.split('-');
+      for (let index = 0; index < valores.length; index++) {
+        this.quantidadeVar2[index] = Number(valores[index]);
+      }
     }
     this.selectMetodoMedida();
     this.updateChart();
-  }
-
-  removeElements() {
-    this.chart.destroy();
-  }
-
-  cleanVariables() {
-    if (this.firstTime) {
-      this.quantidade = [];
-      this.firstTime = false;
-    }
-  }
-
-  somaQuant() {
-    this.qtdTotal = this.quantidade.reduce(function (total, numero) {
-      return total + numero;
-    }, 0);
-    //console.log(this.qtdTotal);
   }
 
   /**
@@ -171,46 +97,124 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
     }
   }*/
 
+  removeElements() {
+    this.chart.destroy();
+  }
+
   updateChart() {
     if (this.noError && !(this.errorInput)) {
       this.removeElements()
       this.chartOptions = {
         series: [
           {
-            name: "Quantidade",
-            data: this.quantidade
+            name: this.nomeVariavel1,
+            type: "column",
+            data: this.quantidadeVar1
+          },
+          {
+            name: this.nomeVariavel2,
+            type: "line",
+            data: this.quantidadeVar2
           }
         ],
         chart: {
+          height: 350,
           type: "line",
-          zoom: {
-            enabled: false
+          toolbar: {
+            tools: {
+              zoom: false,
+              zoomin: false,
+              zoomout: false,
+              pan: false,
+              reset: false
+            }
           }
         },
-        dataLabels: {
-          enabled: false
-        },
         stroke: {
-          curve: "straight"
+          width: [0, 4]
         },
         title: {
           text: this.title,
-          align: "left"
+          align: 'center',
+          floating: true
         },
-        grid: {
-          row: {
-            colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-            opacity: 0.5
-          }
+        dataLabels: {
+          enabled: true,
+          enabledOnSeries: [1]
         },
+        
         xaxis: {
-          categories: this.medidasVetChart
-        }
+          type: "category",
+          categories: this.medidasVetChart,
+        },
+        yaxis: [
+          {
+          },
+          {
+            opposite: true,
+          }
+        ]
       };
-
+  
       this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
       this.chart.render();
     }
+  }
+
+  InicializeChart() {
+    this.chartOptions = {
+      series: [
+        {
+          name: this.nomeVariavel1,
+          type: "column",
+          data: this.quantidadeVar1
+        },
+        {
+          name: this.nomeVariavel2,
+          type: "line",
+          data: this.quantidadeVar2
+        }
+      ],
+      chart: {
+        height: 350,
+        type: "line",
+        toolbar: {
+          tools: {
+            zoom: false,
+            zoomin: false,
+            zoomout: false,
+            pan: false,
+            reset: false
+          }
+        }
+      },
+      stroke: {
+        width: [0, 4]
+      },
+      title: {
+        text: this.title,
+        align: 'center'
+      },
+      dataLabels: {
+        enabled: true,
+        enabledOnSeries: [1]
+      },
+      
+      xaxis: {
+        type: "category",
+        categories: this.medidasVetChart,
+      },
+      yaxis: [
+        {
+        },
+        {
+          opposite: true,
+        }
+      ]
+    };
+
+    this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
+    this.chart.render();
   }
 
 
@@ -311,7 +315,6 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
     const indexMesI = this.month.indexOf(mesI);
     const indexMesF = this.month.indexOf(mesF);
     this.medidasVetChart = this.month.slice(indexMesI, indexMesF + 1);
-    console.log(this.medidasVetChart);
   }
 
   getMes(indexOfMonth: number) {
@@ -326,7 +329,6 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
   getDays() {
     this.extractDaysPeriods();
     var dates = this.getDates(this.datasSemanas[0], this.datasSemanas[1]);
-    console.log(dates);
     this.createDaysPeriods(dates);
   }
 
@@ -367,12 +369,12 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
     this.createHoursPeriods(horaInicio, horaFim);
   }
 
-  
+
   createHoursPeriods(horaI: string, horaF: string) {
     this.medidasVetChart = [];
     var horaFinal = Number(horaF);
     var contador = Number(horaI);
-    while(contador <= horaFinal){
+    while (contador <= horaFinal) {
       this.medidasVetChart.push(contador + " h");
       contador++;
     }
@@ -399,7 +401,8 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
   }
 
   changePeriodo() {
-
+    this.selectMetodoMedida();
+    this.updateChart();
   }
 
 }
