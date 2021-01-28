@@ -24,8 +24,8 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
   public nomeVariavel2: string = 'Preço Unitário';
   public qtdVariavel1Input: string = '';
   public qtdVariavel2Input: string = '';
-  public quantidadeVar1: number[] = [550, 600, 500, 400, 420, 480, 300, 100];
-  public quantidadeVar2: number[] = [205, 250, 271, 302, 351, 470, 718, 974];
+  public quantidadeVar1: number[] = [550, 600, 500, 400, 420, 480];
+  public quantidadeVar2: number[] = [205, 250, 271, 302, 351, 470];
   public firstTime: boolean = true;
   public qtdTotal: number = 0;
 
@@ -36,7 +36,7 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
   public dataAtual: Date = new Date;
   public anos: string[] = [];
 
-  public medidasVetChart: string[] = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago"];
+  public medidasVetChart: string[] = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"];
   public medidas: Object[] = [{ nome: "Horas" }, { nome: "Dias" }, { nome: "Semanas" }, { nome: "Meses" }, { nome: "Anos" }]
   public medidaAtual: string = 'Horas';
 

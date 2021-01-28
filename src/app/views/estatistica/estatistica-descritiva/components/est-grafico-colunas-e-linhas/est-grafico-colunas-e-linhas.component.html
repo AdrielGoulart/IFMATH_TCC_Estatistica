@@ -192,26 +192,29 @@
                 </b>
               </div>
               <div class="modal-body">
-                <table class="table">
-                  <thead class="table-info" style="text-align: center;">
-                    <tr>
-                      <th scope="col">{{medidaAtual}}</th>
-                      <th scope="col">Frequência (fi)</th>
+                <div class="table-responsive">
+                <table class="table table-borderless">
+                  <thead style="text-align: center;">
+                    <tr style="background-color: white;">
+                      <th>&nbsp;</th>
+                      <th *ngFor="let medida of medidasVetChart; let i = index" scope="col">{{medida}}</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr class="table-light" *ngFor="let element of medidasVetChart; let i = index"
-                      style="text-align: center;">
-                      <th scope="row">{{element}}</th>
-                      <td>{{quantidadeVar1[i]}}</td>
+                  <tbody style="text-align: center; border-right: 1px double black;">
+                    <tr class="table-secondary">
+                      <td style="border-right: 1.5px double black;">{{nomeVariavel1}}</td>
+                      <td style="width: auto; border-top: 1.5px double black;" *ngFor="let qtdVar1 of quantidadeVar1; let i = index">
+                        {{qtdVar1}}</td>
                     </tr>
-                    <tr class="table-info" style="text-align: center;">
-                      <th scope="row">Total</th>
-                      <td>{{qtdTotal}}</td>
+                    <tr style="background-color: white;">
+                      <td style="width: auto; border-right: 1.5px double black;">{{nomeVariavel2}}</td>
+                      <td style="width: auto; border-bottom: 1.5px double black;" *ngFor="let qtdVar2 of quantidadeVar2; let i = index">
+                        {{qtdVar2}}</td>
                     </tr>
                   </tbody>
                   <caption>Fonte: {{fonteDados}}</caption>
                 </table>
+              </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

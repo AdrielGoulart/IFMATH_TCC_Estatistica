@@ -15,6 +15,7 @@ import { EstGraficoBarrasMultiplasComponent } from './components/est-grafico-bar
 import { EstGraficoColunasMultiplasComponent } from './components/est-grafico-colunas-multiplas/est-grafico-colunas-multiplas.component';
 import { EstGraficoLinhasComponent } from './components/est-grafico-linhas/est-grafico-linhas.component';
 import { EstGraficoColunasELinhasComponent } from './components/est-grafico-colunas-e-linhas/est-grafico-colunas-e-linhas.component';
+import { EstGraficoQuantColunasComponent } from './components/est-grafico-quant-colunas/est-grafico-quant-colunas.component';
 
 const routes: Routes = [{
   
@@ -76,6 +77,11 @@ const routes: Routes = [{
       {
         path: 'est_graficos_colunas_e_linhas',
         component: EstGraficoColunasELinhasComponent
+      },
+
+      {
+        path: 'est_graficos_quant_colunas',
+        component: EstGraficoQuantColunasComponent
       },
   
   ]
