@@ -22,8 +22,8 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
   public fonteDados: string = 'Dados Fictícios';
   public nomeVariavel1: string = 'Lucro';
   public nomeVariavel2: string = 'Preço Unitário';
-  public qtdVariavel1Input: string = '';
-  public qtdVariavel2Input: string = '';
+  public qtdVariavel1Input: string = '550-600-500-400-420-480';
+  public qtdVariavel2Input: string = '205-250-271-302-351-470';
   public quantidadeVar1: number[] = [550, 600, 500, 400, 420, 480];
   public quantidadeVar2: number[] = [205, 250, 271, 302, 351, 470];
   public firstTime: boolean = true;
@@ -38,9 +38,9 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
 
   public medidasVetChart: string[] = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"];
   public medidas: Object[] = [{ nome: "Horas" }, { nome: "Dias" }, { nome: "Semanas" }, { nome: "Meses" }, { nome: "Anos" }]
-  public medidaAtual: string = 'Horas';
+  public medidaAtual: string = 'Meses';
 
-  public periodoInput: string = '';
+  public periodoInput: string = 'Jan a Jun';
 
   constructor() {
   }
@@ -52,18 +52,18 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
   }
 
   changeQuant(op: number) {
-
+console.log(op);
     if (op == 1) {
       this.quantidadeVar1 = [];
       var valores = this.qtdVariavel1Input.split('-');
       for (let index = 0; index < valores.length; index++) {
-        this.quantidadeVar1[index] = Number(valores[index]);
+        this.quantidadeVar1.push(Number(valores[index]));
       }
     }else{
       this.quantidadeVar2 = [];
       var valores = this.qtdVariavel2Input.split('-');
       for (let index = 0; index < valores.length; index++) {
-        this.quantidadeVar2[index] = Number(valores[index]);
+        this.quantidadeVar2.push(Number(valores[index]));
       }
     }
     this.selectMetodoMedida();
