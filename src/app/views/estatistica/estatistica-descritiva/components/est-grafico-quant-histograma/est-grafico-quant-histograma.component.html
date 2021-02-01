@@ -1,0 +1,243 @@
+<est-base-view>
+  <div class="scroll-center">
+
+    <div class="btn-container mt-2 row align-items-center justify-content-center">
+      <div class=" col-12 text-center">
+        <h3 class="text-center">Histograma</h3>
+      </div>
+    </div>
+
+    <!--Inputs-->
+    <div class="form-group row input-container col-12">
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Título dos Dados: </label>
+        </div>
+        <input type="text" class="form-control" id="inputEmail3" placeholder="Título" [(ngModel)]="title"
+          (ngModelChange)="updateChart()">
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Dados: </label>
+        </div>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" [(ngModel)]="dadosBrutosInput"
+          (ngModelChange)="changeDados()"></textarea>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Fonte dos dados:</label>
+        </div>
+        <input type="text" class="form-control" id="inputEmail3" placeholder="Fonte" [(ngModel)]="fonteDados">
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Alterar o Número de Classes:</label>
+        </div>
+        <input type="number" class="form-control" id="inputEmail3" placeholder="Classes" [(ngModel)]="nClasses">
+      </div>
+
+    </div>
+
+
+    <div class="row content-container col-12 row px-0 align-items-center justify-content-center text-justify">
+
+      <!-- Gráfico -->
+      <div id="chart" style="width: 100%;"></div>
+
+      <div class="row col-12">
+        <!-- Fonte dos dados -->
+        <div class="col-sm">
+          <label class="label1" for="inputEmail3">Fonte: {{fonteDados}}</label>
+        </div>
+        <!-- Botão Tabela-->
+        <div class="col-4">
+          <est-btn-grafico [name]="'Ver Tabela Equivalente'" [modalTarget]="'#myModal'"></est-btn-grafico>
+        </div>
+        <!-- Modal janela que vai aparecer-->
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog" role="document">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header justify-content-center">
+                <b>
+                  <h5 class="modal-title">{{title}}</h5>
+                </b>
+              </div>
+              <div class="modal-body">
+                <div class="table-responsive">
+                <table class="table">
+                  <thead class="table-info" style="text-align: center;">
+                    <tr>
+                      <th scope="col">Lim. Inf</th>
+                      <th scope="col">Lim. Sup</th>
+                      <th scope="col">f</th>
+                      <th scope="col">F</th>
+                      <th scope="col">f%</th>
+                      <th scope="col">F%</th>
+                      <th scope="col">xi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="table-light" *ngFor="let element of frequenciaAbs; let i = index" style="text-align: center;">
+                      <td>{{allIntervals[i]}}</td>
+                      <td>{{allIntervals[i+1]}}</td>
+                      <td>{{frequenciaAbs[i]}}</td>
+                      <td>{{frequenciaAbsAc[i]}}</td>
+                      <td>{{frequenciaRel[i]}}</td>
+                      <td>{{frequenciaRelAc[i]}}</td>
+                      <td>{{valorMed[i]}}</td>
+                    </tr>
+                    <tr class="table-info" style="text-align: center;">
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                      <td>{{n}}</td>
+                      <th>&nbsp;</th>
+                      <td>{{frequenciaRelAc[frequenciaRelAc.length - 1]}}</td>
+                      <th>&nbsp;</th>
+                      <th>&nbsp;</th>
+                    </tr>
+                  </tbody>
+                  <caption>Fonte: {{fonteDados}}</caption>
+                </table>
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!--Propriedades-->
+  <div class="rightbar px-3 vh-100">
+
+    <h3>Propriedades</h3>
+    <p>
+      O gráfico de colunas apresenta dados categorizados em barras retangulares
+      verticais nos quais os retângulos correspondentes a cada categoria é proporcional
+      ao número de observações na respectiva categoria. O gráfico de colunas é utilizado
+      para realizar comparações entre as categorias de uma variável qualitativa ou
+      quantitativa discreta.
+    </p>
+    <hr>
+
+    <p>
+      Para definir a amplitude do intervalo de frequências precisamos
+      realizar os seguintes cálculos:<br><br>
+
+      Número de elementos(n): {{n}}<br>
+      Mínimo(m): {{limiteInf}}<br>
+      Máximo(M): {{limiteSup}}
+    </p>
+
+    <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header" id="headingPrincipal" data-toggle="collapse"
+              data-target="#collapseDistribuicao">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                  data-target="#collapseDistribuicao" aria-expanded="false" aria-controls="collapseDistribuicao">
+                  Amplitude da Distribuição (A):
+                </button>
+    
+                <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                  data-target="#collapseDistribuicao"></i>
+              </h2>
+            </div>
+            <div id="collapseDistribuicao" class="collapse" aria-labelledby="headingPrincipal"
+              data-parent="#accordionExample">
+              <div class="card-body">
+                <ul>
+                  <li>
+                    <ng-katex class="explicacao" equation="A = \color{red}{ M } \color{black}{-} \color{blue}{ m }">
+                    </ng-katex>
+                  </li>
+                  <li>
+                    <ng-katex class="explicacao"
+                      equation="A = \color{red}{ {{limiteSup}} } \color{black}{-} \color{blue}{ {{limiteInf}} } = \color{black}{ {{amplitudeTot}} }">
+                    </ng-katex>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingPrincipal" data-toggle="collapse"
+            data-target="#collapseClasses">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                data-target="#collapseClasses" aria-expanded="false" aria-controls="collapseClasses">
+                Número de Classes (c):
+              </button>
+  
+              <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                data-target="#collapseClasses"></i>
+            </h2>
+          </div>
+          <div id="collapseClasses" class="collapse" aria-labelledby="headingPrincipal"
+            data-parent="#accordionExample">
+            <div class="card-body">
+              <ul>
+                <li>
+                  <ng-katex class="explicacao" equation="c = 1 + \color{red}{ 3,333} \color{black}{ \cdot \log(n)}">
+                  </ng-katex>
+                </li>
+                <li>
+                  <ng-katex class="explicacao"
+                    equation="c = 1 + \color{red}{ 3,333} \color{black}{ \cdot \log({{n}})} \cong {{nClasses}}">
+                  </ng-katex>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingPrincipal" data-toggle="collapse"
+          data-target="#collapseAmplClasse">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+              data-target="#collapseAmplClasse" aria-expanded="false" aria-controls="collapseAmplClasse">
+              Amplitude da classe (a):
+            </button>
+
+            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+              data-target="#collapseAmplClasse"></i>
+          </h2>
+        </div>
+        <div id="collapseAmplClasse" class="collapse" aria-labelledby="headingPrincipal"
+          data-parent="#accordionExample">
+          <div class="card-body">
+            <ul>
+              <li>
+                <ng-katex class="explicacao" equation="a = A \div c">
+                </ng-katex>
+              </li>
+              <li>
+                <ng-katex class="explicacao" equation="a = {{amplitudeTot}} \div {{nClasses}} \cong {{intervaloCla}}">
+                </ng-katex>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </div>
+
+      
+        
+        
+  </div>
+
+</est-base-view>

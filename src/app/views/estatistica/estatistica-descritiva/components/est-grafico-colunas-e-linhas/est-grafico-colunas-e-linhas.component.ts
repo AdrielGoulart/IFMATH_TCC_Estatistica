@@ -52,14 +52,14 @@ export class EstGraficoColunasELinhasComponent implements OnInit {
   }
 
   changeQuant(op: number) {
-console.log(op);
+    
     if (op == 1) {
       this.quantidadeVar1 = [];
       var valores = this.qtdVariavel1Input.split('-');
       for (let index = 0; index < valores.length; index++) {
         this.quantidadeVar1.push(Number(valores[index]));
       }
-    }else{
+    } else {
       this.quantidadeVar2 = [];
       var valores = this.qtdVariavel2Input.split('-');
       for (let index = 0; index < valores.length; index++) {
@@ -70,32 +70,6 @@ console.log(op);
     this.updateChart();
   }
 
-  /**
-* Método responsável por controlar o 
-* aparecimento das mensagens de erro no html
-
-  verifyInputs() {
-    if (this.quantidade.length <= 10 && this.varQual.length <= 10) {
-      this.errorInput = false;
-      if (this.quantidade.length < this.varQual.length) {
-        this.errorInputVar = false;
-        this.errorInputQtd = true;
-        this.noError = false;
-      } else if (this.quantidade.length > this.varQual.length) {
-        this.errorInputQtd = false;
-        this.errorInputVar = true;
-        this.noError = false;
-      } else {
-        this.errorInputQtd = false;
-        this.errorInputVar = false;
-        this.noError = true;
-      }
-    } else {
-      this.errorInput = true;
-      this.errorInputQtd = false;
-      this.errorInputVar = false;
-    }
-  }*/
 
   removeElements() {
     this.chart.destroy();
@@ -142,7 +116,7 @@ console.log(op);
           enabled: true,
           enabledOnSeries: [1]
         },
-        
+
         xaxis: {
           type: "category",
           categories: this.medidasVetChart,
@@ -155,7 +129,7 @@ console.log(op);
           }
         ]
       };
-  
+
       this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
       this.chart.render();
     }
@@ -199,7 +173,7 @@ console.log(op);
         enabled: true,
         enabledOnSeries: [1]
       },
-      
+
       xaxis: {
         type: "category",
         categories: this.medidasVetChart,
