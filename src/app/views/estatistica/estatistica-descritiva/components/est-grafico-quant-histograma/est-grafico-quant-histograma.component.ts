@@ -32,7 +32,7 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
   public qtdTotal: number = 0;
 
   public dadosBrutosInput: string = '3-3.6-3.8-3.9-4-4-4-4.2-4.5-4.7-5-5-5.1-5.4-5.7-5.8-5.8-5.8-5.9-5.9-6-6-6-6-6.1-6.3-6.3-6.3-6.5-6.5-6.7-6.8-6.8-6.9-7-7-7.2-7.2-7.2-7.3-7.4-7.5-7.6-7.6-7.8-8.2-8.6-8.8-9-9';
-  public dadosBrutos: number[] = [];
+  public dadosBrutos: number[] = [3,3.6,3.8,3.9,4,4,4,4.2,4.5,4.7,5,5,5.1,5.4,5.7,5.8,5.8,5.8,5.9,5.9,6,6,6,6,6.1,6.3,6.3,6.3,6.5,6.5,6.7,6.8,6.8,6.9,7,7,7.2,7.2,7.2,7.3,7.4,7.5,7.6,7.6,7.8,8.2,8.6,8.8,9,9];
   public limiteSup: number = 9;
   public limiteInf: number = 3;
   public amplitudeTot: number = 6;
@@ -41,6 +41,7 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
   public n: number = 50;
   public numerosRep: Object = null;
   public allIntervals: number[] = [3, 4, 5, 6, 7, 8, 9, 10];
+  public allIntervalsString: string[] = [];
   public tableElements: TableElements[] = [];
   public frequenciaAbs: number[] = [4, 6, 10, 14, 11, 3, 2];
   public frequenciaAbsAc: number[] = [4, 10, 20, 34, 45, 48, 50];
@@ -74,6 +75,7 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
     this.frequenciaRelativa();
     this.frequenciaRelativaAcumulada();
     this.valorMedio();
+    this.convertIntervals();
     this.updateChart();
   }
 
@@ -97,12 +99,14 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
         tabela.intervalo = countInter + " |----> " + (countInter + this.intervaloCla);
         this.tableElements.push(tabela);
         countInter += this.intervaloCla;
-        this.allIntervals.push(countInter);
+        this.allIntervals.push( (Number.isInteger(countInter)) ? countInter : parseFloat(countInter.toFixed(1)));
+       
       }
     }
   }
 
   contaNumerosRepetidos() {
+    this.numerosRep = [];
     this.numerosRep = this.dadosBrutos.reduce(function (object, item) {
       //console.log( object , item ); 
       if (!object[item]) {
@@ -129,7 +133,6 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
   frequenciaAbsoluta() {
     var k = 0;
     var countRep = 0;
-    this.frequenciaAbs = [];
     for (let index = 0; index < this.allIntervals.length; index++) {
       countRep = 0;
       if (index + 1 != null) {
@@ -188,12 +191,13 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
 
   valorMedio() {
     this.valorMed = [];
+    var countValMed = 0;
     for (let index = 0; index < this.allIntervals.length; index++) {
       if (index != this.allIntervals.length - 1) {
-        this.valorMed.push(Number((this.allIntervals[index] + this.allIntervals[index + 1]) / 2)).toFixed(2);
+        countValMed = Number((this.allIntervals[index] + this.allIntervals[index + 1]) / 2);
+        this.valorMed.push((Number.isInteger(countValMed)) ? countValMed : parseFloat(countValMed.toFixed(2)));
       }
     }
-    console.log(this.valorMed);
   }
 
   amplitudeTotal() {
@@ -207,10 +211,17 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
   }
 
   intervaloClasses() {
-    this.intervaloCla = Math.round(this.amplitudeTot / this.nClasses);
+    this.intervaloCla = (this.amplitudeTot / this.nClasses);
+    this.intervaloCla = (Number.isInteger(this.intervaloCla)) ? this.intervaloCla : parseFloat(this.intervaloCla.toFixed(1));
     //console.log("Intevalos de Classe(i): ", this.intervaloCla);
   }
 
+  convertIntervals(){
+    this.allIntervalsString = [];
+    for (let index = 0; index < this.allIntervals.length; index++) {
+      this.allIntervalsString.push(String(this.allIntervals[index]));
+    }
+  }
 
   changeNClasses(){
     this.intervaloClasses();
@@ -222,8 +233,10 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
     this.frequenciaRelativa();
     this.frequenciaRelativaAcumulada();
     this.valorMedio();
+    this.convertIntervals();
     this.updateChart();
   }
+
 
   removeElements() {
     this.chart.destroy();
@@ -265,8 +278,8 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
         },
         xaxis: {
           //offsetX: -50,
-          range: undefined,
-          categories: this.allIntervals,
+          range: 2,
+          categories: this.allIntervalsString,
           axisBorder: {
             show: false
           },

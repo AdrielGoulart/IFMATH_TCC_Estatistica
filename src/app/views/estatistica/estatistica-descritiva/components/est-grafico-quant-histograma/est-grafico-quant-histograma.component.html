@@ -37,7 +37,8 @@
         <div class="input-group-prepend">
           <label class="label">Alterar o Número de Classes:</label>
         </div>
-        <input type="number" class="form-control" id="inputEmail3" placeholder="Classes" [(ngModel)]="nClasses">
+        <input type="number" class="form-control" id="inputEmail3" placeholder="Classes" [(ngModel)]="nClasses"
+        (ngModelChange)="changeNClasses()">
       </div>
 
     </div>
