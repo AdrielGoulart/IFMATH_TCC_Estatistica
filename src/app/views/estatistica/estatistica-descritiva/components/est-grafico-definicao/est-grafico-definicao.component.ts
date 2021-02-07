@@ -24,8 +24,7 @@ export class EstGraficoDefinicaoComponent implements OnInit {
 
   graficosQuantCont: Object[] = [
     { title: "Histograma", route: "est_graficos_quant_histograma" },
-    { title: "Polígono de Frequência", route: "est_graficos_pol_freq" },
-    { title: "Polígono de Frequência Acumulada", route: "est_graficos_pol_freq_ac" },
+    { title: "Polígono de Frequência", route: "est_graficos_quant_poligono_frequencia" },
   ];
 
   constructor() { }

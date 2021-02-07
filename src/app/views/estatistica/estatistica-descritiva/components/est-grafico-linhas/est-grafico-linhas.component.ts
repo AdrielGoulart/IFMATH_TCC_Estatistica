@@ -44,9 +44,8 @@ export class EstGraficoLinhasComponent implements OnInit {
   }
 
   ngOnInit() {
-
     registerLocaleData(pt);
-    console.log(Date.now());
+    
     this.chartOptions = {
       series: [
         {

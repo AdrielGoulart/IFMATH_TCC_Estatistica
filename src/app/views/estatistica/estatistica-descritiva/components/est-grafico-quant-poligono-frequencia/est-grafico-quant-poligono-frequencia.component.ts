@@ -10,11 +10,11 @@ export class TableElements {
 }
 
 @Component({
-  selector: 'ifmath-est-grafico-quant-histograma',
-  templateUrl: './est-grafico-quant-histograma.component.html',
-  styleUrls: ['./est-grafico-quant-histograma.component.scss']
+  selector: 'ifmath-est-grafico-quant-poligono-frequencia',
+  templateUrl: './est-grafico-quant-poligono-frequencia.component.html',
+  styleUrls: ['./est-grafico-quant-poligono-frequencia.component.scss']
 })
-export class EstGraficoQuantHistogramaComponent implements OnInit {
+export class EstGraficoQuantPoligonoFrequenciaComponent implements OnInit {
 
   public errorInput: boolean = false;
   public errorInputVar: boolean = false;
@@ -29,7 +29,8 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
   public title: string = 'Notas da turma XY na avaliação I de Cálculo';
   public fonteDados: string = 'Dados Fictícios';
   public firstTime: boolean = true;
-  public qtdTotal: number = 0;
+  public textButton: string = 'Ver Histograma';
+  public isHistogram: boolean = false;
 
   public dadosBrutosInput: string = '3-3.6-3.8-3.9-4-4-4-4.2-4.5-4.7-5-5-5.1-5.4-5.7-5.8-5.8-5.8-5.9-5.9-6-6-6-6-6.1-6.3-6.3-6.3-6.5-6.5-6.7-6.8-6.8-6.9-7-7-7.2-7.2-7.2-7.3-7.4-7.5-7.6-7.6-7.8-8.2-8.6-8.8-9-9';
   public dadosBrutos: number[] = [3, 3.6, 3.8, 3.9, 4, 4, 4, 4.2, 4.5, 4.7, 5, 5, 5.1, 5.4, 5.7, 5.8, 5.8, 5.8, 5.9, 5.9, 6, 6, 6, 6, 6.1, 6.3, 6.3, 6.3, 6.5, 6.5, 6.7, 6.8, 6.8, 6.9, 7, 7, 7.2, 7.2, 7.2, 7.3, 7.4, 7.5, 7.6, 7.6, 7.8, 8.2, 8.6, 8.8, 9, 9];
@@ -52,7 +53,7 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
 
   ngOnInit() {
 
-    this.InicializeChart();
+    this.InicializePoligonoChart();
   }
 
 
@@ -74,7 +75,15 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
     this.frequenciaRelativa();
     this.frequenciaRelativaAcumulada();
     this.valorMedio();
-    this.updateChart();
+    this.selectChart();
+  }
+
+  selectChart(){
+    if(this.isHistogram){
+      this.updateHistogramaChart();
+    }else{
+      this.updatePoligonoChart();
+    }
   }
 
   formaIntervalos() {
@@ -97,8 +106,8 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
         tabela.intervalo = countInter + " |----> " + (countInter + this.intervaloCla);
         this.tableElements.push(tabela);
         countInter += this.intervaloCla;
-        this.allIntervals.push( (Number.isInteger(countInter)) ? countInter : parseFloat(countInter.toFixed(1)));
-       
+        this.allIntervals.push((Number.isInteger(countInter)) ? countInter : parseFloat(countInter.toFixed(1)));
+
       }
     }
   }
@@ -225,7 +234,7 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
     }
   }*/
 
-  changeNClasses(){
+  changeNClasses() {
     this.intervaloClasses();
     this.contaNumerosRepetidos();
     this.formaIntervalos();
@@ -235,7 +244,7 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
     this.frequenciaRelativa();
     this.frequenciaRelativaAcumulada();
     this.valorMedio();
-    this.updateChart();
+    this.selectChart();
   }
 
 
@@ -244,7 +253,17 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
   }
 
 
-  updateChart() {
+  changeChart(){
+    if(this.isHistogram){
+      this.isHistogram = false;
+      this.updatePoligonoChart();
+    }else{
+      this.isHistogram = true;
+      this.updateHistogramaChart();
+    }
+  }
+
+  updateHistogramaChart() {
     if (this.noError && !(this.errorInput)) {
       this.removeElements()
       this.chartOptions = {
@@ -261,7 +280,7 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
           text: this.title,
           align: 'center',
 
-          style:{
+          style: {
             color: '#000000'
           }
         },
@@ -278,8 +297,6 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
           }
         },
         xaxis: {
-          //offsetX: -50,
-          range: 2,
           categories: this.allIntervals,
           labels: {
             formatter: function (val) {
@@ -306,61 +323,151 @@ export class EstGraficoQuantHistogramaComponent implements OnInit {
     }
   }
 
-  InicializeChart() {
+  InicializePoligonoChart() {
+    var valorMedio = this.valorMed.slice();
+    var frequenciaAbs = this.frequenciaAbs.slice();
+    valorMedio.push(this.valorMed[this.valorMed.length - 1] + this.intervaloCla);
+    valorMedio.unshift(this.valorMed[0] - this.intervaloCla);
+    frequenciaAbs.unshift(0);
+    frequenciaAbs.push(0);
+    //this.removeElements()
     this.chartOptions = {
-      series: [{
-        name: "Quantidade",
-        data: this.frequenciaAbs
-      }],
+      series: [
+        {
+          name: "frequência",
+          data: frequenciaAbs
+        }
+      ],
       chart: {
-        type: "histogram",
-        height: 380,
-        foreColor: "#999",
+        type: "line",
+        zoom: {
+          enabled: false
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: "straight"
       },
       title: {
         text: this.title,
-        align: 'center',
-
-        style:{
-          color: '#000000'
-        }
+        align: "center"
       },
-      plotOptions: {
-        bar: {
-          dataLabels: {
-            hideOverflowingLabels: false,
-          }
-        }
-      },
-      states: {
-        active: {
-          allowMultipleDataPointsSelection: true
+      grid: {
+        row: {
+          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+          opacity: 0.5
         }
       },
       xaxis: {
-        categories: this.allIntervals,
+        categories: valorMedio,
         labels: {
           formatter: function (val) {
-            return String((Number.isInteger(Number(val))) ? Number(val) : parseFloat(Number(val).toFixed(1)))
+            return String((Number.isInteger(Number(val))) ? Number(val) : parseFloat(Number(val).toFixed(2)))
           }
         },
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        }
-      },
-      yaxis: {
-        tickAmount: 4,
-        labels: {
-          offsetX: -5,
-          offsetY: -5
-        },
-      },
+      }
     };
+
     this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
     this.chart.render();
   }
 
+  updatePoligonoChart() {
+    if (this.noError && !(this.errorInput)) {
+      var valorMedio = this.valorMed.slice();
+      var frequenciaAbs = this.frequenciaAbs.slice();
+      valorMedio.push(this.valorMed[this.valorMed.length - 1] + this.intervaloCla);
+      valorMedio.unshift(this.valorMed[0] - this.intervaloCla);
+      frequenciaAbs.unshift(0);
+      frequenciaAbs.push(0);
+      this.removeElements();
+      this.chartOptions = {
+        series: [
+          {
+            name: "frequência",
+            data: frequenciaAbs
+          }
+        ],
+        chart: {
+          type: "line",
+          zoom: {
+            enabled: false
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: "straight"
+        },
+        title: {
+          text: this.title,
+          align: "center"
+        },
+        grid: {
+          row: {
+            colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+            opacity: 0.5
+          }
+        },
+        xaxis: {
+          categories: valorMedio,
+          labels: {
+            formatter: function (val) {
+              return String((Number.isInteger(Number(val))) ? Number(val) : parseFloat(Number(val).toFixed(2)))
+            }
+          },
+        }
+      };
+
+      this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
+      this.chart.render();
+    }
+  }
+
 }
+
+
+
+/*var options = {
+  series: [{
+  name: 'Website Blog',
+  type: 'column',
+  data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+}, {
+  name: 'Social Media',
+  type: 'line',
+  data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
+}],
+  chart: {
+  height: 350,
+  type: 'line',
+},
+stroke: {
+  width: [0, 4]
+},
+title: {
+  text: 'Traffic Sources'
+},
+dataLabels: {
+  enabled: true,
+  enabledOnSeries: [1]
+},
+labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
+xaxis: {
+  type: 'datetime'
+},
+yaxis: [{
+  title: {
+    text: 'Website Blog',
+  },
+
+}, {
+  opposite: true,
+  title: {
+    text: 'Social Media'
+  }
+}]
+};*/
