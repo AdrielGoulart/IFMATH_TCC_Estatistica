@@ -1,13 +1,3 @@
 @import '../../shared/style/est-conteudo.scss';
 @import '../../shared/style/est-rightbar.scss';
-
-.label {
-    padding-top: 7px;
-    text-align: right;    
-}
-
-.label1 {
-    padding-top: 7px;
-    text-align: right; 
-    align-items: baseline;;   
-}
+@import '../../shared/style/est-center-items.scss';

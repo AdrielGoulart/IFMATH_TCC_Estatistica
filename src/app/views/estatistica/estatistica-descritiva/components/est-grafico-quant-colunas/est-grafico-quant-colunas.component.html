@@ -50,11 +50,14 @@
 
       <div class="row col-12">
         <!-- Fonte dos dados -->
-        <div class="col-sm">
+        <div class="mt-2 col-12">
           <label class="label1" for="inputEmail3">Fonte: {{fonteDados}}</label>
         </div>
+        <!-- Div usada apenas para fazer com que os botões fiquem do lado direito -->
+        <div class="col-sm">
+        </div>
         <!-- Botão Tabela-->
-        <div class="col-4">
+        <div class="btn-container mt-2 row align-items-center justify-content-center">
           <est-btn-grafico [name]="'Ver Tabela Equivalente'" [modalTarget]="'#myModal'"></est-btn-grafico>
         </div>
         <!-- Modal janela que vai aparecer-->
