@@ -18,6 +18,7 @@ import { EstGraficoColunasELinhasComponent } from './components/est-grafico-colu
 import { EstGraficoQuantColunasComponent } from './components/est-grafico-quant-colunas/est-grafico-quant-colunas.component';
 import { EstGraficoQuantHistogramaComponent } from './components/est-grafico-quant-histograma/est-grafico-quant-histograma.component';
 import { EstGraficoQuantPoligonoFrequenciaComponent } from './components/est-grafico-quant-poligono-frequencia/est-grafico-quant-poligono-frequencia.component';
+import { EstGraficoQuantDispersaoComponent } from './components/est-grafico-quant-dispersao/est-grafico-quant-dispersao.component';
 
 const routes: Routes = [{
   
@@ -94,6 +95,11 @@ const routes: Routes = [{
       {
         path: 'est_graficos_quant_poligono_frequencia',
         component: EstGraficoQuantPoligonoFrequenciaComponent
+      },
+
+      {
+        path: 'est_graficos_quant_dispersao',
+        component: EstGraficoQuantDispersaoComponent
       },
   
   ]

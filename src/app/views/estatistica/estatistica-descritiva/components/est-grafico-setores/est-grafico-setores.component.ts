@@ -1,13 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import pt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
-//ChartJS
-//import { Chart } from 'chart.js'
-//ApexCharts
 import { ApexOptions } from 'apexcharts';
-
-//CnavasJS
-declare var CanvasJS: any;
 
 //Apex Charts
 declare var ApexCharts: any;

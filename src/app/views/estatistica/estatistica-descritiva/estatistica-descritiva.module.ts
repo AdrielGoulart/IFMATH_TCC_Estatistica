@@ -25,6 +25,7 @@ import { EstGraficoColunasELinhasComponent } from './components/est-grafico-colu
 import { EstGraficoQuantColunasComponent } from './components/est-grafico-quant-colunas/est-grafico-quant-colunas.component';
 import { EstGraficoQuantHistogramaComponent } from './components/est-grafico-quant-histograma/est-grafico-quant-histograma.component';
 import { EstGraficoQuantPoligonoFrequenciaComponent } from './components/est-grafico-quant-poligono-frequencia/est-grafico-quant-poligono-frequencia.component';
+import { EstGraficoQuantDispersaoComponent } from './components/est-grafico-quant-dispersao/est-grafico-quant-dispersao.component';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { EstGraficoQuantPoligonoFrequenciaComponent } from './components/est-gra
     EstGraficoColunasELinhasComponent, 
     EstGraficoQuantColunasComponent, 
     EstGraficoQuantHistogramaComponent, 
-    EstGraficoQuantPoligonoFrequenciaComponent
+    EstGraficoQuantPoligonoFrequenciaComponent, 
+    EstGraficoQuantDispersaoComponent
   ]
 })
 export class EstatisticaDescritivaModule { }

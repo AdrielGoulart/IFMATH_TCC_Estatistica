@@ -19,7 +19,7 @@ export class EstGraficoDefinicaoComponent implements OnInit {
     { title: "Gráfico de Colunas", route: "est_graficos_quant_colunas"},
     { title: "Gráfico de Linhas", route: "est_graficos_linhas" },
     { title: "Gráfico de Colunas e Linhas", route: "est_graficos_colunas_e_linhas" },
-    { title: "Gráfico de Dispersão", route: "est_graficos_dispersao" },
+    { title: "Gráfico de Dispersão", route: "est_graficos_quant_dispersao" },
   ];
 
   graficosQuantCont: Object[] = [
