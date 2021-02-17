@@ -9,8 +9,7 @@ export class EstApresentacaoComponent implements OnInit {
 
  // Botoões de navegação
  buttons: Object[] = [
-  { title: "Gráficos", route: "est_graficos" },
-  { title: "Tabelas", route: "est_tabelas" }
+  { title: "Gráficos", route: "est_graficos" }
 ];
 
   constructor() { }
