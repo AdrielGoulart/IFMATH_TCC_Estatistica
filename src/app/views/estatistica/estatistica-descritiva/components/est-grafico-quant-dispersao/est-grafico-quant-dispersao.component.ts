@@ -3,6 +3,19 @@ import pt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { ApexOptions } from 'apexcharts';
 
+class Coordenada {
+
+  constructor(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
+
+  x: number;
+  y: number
+}
+
+let dadosXY = [];
+
 @Component({
   selector: 'ifmath-est-grafico-quant-dispersao',
   templateUrl: './est-grafico-quant-dispersao.component.html',
@@ -19,115 +32,88 @@ export class EstGraficoQuantDispersaoComponent implements OnInit {
 
   public quantidade: number[] = [12, 7, 4, 1, 7];
   public quantInput: string = '';
-  public title: string = 'Número de Infectados pelo COVID-19 em Lages';
+  public title: string = 'Efeito da temperatura no desempenho do XX';
   public fonteDados: string = 'Dados Fictícios';
   public firstTime: boolean = true;
   public qtdTotal: number = 0;
 
-  public day: string[] = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
-  public month: string[] = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
-
-  public datasSemanas: Date[] = null;
-  public dataAtual: Date = new Date;
-  public anos: string[] = [];
-
-  public medidasVetChart: string[] = ["13 h","14 h","15 h","16 h","17 h"];
-  public medidas: Object[] = [{ nome: "Horas" }, { nome: "Dias" }, { nome: "Semanas" }, { nome: "Meses" }, { nome: "Anos" }]
-  public medidaAtual: string = 'Horas';
-
-  public periodoInput: string = '';
-
   /////////////////////////////
-  public titleVarX: string = '';
-  public dadosXInput: string = '';
-  public titleVarY: string = '';
-  public dadosYInput: string = '';
-  
+  public titleVarX: string = 'Temperatura em °C';
+  public dadosXInput: string = '100 - 110 - 120 - 130 - 140 - 150';
+  public dadosX: number[] = [100, 110, 120, 130, 140, 150];
+  public titleVarY: string = 'Desempenho em litros (l)';
+  public dadosYInput: string = '45 - 51 - 54 - 61 - 66 - 70';
+  public dadosY: number[] = [45, 51, 54, 61, 66, 70];
+  public coodenada: Coordenada[] = [{ x: 100, y: 45 }, { x: 110, y: 51 }];
+  public equal: boolean = true;
 
   constructor() {
   }
 
   ngOnInit() {
     registerLocaleData(pt);
-    
-    this.chartOptions = {
-      series: [{
-        name: "SAMPLE A",
-        data: [
-        [100, 45], [110, 51],[120, 54],[130, 61],[140, 66],[150, 70]
-      ]
-      }],
-      chart: {
-        height: 350,
-        type: 'scatter',
-        zoom: {
-          enabled: false,
-          type: 'xy'
-        }
-      },
-      title:{
-        text:"Efeito da temperatura no desempenho do XX",
-        align: 'center'
-      },
-      xaxis: {
-        title:{
-          text: "Temperatura em °C"
-        },
-        tickAmount: 10,
-        labels: {
-          formatter: function(val) {
-            return parseFloat(val).toFixed(1)
-          }
-        }
-      },
-      yaxis: {
-        tickAmount: 7,
-        title:{
-          text: "Desempenho em litros (l)",
-        }
+    this.initializeDadosXY();
+    this.initializeChart();
+  }
+
+  initializeDadosXY() {
+    var int1 = [100, 45];
+    var int2 = [110, 51];
+    var int3 = [120, 54];
+    var int4 = [130, 61];
+    var int5 = [140, 66];
+    var int6 = [150, 70];
+
+    dadosXY.push(int1);
+    dadosXY.push(int2);
+    dadosXY.push(int3);
+    dadosXY.push(int4);
+    dadosXY.push(int5);
+    dadosXY.push(int6);
+    console.log(JSON.stringify(dadosXY))
+  }
+
+  addCoordenadaIntoDadosXY() {
+    this.coodenada = [];
+    dadosXY = [];
+    if (this.verifyInputsLength()) {
+      for (let i = 0; i < this.dadosX.length; i++) {
+        this.coodenada.push(new Coordenada(this.dadosX[i], this.dadosY[i]));
       }
-    };
-
-    this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
-    this.chart.render();
-  }
-
-  changeDadosX(){
-
-  }
-
-  changeDadosY(){
-
-  }
-
-  changeQuant() {
-    this.cleanVariables();
-    this.quantidade = [];
-    var valores = this.quantInput.split('-');
-    for (let index = 0; index < valores.length; index++) {
-      this.quantidade[index] = Number(valores[index]);
+      dadosXY = this.coodenada.map(Object.values);
+      this.updateChart();
+      //console.log(JSON.stringify(dadosXY))
     }
-    this.selectMetodoMedida();
-    this.updateChart();
+  }
+
+  changeDadosX() {
+    this.dadosX = [];
+    var valores = this.dadosXInput.split('-');
+    for (let index = 0; index < valores.length; index++) {
+      this.dadosX[index] = Number(valores[index]);
+    }
+    this.addCoordenadaIntoDadosXY();
+  }
+
+  changeDadosY() {
+    this.dadosY = [];
+    var valores = this.dadosYInput.split('-');
+    for (let index = 0; index < valores.length; index++) {
+      this.dadosY[index] = Number(valores[index]);
+    }
+    this.addCoordenadaIntoDadosXY();
+  }
+
+  verifyInputsLength(): boolean {
+    this.equal = this.dadosY.length == this.dadosX.length ? true : false;
+    console.log("Booleano: ",this.equal);
+    return this.equal;
   }
 
   removeElements() {
     this.chart.destroy();
   }
 
-  cleanVariables() {
-    if (this.firstTime) {
-      this.quantidade = [];
-      this.firstTime = false;
-    }
-  }
-
-  somaQuant() {
-    this.qtdTotal = this.quantidade.reduce(function (total, numero) {
-      return total + numero;
-    }, 0);
-    //console.log(this.qtdTotal);
-  }
 
   /**
 * Método responsável por controlar o 
@@ -160,36 +146,38 @@ export class EstGraficoQuantDispersaoComponent implements OnInit {
     if (this.noError && !(this.errorInput)) {
       this.removeElements()
       this.chartOptions = {
-        series: [
-          {
-            name: "Quantidade",
-            data: this.quantidade
-          }
-        ],
+        series: [{
+          name: "SAMPLE A",
+          data: dadosXY
+        }],
         chart: {
-          type: "line",
+          height: 350,
+          type: 'scatter',
           zoom: {
-            enabled: false
+            enabled: false,
+            type: 'xy'
           }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: "straight"
         },
         title: {
-          text: this.title,
-          align: "left"
-        },
-        grid: {
-          row: {
-            colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-            opacity: 0.5
-          }
+          text: "Efeito da temperatura no desempenho do XX",
+          align: 'center'
         },
         xaxis: {
-          categories: this.medidasVetChart
+          title: {
+            text: "Temperatura em °C"
+          },
+          tickAmount: 10,
+          labels: {
+            formatter: function (val) {
+              return parseFloat(val).toFixed(1)
+            }
+          }
+        },
+        yaxis: {
+          tickAmount: 7,
+          title: {
+            text: "Desempenho em litros (l)",
+          }
         }
       };
 
@@ -199,192 +187,48 @@ export class EstGraficoQuantDispersaoComponent implements OnInit {
   }
 
 
-  getWeeks() {
-    //var teste = "8-Jun a 27-Jul";
-    this.extractWeekPeriods();
-    var dates = this.getDates(this.datasSemanas[0], this.datasSemanas[1]);
-    //console.log(dates);
-    this.createWeekPeriods(dates);
-  }
-
-  extractWeekPeriods() {
-    this.datasSemanas = [];
-    var semanas = this.periodoInput.split('a');
-    var dataInicio = semanas[0].trim().split('-');
-    var dataFim = semanas[1].trim().split('-');
-
-    for (let index = 0; index <= this.month.length; index++) {
-      if (dataInicio[1] == this.month[index]) {
-        this.datasSemanas.push(new Date(this.dataAtual.getFullYear(), index, Number(dataInicio[0])));
-      } if (dataFim[1] == this.month[index]) {
-        this.datasSemanas.push(new Date(this.dataAtual.getFullYear(), index, Number(dataFim[0])));
-      }
-    }
-  }
-
-  /**
-   * Método responsável por pegar os dias entre as duas datas de início da semana
-   * @param startDate variável que contempla a data de início para a captura do período
-   * @param endDate variável que contempla a data final para a captura do período
-   */
-  getDates(startDate, endDate) {
-    var dates = [],
-      currentDate = startDate,
-      addDays = function (days) {
-        var date = new Date(this.valueOf());
-        date.setDate(date.getDate() + days);
-        return date;
+  initializeChart() {
+    if (this.noError && !(this.errorInput)) {
+      this.chartOptions = {
+        series: [{
+          name: "SAMPLE A",
+          data: dadosXY
+        }],
+        chart: {
+          height: 350,
+          type: 'scatter',
+          zoom: {
+            enabled: false,
+            type: 'xy'
+          }
+        },
+        title: {
+          text: "Efeito da temperatura no desempenho do XX",
+          align: 'center'
+        },
+        xaxis: {
+          title: {
+            text: "Temperatura em °C"
+          },
+          tickAmount: 10,
+          labels: {
+            formatter: function (val) {
+              return parseFloat(val).toFixed(1)
+            }
+          }
+        },
+        yaxis: {
+          tickAmount: 7,
+          title: {
+            text: "Desempenho em litros (l)",
+          }
+        }
       };
-    while (currentDate <= endDate) {
-      dates.push(currentDate);
-      //console.log(currentDate.getMonth().toString());
-      currentDate = addDays.call(currentDate, 1);
+
+      this.chart = new ApexCharts(document.querySelector("#chart"), this.chartOptions);
+      this.chart.render();
+
     }
-    return dates;
-  };
-
-  /**
-   * Pega todos os dias presentes entre a semana de início e fim e organiza
-   * de modo a pegar as datas de 7 em 7 dias, ou seja a cada uma semana, para então
-   * poderem ser utilizadas no gráfico. Calcula também quantas semanas o período vai ter
-   * @param period variável que contem o período completo(todos os dias) entre a semana de início e fim
-   */
-  createWeekPeriods(period: Date[]) {
-    this.medidasVetChart = [];
-
-    for (let index = 0; index < period.length; index++) {
-      if (index % 7 == 0) {
-        this.medidasVetChart.push(String(period[index].getDate()) + "/" + this.getMes(period[index].getMonth()));
-      }
-    }
-  }
-
-
-  // ------------------------------ Anos
-  getYears() {
-    //var teste = "2018 a 2020";
-    //var anos = teste.split('a');
-    var anos = this.periodoInput.split('a');
-    var anoInicio = Number(anos[0].trim());
-    var anoFim = Number(anos[1].trim());
-    this.createYearsPeriods(anoInicio, anoFim);
-  }
-
-  createYearsPeriods(anoI: number, anoF: number) {
-    this.medidasVetChart = [];
-    for (var i = Math.min(anoI, anoF); anoI >= 0 && anoF >= 0 && i <= Math.max(anoI, anoF); i++) {
-      this.medidasVetChart.push(String(i));
-    }
-  }
-
-  // ------------------------------ Anos
-
-
-  // ------------------------------- Meses
-
-  getMonths() {
-    //var teste = "Jul a Set";
-    ///var meses = teste.split('a');
-    var meses = this.periodoInput.split('a');
-    var mesInicio = String(meses[0].trim());
-    var mesFim = String(meses[1].trim());
-    this.createMonthPeriods(mesInicio, mesFim);
-  }
-
-  createMonthPeriods(mesI: string, mesF: string) {
-    this.medidasVetChart = [];
-    const indexMesI = this.month.indexOf(mesI);
-    const indexMesF = this.month.indexOf(mesF);
-    this.medidasVetChart = this.month.slice(indexMesI, indexMesF + 1);
-    console.log(this.medidasVetChart);
-  }
-
-  getMes(indexOfMonth: number) {
-    return this.month[indexOfMonth];
-  }
-
-  // ------------------------------- FIM Meses
-
-
-  // ------------------------------- Dias
-
-  getDays() {
-    this.extractDaysPeriods();
-    var dates = this.getDates(this.datasSemanas[0], this.datasSemanas[1]);
-    console.log(dates);
-    this.createDaysPeriods(dates);
-  }
-
-  extractDaysPeriods() {
-    this.datasSemanas = [];
-    var dias = this.periodoInput.split('a');
-    var dataInicio = dias[0].trim().split('-');
-    var dataFim = dias[1].trim().split('-');
-
-    for (let index = 0; index <= this.month.length; index++) {
-      if (dataInicio[1] == this.month[index]) {
-        this.datasSemanas.push(new Date(this.dataAtual.getFullYear(), index, Number(dataInicio[0])));
-      } if (dataFim[1] == this.month[index]) {
-        this.datasSemanas.push(new Date(this.dataAtual.getFullYear(), index, Number(dataFim[0])));
-      }
-    }
-  }
-
-  createDaysPeriods(period: Date[]) {
-    this.medidasVetChart = [];
-
-    for (let index = 0; index < period.length; index++) {
-      this.medidasVetChart.push(String(period[index].getDate()) + "/" + this.getMes(period[index].getMonth()));
-    }
-  }
-
-  // ------------------------------- FIM Dias
-
-
-  // ------------------------------- Horas
-
-  getHours() {
-    //var teste = "Jul a Set";
-    ///var meses = teste.split('a');
-    var horas = this.periodoInput.split('a');
-    var horaInicio = String(horas[0].trim());
-    var horaFim = String(horas[1].trim());
-    this.createHoursPeriods(horaInicio, horaFim);
-  }
-
-  
-  createHoursPeriods(horaI: string, horaF: string) {
-    this.medidasVetChart = [];
-    var horaFinal = Number(horaF);
-    var contador = Number(horaI);
-    while(contador <= horaFinal){
-      this.medidasVetChart.push(contador + " h");
-      contador++;
-    }
-  }
-
-  // ------------------------------- FIM Horas
-
-  getMedida(event) {
-    this.medidaAtual = event.target.value;
-  }
-
-  selectMetodoMedida() {
-    if (this.medidaAtual == "Horas") {
-      this.getHours();
-    } else if (this.medidaAtual == "Dias") {
-      this.getDays();
-    } else if (this.medidaAtual == "Semanas") {
-      this.getWeeks();
-    } else if (this.medidaAtual == "Meses") {
-      this.getMonths();
-    } else if (this.medidaAtual == "Anos") {
-      this.getYears();
-    }
-  }
-
-  changePeriodo() {
-
   }
 
 }

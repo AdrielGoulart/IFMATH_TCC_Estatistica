@@ -66,6 +66,13 @@
 
     <div class="row content-container col-12 row px-0 align-items-center justify-content-center text-justify">
 
+      <!-- Entradas -->
+      <div class="mt-4">
+        <div [className]="equal === false ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'" role="alert">
+          O número de elementos de X deve ser igual ao de Y.
+        </div>
+      </div>
+
       <!-- Gráfico -->
       <div id="chart" style="width: 100%;"></div>
 
@@ -95,19 +102,15 @@
                 <table class="table">
                   <thead class="table-info" style="text-align: center;">
                     <tr>
-                      <th scope="col">{{medidaAtual}}</th>
-                      <th scope="col">Frequência (fi)</th>
+                      <th scope="col">{{titleVarX}}</th>
+                      <th scope="col">{{titleVarY}}</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="table-light" *ngFor="let element of medidasVetChart; let i = index"
+                    <tr class="table-light" *ngFor="let element of dadosX; let i = index"
                       style="text-align: center;">
-                      <th scope="row">{{element}}</th>
-                      <td>{{quantidade[i]}}</td>
-                    </tr>
-                    <tr class="table-info" style="text-align: center;">
-                      <th scope="row">Total</th>
-                      <td>{{qtdTotal}}</td>
+                      <td>{{element}}</td>
+                      <td>{{dadosY[i]}}</td>
                     </tr>
                   </tbody>
                   <caption>Fonte: {{fonteDados}}</caption>
