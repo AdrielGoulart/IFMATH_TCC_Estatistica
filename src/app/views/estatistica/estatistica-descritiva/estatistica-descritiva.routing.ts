@@ -8,17 +8,17 @@ import { EstReferenciasComponent } from './components/est-referencias/est-refere
 import { EstViewComponent } from './components/est-view/est-view.component';
 //Gráficos
 import { EstGraficoDefinicaoComponent } from './components/est-grafico-definicao/est-grafico-definicao.component'
-import { EstGraficoSetoresComponent } from './components/est-grafico-setores/est-grafico-setores.component';
-import {  EstGraficoBarrasComponent } from './components/est-grafico-barras/est-grafico-barras.component';
-import { EstGraficoColunasComponent } from './components/est-grafico-colunas/est-grafico-colunas.component';
-import { EstGraficoBarrasMultiplasComponent } from './components/est-grafico-barras-multiplas/est-grafico-barras-multiplas.component';
-import { EstGraficoColunasMultiplasComponent } from './components/est-grafico-colunas-multiplas/est-grafico-colunas-multiplas.component';
-import { EstGraficoLinhasComponent } from './components/est-grafico-linhas/est-grafico-linhas.component';
-import { EstGraficoColunasELinhasComponent } from './components/est-grafico-colunas-e-linhas/est-grafico-colunas-e-linhas.component';
-import { EstGraficoQuantColunasComponent } from './components/est-grafico-quant-colunas/est-grafico-quant-colunas.component';
-import { EstGraficoQuantHistogramaComponent } from './components/est-grafico-quant-histograma/est-grafico-quant-histograma.component';
-import { EstGraficoQuantPoligonoFrequenciaComponent } from './components/est-grafico-quant-poligono-frequencia/est-grafico-quant-poligono-frequencia.component';
-import { EstGraficoQuantDispersaoComponent } from './components/est-grafico-quant-dispersao/est-grafico-quant-dispersao.component';
+import { EstGraficoQualiSetoresComponent } from './components/Graficos/Qualitativos/est-grafico-quali-setores/est-grafico-quali-setores.component';
+import { EstGraficoQualiBarrasComponent } from './components/Graficos/Qualitativos/est-grafico-quali-barras/est-grafico-quali-barras.component';
+import { EstGraficoQualiColunasComponent } from './components/Graficos/Qualitativos/est-grafico-quali-colunas/est-grafico-quali-colunas.component';
+import { EstGraficoQualiBarrasMultiplasComponent } from './components/Graficos/Qualitativos/est-grafico-quali-barras-multiplas/est-grafico-quali-barras-multiplas.component';
+import { EstGraficoQualiColunasMultiplasComponent } from './components/Graficos/Qualitativos/est-grafico-quali-colunas-multiplas/est-grafico-quali-colunas-multiplas.component';
+import { EstGraficoQuantLinhasComponent } from './components/Graficos/Quantitativos/est-grafico-quant-linhas/est-grafico-quant-linhas.component';
+import { EstGraficoQuantColunasELinhasComponent } from './components/Graficos/Quantitativos/est-grafico-quant-colunas-e-linhas/est-grafico-quant-colunas-e-linhas.component';
+import { EstGraficoQuantColunasComponent } from './components/Graficos/Quantitativos/est-grafico-quant-colunas/est-grafico-quant-colunas.component';
+import { EstGraficoQuantHistogramaComponent } from './components/Graficos/Quantitativos/est-grafico-quant-histograma/est-grafico-quant-histograma.component';
+import { EstGraficoQuantPoligonoFrequenciaComponent } from './components/Graficos/Quantitativos/est-grafico-quant-poligono-frequencia/est-grafico-quant-poligono-frequencia.component';
+import { EstGraficoQuantDispersaoComponent } from './components/Graficos/Quantitativos/est-grafico-quant-dispersao/est-grafico-quant-dispersao.component';
 
 const routes: Routes = [{
   
@@ -51,35 +51,35 @@ const routes: Routes = [{
       },
       {
         path: 'est_graficos_setores',
-        component: EstGraficoSetoresComponent
+        component: EstGraficoQualiSetoresComponent
       },
       {
         path: 'est_graficos_barras',
-        component: EstGraficoBarrasComponent
+        component: EstGraficoQualiBarrasComponent
       },
       {
         path: 'est_graficos_colunas',
-        component: EstGraficoColunasComponent
+        component: EstGraficoQualiColunasComponent
       },
 
       {
         path: 'est_graficos_barras_mul',
-        component: EstGraficoBarrasMultiplasComponent
+        component: EstGraficoQualiBarrasMultiplasComponent
       },
 
       {
         path: 'est_graficos_colunas_mul',
-        component: EstGraficoColunasMultiplasComponent
+        component: EstGraficoQualiColunasMultiplasComponent
       },
 
       {
         path: 'est_graficos_linhas',
-        component: EstGraficoLinhasComponent
+        component: EstGraficoQuantLinhasComponent
       },
 
       {
         path: 'est_graficos_colunas_e_linhas',
-        component: EstGraficoColunasELinhasComponent
+        component: EstGraficoQuantColunasELinhasComponent
       },
 
       {

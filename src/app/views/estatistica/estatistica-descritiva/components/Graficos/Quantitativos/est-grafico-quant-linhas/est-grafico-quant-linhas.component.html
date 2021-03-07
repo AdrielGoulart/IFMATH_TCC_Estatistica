@@ -1,0 +1,139 @@
+<est-base-view>
+
+  <div class="scroll-center">
+
+    <div class="btn-container mt-2 row align-items-center justify-content-center">
+      <div class=" col-12 text-center">
+        <h3 class="text-center">Gráfico de Linhas</h3>
+      </div>
+    </div>
+
+    <div class="form-group row input-container col-12">
+
+      <!--Inputs-->
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Título dos Dados: </label>
+        </div>
+        <input type="text" class="form-control" id="inputEmail3" placeholder="Título" [(ngModel)]="title"
+          (ngModelChange)="updateChart()">
+      </div>
+
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label class="label">Selecione a medida:</label>
+        </div>
+        <div class="col-4 mb-3">
+          <select class="form-control border-0 mb-0" id="localChegada" (click)="getMedida($event)">
+            <option *ngFor="let medida of medidas; let i = index" [value]="medida.nome">{{ medida.nome }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label" id="basic-addon1">Período: </label>
+        </div>
+        <div class="col mb-2">
+          <input type="text" class="form-control" id="inputEmail3" placeholder="Separe as datas pela letra a"
+            [(ngModel)]="periodoInput" (ngModelChange)="changePeriodo()" aria-describedby="basic-addon1">
+          <est-form-msg-error style="margin-left: auto;" [mostrarErro]="errorInputQtd"
+            msgErro="O número de quantidades deve ser igual ao do campo variáveis">
+          </est-form-msg-error>
+        </div>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label" id="basic-addon1">Quantidades: </label>
+        </div>
+        <div class="col mb-2">
+          <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
+            [(ngModel)]="quantInput" (ngModelChange)="changeQuant()" aria-describedby="basic-addon1">
+        </div>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Fonte dos dados:</label>
+        </div>
+        <input type="text" class="form-control" id="inputEmail3" placeholder="Fonte" [(ngModel)]="fonteDados">
+      </div>
+
+    </div>
+
+
+    <div class="row content-container col-12 row px-0 align-items-center justify-content-center text-justify">
+
+      <!-- Gráfico -->
+      <div id="chart" style="width: 100%;"></div>
+
+      <div class="row col-12">
+        <!-- Fonte dos dados -->
+        <div class="mt-2 col-12">
+          <label class="label1" for="inputEmail3">Fonte: {{fonteDados}}</label>
+        </div>
+        <!-- Div usada apenas para fazer com que os botões fiquem do lado direito -->
+        <div class="col-sm">
+        </div>
+        <!-- Botão Tabela-->
+        <div class="btn-container mt-2 row align-items-center justify-content-center">
+          <est-btn-grafico [name]="'Ver Tabela Equivalente'" [modalTarget]="'#myModal'"></est-btn-grafico>
+        </div>
+        <!-- Modal janela que vai aparecer-->
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog" role="document">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header justify-content-center">
+                <b>
+                  <h5 class="modal-title">{{title}}</h5>
+                </b>
+              </div>
+              <div class="modal-body">
+                <table class="table">
+                  <thead class="table-info" style="text-align: center;">
+                    <tr>
+                      <th scope="col">{{medidaAtual}}</th>
+                      <th scope="col">Frequência (fi)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="table-light" *ngFor="let element of medidasVetChart; let i = index" style="text-align: center;">
+                      <th scope="row">{{element}}</th>
+                      <td>{{quantidade[i]}}</td>
+                    </tr>
+                    <tr class="table-info" style="text-align: center;">
+                      <th scope="row">Total</th>
+                      <td>{{qtdTotal}}</td>
+                    </tr>
+                  </tbody>
+                  <caption>Fonte: {{fonteDados}}</caption>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <!--Propriedades-->
+  <div class="rightbar px-3 vh-100">
+
+    <h3>Propriedades</h3>
+    <p>
+      O gráfico de linhas pode exibir dados ao longo do tempo e é, portanto, ideal 
+      para mostrar tendências em dados. Para construir este gráfico, associamos as 
+      datas às quantidades e posteriormente unimos os pontos através de uma linha.
+    </p>
+    <hr>
+
+  </div>
+
+</est-base-view>
