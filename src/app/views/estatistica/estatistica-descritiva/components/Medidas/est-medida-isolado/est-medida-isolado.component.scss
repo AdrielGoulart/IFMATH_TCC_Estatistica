@@ -1,0 +1,13 @@
+@import '../../../shared/style/est-conteudo.scss';
+@import '../../../shared/style/est-rightbar.scss';
+@import '../../../shared/style/est-center-items.scss';
+
+
+//EESE AQUI VOU REPLICAR PARA PARA O TÍTULO DAS DEMAIS TABELAS
+//PRESENTES EM GRÁFICOS
+.titleTable{
+    caption-side: top;
+    color: black;
+    text-align: center;
+    font-size: larger;
+}

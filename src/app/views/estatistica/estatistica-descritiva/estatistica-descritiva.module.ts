@@ -27,6 +27,11 @@ import { EstGraficoQuantHistogramaComponent } from './components/Graficos/Quanti
 import { EstGraficoQuantPoligonoFrequenciaComponent } from './components/Graficos/Quantitativos/est-grafico-quant-poligono-frequencia/est-grafico-quant-poligono-frequencia.component';
 import { EstGraficoQuantDispersaoComponent } from './components/Graficos/Quantitativos/est-grafico-quant-dispersao/est-grafico-quant-dispersao.component';
 
+//Medidas
+import { EstMedidaIsoladoComponent } from './components/Medidas/est-medida-isolado/est-medida-isolado.component';
+import { EstMedidaAgrupadoComponent } from './components/Medidas/est-medida-agrupado/est-medida-agrupado.component';
+import { EstMedidaClasseComponent } from './components/Medidas/est-medida-classe/est-medida-classe.component';
+
 
 @NgModule({
   imports: [
@@ -54,7 +59,10 @@ import { EstGraficoQuantDispersaoComponent } from './components/Graficos/Quantit
     EstGraficoQuantColunasComponent, 
     EstGraficoQuantHistogramaComponent, 
     EstGraficoQuantPoligonoFrequenciaComponent, 
-    EstGraficoQuantDispersaoComponent,
+    EstGraficoQuantDispersaoComponent, 
+    EstMedidaIsoladoComponent, 
+    EstMedidaAgrupadoComponent, 
+    EstMedidaClasseComponent,
     
   ]
 })

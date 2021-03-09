@@ -19,6 +19,10 @@ import { EstGraficoQuantColunasComponent } from './components/Graficos/Quantitat
 import { EstGraficoQuantHistogramaComponent } from './components/Graficos/Quantitativos/est-grafico-quant-histograma/est-grafico-quant-histograma.component';
 import { EstGraficoQuantPoligonoFrequenciaComponent } from './components/Graficos/Quantitativos/est-grafico-quant-poligono-frequencia/est-grafico-quant-poligono-frequencia.component';
 import { EstGraficoQuantDispersaoComponent } from './components/Graficos/Quantitativos/est-grafico-quant-dispersao/est-grafico-quant-dispersao.component';
+//Medidas
+import { EstMedidaIsoladoComponent } from './components/Medidas/est-medida-isolado/est-medida-isolado.component';
+import { EstMedidaAgrupadoComponent } from './components/Medidas/est-medida-agrupado/est-medida-agrupado.component';
+import { EstMedidaClasseComponent } from './components/Medidas/est-medida-classe/est-medida-classe.component';
 
 const routes: Routes = [{
   
@@ -100,6 +104,20 @@ const routes: Routes = [{
       {
         path: 'est_graficos_quant_dispersao',
         component: EstGraficoQuantDispersaoComponent
+      },
+
+      // Rotas Medidas
+      {
+        path: 'est_medida_isolado',
+        component: EstMedidaIsoladoComponent
+      },
+      {
+        path: 'est_medida_agrupado',
+        component: EstMedidaAgrupadoComponent
+      },
+      {
+        path: 'est_medida_classe',
+        component: EstMedidaClasseComponent
       },
   
   ]
