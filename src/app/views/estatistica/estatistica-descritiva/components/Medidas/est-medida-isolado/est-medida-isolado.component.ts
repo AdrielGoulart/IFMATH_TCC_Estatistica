@@ -330,7 +330,7 @@ export class EstMedidaIsoladoComponent implements OnInit {
   ordenaValoresMediana(){
     this.numerosOrdenadosMediana = '';
     this.numerosOrdenadosMediana += this.dados[0];
-    for (let i = 0; i < this.dados.length; i++) {
+    for (let i = 1; i < this.dados.length; i++) {
       this.numerosOrdenadosMediana += ' -' + this.dados[i]; 
     }
   }

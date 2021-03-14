@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import pt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 
 @Component({
   selector: 'est-medida-agrupado',
@@ -8,37 +10,51 @@ import { Component, OnInit } from '@angular/core';
 export class EstMedidaAgrupadoComponent implements OnInit {
 
   public errorInput: boolean = false;
-  public errorInputVar: boolean = false;
-  public errorInputQtd: boolean = false;
-  public noError: boolean = false;
   
   public qtdTotalX: number = 0;
   public qtdTotalF: number = 0;
-  public media: number = 0;
-  public tamanho: number = 0;
-  public mediana: number = 0;
-  public amplitude: number = 0;
-  public desvio: number = 0;
-  public varianci: number =0;
-  public coefVariacao: number = 0;
-  public desvioPop: number = 0;
-  public varianciaPop: number = 0;
-  public coefVariacaoPop: number = 0;
+  public media: number = 7.333;
+  public mediana: number = 7;
+  public amplitude: number = 3;
+  public desvio: number = 1.0328;
+  public varianci: number =1.067;
+  public coefVariacao: number = 14.084;
+  public desvioPop: number = 0.943;
+  public varianciaPop: number = 0.889;
+  public coefVariacaoPop: number = 12.856;
 
   public title: string = 'Idade dos estudantes da turma XXy';
-  public xi: number[] = [];
-  public xiInput: string = '';
-  public fi: number[] = [];
-  public fiInput: string = '';
+  public xi: number[] = [6, 7, 8, 9];
+  public xiInput: string = '6 - 7 - 8 - 9';
+  public fi: number[] = [1, 3, 1, 1];
+  public fiInput: string = '1 - 3 - 1 - 1';
   public fonteDados: string = 'Dados Fictícios';
   public firstTime: boolean = true;
   public repetidas: object = {};
   public aberto : number[] = [];
 
+  public numerosRep: Object = null;
+  public frequenciaAbsSoma: number = 6;
+  public formulaMedia: string = '7 + 8 + 7 + 9 + 7 + 6';
+  public dadosXi: string[] = ['6', '7', '8', '9'];
+  public valorModa: number[] = [7];
+  public formulaModa: string = ' 7 é o número que mais se repete.';
+  public resultadoModa: string = '7';
+  public tipoModa: string = 'unimodal';
+  public numerosOrdenadosMediana:string = '6 - 7 - 7 - 7 - 8 - 9';
+  public limiteSuperior: number = 9;
+  public limiteInferior: number = 6;
+  public somatorioXi: string = '7² + 8² + 7² + 9² + 7² + 6²';
+  public xiQuadrado:number = 328;
+  public n:number = 6;
+  public isAmostra: boolean = true;
+  public dados:number[] = [];
+  public qtdTotal:number = 44;
+
   constructor() { }
 
-  ngOnInit(): void {
-    
+  ngOnInit(){
+    registerLocaleData(pt);
   }
   
   // Botoões de navegação
@@ -49,8 +65,6 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   ];
 
   changeDados(){
-    //console.log('chamada da funcao');
-    this.cleanVariables();
     this.xi = [];
     this.fi = [];
     let valoresX = this.xiInput.split('-');
@@ -65,7 +79,10 @@ export class EstMedidaAgrupadoComponent implements OnInit {
       }
     console.log('valor fi', this.fi);
 
-    //this.verifyInputs();
+    if(this.xi.length == this.fi.length){
+      this.errorInput = false;
+      //this.verifyInputs();
+    this.criaVetCompleto();
     this.somaQuant();
     this.calculaMedia();
     this.AgrupaArray();
@@ -80,14 +97,10 @@ export class EstMedidaAgrupadoComponent implements OnInit {
     this.desvioPadrãoPopulacao();
     this.varianciaPopulacao();
     this.coeficienteVariacaoPopulacao();
-  }
-
-  cleanVariables() {
-    if (this.firstTime) {
-      this.xi = [];
-      this.fi = [];
-      this.firstTime = false;
+    }else{
+      this.errorInput = true;
     }
+    
   }
 
   somaQuant() {
@@ -167,7 +180,6 @@ export class EstMedidaAgrupadoComponent implements OnInit {
       // }
 
     });
-    console.log('moda', isGreater);
   }
 
   //Isolados/Populaçõa
@@ -189,9 +201,10 @@ export class EstMedidaAgrupadoComponent implements OnInit {
 
   //Isolados/População
   amplitudeTotal(){
-    const dadosOrdenados: number[] = this.xi.sort();
-    const ultimo = dadosOrdenados.length;
-    this.amplitude = dadosOrdenados[ultimo-1] - dadosOrdenados[0];
+    const dadosOrdenados: number[] = this.xi.sort(function (a, b) { return a - b });
+    this.limiteInferior = dadosOrdenados[0];
+    this.limiteSuperior = dadosOrdenados[dadosOrdenados.length - 1];
+    this.amplitude = this.limiteSuperior - this.limiteInferior;
     //console.log('amplitude',this.amplitude);
   }
 
@@ -256,6 +269,147 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   coeficienteVariacaoPopulacao(){
     this.coefVariacaoPop = (this.desvioPop/this.media)*100
     //console.log('coefPopu', this.coefVariacaoPop);
+  }
+
+
+  //////////////////////////////////////////////
+
+  criaVetCompleto(){
+    this.dados= [];
+    var qtdNumero = 0;
+    for (let i = 0; i < this.xi.length; i++) {
+      qtdNumero = this.fi[i];
+      for (let index = 0; index < qtdNumero; index++) {
+        this.dados.push(this.xi[i]);
+      }
+    }
+    this.n = this.dados.length;
+    this.somaVetDados();
+    this.ordenaValores();
+    this.ordenaValoresMediana();
+    this.modaCalc();
+    this.formatFormulaModa();
+    this.aplicaNumerosFormulaMedia();
+    this.calculaSomatorioXi();
+    this.criaValoresSomatorioXi();
+    this.somaFreqAcumulada();
+  }
+
+  /**
+     * Percorre o array dados contando os valores repetidos e os eliminando
+     */
+   contaNumerosRepetidos() {
+    this.numerosRep = this.dados.reduce(function (object, item) {
+      //console.log(object, item);
+      if (!object[item]) {
+        object[item] = 1;
+      } else {
+        object[item]++;
+      }
+      return object;
+    }, {})
+  }
+
+  modaCalc() {
+    this.valorModa = [];
+    var max = this.fi.reduce(function (a, b) {
+      return Math.max(a, b);
+    });
+    var count = 0
+    for (const key in this.numerosRep) {
+      if ((max == this.numerosRep[key])) {
+        this.valorModa.push(Number(key));
+      }
+    }
+    if (this.valorModa.length == 0) {
+      this.tipoModa = 'amodal';
+    } else if (this.valorModa.length == 1) {
+      this.tipoModa = 'unimodal';
+    } else if (this.valorModa.length == 2) {
+      this.tipoModa = 'bimodal';
+    } else if (this.valorModa.length > 2) {
+      this.tipoModa = 'multimodal';
+    }
+  }
+
+  formatFormulaModa() {
+    this.formulaModa = '';
+    this.resultadoModa = '';
+    if (this.valorModa.length != 0) {
+
+      if (this.valorModa.length == 1) {
+        this.formulaModa += ' e '+ this.valorModa[0] + ' é o número que mais se repete.';
+        this.resultadoModa += this.valorModa[0];
+      } else if (this.valorModa.length > 1) {
+        this.formulaModa += ' os números ' + this.valorModa[0];
+        this.resultadoModa += this.valorModa[0];
+        for (let i = 1; i < this.valorModa.length; i++) {
+          this.formulaModa +=  ' e ' +this.valorModa[i];
+          this.resultadoModa += ' e ' + this.valorModa[i];
+        }
+        this.formulaModa += ' são os que mais se repetem.';
+      }
+    }
+  }
+
+  aplicaNumerosFormulaMedia() {
+    //var teste = [7,8,7,9,7,6]
+    this.formulaMedia = '';
+    this.formulaMedia += this.dados[0] + ' + ';
+    for (let i = 1; i < this.dados.length - 1; i++) {
+      this.formulaMedia += this.dados[i] + ' + ';
+    }
+    this.formulaMedia += this.dados[this.dados.length - 1]
+  }
+
+  /**
+* Ordena os valores do menor para o maior
+*/
+  ordenaValores() {
+    this.dados.sort(function (a, b) {
+      return a - b;
+    });
+  }
+
+  somaVetDados() {
+    this.qtdTotal = this.dados.reduce(function (total, numero) {
+      return total + numero;
+    }, 0);
+  }
+
+  ordenaValoresMediana(){
+    this.numerosOrdenadosMediana = '';
+    this.numerosOrdenadosMediana += this.dados[0];
+    for (let i = 1; i < this.dados.length; i++) {
+      this.numerosOrdenadosMediana += ' -' + this.dados[i]; 
+    }
+  }
+
+  calculaSomatorioXi(){
+    this.xiQuadrado = 0;
+    for (let i = 0; i < this.dados.length; i++) {
+      this.xiQuadrado += (this.dados[i] * this.dados[i]);
+    }
+  }
+
+  criaValoresSomatorioXi(){
+    var valores = this.dados;
+    this.somatorioXi = '';
+    this.somatorioXi += valores[0];
+    for (let i = 1; i < valores.length; i++) {
+     this.somatorioXi += '² +'+ valores[i];
+    }
+    this.somatorioXi += '²';
+  }
+
+  somaFreqAcumulada() {
+    this.frequenciaAbsSoma = this.fi.reduce(function (total, numero) {
+      return total + numero;
+    }, 0);
+  }
+
+  setRadio(isAmostra: boolean){
+    this.isAmostra = isAmostra;
   }
 
 }
