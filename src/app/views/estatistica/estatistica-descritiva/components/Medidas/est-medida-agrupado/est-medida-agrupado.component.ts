@@ -36,7 +36,6 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   public numerosRep: Object = null;
   public frequenciaAbsSoma: number = 6;
   public formulaMedia: string = '7 + 8 + 7 + 9 + 7 + 6';
-  public dadosXi: string[] = ['6', '7', '8', '9'];
   public valorModa: number[] = [7];
   public formulaModa: string = ' 7 é o número que mais se repete.';
   public resultadoModa: string = '7';
@@ -287,6 +286,7 @@ export class EstMedidaAgrupadoComponent implements OnInit {
     this.somaVetDados();
     this.ordenaValores();
     this.ordenaValoresMediana();
+    this.contaNumerosRepetidos();
     this.modaCalc();
     this.formatFormulaModa();
     this.aplicaNumerosFormulaMedia();
