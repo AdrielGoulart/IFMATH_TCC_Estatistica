@@ -1,83 +1,125 @@
 <est-base-view>
 
-  <!-- Botões de navegação -->
-  <div class="btn-container mt-2 row align-items-center justify-content-center">
-    <div class=" col-12 text-center">
-      <h3 class="text-center">Dados em Classes</h3>
+  <div class="scroll-center row justify-content-around">
+
+    <!-- Botões de navegação -->
+    <div class="btn-container mt-2 row align-items-center justify-content-center">
+      <div class=" col-12 text-center">
+        <h3 class="text-center">Dados em Classes</h3>
+      </div>
+      <h5 class="mt-2 col-12 text-center">Escolha abaixo a maneira de entrada de dados:</h5>
+      <est-btn *ngFor="let button of buttons; let i = index" [name]="button.title" [route]="button.route"></est-btn>
+      <br><br><br>
     </div>
-    <h5 class="mt-2 col-12 text-center">Escolha abaixo a maneira de entrada de dados:</h5>
-    <est-btn *ngFor="let button of buttons; let i = index" [name]="button.title" [route]="button.route"></est-btn>
-    <br><br><br>
+
+    <!--Inputs-->
+    <div class="form-group row input-container col-12">
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Título dos Dados: </label>
+        </div>
+        <input type="text" class="form-control" id="inputEmail3" placeholder="Título" [(ngModel)]="title"
+          (ngModelChange)="updateChart()">
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label" id="basic-addon1">Entre com os limites inferiores:</label>
+        </div>
+        <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
+          [(ngModel)]="limiteInferiorInput" (ngModelChange)="changeDados()" aria-describedby="basic-addon1">
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label" id="basic-addon1">Entre com os limites superiores:</label>
+        </div>
+        <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
+          [(ngModel)]="limiteSuperiorInput" (ngModelChange)="changeDados()" aria-describedby="basic-addon1">
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label" id="basic-addon1">Entre com os valoes de fi:</label>
+        </div>
+        <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
+          [(ngModel)]="valorfiInput" (ngModelChange)="changeDados()" aria-describedby="basic-addon1">
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="label">Fonte dos dados:</label>
+        </div>
+        <input type="text" class="form-control" id="inputEmail3" placeholder="Fonte" [(ngModel)]="fonteDados">
+      </div>
+
+    </div>
+
+
+    <div class="row content-container col-12 row px-0 align-items-center justify-content-center text-justify">
+
+      <!--AQUI VAI IR A TABELA-->
+      <table class="table">
+        <caption class="titleTable">{{title}}</caption>
+        <thead style="text-align: center;">
+          <tr style="border-top: 1px double black;">
+            <th scope="col" style="border-bottom: 1px double black;">&nbsp;</th>
+            <th scope="col" style="border-bottom: 1px double black;">Limites</th>
+            <th scope="col" style="border-bottom: 1px double black;">&nbsp;</th>
+            <th scope="col" style="border-bottom: 1px double black;">Xi</th>
+            <th scope="col" style="border-bottom: 1px double black;">fi</th>
+            <th scope="col" style="border-bottom: 1px double black;">Fi</th>
+            <th scope="col" style="border-bottom: 1px double black;">xi.fi</th>
+            <th scope="col" style="border-bottom: 1px double black;">xi².fi</th>
+          </tr>
+        </thead>
+        <tbody style="border-bottom: 1px double black;">
+          <tr class="table-light" *ngFor="let Li of limiteInferior; let i = index" style="text-align: center;">
+            <td>{{Li}}</td>
+            <td>|-------------</td>
+            <td>{{limiteSuperior[i]}}</td>
+            <td>{{valorXi[i].toFixed(2) | number:'':'pt' }}</td>
+            <td>{{valorfi[i].toFixed(2) | number:'':'pt' }}</td>
+            <td>{{arrayFi[i].toFixed(2) | number:'':'pt' }}</td>
+            <td>{{valorxifi[i].toFixed(2) | number:'':'pt' }}</td>
+            <td>{{valorxifiQuad[i].toFixed(2) | number:'':'pt' }}</td>
+          </tr>
+          <tr style="text-align: center;border-top: 1px double black;">
+            <th>&nbsp;</th>
+            <th scope="row">Soma</th>
+            <th>&nbsp;</th>
+            <th scope="row">-</th>
+            <td>{{qtdTotalfi}}</td>
+            <th scope="row">-</th>
+            <td>{{qtdTotalXi.toFixed(2) | number:'':'pt'}}</td>
+            <td>{{qtdTotalxifiQuad.toFixed(2) | number:'':'pt'}}</td>
+          </tr>
+        </tbody>
+        <caption>Fonte: {{fonteDados}}</caption>
+      </table>
+
+    </div>
   </div>
-
-  <!--Inputs-->
-  <div class="form-group row input-container col-12">
-
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="label">Título dos Dados: </label>
-      </div>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Título" [(ngModel)]="title"
-        (ngModelChange)="updateChart()">
-    </div>
-
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="label" id="basic-addon1">Entre com os limites inferiores:</label>
-      </div>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
-        [(ngModel)]="limiteInferiorInput" (ngModelChange)="changeDados()" aria-describedby="basic-addon1">
-    </div>
-
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="label" id="basic-addon1">Entre com os limites superiores:</label>
-      </div>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
-        [(ngModel)]="limiteSuperiorInput" (ngModelChange)="changeDados()" aria-describedby="basic-addon1">
-    </div>
-
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="label" id="basic-addon1">Entre com os valoes de fi:</label>
-      </div>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Separe por - os valores"
-        [(ngModel)]="valorfiInput" (ngModelChange)="changeDados()" aria-describedby="basic-addon1">
-    </div>
-
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="label">Fonte dos dados:</label>
-      </div>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Fonte" [(ngModel)]="fonteDados">
-    </div>
-
-  </div>
-
-
-  <div class="row content-container col-12 row px-0 align-items-center justify-content-center text-justify">
-    <!--AQUI VAI IR A TABELA-->
-
-  </div>
-
   <!--Propriedades-->
   <div class="rightbar px-3 vh-100">
 
     <h3>Dados em Classes</h3>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="amostra" value="option1" checked>
+      <input class="form-check-input" type="radio" name="exampleRadios" id="amostra" value="option1" checked
+        (click)="setRadio(true)">
       <label class="form-check-label" for="amostra">
         Amostra
       </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="populacao" value="option2">
+      <input class="form-check-input" type="radio" name="exampleRadios" id="populacao" value="option2"
+        (click)="setRadio(false)">
       <label class="form-check-label" for="populacao">
         População
       </label>
     </div>
     <hr>
-
 
     <!-- Accordion Medidas de Tendência Central-->
     <div class="accordion" id="accordionExample">
@@ -86,15 +128,16 @@
         Tais parâmetros estatísticos indicam valores representativos de um conjunto
         de dados.
       </p>
-      <!-- Média -->
-      <div class="card">
+
+      <!-- Média Amostra-->
+      <div *ngIf="isAmostra" class="card">
         <div class="card-header" id="headingMedia" data-toggle="collapse" data-target="#collapseMedia">
           <h2 class="mb-0">
             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMedia"
               aria-expanded="true" aria-controls="collapseMedia">
               <p>
-                Média: 
-                <ng-katex class="explicacao" equation=" \approx {{ media }}"> </ng-katex>
+                Média:
+                <ng-katex class="explicacao" equation=" \overline{x} \approx {{ media | number:'':'pt'}}"> </ng-katex>
               </p>
             </button>
             <i class="fa fa-arrow-circle-down float-right mt-2 mr-4" data-toggle="collapse"
@@ -104,44 +147,81 @@
 
         <div id="collapseMedia" class="collapse" aria-labelledby="headingMedia" data-parent="#accordionExample">
           <div class="card-body">
-            Note que temos um triângulo retângulo, aplicando o teorema de pitágoras temos:
+
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
                 <!-- Panel -->
                 <div class="panel-group" id="accordion">
+
                   <!-- Passo 1 -->
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1" class="">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Media" class="">
                           <p>
                             <ng-katex class="explicacao"
-                              equation="\color{black}{g} \color{black}{^2} = \color{red}{h} \color{black}{^2 +} \color{blue}{r} \color{black}{^2}">
+                              equation=" \textcolor{black}{\overline{x} = \dfrac{ \sum_{} xi \cdot fi } { \sum_{} fi } }">
                             </ng-katex>
                             <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                              data-target="#collapsePasso1"></i>
+                              data-target="#collapsePasso1Media"></i>
                           </p>
                         </a>
                       </h4>
                     </div>
-                    <div id="collapsePasso1" class="panel-collapse collapse">
+                    <div id="collapsePasso1Media" class="panel-collapse collapse">
                       <div class="panel-body">
-                        Fórmula para o cálculo da geratriz.
-                        <ul>
-                          <li>
-                            <ng-katex equation="\color{limegreen}{ g }"></ng-katex> = geratriz
-                          </li>
-                          <li>
-                            <ng-katex equation="\color{red}{ h }"></ng-katex> = altura
-                          </li>
-                          <li>
-                            <ng-katex equation="\color{blue}{ r }"></ng-katex> = raio
-                          </li>
-                        </ul>
+                        Fórmula para o cálculo da média
+                      </div>
+                    </div>
+                  </div>
+                  <hr><br>
+
+                  <!-- Passo 2 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Media" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{\overline{x} = \dfrac{ {{ qtdTotalXi}} } { {{qtdTotalfi}} } }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso2Media"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso2Media" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Substituindo os dados na fórmula.
                       </div>
                     </div>
                   </div>
                   <hr>
+
+                  <!-- Passo 3 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Media" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{\overline{x} \approx {{ media | number:'':'pt'}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso3Media"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso3Media" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resultado final, após fazer a divisão.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
                 </div>
                 <!-- end panel -->
               </div>
@@ -149,7 +229,109 @@
           </div>
         </div>
       </div>
-      <!-- end collapse Média -->
+      <!-- end collapse Média Amostra-->
+
+      <!-- Média População-->
+      <div *ngIf="isAmostra === false" class="card">
+        <div class="card-header" id="headingMedia" data-toggle="collapse" data-target="#collapseMedia">
+          <h2 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMedia"
+              aria-expanded="true" aria-controls="collapseMedia">
+              <p>
+                Média:
+                <ng-katex class="explicacao" equation="\mu \approx {{ media | number:'':'pt'}}"> </ng-katex>
+              </p>
+            </button>
+            <i class="fa fa-arrow-circle-down float-right mt-2 mr-4" data-toggle="collapse"
+              data-target="#collapseMedia"></i>
+          </h2>
+        </div>
+
+        <div id="collapseMedia" class="collapse" aria-labelledby="headingMedia" data-parent="#accordionExample">
+          <div class="card-body">
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+                <!-- Panel -->
+                <div class="panel-group" id="accordion">
+
+                  <!-- Passo 1 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Media" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{\mu = \dfrac{ \sum_{} xi \cdot fi } { \sum_{} fi } }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso1Media"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso1Media" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Fórmula para o cálculo da média
+                      </div>
+                    </div>
+                  </div>
+                  <hr><br>
+
+                  <!-- Passo 2 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Media" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{\mu = \dfrac{ {{qtdTotalXi}} } { {{qtdTotalfi}} } }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso2Media"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso2Media" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Susbstituindo os dados na fórmula.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 3 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Media" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{\mu \approx {{ media | number:'':'pt'}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso3Media"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso3Media" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resultado final, após fazer a divisão.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                </div>
+                <!-- end panel -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end collapse Média População-->
 
       <!-- Moda -->
       <div class="card">
@@ -157,10 +339,9 @@
           <h2 class="mb-0">
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseModa"
               aria-expanded="false" aria-controls="collapseModa">
-              <p class="mb-0">
+              <p class="mb-0" style="font-size: large;">
                 Moda:
-                <ng-katex class="explicacao" equation=" \approx {{ (radius * geratriz).toFixed(2) }}  \pi \ u.a.">
-                </ng-katex>
+                <ng-katex class="explicacao" equation="Mo ="> </ng-katex> {{ resultadoModa}}
               </p>
             </button>
 
@@ -171,35 +352,7 @@
         <div id="collapseModa" class="collapse" aria-labelledby="headingModa" data-parent="#accordionExample">
           <!-- Panel -->
           <div class="card-body">
-            <!-- Passo 1  -->
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" class="">
-                    <p>
-                      <ng-katex class="explicacao"
-                        equation="\textcolor{black}{A_l = \pi \cdot \textcolor{blue}{r} \cdot \textcolor{limegreen}{ g } }">
-                      </ng-katex>
-                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                        data-target="#collapseSix"></i>
-                    </p>
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseSix" class="panel-collapse collapse">
-                <div class="panel-body">
-                  Fórmula para calcular a área lateral.
-                  <ul>
-                    <li>
-                      <ng-katex equation="\color{blue}{ r }"></ng-katex> = raio
-                    </li>
-                    <li>
-                      <ng-katex equation="\color{limegreen}{ g }"></ng-katex> = geratriz
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            Ponto médio da classe com maior frequência, nesse caso a série é {{tipoModa}} e {{formulaModa}}.
             <hr>
           </div>
           <!-- end panel  -->
@@ -214,7 +367,7 @@
               aria-expanded="false" aria-controls="collapseMediana">
               <p>
                 Mediana:
-                <ng-katex class="explicacao" equation=" \approx {{ mediana }}">
+                <ng-katex class="explicacao" equation=" Md = {{ mediana | number:'':'pt'}}">
                 </ng-katex>
               </p>
             </button>
@@ -226,41 +379,970 @@
         <div id="collapseMediana" class="collapse" aria-labelledby="headingMediana" data-parent="#accordionExample">
           <!-- Panel -->
           <div class="card-body">
+
             <!-- Passo 1  -->
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" class="">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Mediana" class="">
                     <p>
-                      <ng-katex class="explicacao"
-                        equation="\textcolor{black}{A_l = \pi \cdot \textcolor{blue}{r} \cdot \textcolor{limegreen}{ g } }">
+                      <ng-katex class="explicacao" equation="\textcolor{black}{ Pme = \dfrac{ \sum_{} fi} { 2 } }">
                       </ng-katex>
                       <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                        data-target="#collapseSix"></i>
+                        data-target="#collapsePasso1Mediana"></i>
                     </p>
                   </a>
                 </h4>
               </div>
-              <div id="collapseSix" class="panel-collapse collapse">
+              <div id="collapsePasso1Mediana" class="panel-collapse collapse">
                 <div class="panel-body">
-                  Fórmula para calcular a área lateral.
+                  Primeiramente precisamos determinar a posição da mediana,
+                  descobrindo o seu ponto médio, usando a fórmula logo acima.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 2  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Mediana" class="">
+                    <p>
+                      <ng-katex class="explicacao" equation="\textcolor{black}{ Pme = \dfrac{ {{qtdTotalfi}} } { 2 } }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso2Mediana"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso2Mediana" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Substiruindo os dados na fórmula.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 3  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Mediana" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ Pme =  {{(qtdTotalfi / 2) | number:'':'pt'}}  } ">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso3Mediana"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso3Mediana" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Calculando a divisão, temos a posição da mediana, que corresponde à classe .... da distribuição.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 4  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso4Mediana" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ Me = Lime + \left( \dfrac{Pme - Fa}{fme} \right) \cdot i  } ">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso4Mediana"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso4Mediana" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Fórmula para o cálculo da mediana.
                   <ul>
                     <li>
-                      <ng-katex equation="\color{blue}{ r }"></ng-katex> = raio
+                      <ng-katex equation="\color{limegreen}{ Lime }"></ng-katex> = Limite inferior da classe mediana.
                     </li>
                     <li>
-                      <ng-katex equation="\color{limegreen}{ g }"></ng-katex> = geratriz
+                      <ng-katex equation="\color{red}{ Pme }"></ng-katex> = posição da mediana.
+                    </li>
+                    <li>
+                      <ng-katex equation="\color{blue}{ Fa }"></ng-katex> = frequência acumulada da classe anterior.
+                    </li>
+                    <li>
+                      <ng-katex equation="\color{black}{ fme }"></ng-katex> = frequência da classe.
+                    </li>
+                    <li>
+                      <ng-katex equation="\color{green}{ i }"></ng-katex> = amplitude.
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
             <hr>
+
+            <!-- Passo 5  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso5Mediana" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ Me = {{limiteInfMed}} + \left( \dfrac{ {{qtdTotalfi/2 | number:'':'pt'}} - {{frecAcAnt}} }{ {{frecClasse}} } \right) \cdot {{amplitude}}  } ">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso5Mediana"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso5Mediana" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Substituindo os valores na fórmula.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 6  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso6Mediana" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ Me = {{limiteInfMed}} + \dfrac{ {{(qtdTotalfi/2) - frecAcAnt | number:'':'pt'}} }{ {{frecClasse}} } \cdot {{amplitude}}  } ">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso6Mediana"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso6Mediana" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Resolvemos a subtração entre parênteses.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 7  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso7Mediana" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ Me = {{limiteInfMed}} + \dfrac{ {{((qtdTotalfi/2) - frecAcAnt) * amplitude | number:'':'pt'}} }{ {{frecClasse}} }  } ">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso7Mediana"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso7Mediana" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Resolvemos o produto.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 8  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso8Mediana" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ Me = {{mediana.toFixed(3) | number:'':'pt'}}  } ">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso8Mediana"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso8Mediana" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Resultado final após a soma.
+                </div>
+              </div>
+            </div>
+            <hr>
+
           </div>
           <!-- end panel  -->
         </div>
       </div><!-- end collapse Mediana -->
+
+      <!-- Quartis-->
+      <div class="card">
+        <div class="card-header" id="headingMedia" data-toggle="collapse" data-target="#collapseQuartis">
+          <h2 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseQuartis"
+              aria-expanded="true" aria-controls="collapseQuartis">
+              <p>
+                Quartis:
+                <ng-katex class="explicacao"
+                  equation=" Q_1 = {{Q1 | number:'':'pt'}} \ Q_2 = {{mediana | number:'':'pt'}} \ Q_3 = {{Q3 | number:'':'pt'}} ">
+                </ng-katex>
+              </p>
+            </button>
+            <i class="fa fa-arrow-circle-down float-right mt-2 mr-4" data-toggle="collapse"
+              data-target="#collapseQuartis"></i>
+          </h2>
+        </div>
+
+        <div id="collapseQuartis" class="collapse" aria-labelledby="headingMedia" data-parent="#accordionExample">
+          <div class="card-body">
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+                <!-- Panel -->
+                <div class="panel-group" id="accordion">
+
+                  <!-- Passo 1 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{PQ_1 = 1 \cdot \dfrac{\sum_{} fi}{4}}">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso1Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso1Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Primeiro encontramos a posição do primeiro quartil usando a fórmula acima.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 2 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{PQ_1 = 1 \cdot \dfrac{ {{qtdTotalfi}} }{4}}">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso2Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso2Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Sustituindo os valores na fórmula.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 3 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{PQ_1 = {{(1 * (qtdTotalfi/ 4)) | number:'':'pt'}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso3Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso3Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Valor da posição do primeiro quartil.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 4 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso4Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{Q_1 = {{limiteInfQ1}} + \left( \dfrac{ {{qtdTotalfi/4 | number:'':'pt'}} - {{frecAcAntQ1}} }{ {{frecClasseQ1}} } \right) \cdot {{amplitude}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso4Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso4Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Fórmula para o cálculo do primeiro quartil, note que é a mesma fórmula usada para calcular
+                        a mediana, mudando apenas os dados aplicados sobre ela, obtendo assim a fórmula:
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{ Q_1 = LiQ_1 + \left( \dfrac{PQ1 - Fa}{fQ_1} \right) \cdot i  } ">
+                        </ng-katex>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 5  -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso5Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{ Q_1 = {{limiteInfQ1}} + \dfrac{ {{(qtdTotalfi/4) - frecAcAntQ1 | number:'':'pt'}} }{ {{frecClasseQ1}} } \cdot {{amplitude}}  } ">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso5Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso5Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resolvemos a subtração entre parênteses.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 6  -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso6Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{ Q_1 = {{limiteInfQ1}} + \dfrac{ {{((qtdTotalfi/4) - frecAcAntQ1) * amplitude | number:'':'pt'}} }{ {{frecClasseQ1}} }  } ">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso6Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso6Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resolvemos o produto.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 7  -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso7Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{ Q_1 = {{Q1.toFixed(3) | number:'':'pt'}}  } ">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso7Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso7Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resultado final após a soma.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 8  -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso8Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{ Q_2 = {{mediana.toFixed(3) | number:'':'pt'}}  } ">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso8Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso8Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resultado final. O segundo quartil é igual a mediana.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <!--agsdygasdghsdghsdhshdhsdsa-->
+
+                  <!-- Passo 9 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso9Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{PQ_3 = 3 \cdot \dfrac{\sum_{} fi}{4}}">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso9Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso9Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Primeiro encontramos a posição do terceiro quartil usando a fórmula acima.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 10 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso10Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{PQ_3 = 3 \cdot \dfrac{ {{qtdTotalfi}} }{4}}">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso10Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso10Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Sustituindo os valores na fórmula.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 11 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso11Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{PQ_3 = {{(3 * (qtdTotalfi/ 4)) | number:'':'pt'}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso11Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso11Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Valor da posição do terceiro quartil.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 12 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso12Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{Q_3 = {{limiteInfQ3}} + \left( \dfrac{ {{qtdTotalfi/4 | number:'':'pt'}} - {{frecAcAntQ3}} }{ {{frecClasseQ3}} } \right) \cdot {{amplitude}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso12Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso12Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Fórmula para o cálculo do terceiro quartil:
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{ Q_3 = LiQ_3 + \left( \dfrac{PQ3 - Fa}{fQ_3} \right) \cdot i  } ">
+                        </ng-katex>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 13  -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso13Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{ Q_3 = {{limiteInfQ3}} + \dfrac{ {{((qtdTotalfi/4) * 3) - frecAcAntQ3 | number:'':'pt'}} }{ {{frecClasseQ3}} } \cdot {{amplitude}}  } ">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso13Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso13Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resolvemos a subtração entre parênteses.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 14  -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso14Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{ Q_3 = {{limiteInfQ3}} + \dfrac{ {{(((qtdTotalfi/4) * 3) - frecAcAntQ3) * amplitude | number:'':'pt'}} }{ {{frecClasseQ3}} }  } ">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso14Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso14Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resolvemos o produto.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 15  -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso15Quartis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{ Q_3 = {{Q3.toFixed(3) | number:'':'pt'}}  } ">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso15Quartis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso15Quartis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resultado final após a soma.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+
+                </div>
+                <!-- end panel -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end collapse Quartis-->
+
+      <!-- Percentis-->
+      <div class="card">
+        <div class="card-header" id="headingMedia" data-toggle="collapse" data-target="#collapsePercentis">
+          <h2 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapsePercentis"
+              aria-expanded="true" aria-controls="collapsePercentis">
+              <p>
+                Percentis:
+                <ng-katex class="explicacao"
+                  equation=" P_{10} = {{P10 | number:'':'pt'}} \ P_{90} = {{P90 | number:'':'pt'}} ">
+                </ng-katex>
+              </p>
+            </button>
+            <i class="fa fa-arrow-circle-down float-right mt-2 mr-4" data-toggle="collapse"
+              data-target="#collapsePercentis"></i>
+          </h2>
+        </div>
+
+        <div id="collapsePercentis" class="collapse" aria-labelledby="headingMedia" data-parent="#accordionExample">
+          <div class="card-body">
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+                <!-- Panel -->
+                <div class="panel-group" id="accordion">
+
+                  <!-- Passo 1 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Percentis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{P_{P_{10}} = 10 \cdot \dfrac{\sum_{} fi}{100}}">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso1Percentis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso1Percentis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Primeiro encontramos a posição do percentil 10 usando a fórmula acima.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 2 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Percentis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{P_{P_{10}} = 10 \cdot \dfrac{ {{qtdTotalfi}} }{100}}">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso2Percentis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso2Percentis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Sustituindo os valores na fórmula.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 3 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Percentis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{P_{P_{10}} = {{(10 * (qtdTotalfi/ 100)) | number:'':'pt'}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso3Percentis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso3Percentis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Valor da posição do percentil 10.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 4 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso4Percentis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{P_{10} = {{limiteInfP10}} + \left( \dfrac{ {{ (qtdTotalfi/100) * 10 | number:'':'pt'}} - {{frecAcAntP10}} }{ {{frecClasseP10}} } \right) \cdot {{amplitude}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso4Percentis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso4Percentis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Fórmula para o cálculo do percenti 10, note que é a mesma fórmula usada para calcular
+                        a mediana, mudando apenas os dados aplicados sobre ela, obtendo assim a fórmula:
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{P_{10} = LiP_{10} + \left( \dfrac{P_{P_{10}} - Fa}{f_{P_{10}}} \right) \cdot i  } ">
+                        </ng-katex>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 5  -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso5Percentis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{ P_{10} = {{limiteInfP10}} + \dfrac{ {{((qtdTotalfi/100) * 10) - frecAcAntP10 | number:'':'pt'}} }{ {{frecClasseP10}} } \cdot {{amplitude}}  } ">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso5Percentis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso5Percentis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resolvemos a subtração entre parênteses.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 6  -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso6Percentis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{ P_{10} = {{limiteInfP10}} + \dfrac{ {{(((qtdTotalfi/100) * 10) - frecAcAntP10) * amplitude | number:'':'pt'}} }{ {{frecClasseP10}} }  } ">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso6Percentis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso6Percentis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resolvemos o produto.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 7  -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso7Percentis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{ P_{10} = {{P10.toFixed(3) | number:'':'pt'}}  } ">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso7Percentis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso7Percentis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resultado final após a soma.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+
+                  <!-- Passo 8 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso8Percentis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{P_{P_{90}} = 90 \cdot \dfrac{\sum_{} fi}{100}}">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso8Percentis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso8Percentis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Primeiro encontramos a posição do percentil 90 usando a fórmula acima.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 9 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso9Percentis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{P_{P_{90}} = 90 \cdot \dfrac{ {{qtdTotalfi}} }{100}}">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso9Percentis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso9Percentis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Sustituindo os valores na fórmula.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 10 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso10Percentis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{P_{P_{10}} = {{(90 * (qtdTotalfi/ 100)) | number:'':'pt'}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso10Percentis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso10Percentis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Valor da posição do percentil 90.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 11 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso11Percentis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation=" \textcolor{black}{P_{90} = {{limiteInfP90}} + \left( \dfrac{ {{ (qtdTotalfi/100) * 90 | number:'':'pt'}} - {{frecAcAntP90}} }{ {{frecClasseP90}} } \right) \cdot {{amplitude}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso11Percentis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso11Percentis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Fórmula para o cálculo do percentil 90, note que é a mesma fórmula usada para calcular
+                        a mediana, mudando apenas os dados aplicados sobre ela, obtendo assim a fórmula:
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{P_{90} = LiP_{90} + \left( \dfrac{P_{P_{90}} - Fa}{f_{P_{90}}} \right) \cdot i  } ">
+                        </ng-katex>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 12  -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso12Percentis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{ P_{90} = {{limiteInfP90}} + \dfrac{ {{((qtdTotalfi/100) * 90) - frecAcAntP90 | number:'':'pt'}} }{ {{frecClasseP90}} } \cdot {{amplitude}}  } ">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso12Percentis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso12Percentis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resolvemos a subtração entre parênteses.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 13  -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso13Percentis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{ P_{90} = {{limiteInfP90}} + \dfrac{ {{(((qtdTotalfi/100) * 90) - frecAcAntP90) * amplitude | number:'':'pt'}} }{ {{frecClasseP90}} }  } ">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso13Percentis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso13Percentis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resolvemos o produto.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 14  -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso14Percentis" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{ P_{90} = {{P90.toFixed(3) | number:'':'pt'}}  } ">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso14Percentis"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso14Percentis" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resultado final após a soma.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+
+
+                </div>
+                <!-- end panel -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end collapse Percentis-->
     </div>
+
     <hr>
 
 
@@ -279,7 +1361,7 @@
               aria-expanded="true" aria-controls="collapseAmplitude">
               <p>
                 Amplitude Total:
-                <ng-katex class="explicacao" equation=" \approx {{ amplitude }}"> </ng-katex>
+                <ng-katex class="explicacao" equation=" A_t = {{ amplitudeTot }}"> </ng-katex>
               </p>
             </button>
             <i class="fa fa-arrow-circle-down float-right mt-2 mr-4" data-toggle="collapse"
@@ -289,44 +1371,91 @@
 
         <div id="collapseAmplitude" class="collapse" aria-labelledby="headingAmplitude" data-parent="#accordionExample">
           <div class="card-body">
-            Note que temos um triângulo retângulo, aplicando o teorema de pitágoras temos:
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
                 <!-- Panel -->
                 <div class="panel-group" id="accordion">
+
                   <!-- Passo 1 -->
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1" class="">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Amplitude" class="">
                           <p>
                             <ng-katex class="explicacao"
-                              equation="\color{black}{g} \color{black}{^2} = \color{red}{h} \color{black}{^2 +} \color{blue}{r} \color{black}{^2}">
+                              equation="\color{black}{A_t} = \color{red}{L_s} \color{black}{ -} \color{blue}{L_i}">
                             </ng-katex>
                             <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                              data-target="#collapsePasso1"></i>
+                              data-target="#collapsePasso1Amplitude"></i>
                           </p>
                         </a>
                       </h4>
                     </div>
-                    <div id="collapsePasso1" class="panel-collapse collapse">
+                    <div id="collapsePasso1Amplitude" class="panel-collapse collapse">
                       <div class="panel-body">
-                        Fórmula para o cálculo da geratriz.
+                        Fórmula para o cálculo da amplitude total.
                         <ul>
                           <li>
-                            <ng-katex equation="\color{limegreen}{ g }"></ng-katex> = geratriz
+                            <ng-katex equation="\color{limegreen}{ A_t }"></ng-katex> = amplitude total
                           </li>
                           <li>
-                            <ng-katex equation="\color{red}{ h }"></ng-katex> = altura
+                            <ng-katex equation="\color{red}{ L_s }"></ng-katex> = limite superior
                           </li>
                           <li>
-                            <ng-katex equation="\color{blue}{ r }"></ng-katex> = raio
+                            <ng-katex equation="\color{blue}{ L_i }"></ng-katex> = limite inferior
                           </li>
                         </ul>
                       </div>
                     </div>
                   </div>
                   <hr>
+
+                  <!-- Passo 2 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Amplitude" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{A_t} = \color{red}{ {{limiteSuperiorLs}} } \color{black}{ -} \color{blue}{ {{limiteInferiorLi}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso2Amplitude"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso2Amplitude" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Substituindo os valores na fórmula.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 3 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Amplitude" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{A_t} =  \color{black}{ {{amplitudeTot}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso3Amplitude"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso3Amplitude" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Subtraindo os valores obtemos a amplitude total.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
                 </div>
                 <!-- end panel -->
               </div>
@@ -336,15 +1465,15 @@
       </div>
       <!-- end collapse Amplitude Total -->
 
-      <!-- Desvio Padrão -->
-      <div class="card">
-        <div class="card-header" id="headingDesvio" data-toggle="collapse" data-target="#collapseDevioPadrao">
+      <!-- Desvio Padrão Amostra-->
+      <div *ngIf="isAmostra" class="card">
+        <div class="card-header" id="headingDesvioPadrao" data-toggle="collapse" data-target="#collapseDevioPadrao">
           <h2 class="mb-0">
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
               data-target="#collapseDevioPadrao" aria-expanded="false" aria-controls="collapseDevioPadrao">
               <p>
                 Desvio Padrão:
-                <ng-katex class="explicacao" equation=" \approx {{ desvio }}">
+                <ng-katex class="explicacao" equation=" s \approx {{ desvio.toFixed(3) | number:'':'pt'}}">
                 </ng-katex>
               </p>
             </button>
@@ -352,126 +1481,421 @@
               data-target="#collapseDevioPadrao"></i>
           </h2>
         </div>
-        <div id="collapseDevioPadrao" class="collapse" aria-labelledby="headingDesvio" data-parent="#accordionExample">
+        <div id="collapseDevioPadrao" class="collapse" aria-labelledby="headingDesvioPadrao"
+          data-parent="#accordionExample">
           <!-- Panel -->
           <div class="card-body">
             <!-- Passo 1  -->
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" class="">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Desvio" class="">
                     <p>
                       <ng-katex class="explicacao"
-                        equation="\textcolor{black}{A_l = \pi \cdot \textcolor{blue}{r} \cdot \textcolor{limegreen}{ g } }">
+                        equation="\textcolor{black}{ \sum_{} \left( xi - \overline{x} \right)^2 = {{somatorioDesvAmos.toFixed(3) | number:'':'pt'}} }">
                       </ng-katex>
                       <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                        data-target="#collapseSix"></i>
+                        data-target="#collapsePasso1Desvio"></i>
                     </p>
                   </a>
                 </h4>
               </div>
-              <div id="collapseSix" class="panel-collapse collapse">
+              <div id="collapsePasso1Desvio" class="panel-collapse collapse">
                 <div class="panel-body">
-                  Fórmula para calcular a área lateral.
+                  Primeiramente calcula-se o somatório.
+                  <br>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 2  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Desvio" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ s = \sqrt{ \dfrac{ \sum_{} \left( xi - \overline{x} \right)^2 }{ n - 1} } }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso2Desvio"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso2Desvio" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Fórmula para o cálculo do desvio padrão.
                   <ul>
                     <li>
-                      <ng-katex equation="\color{blue}{ r }"></ng-katex> = raio
+                      <ng-katex equation="\color{limegreen}{ s }"></ng-katex> = desvio padrão.
                     </li>
                     <li>
-                      <ng-katex equation="\color{limegreen}{ g }"></ng-katex> = geratriz
+                      <ng-katex equation="\color{red}{ n }"></ng-katex> = número de elementos.
+                    </li>
+                    <li>
+                      <ng-katex equation="\color{blue}{ \sum_{} \left( xi - \overline{x} \right)^2 }"></ng-katex> =
+                      somatório de xi menos a média , elevados ao quadrado.
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
             <hr>
-            <!-- Passo 2  -->
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" class="">
-                    <p>
-                      <ng-katex class="explicacao"
-                        equation="\textcolor{black}{A_l = \pi \cdot \textcolor{blue}{ {{radius}} } \cdot \textcolor{limegreen}{ {{outsideRoot != 1 ? outsideRoot : '' }} {{ insideRoot !=1 ? '\\sqrt{' + insideRoot + '}' : '' }} } }">
-                      </ng-katex>
-                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                        data-target="#collapseSeven"></i>
-                    </p>
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseSeven" class="panel-collapse collapse">
-                <div class="panel-body">
-                  Multiplica o raio (<ng-katex equation="\textcolor{blue}{ {{radius}} }"></ng-katex>) pela geratriz
-                  fatorada.
-                </div>
-              </div>
-            </div>
-            <hr>
+
             <!-- Passo 3  -->
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight" class="">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Desvio" class="">
                     <p>
                       <ng-katex class="explicacao"
-                        equation="\textcolor{black}{A_l = \pi \cdot \textcolor{red}{  {{ radius * outsideRoot }} {{ insideRoot !=1 ? '\\sqrt{' + insideRoot + '}' : '' }} } }">
+                        equation="\textcolor{black}{ s = \sqrt{ \dfrac{ {{somatorioDesvAmos.toFixed(3) | number:'':'pt'}} }{ {{qtdTotalfi}} - 1} } }">
                       </ng-katex>
                       <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                        data-target="#collapseEight"></i>
+                        data-target="#collapsePasso3Desvio"></i>
                     </p>
                   </a>
                 </h4>
               </div>
-              <div id="collapseEight" class="panel-collapse collapse">
+              <div id="collapsePasso3Desvio" class="panel-collapse collapse">
                 <div class="panel-body">
-                  Multiplica <ng-katex equation="\pi"></ng-katex> pelo resultado do passo anterior.
+                  Substituindo os dados na fórmula.
                 </div>
               </div>
             </div>
             <hr>
+
+            <!-- Passo 5 -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso5Desvio" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ \sigma = \sqrt{ \dfrac{ {{somatorioDesvAmos.toFixed(3) | number:'':'pt'}} }{ {{qtdTotalfi - 1}} } } }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso5Desvio"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso5Desvio" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Resolvemos a subtração no denominador.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 6 -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso6Desvio" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ \sigma = \sqrt{  {{ (somatorioDesvAmos/(qtdTotalfi -1)).toFixed(3) | number:'':'pt'}} } }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso6Desvio"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso6Desvio" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Resolvemos a divisão.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 7 -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso7Desvio" class="">
+                    <p>
+                      <ng-katex class="explicacao" equation="\textcolor{black}{ s = {{desvio | number:'':'pt'}} }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso7Desvio"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso7Desvio" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Resultado final após raiz quadrada.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+          </div>
+          <!-- end panel  -->
+        </div>
+      </div><!-- end collapse Desvio Padrão Amostra-->
+
+      <!-- Desvio Padrão População-->
+      <div *ngIf="isAmostra === false" class="card">
+        <div class="card-header" id="headingDesvioPadrao" data-toggle="collapse" data-target="#collapseDevioPadrao">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+              data-target="#collapseDevioPadrao" aria-expanded="false" aria-controls="collapseDevioPadrao">
+              <p>
+                Desvio Padrão:
+                <ng-katex class="explicacao" equation=" \sigma \approx {{ desvioPop.toFixed(3) | number:'':'pt'}}">
+                </ng-katex>
+              </p>
+            </button>
+            <i class="fa fa-arrow-circle-down float-right mt-2 mr-4" data-toggle="collapse"
+              data-target="#collapseDevioPadrao"></i>
+          </h2>
+        </div>
+        <div id="collapseDevioPadrao" class="collapse" aria-labelledby="headingDesvioPadrao"
+          data-parent="#accordionExample">
+          <!-- Panel -->
+          <div class="card-body">
+            <!-- Passo 1  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Desvio" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ \sum_{} \left( xi - \overline{\mu} \right)^2 = {{somatorioDesvPop.toFixed(3) | number:'':'pt'}} }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso1Desvio"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso1Desvio" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Primeiramente calcula-se o somatório.
+                  <br>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 2  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Desvio" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ \sigma = \sqrt{ \dfrac{ \sum_{} \left( xi - \mu \right)^2 }{ n } } }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso2Desvio"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso2Desvio" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Fórmula para o cálculo do desvio padrão.
+                  <ul>
+                    <li>
+                      <ng-katex equation="\color{limegreen}{ \sigma }"></ng-katex> = desvio padrão.
+                    </li>
+                    <li>
+                      <ng-katex equation="\color{red}{ n }"></ng-katex> = número de elementos.
+                    </li>
+                    <li>
+                      <ng-katex equation="\color{blue}{ \sum_{} \left( xi - \mu \right)^2 }"></ng-katex> = somatório de
+                      xi menos a média, elevados ao quadrado.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 3  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Desvio" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ \sigma = \sqrt{ \dfrac{ {{somatorioDesvPop | number:'':'pt'}} }{ {{qtdTotalfi}}} } }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso3Desvio"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso3Desvio" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Substituindo os dados na fórmula.
+                </div>
+              </div>
+            </div>
+            <hr>
+
             <!-- Passo 4 -->
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine" class="">
-                    <p *ngIf="isApprox; else elseBlock">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso4Desvio" class="">
+                    <p>
                       <ng-katex class="explicacao"
-                        equation="\textcolor{black}{A_l \approx \textcolor{black}{ {{ (radius * geratriz).toFixed(2) }} } \pi \ u.a.}">
+                        equation="\textcolor{black}{ \sigma = \sqrt{ \dfrac{ {{somatorioDesvPop | number:'':'pt'}} }{ {{qtdTotalfi}} } } }">
                       </ng-katex>
                       <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                        data-target="#collapseNine"></i>
+                        data-target="#collapsePasso4Desvio"></i>
                     </p>
-                    <ng-template #elseBlock>
-                      <ng-katex class="explicacao"
-                        equation="\textcolor{black}{A_l = \textcolor{black}{ {{radius * geratriz }} } \pi \ u.a.}">
-                      </ng-katex>
-                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                        data-target="#collapsePaaso4"></i>
-                    </ng-template>
                   </a>
                 </h4>
               </div>
-              <div id="collapseNine" class="panel-collapse collapse">
+              <div id="collapsePasso4Desvio" class="panel-collapse collapse">
                 <div class="panel-body">
-                  Resultado final aproximado na forma decimal em unidades de área.
+                  Resolve-se a subtração no denominador.
                 </div>
               </div>
             </div>
+            <hr>
+
+            <!-- Passo 5 -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso5Desvio" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ \sigma = \sqrt{  {{ (somatorioDesvPop/qtdTotalfi).toFixed(3) | number:'':'pt'}} } }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso5Desvio"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso5Desvio" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Resolvemos a divisão.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 6 -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso6Desvio" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ \sigma = {{desvioPop | number:'':'pt'}} }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso6Desvio"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso6Desvio" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Resultado final após raiz quadrada.
+                </div>
+              </div>
+            </div>
+            <hr>
+
           </div>
           <!-- end panel  -->
         </div>
-      </div><!-- end collapse Desvio Padrão -->
+      </div><!-- end collapse Desvio População -->
 
-      <!-- Variância -->
-      <div class="card">
+      <!-- Variância Amostra-->
+      <div *ngIf="isAmostra" class="card">
         <div class="card-header" id="headingVariancia" data-toggle="collapse" data-target="#collapseVariancia">
           <h2 class="mb-0">
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseVariancia"
               aria-expanded="false" aria-controls="collapseVariancia">
               <p class="mb-0">
                 Variância:
-                <ng-katex class="explicacao" equation=" \approx {{ varianci }}">
+                <ng-katex class="explicacao" equation=" s^2 \approx {{ varianci.toFixed(3) | number:'':'pt'}}">
+                </ng-katex>
+              </p>
+            </button>
+
+            <i class="fa fa-arrow-circle-down float-right mt-2 mr-4" data-toggle="collapse"
+              data-target="#collapseVariancia"></i>
+          </h2>
+        </div>
+        <div id="collapseVariancia" class="collapse" aria-labelledby="headingVariancia" data-parent="#accordionExample">
+          <!-- Panel -->
+          <div class="card-body">
+
+            <!-- Passo 1  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Variancia" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{s^2 = {{desvio.toFixed(3) | number:'':'pt' }}^2}">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso1Variancia"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso1Variancia" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Eleva-se o desvio padrão ao quadrado.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 2  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Variancia" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{s^2 \cong {{varianci.toFixed(3) | number:'':'pt'}}}">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso2Variancia"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso2Variancia" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Resultado final após a potência.
+                </div>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- end panel  -->
+        </div>
+      </div><!-- end collapse Variância Amostra -->
+
+      <!-- Variância População-->
+      <div *ngIf="isAmostra === false" class="card">
+        <div class="card-header" id="headingVariancia" data-toggle="collapse" data-target="#collapseVariancia">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseVariancia"
+              aria-expanded="false" aria-controls="collapseVariancia">
+              <p class="mb-0">
+                Variância:
+                <ng-katex class="explicacao" equation=" \sigma^2 \approx {{ varianciaPop.toFixed(3) | number:'':'pt'}}">
                 </ng-katex>
               </p>
             </button>
@@ -487,28 +1911,42 @@
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" class="">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Variancia" class="">
                     <p>
-                      <ng-katex class="explicacao"
-                        equation="\textcolor{black}{A_l = \pi \cdot \textcolor{blue}{r} \cdot \textcolor{limegreen}{ g } }">
+                      <ng-katex class="explicacao" equation="\textcolor{black}{\sigma^2 = {{desvioPop}}^2 }">
                       </ng-katex>
                       <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                        data-target="#collapseSix"></i>
+                        data-target="#collapsePasso1Variancia"></i>
                     </p>
                   </a>
                 </h4>
               </div>
-              <div id="collapseSix" class="panel-collapse collapse">
+              <div id="collapsePasso1Variancia" class="panel-collapse collapse">
                 <div class="panel-body">
-                  Fórmula para calcular a área lateral.
-                  <ul>
-                    <li>
-                      <ng-katex equation="\color{blue}{ r }"></ng-katex> = raio
-                    </li>
-                    <li>
-                      <ng-katex equation="\color{limegreen}{ g }"></ng-katex> = geratriz
-                    </li>
-                  </ul>
+                  Eleva-se o desvio padrão ao quadrado.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 2  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Variancia" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{\sigma^2 \cong {{varianciaPop.toFixed(3) | number:'':'pt'}}}">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso2Variancia"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso2Variancia" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Resultado final após a potência.
                 </div>
               </div>
             </div>
@@ -516,18 +1954,17 @@
           </div>
           <!-- end panel  -->
         </div>
-      </div><!-- end collapse Variância -->
+      </div><!-- end collapse Variância População-->
 
-
-      <!-- Coeficiente de Variação -->
-      <div class="card">
+      <!-- Coeficiente de Variação Amostra-->
+      <div *ngIf="isAmostra" class="card">
         <div class="card-header" id="headingCoefVariacao" data-toggle="collapse" data-target="#collapseCoefVar">
           <h2 class="mb-0">
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseCoefVar"
               aria-expanded="false" aria-controls="collapseCoefVar">
               <p class="mb-0">
                 Coeficiente de Variação:
-                <ng-katex class="explicacao" equation=" \approx {{ coefVariacao }}">
+                <ng-katex class="explicacao" equation=" cv \approx {{ coefVariacao.toFixed(3) | number:'':'pt' }} \% ">
                 </ng-katex>
               </p>
             </button>
@@ -536,73 +1973,235 @@
               data-target="#collapseCoefVar"></i>
           </h2>
         </div>
-        <div id="collapseCoefVar" class="collapse" aria-labelledby="headingCoefVariacao" data-parent="#accordionExample">
+        <div id="collapseCoefVar" class="collapse" aria-labelledby="headingCoefVariacao"
+          data-parent="#accordionExample">
           <!-- Panel -->
           <div class="card-body">
+
             <!-- Passo 1  -->
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" class="">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1CoefVar" class="">
                     <p>
                       <ng-katex class="explicacao"
-                        equation="\textcolor{black}{A_l = \pi \cdot \textcolor{blue}{r} \cdot \textcolor{limegreen}{ g } }">
+                        equation="\textcolor{black}{ cv = \dfrac{ \color{red}{s} } { \color{blue}{\overline{x} }} \cdot 100 \% }">
                       </ng-katex>
                       <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                        data-target="#collapseSix"></i>
+                        data-target="#collapsePasso1CoefVar"></i>
                     </p>
                   </a>
                 </h4>
               </div>
-              <div id="collapseSix" class="panel-collapse collapse">
+              <div id="collapsePasso1CoefVar" class="panel-collapse collapse">
                 <div class="panel-body">
-                  Fórmula para calcular a área lateral.
+                  Fórmula para calcular o coenficiênte de variação.
                   <ul>
                     <li>
-                      <ng-katex equation="\color{blue}{ r }"></ng-katex> = raio
+                      <ng-katex equation="\color{black}{ cv }"></ng-katex> = coeficiente de variação.
                     </li>
                     <li>
-                      <ng-katex equation="\color{limegreen}{ g }"></ng-katex> = geratriz
+                      <ng-katex equation="\color{red}{ s }"></ng-katex> = desvio padrão.
+                    </li>
+                    <li>
+                      <ng-katex equation="\color{blue}{ \overline{x}}"></ng-katex> = média da distribuição.
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
             <hr>
+
+            <!-- Passo 2  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2CoefVar" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{cv = \frac{ {{desvio.toFixed(3) | number:'':'pt'}} } { {{media | number:'':'pt'}} } \cdot 100 \% }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso2CoefVar"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso2CoefVar" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Substirui-se o valor do desvio padrão e da média na fórmula.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 3  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3CoefVar" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{cv = {{coefVariacao.toFixed(3) | number:'':'pt'}} \% }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso3CoefVar"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso3CoefVar" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Resolve-se o produto e divisão respectivamente.
+                </div>
+              </div>
+            </div>
+            <hr>
+
           </div>
           <!-- end panel  -->
         </div>
       </div><!-- end collapse Coeficiênte de Variação -->
-    </div>
-    <hr>
 
-    <!-- Accordion Medidas de assimetria e curtoso-->
+
+      <!-- Coeficiente de Variação População-->
+      <div *ngIf="isAmostra === false" class="card">
+        <div class="card-header" id="headingCoefVariacao" data-toggle="collapse" data-target="#collapseCoefVar">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseCoefVar"
+              aria-expanded="false" aria-controls="collapseCoefVar">
+              <p class="mb-0">
+                Coeficiente de Variação:
+                <ng-katex class="explicacao"
+                  equation=" cv \approx {{ coefVariacaoPop.toFixed(3) | number:'':'pt' }} \% ">
+                </ng-katex>
+              </p>
+            </button>
+
+            <i class="fa fa-arrow-circle-down float-right mt-2 mr-4" data-toggle="collapse"
+              data-target="#collapseCoefVar"></i>
+          </h2>
+        </div>
+        <div id="collapseCoefVar" class="collapse" aria-labelledby="headingCoefVariacao"
+          data-parent="#accordionExample">
+          <!-- Panel -->
+          <div class="card-body">
+
+            <!-- Passo 1  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1CoefVar" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{ cv = \dfrac{ \color{red}{\sigma} } { \color{blue}{ \mu }} \cdot 100 \% }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso1CoefVar"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso1CoefVar" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Fórmula para calcular o coenficiênte de variação.
+                  <ul>
+                    <li>
+                      <ng-katex equation="\color{black}{ cv }"></ng-katex> = coeficiente de variação.
+                    </li>
+                    <li>
+                      <ng-katex equation="\color{red}{ \sigma }"></ng-katex> = desvio padrão.
+                    </li>
+                    <li>
+                      <ng-katex equation="\color{blue}{ \mu }"></ng-katex> = média da distribuição.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 2  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2CoefVar" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{cv = \frac{ {{desvio.toFixed(3) | number:'':'pt'}} } { {{media | number:'':'pt'}} } \cdot 100 \% }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso2CoefVar"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso2CoefVar" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Substirui-se o valor do desvio padrão e da média na fórmula.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Passo 3  -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3CoefVar" class="">
+                    <p>
+                      <ng-katex class="explicacao"
+                        equation="\textcolor{black}{cv = {{coefVariacaoPop.toFixed(3) | number:'':'pt'}} \% }">
+                      </ng-katex>
+                      <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                        data-target="#collapsePasso3CoefVar"></i>
+                    </p>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsePasso3CoefVar" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Resolve-se o produto e divisão respectivamente.
+                </div>
+              </div>
+            </div>
+            <hr>
+
+          </div>
+          <!-- end panel  -->
+        </div>
+      </div><!-- end collapse Coeficiênte de Variação População-->
+      <hr>
+    </div>
+
+    <!-- Accordion Medidas de assimetria e curtose-->
     <div class="accordion" id="accordionExample">
       <h3 style="font-size: large;">Medidas de assimetria e curtose</h3>
-      <p>Assimetria: É o grau de desvio da simetria de uma distribuição.
-        Ela é positiva para as distribuições assimétricas à direita, negativa para aquelas assimétricas à esquerda e para distribuições simétricas o seu valor é zero.
+      <p><b>Assimetria:</b> É o grau de desvio da simetria de uma distribuição.
+        Ela é positiva para as distribuições assimétricas à direita, negativa para aquelas assimétricas à esquerda e
+        para distribuições simétricas o seu valor é zero.
       </p>
-      <p>Curtose: Indica o grau de achatamento de uma distribuição, tomando como referência a curva normal.
+      <p><b>Curtose:</b> Indica o grau de achatamento de uma distribuição, tomando como referência a curva normal.
       </p>
-      <!-- 1 coeficiente de assimetria de pearson -->
-      <div class="card">
-        <div class="card-header" id="headingPearson1" data-toggle="collapse" data-target="#collapseMedia">
+
+      <!-- 1 coeficiente de assimetria de pearson Amostra -->
+      <div *ngIf="isAmostra" class="card">
+        <div class="card-header" id="headingPearson1" data-toggle="collapse" data-target="#collapseCoefPearson">
           <h2 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMedia"
-              aria-expanded="true" aria-controls="collapseMedia">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseCoefPearson"
+              aria-expanded="true" aria-controls="collapseCoefPearson">
               <p>
-                1 Coeficiente de Assimetria de Pearson: 
-                <ng-katex class="explicacao" equation=" \approx {{ pearson1 }}"> </ng-katex>
+                1° Coeficiente de Assimetria de Pearson:
+                <ng-katex class="explicacao" equation=" \approx {{ pearson1.toFixed(3) | number:'':'pt'}}"> </ng-katex>
               </p>
             </button>
             <i class="fa fa-arrow-circle-down float-right mt-2 mr-4" data-toggle="collapse"
-              data-target="#collapseMedia"></i>
+              data-target="#collapseCoefPearson"></i>
           </h2>
         </div>
-
-        <div id="collapseMedia" class="collapse" aria-labelledby="headingPearson1" data-parent="#accordionExample">
+        <div id="collapseCoefPearson" class="collapse" aria-labelledby="headingPearson1"
+          data-parent="#accordionExample">
           <div class="card-body">
-            Note que temos um triângulo retângulo, aplicando o teorema de pitágoras temos:
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
                 <!-- Panel -->
@@ -611,35 +2210,108 @@
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1" class="">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Coef1Pearson" class="">
                           <p>
                             <ng-katex class="explicacao"
-                              equation="\color{black}{g} \color{black}{^2} = \color{red}{h} \color{black}{^2 +} \color{blue}{r} \color{black}{^2}">
+                              equation="\color{black}{ e_1 = \dfrac{\overline{x} - Mo}{s}  }">
                             </ng-katex>
                             <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                              data-target="#collapsePasso1"></i>
+                              data-target="#collapsePasso1Coef1Pearson"></i>
                           </p>
                         </a>
                       </h4>
                     </div>
-                    <div id="collapsePasso1" class="panel-collapse collapse">
+                    <div id="collapsePasso1Coef1Pearson" class="panel-collapse collapse">
                       <div class="panel-body">
-                        Fórmula para o cálculo da geratriz.
+                        Fórmula para o cálculo do 1° coeficiente de Pearson.
                         <ul>
                           <li>
-                            <ng-katex equation="\color{limegreen}{ g }"></ng-katex> = geratriz
+                            <ng-katex equation="\color{limegreen}{ e_1 }"></ng-katex> = 1° coeficiente de Pearson.
                           </li>
                           <li>
-                            <ng-katex equation="\color{red}{ h }"></ng-katex> = altura
+                            <ng-katex equation="\color{red}{ \overline{x} }"></ng-katex> = média da distribuição.
                           </li>
                           <li>
-                            <ng-katex equation="\color{blue}{ r }"></ng-katex> = raio
+                            <ng-katex equation="\color{blue}{ Mo }"></ng-katex> = moda da distribuição.
+                          </li>
+                          <li>
+                            <ng-katex equation="\color{black}{ s }"></ng-katex> = desvio padrão.
                           </li>
                         </ul>
                       </div>
                     </div>
                   </div>
                   <hr>
+
+                  <!-- Passo 2 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Coef1Pearson" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ e_1 = \dfrac{ {{media.toFixed(3) | number:'':'pt'}} - {{moda.toFixed(3) | number:'':'pt'}} } { {{desvio}} }  }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso2Coef1Pearson"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso2Coef1Pearson" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Substituindo os dados na fórmula.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 3 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Coef1Pearson" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ e_1 = \dfrac{ {{(media - moda).toFixed(3) | number:'':'pt'}} } { {{desvio}} }  }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso3Coef1Pearson"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso3Coef1Pearson" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Realizamos a subtração primeiro.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 4 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso4Coef1Pearson" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ e_1 = {{pearson1.toFixed(3) | number:'':'pt'}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso4Coef1Pearson"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso4Coef1Pearson" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resultado final após a subtração.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
                 </div>
                 <!-- end panel -->
               </div>
@@ -647,27 +2319,27 @@
           </div>
         </div>
       </div>
-      <!-- end collapse 1 coeficiente de assimetria de pearson -->
+      <!-- end collapse 1 coeficiente de assimetria de pearson Amostra-->
 
-      <!-- 2 coeficiente de assimetria de pearson -->
-      <div class="card">
-        <div class="card-header" id="headingPearson2" data-toggle="collapse" data-target="#collapseMedia">
+      <!-- 1 coeficiente de assimetria de pearson População -->
+      <div *ngIf="isAmostra === false" class="card">
+        <div class="card-header" id="headingPearson1" data-toggle="collapse" data-target="#collapseCoefPearson">
           <h2 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMedia"
-              aria-expanded="true" aria-controls="collapseMedia">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseCoefPearson"
+              aria-expanded="true" aria-controls="collapseCoefPearson">
               <p>
-                2 Coeficiente de Assimetria de Pearson: 
-                <ng-katex class="explicacao" equation=" \approx {{ pearson2 }}"> </ng-katex>
+                1° Coeficiente de Assimetria de Pearson:
+                <ng-katex class="explicacao" equation=" \approx {{ pearson1Pop.toFixed(3) | number:'':'pt'}}">
+                </ng-katex>
               </p>
             </button>
             <i class="fa fa-arrow-circle-down float-right mt-2 mr-4" data-toggle="collapse"
-              data-target="#collapseMedia"></i>
+              data-target="#collapseCoefPearson"></i>
           </h2>
         </div>
-
-        <div id="collapseMedia" class="collapse" aria-labelledby="headingPearson2" data-parent="#accordionExample">
+        <div id="collapseCoefPearson" class="collapse" aria-labelledby="headingPearson1"
+          data-parent="#accordionExample">
           <div class="card-body">
-            Note que temos um triângulo retângulo, aplicando o teorema de pitágoras temos:
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
                 <!-- Panel -->
@@ -676,35 +2348,107 @@
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1" class="">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Coef1Pearson" class="">
                           <p>
-                            <ng-katex class="explicacao"
-                              equation="\color{black}{g} \color{black}{^2} = \color{red}{h} \color{black}{^2 +} \color{blue}{r} \color{black}{^2}">
+                            <ng-katex class="explicacao" equation="\color{black}{ e_1 = \dfrac{\mu - Mo}{\sigma}  }">
                             </ng-katex>
                             <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                              data-target="#collapsePasso1"></i>
+                              data-target="#collapsePasso1Coef1Pearson"></i>
                           </p>
                         </a>
                       </h4>
                     </div>
-                    <div id="collapsePasso1" class="panel-collapse collapse">
+                    <div id="collapsePasso1Coef1Pearson" class="panel-collapse collapse">
                       <div class="panel-body">
-                        Fórmula para o cálculo da geratriz.
+                        Fórmula para o cálculo do 1° coeficiente de Pearson.
                         <ul>
                           <li>
-                            <ng-katex equation="\color{limegreen}{ g }"></ng-katex> = geratriz
+                            <ng-katex equation="\color{limegreen}{ e_1 }"></ng-katex> = 1° coeficiente de Pearson.
                           </li>
                           <li>
-                            <ng-katex equation="\color{red}{ h }"></ng-katex> = altura
+                            <ng-katex equation="\color{red}{ \mu }"></ng-katex> = média da distribuição.
                           </li>
                           <li>
-                            <ng-katex equation="\color{blue}{ r }"></ng-katex> = raio
+                            <ng-katex equation="\color{blue}{ Mo }"></ng-katex> = moda da distribuição.
+                          </li>
+                          <li>
+                            <ng-katex equation="\color{black}{ \sigma }"></ng-katex> = desvio padrão.
                           </li>
                         </ul>
                       </div>
                     </div>
                   </div>
                   <hr>
+
+                  <!-- Passo 2 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Coef1Pearson" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ e_1 = \dfrac{ {{media.toFixed(3) | number:'':'pt'}} - {{moda.toFixed(3) | number:'':'pt'}} } { {{desvioPop}} }  }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso2Coef1Pearson"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso2Coef1Pearson" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Substituindo os dados na fórmula.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 3 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Coef1Pearson" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ e_1 = \dfrac{ {{(media - moda).toFixed(3) | number:'':'pt'}} } { {{desvioPop}} }  }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso3Coef1Pearson"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso3Coef1Pearson" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Realizamos a subtração primeiro.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 4 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso4Coef1Pearson" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ e_1 = {{pearson1Pop.toFixed(3) | number:'':'pt'}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso4Coef1Pearson"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso4Coef1Pearson" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resultado final após a subtração.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
                 </div>
                 <!-- end panel -->
               </div>
@@ -712,27 +2456,301 @@
           </div>
         </div>
       </div>
-      <!-- end collapse 1 coeficiente de assimetria de pearson -->
+      <!-- end collapse 1 coeficiente de assimetria de pearson Amostra-->
+
+      <!-- 2 coeficiente de assimetria de pearson Amostra-->
+      <div *ngIf="isAmostra" class="card">
+        <div class="card-header" id="headingPearson1" data-toggle="collapse" data-target="#collapseCoef2Pearson">
+          <h2 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseCoef2Pearson"
+              aria-expanded="true" aria-controls="collapseCoef2Pearson">
+              <p>
+                2° Coeficiente de Assimetria de Pearson:
+                <ng-katex class="explicacao" equation=" \approx {{ pearson2.toFixed(3) | number:'':'pt'}}"> </ng-katex>
+              </p>
+            </button>
+            <i class="fa fa-arrow-circle-down float-right mt-2 mr-4" data-toggle="collapse"
+              data-target="#collapseCoef2Pearson"></i>
+          </h2>
+        </div>
+        <div id="collapseCoef2Pearson" class="collapse" aria-labelledby="headingPearson1"
+          data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+                <!-- Panel -->
+                <div class="panel-group" id="accordion">
+                  <!-- Passo 1 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Coef2Pearson" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ e_2 = \dfrac{ 3 \cdot \left( \overline{x} - Me \right)} { s }}">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso1Coef2Pearson"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso1Coef2Pearson" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Fórmula para o cálculo do 2° coeficiente de Pearson.
+                        <ul>
+                          <li>
+                            <ng-katex equation="\color{limegreen}{ e_2 }"></ng-katex> = 1° coeficiente de Pearson.
+                          </li>
+                          <li>
+                            <ng-katex equation="\color{red}{ \overline{x} }"></ng-katex> = média da distribuição.
+                          </li>
+                          <li>
+                            <ng-katex equation="\color{blue}{ Me }"></ng-katex> = mediana da distribuição.
+                          </li>
+                          <li>
+                            <ng-katex equation="\color{black}{ s }"></ng-katex> = desvio padrão.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 2 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Coef2Pearson" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ e_2 = \dfrac{ 3 \cdot \left( {{media.toFixed(3) | number:'':'pt'}} - {{mediana.toFixed(3) | number:'':'pt'}} \right) } { {{desvio}} }  }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso2Coef2Pearson"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso2Coef2Pearson" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Substituindo os dados na fórmula.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 3 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Coef2Pearson" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ e_2 = \dfrac{ 3 \cdot {{(media - mediana).toFixed(3) | number:'':'pt'}} } { {{desvio}} }  }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso3Coef2Pearson"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso3Coef2Pearson" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Realizamos a subtração primeiro.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 4 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso4Coef2Pearson" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ e_2 = {{pearson2Pop.toFixed(3) | number:'':'pt'}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso4Coef2Pearson"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso4Coef2Pearson" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resultado final após a subtração.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                </div>
+                <!-- end panel -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end collapse 2 coeficiente de assimetria de pearson Amostra-->
+
+      <!-- 2 coeficiente de assimetria de pearson População -->
+      <div *ngIf="isAmostra === false" class="card">
+        <div class="card-header" id="headingPearson1" data-toggle="collapse" data-target="#collapseCoef2Pearson">
+          <h2 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseCoef2Pearson"
+              aria-expanded="true" aria-controls="collapseCoef2Pearson">
+              <p>
+                2° Coeficiente de Assimetria de Pearson:
+                <ng-katex class="explicacao" equation=" \approx {{ pearson2Pop.toFixed(3) | number:'':'pt'}}">
+                </ng-katex>
+              </p>
+            </button>
+            <i class="fa fa-arrow-circle-down float-right mt-2 mr-4" data-toggle="collapse"
+              data-target="#collapseCoef2Pearson"></i>
+          </h2>
+        </div>
+        <div id="collapseCoef2Pearson" class="collapse" aria-labelledby="headingPearson1"
+          data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+                <!-- Panel -->
+                <div class="panel-group" id="accordion">
+                  <!-- Passo 1 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Coef2Pearson" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ e_2 = \dfrac{ 3 \cdot \left( \mu - Me \right) } {\sigma}  }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso1Coef2Pearson"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso1Coef2Pearson" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Fórmula para o cálculo do 2° coeficiente de Pearson.
+                        <ul>
+                          <li>
+                            <ng-katex equation="\color{limegreen}{ e_2 }"></ng-katex> = 1° coeficiente de Pearson.
+                          </li>
+                          <li>
+                            <ng-katex equation="\color{red}{ \mu }"></ng-katex> = média da distribuição.
+                          </li>
+                          <li>
+                            <ng-katex equation="\color{blue}{ Me }"></ng-katex> = mediana da distribuição.
+                          </li>
+                          <li>
+                            <ng-katex equation="\color{black}{ \sigma }"></ng-katex> = desvio padrão.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 2 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Coef2Pearson" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ e_2 = \dfrac{ 3 \cdot \left( {{media.toFixed(3) | number:'':'pt'}} - {{mediana.toFixed(3) | number:'':'pt'}} \right)} { {{desvioPop}} } }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso2Coef2Pearson"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso2Coef2Pearson" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Substituindo os dados na fórmula.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 3 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Coef2Pearson" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ e_2 = \dfrac{ 3 \cdot \left( {{(media - mediana).toFixed(3) | number:'':'pt'}} \right)} { {{desvioPop}}  } }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso3Coef2Pearson"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso3Coef2Pearson" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Realizamos a subtração primeiro.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 4 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso4Coef2Pearson" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ e_2 = {{pearson2Pop.toFixed(3) | number:'':'pt'}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso4Coef2Pearson"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso4Coef2Pearson" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resultado final após a subtração.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                </div>
+                <!-- end panel -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end collapse 2 coeficiente de assimetria de pearson População-->
 
       <!-- Curtose -->
       <div class="card">
-        <div class="card-header" id="headingCurtose" data-toggle="collapse" data-target="#collapseMedia">
+        <div class="card-header" id="headingCurtose" data-toggle="collapse" data-target="#collapseCurtose">
           <h2 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMedia"
-              aria-expanded="true" aria-controls="collapseMedia">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseCurtose"
+              aria-expanded="true" aria-controls="collapseCurtose">
               <p>
-                Curtose: 
-                <ng-katex class="explicacao" equation=" \approx {{ curtose }}"> </ng-katex>
+                Curtose:
+                <ng-katex class="explicacao" equation=" \approx {{ curtose.toFixed(3) | number:'':'pt'}}"> </ng-katex>
               </p>
             </button>
             <i class="fa fa-arrow-circle-down float-right mt-2 mr-4" data-toggle="collapse"
-              data-target="#collapseMedia"></i>
+              data-target="#collapseCurtose"></i>
           </h2>
         </div>
 
-        <div id="collapseMedia" class="collapse" aria-labelledby="headingCurtose" data-parent="#accordionExample">
+        <div id="collapseCurtose" class="collapse" aria-labelledby="headingCurtose" data-parent="#accordionExample">
           <div class="card-body">
-            Note que temos um triângulo retângulo, aplicando o teorema de pitágoras temos:
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
                 <!-- Panel -->
@@ -741,35 +2759,129 @@
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1" class="">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso1Curtose" class="">
                           <p>
                             <ng-katex class="explicacao"
-                              equation="\color{black}{g} \color{black}{^2} = \color{red}{h} \color{black}{^2 +} \color{blue}{r} \color{black}{^2}">
+                              equation="\color{black}{ C = \dfrac{Q_3 - Q_1}{2 \cdot \left(  P_{90} - P_{10} \right)} }">
                             </ng-katex>
                             <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
-                              data-target="#collapsePasso1"></i>
+                              data-target="#collapsePasso1Curtose"></i>
                           </p>
                         </a>
                       </h4>
                     </div>
-                    <div id="collapsePasso1" class="panel-collapse collapse">
+                    <div id="collapsePasso1Curtose" class="panel-collapse collapse">
                       <div class="panel-body">
                         Fórmula para o cálculo da geratriz.
                         <ul>
                           <li>
-                            <ng-katex equation="\color{limegreen}{ g }"></ng-katex> = geratriz
+                            <ng-katex equation="\color{limegreen}{ C }"></ng-katex> = curtose.
                           </li>
                           <li>
-                            <ng-katex equation="\color{red}{ h }"></ng-katex> = altura
+                            <ng-katex equation="\color{red}{ Q_3 \ Q_1 }"></ng-katex> = quartil 3 e quartil 1.
                           </li>
                           <li>
-                            <ng-katex equation="\color{blue}{ r }"></ng-katex> = raio
+                            <ng-katex equation="\color{blue}{ P_{90} \ P_{10} }"></ng-katex> = percentil 90 e percentil
+                            10.
                           </li>
                         </ul>
                       </div>
                     </div>
                   </div>
                   <hr>
+
+                  <!-- Passo 2 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Curtose" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ C = \dfrac{ {{Q3.toFixed(3) | number:'':'pt'}} - {{Q1.toFixed(3) | number:'':'pt'}} } {2 \cdot \left(  {{P90.toFixed(3) | number:'':'pt'}} - {{P10.toFixed(3) | number:'':'pt'}} \right)} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso2Curtose"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso2Curtose" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Substiruindo os valores na fórmula.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 3 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Curtose" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ C = \dfrac{ {{(Q3 - Q1).toFixed(3) | number:'':'pt'}} } {2 \cdot \left(  {{(P90 - P10).toFixed(3) | number:'':'pt'}} \right) } }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso3Curtose"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso3Curtose" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resolvendo as substrações.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 4 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso4Curtose" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ C = \dfrac{ {{(Q3 - Q1).toFixed(3) | number:'':'pt'}} } { {{((P90 - P10)*2).toFixed(3) | number:'':'pt'}}  } }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso4Curtose"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso4Curtose" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resolvendo a multiplicação no denominador.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Passo 5 -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso5Curtose" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\color{black}{ C = {{curtose.toFixed(3) | number:'':'pt'}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapsePasso5Curtose"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsePasso5Curtose" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Resultado final após a divisão.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
                 </div>
                 <!-- end panel -->
               </div>
@@ -778,10 +2890,8 @@
         </div>
       </div>
       <!-- end collapse curtose -->
-
     </div>
     <hr>
-
 
   </div>
 

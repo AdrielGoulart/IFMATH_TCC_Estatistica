@@ -35,7 +35,7 @@ export class EstMedidaAgrupadoComponent implements OnInit {
 
   public numerosRep: Object = null;
   public frequenciaAbsSoma: number = 6;
-  public formulaMedia: string = '7 + 8 + 7 + 9 + 7 + 6';
+  public formulaMedia: string = '6.1 + 7.3 + 8.1 + 9.1';
   public valorModa: number[] = [7];
   public formulaModa: string = ' 7 é o número que mais se repete.';
   public resultadoModa: string = '7';
@@ -49,6 +49,13 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   public isAmostra: boolean = true;
   public dados:number[] = [];
   public qtdTotal:number = 44;
+
+  //Desvio Padrão
+  public somatorioDesvAmos: number = 5.11;
+  public somatorioDesvPop: number = 5.11;
+
+  //Media
+  public valorSomatorioMedia: number = 44;
 
   constructor() { }
 
@@ -132,6 +139,7 @@ export class EstMedidaAgrupadoComponent implements OnInit {
       baixo += this.fi[index];
     }
     this.media = cima/baixo;
+    this.valorSomatorioMedia = cima;
     //console.log(this.media);
   }
 
@@ -223,6 +231,7 @@ export class EstMedidaAgrupadoComponent implements OnInit {
     let divisao: number = somatorio/(n-1)
     //console.log('divisao', divisao);
     this.desvio = Math.sqrt(divisao);
+    this.somatorioDesvAmos = somatorio;
     //console.log('desvio', this.desvio);
   }
 
@@ -254,6 +263,7 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   
     let divisao: number = somatorioPop/(n);
     this.desvioPop = Math.sqrt(divisao);
+    this.somatorioDesvPop = somatorioPop;
   
     //console.log('desvioPop', this.desvioPop);
   }
@@ -355,11 +365,11 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   aplicaNumerosFormulaMedia() {
     //var teste = [7,8,7,9,7,6]
     this.formulaMedia = '';
-    this.formulaMedia += this.dados[0] + ' + ';
+    this.formulaMedia += this.dados[0] + '.'+ this.fi[0]+' + ';
     for (let i = 1; i < this.dados.length - 1; i++) {
-      this.formulaMedia += this.dados[i] + ' + ';
+      this.formulaMedia += this.dados[i] + '.'+ this.fi[i]+' + ';
     }
-    this.formulaMedia += this.dados[this.dados.length - 1]
+    this.formulaMedia += this.dados[this.dados.length - 1]+'.'+this.fi[this.fi.length-1];
   }
 
   /**
