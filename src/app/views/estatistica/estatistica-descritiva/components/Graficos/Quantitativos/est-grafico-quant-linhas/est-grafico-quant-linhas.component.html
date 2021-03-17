@@ -35,13 +35,8 @@
         <div class="input-group-prepend">
           <label class="label" id="basic-addon1">Período: </label>
         </div>
-        <div class="col mb-2">
-          <input type="text" class="form-control" id="inputEmail3" placeholder="Separe as datas pela letra a"
+          <input type="text" class="form-control" id="inputEmail3" placeholder="Separe os períodos pela letra a"
             [(ngModel)]="periodoInput" (ngModelChange)="changePeriodo()" aria-describedby="basic-addon1">
-          <est-form-msg-error style="margin-left: auto;" [mostrarErro]="errorInputQtd"
-            msgErro="O número de quantidades deve ser igual ao do campo variáveis">
-          </est-form-msg-error>
-        </div>
       </div>
 
       <div class="input-group mb-3">
@@ -87,12 +82,10 @@
             <!-- Modal content-->
             <div class="modal-content">
               <div class="modal-header justify-content-center">
-                <b>
-                  <h5 class="modal-title">{{title}}</h5>
-                </b>
               </div>
               <div class="modal-body">
                 <table class="table">
+                  <caption class="titleTable"><b>{{title}}</b></caption>
                   <thead class="table-info" style="text-align: center;">
                     <tr>
                       <th scope="col">{{medidaAtual}}</th>

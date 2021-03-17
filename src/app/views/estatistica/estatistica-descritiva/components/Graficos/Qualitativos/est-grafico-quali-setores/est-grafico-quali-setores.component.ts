@@ -21,9 +21,9 @@ export class EstGraficoQualiSetoresComponent implements OnInit {
     '#A0522D', '#FFFF00', '#A9A9A9']
 
   public varQual: string[] = ['Azul', 'Amarelo', 'Vermelho', 'Verde', 'Preto'];
-  public varQualInput: string = '';
+  public varQualInput: string = 'Azul - Amarelo - Vermelho - verde - Preto';
   public quantidade: number[] = [12, 7, 4, 1, 7];
-  public quantInput: string = '';
+  public quantInput: string = '12 - 7 - 4 - 1 - 7';
   public title: string = 'Cor favorita dos alunos de 7° ano da escola XXY';
   public fonteDados: string = 'Dados Fictícios';
   public nomeVariavel: string = 'Cor';

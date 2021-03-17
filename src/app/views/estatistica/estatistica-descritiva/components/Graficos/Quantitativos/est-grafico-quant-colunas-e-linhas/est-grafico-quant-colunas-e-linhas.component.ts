@@ -37,7 +37,7 @@ export class EstGraficoQuantColunasELinhasComponent implements OnInit {
   public anos: string[] = [];
 
   public medidasVetChart: string[] = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"];
-  public medidas: Object[] = [{ nome: "Horas" }, { nome: "Dias" }, { nome: "Semanas" }, { nome: "Meses" }, { nome: "Anos" }]
+  public medidas: Object[] = [{ nome: "Meses" }, { nome: "Dias" }, { nome: "Semanas" }, { nome: "Horas" }, { nome: "Anos" }]
   public medidaAtual: string = 'Meses';
 
   public periodoInput: string = 'Jan a Jun';
@@ -278,7 +278,7 @@ export class EstGraficoQuantColunasELinhasComponent implements OnInit {
   getMonths() {
     //var teste = "Jul a Set";
     ///var meses = teste.split('a');
-    var meses = this.periodoInput.split('a');
+    var meses = this.periodoInput.split(' a');
     var mesInicio = String(meses[0].trim());
     var mesFim = String(meses[1].trim());
     this.createMonthPeriods(mesInicio, mesFim);
@@ -308,7 +308,7 @@ export class EstGraficoQuantColunasELinhasComponent implements OnInit {
 
   extractDaysPeriods() {
     this.datasSemanas = [];
-    var dias = this.periodoInput.split('a');
+    var dias = this.periodoInput.split(' a');
     var dataInicio = dias[0].trim().split('-');
     var dataFim = dias[1].trim().split('-');
 
@@ -358,6 +358,23 @@ export class EstGraficoQuantColunasELinhasComponent implements OnInit {
 
   getMedida(event) {
     this.medidaAtual = event.target.value;
+    if (this.medidaAtual == "Horas") {
+      this.periodoInput = '1 a 10';
+      this.getHours();
+    } else if (this.medidaAtual == "Dias") {
+      this.periodoInput = '10-Jun a 15-Jun';
+      this.getDays();
+    } else if (this.medidaAtual == "Semanas") {
+      this.periodoInput = '8-Jun a 27-Jul';
+      this.getWeeks();
+    } else if (this.medidaAtual == "Meses") {
+      this.periodoInput = 'Jan a Jun';
+      this.getMonths();
+    } else if (this.medidaAtual == "Anos") {
+      this.periodoInput = '2000 a 2005';
+      this.getYears();
+    }
+    this.updateChart();
   }
 
   selectMetodoMedida() {

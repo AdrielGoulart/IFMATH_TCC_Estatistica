@@ -87,12 +87,10 @@
             <!-- Modal content-->
             <div class="modal-content">
               <div class="modal-header justify-content-center">
-                <b>
-                  <h5 class="modal-title">{{title}}</h5>
-                </b>
               </div>
               <div class="modal-body">
                 <table class="table">
+                  <caption class="titleTable"><b>{{title}}</b></caption>
                   <thead class="table-info" style="text-align: center;">
                     <tr>
                       <th scope="col">{{nomeVariavel}}</th>
@@ -101,7 +99,7 @@
                   </thead>
                   <tbody>
                     <tr class="table-light" *ngFor="let element of varQual; let i = index" style="text-align: center;">
-                      <th scope="row">{{element}}</th>
+                      <td>{{element}}</td>
                       <td>{{quantidade[i]}}</td>
                     </tr>
                     <tr class="table-info" style="text-align: center;">

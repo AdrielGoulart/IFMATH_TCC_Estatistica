@@ -17,8 +17,8 @@ export class EstGraficoQuantLinhasComponent implements OnInit {
   public chartOptions: Partial<ApexOptions>;
   public chart: ApexCharts;
 
-  public quantidade: number[] = [12, 7, 4, 1, 7];
-  public quantInput: string = '';
+  public quantidade: number[] = [205, 250, 271, 302, 351, 470, 718, 974];
+  public quantInput: string = '205 - 250 - 271 - 302 - 351 - 470 - 718 - 974';
   public title: string = 'Número de Infectados pelo COVID-19 em Lages';
   public fonteDados: string = 'Secretaria da Saúde - Município de Lages';
   public firstTime: boolean = true;
@@ -32,10 +32,10 @@ export class EstGraficoQuantLinhasComponent implements OnInit {
   public anos: string[] = [];
 
   public medidasVetChart: string[] = ["13 h","14 h","15 h","16 h","17 h"];
-  public medidas: Object[] = [{ nome: "Horas" }, { nome: "Dias" }, { nome: "Semanas" }, { nome: "Meses" }, { nome: "Anos" }]
+  public medidas: Object[] = [{ nome: "Meses" }, { nome: "Dias" }, { nome: "Semanas" }, { nome: "Horas" }, { nome: "Anos" }];
   public medidaAtual: string = 'Horas';
 
-  public periodoInput: string = '';
+  public periodoInput: string = 'Jan a Ago';
 
   constructor() {
   }
@@ -278,7 +278,7 @@ export class EstGraficoQuantLinhasComponent implements OnInit {
   getMonths() {
     //var teste = "Jul a Set";
     ///var meses = teste.split('a');
-    var meses = this.periodoInput.split('a');
+    var meses = this.periodoInput.split(' a');
     var mesInicio = String(meses[0].trim());
     var mesFim = String(meses[1].trim());
     this.createMonthPeriods(mesInicio, mesFim);
@@ -310,7 +310,7 @@ export class EstGraficoQuantLinhasComponent implements OnInit {
 
   extractDaysPeriods() {
     this.datasSemanas = [];
-    var dias = this.periodoInput.split('a');
+    var dias = this.periodoInput.split(' a');
     var dataInicio = dias[0].trim().split('-');
     var dataFim = dias[1].trim().split('-');
 
@@ -360,6 +360,23 @@ export class EstGraficoQuantLinhasComponent implements OnInit {
 
   getMedida(event) {
     this.medidaAtual = event.target.value;
+    if (this.medidaAtual == "Horas") {
+      this.periodoInput = '1 a 7';
+      this.getHours();
+    } else if (this.medidaAtual == "Dias") {
+      this.periodoInput = '10-Jun a 17-Jun';
+      this.getDays();
+    } else if (this.medidaAtual == "Semanas") {
+      this.periodoInput = '8-Jun a 27-Jul';
+      this.getWeeks();
+    } else if (this.medidaAtual == "Meses") {
+      this.periodoInput = 'Jan a Ago';
+      this.getMonths();
+    } else if (this.medidaAtual == "Anos") {
+      this.periodoInput = '2000 a 2007';
+      this.getYears();
+    }
+    this.updateChart();
   }
 
   selectMetodoMedida() {
@@ -377,7 +394,8 @@ export class EstGraficoQuantLinhasComponent implements OnInit {
   }
 
   changePeriodo() {
-
+    this.selectMetodoMedida();
+    this.updateChart();
   }
 
 
