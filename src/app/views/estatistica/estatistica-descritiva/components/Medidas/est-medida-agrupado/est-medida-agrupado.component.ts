@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import pt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { count } from 'rxjs/operator/count';
 
 @Component({
   selector: 'est-medida-agrupado',
@@ -10,14 +11,15 @@ import { registerLocaleData } from '@angular/common';
 export class EstMedidaAgrupadoComponent implements OnInit {
 
   public errorInput: boolean = false;
-  
+  public errorOrdemXi: boolean = false;
+
   public qtdTotalX: number = 0;
   public qtdTotalF: number = 0;
   public media: number = 7.333;
   public mediana: number = 7;
   public amplitude: number = 3;
   public desvio: number = 1.0328;
-  public varianci: number =1.067;
+  public varianci: number = 1.067;
   public coefVariacao: number = 14.084;
   public desvioPop: number = 0.943;
   public varianciaPop: number = 0.889;
@@ -26,12 +28,12 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   public title: string = 'Idade dos estudantes da turma XXy';
   public xi: number[] = [6, 7, 8, 9];
   public xiInput: string = '6 - 7 - 8 - 9';
-  public fi: number[] = [1, 3, 1, 1];
+  public fi: number[] = [1, 3, 1, 1, 1];
   public fiInput: string = '1 - 3 - 1 - 1';
   public fonteDados: string = 'Dados Fictícios';
   public firstTime: boolean = true;
   public repetidas: object = {};
-  public aberto : number[] = [];
+  public aberto: number[] = [];
 
   public numerosRep: Object = null;
   public frequenciaAbsSoma: number = 6;
@@ -40,15 +42,19 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   public formulaModa: string = ' 7 é o número que mais se repete.';
   public resultadoModa: string = '7';
   public tipoModa: string = 'unimodal';
-  public numerosOrdenadosMediana:string = '6 - 7 - 7 - 7 - 8 - 9';
+  public numerosOrdenadosMediana: string = '6 - 7 - 7 - 7 - 8 - 9';
   public limiteSuperior: number = 9;
   public limiteInferior: number = 6;
   public somatorioXi: string = '7² + 8² + 7² + 9² + 7² + 6²';
-  public xiQuadrado:number = 328;
-  public n:number = 6;
+  public xiQuadrado: number = 328;
+  public n: number = 6;
   public isAmostra: boolean = true;
-  public dados:number[] = [];
-  public qtdTotal:number = 44;
+  public dados: number[] = [];
+  public qtdTotal: number = 44;
+
+  public msgErro: string = 'O número de elementos em xi deve ser igual ao número de elementos em fi.';
+
+
 
   //Desvio Padrão
   public somatorioDesvAmos: number = 5.11;
@@ -59,10 +65,10 @@ export class EstMedidaAgrupadoComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(){
+  ngOnInit() {
     registerLocaleData(pt);
   }
-  
+
   // Botoões de navegação
   buttons: Object[] = [
     { title: "Dados Isolados", route: "est_medida_isolado" },
@@ -70,43 +76,49 @@ export class EstMedidaAgrupadoComponent implements OnInit {
     { title: "Dados em Classes", route: "est_medida_classe" }
   ];
 
-  changeDados(){
+  changeDados() {
     this.xi = [];
     this.fi = [];
     let valoresX = this.xiInput.split('-');
-      for (let index = 0; index < valoresX.length; index++) {
-        this.xi[index] = Number(valoresX[index]);
-      }   
+    for (let index = 0; index < valoresX.length; index++) {
+      this.xi[index] = Number(valoresX[index]);
+    }
     console.log('valor xi', this.xi);
 
-      let valoresF = this.fiInput.split('-');
-      for (let index = 0; index < valoresF.length; index++) {
-        this.fi[index] = Number(valoresF[index]);
-      }
+    let valoresF = this.fiInput.split('-');
+    for (let index = 0; index < valoresF.length; index++) {
+      this.fi[index] = Number(valoresF[index]);
+    }
     console.log('valor fi', this.fi);
 
-    if(this.xi.length == this.fi.length){
-      this.errorInput = false;
-      //this.verifyInputs();
-    this.criaVetCompleto();
-    this.somaQuant();
-    this.calculaMedia();
-    this.AgrupaArray();
-    this.calculaModa();
-    this.calculaMediana();
-    this.amplitudeTotal();
-    this.desvioPadrão();
-    this.variancia();
-    this.coeficienteVariacao();
-    
-    //Populacao
-    this.desvioPadrãoPopulacao();
-    this.varianciaPopulacao();
-    this.coeficienteVariacaoPopulacao();
-    }else{
-      this.errorInput = true;
+
+    this.verificaOrdem();
+    if (!this.errorOrdemXi) {
+
+      if (this.xi.length == this.fi.length) {
+        this.errorInput = false;
+        this.msgErro = 'O número de elementos em xi deve ser igual ao número de elementos em fi.';
+        //this.verifyInputs();
+        this.criaVetCompleto();
+        this.somaQuant();
+        this.calculaMedia();
+        this.AgrupaArray();
+        this.calculaModa();
+        this.calculaMediana();
+        this.amplitudeTotal();
+        this.desvioPadrão();
+        this.variancia();
+        this.coeficienteVariacao();
+
+        //Populacao
+        this.desvioPadrãoPopulacao();
+        this.varianciaPopulacao();
+        this.coeficienteVariacaoPopulacao();
+      } else {
+        this.errorInput = true;
+        this.msgErro = 'O número de elementos em xi deve ser igual ao número de elementos em fi.';
+      }
     }
-    
   }
 
   somaQuant() {
@@ -122,8 +134,8 @@ export class EstMedidaAgrupadoComponent implements OnInit {
 
     for (let index = 0; index < this.xi.length; index++) {
       for (let i = 0; i < this.fi[index]; i++) {
-          this.aberto[posicao] = this.xi[index];
-          posicao++;
+        this.aberto[posicao] = this.xi[index];
+        posicao++;
       }
     }
 
@@ -134,25 +146,25 @@ export class EstMedidaAgrupadoComponent implements OnInit {
     this.somaQuant();
     let cima: number = 0;
     let baixo: number = 0;
-    for(let index = 0; index < this.xi.length; index++){
-      cima += this.fi[index]*this.xi[index];
+    for (let index = 0; index < this.xi.length; index++) {
+      cima += this.fi[index] * this.xi[index];
       baixo += this.fi[index];
     }
-    this.media = cima/baixo;
+    this.media = cima / baixo;
     this.valorSomatorioMedia = cima;
     //console.log(this.media);
   }
 
   AgrupaArray() {
     const collettion = this.aberto;
-  
+
 
     let mapper = {}
 
     collettion.forEach(element => {
-      if(mapper[element]) {
-        mapper[element].count = mapper[element].count + 1 
-        return 
+      if (mapper[element]) {
+        mapper[element].count = mapper[element].count + 1
+        return
       }
 
       mapper = {
@@ -166,19 +178,19 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   }
 
   //Isolados/Populaçõa
-  calculaModa(){
+  calculaModa() {
     let isGreater: object = {};
     const repetidasArray = Object.entries(this.repetidas);
 
     repetidasArray.forEach(element => {
       //console.log('element', element[1]);
-      const count = element&&element[1]&&element[1].count?element[1].count:0;
-      const isGreaterCount = isGreater&&isGreater[1]&&isGreater[1].count?isGreater[1].count:0;
+      const count = element && element[1] && element[1].count ? element[1].count : 0;
+      const isGreaterCount = isGreater && isGreater[1] && isGreater[1].count ? isGreater[1].count : 0;
 
       //console.log('count', count);
       //console.log('isGreaterCount', isGreaterCount);
 
-      if(count > isGreaterCount) isGreater=element;
+      if (count > isGreaterCount) isGreater = element;
       //arrumar pra bimodal
       // if(count == isGreaterCount) {
       //   let modaUm = element;
@@ -190,16 +202,16 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   }
 
   //Isolados/Populaçõa
-  calculaMediana(){
-    const dadosLength = this.aberto.length%2;
-    const dadosOrdenados: number[] = this.dados.sort(function(a, b){return a-b});
-    const medianaTemp: number = dadosOrdenados.length/2;   
+  calculaMediana() {
+    const dadosLength = this.aberto.length % 2;
+    const dadosOrdenados: number[] = this.dados.sort(function (a, b) { return a - b });
+    const medianaTemp: number = dadosOrdenados.length / 2;
 
-    if(dadosLength==0){
-      this.mediana = (dadosOrdenados[medianaTemp-1] + dadosOrdenados[medianaTemp])/2;
+    if (dadosLength == 0) {
+      this.mediana = (dadosOrdenados[medianaTemp - 1] + dadosOrdenados[medianaTemp]) / 2;
       //console.log('mediana par', this.mediana);
-    } 
-    else{
+    }
+    else {
       const medianaArrendonda = Math.floor(medianaTemp);
       this.mediana = dadosOrdenados[medianaArrendonda];
       //console.log('mediana impar', this.mediana);
@@ -207,7 +219,7 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   }
 
   //Isolados/População
-  amplitudeTotal(){
+  amplitudeTotal() {
     const dadosOrdenados: number[] = this.xi.sort(function (a, b) { return a - b });
     this.limiteInferior = dadosOrdenados[0];
     this.limiteSuperior = dadosOrdenados[dadosOrdenados.length - 1];
@@ -216,11 +228,11 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   }
 
   //Isolado
-  desvioPadrão(){
+  desvioPadrão() {
     let somatorio: number = 0;
-    let n: number =0;
-    for(let index = 0; index < this.xi.length; index++){
-      somatorio += this.fi[index]*Math.pow(this.xi[index] - this.media, 2);
+    let n: number = 0;
+    for (let index = 0; index < this.xi.length; index++) {
+      somatorio += this.fi[index] * Math.pow(this.xi[index] - this.media, 2);
       //console.log('somatorio', somatorio)
     }
     for (let index = 0; index < this.fi.length; index++) {
@@ -228,7 +240,7 @@ export class EstMedidaAgrupadoComponent implements OnInit {
       //console.log('N no for',n, this.fi[index])    
     }
     //console.log('numero', n);
-    let divisao: number = somatorio/(n-1)
+    let divisao: number = somatorio / (n - 1)
     //console.log('divisao', divisao);
     this.desvio = Math.sqrt(divisao);
     this.somatorioDesvAmos = somatorio;
@@ -236,55 +248,55 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   }
 
   //Isolado
-  variancia(){
+  variancia() {
     this.varianci = Math.pow(this.desvio, 2);
     //console.log('variancia', this.varianci);
   }
-  
+
   //Isolado
-  coeficienteVariacao(){
-    this.coefVariacao = (this.desvio/this.media)*100
+  coeficienteVariacao() {
+    this.coefVariacao = (this.desvio / this.media) * 100
     //console.log(this.coefVariacao);
   }
 
   //População
-  desvioPadrãoPopulacao(){
+  desvioPadrãoPopulacao() {
     let somatorioPop: number = 0;
-    let n: number =0;
+    let n: number = 0;
 
-    for(let index = 0; index < this.xi.length; index++){
-      somatorioPop += this.fi[index]*Math.pow(this.xi[index] - this.media, 2);
+    for (let index = 0; index < this.xi.length; index++) {
+      somatorioPop += this.fi[index] * Math.pow(this.xi[index] - this.media, 2);
       //console.log('somatorioPop', somatorioPop)
     }
     for (let index = 0; index < this.fi.length; index++) {
       n += this.fi[index];
       //console.log('N no for',n, this.fi[index])    
     }
-  
-    let divisao: number = somatorioPop/(n);
+
+    let divisao: number = somatorioPop / (n);
     this.desvioPop = Math.sqrt(divisao);
     this.somatorioDesvPop = somatorioPop;
-  
+
     //console.log('desvioPop', this.desvioPop);
   }
 
   //Populacao
-  varianciaPopulacao(){
+  varianciaPopulacao() {
     this.varianciaPop = Math.pow(this.desvioPop, 2);
     //console.log('varianciaPop', this.varianciaPop);
   }
-  
+
   //Populacao
-  coeficienteVariacaoPopulacao(){
-    this.coefVariacaoPop = (this.desvioPop/this.media)*100
+  coeficienteVariacaoPopulacao() {
+    this.coefVariacaoPop = (this.desvioPop / this.media) * 100
     //console.log('coefPopu', this.coefVariacaoPop);
   }
 
 
   //////////////////////////////////////////////
 
-  criaVetCompleto(){
-    this.dados= [];
+  criaVetCompleto() {
+    this.dados = [];
     var qtdNumero = 0;
     for (let i = 0; i < this.xi.length; i++) {
       qtdNumero = this.fi[i];
@@ -308,7 +320,7 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   /**
      * Percorre o array dados contando os valores repetidos e os eliminando
      */
-   contaNumerosRepetidos() {
+  contaNumerosRepetidos() {
     this.numerosRep = this.dados.reduce(function (object, item) {
       //console.log(object, item);
       if (!object[item]) {
@@ -348,13 +360,13 @@ export class EstMedidaAgrupadoComponent implements OnInit {
     if (this.valorModa.length != 0) {
 
       if (this.valorModa.length == 1) {
-        this.formulaModa += ' e '+ this.valorModa[0] + ' é o número que mais se repete.';
+        this.formulaModa += ' e ' + this.valorModa[0] + ' é o número que mais se repete.';
         this.resultadoModa += this.valorModa[0];
       } else if (this.valorModa.length > 1) {
         this.formulaModa += ' os números ' + this.valorModa[0];
         this.resultadoModa += this.valorModa[0];
         for (let i = 1; i < this.valorModa.length; i++) {
-          this.formulaModa +=  ' e ' +this.valorModa[i];
+          this.formulaModa += ' e ' + this.valorModa[i];
           this.resultadoModa += ' e ' + this.valorModa[i];
         }
         this.formulaModa += ' são os que mais se repetem.';
@@ -365,11 +377,11 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   aplicaNumerosFormulaMedia() {
     //var teste = [7,8,7,9,7,6]
     this.formulaMedia = '';
-    this.formulaMedia += this.dados[0] + '.'+ this.fi[0]+' + ';
-    for (let i = 1; i < this.fi.length-1; i++) {
-      this.formulaMedia += this.xi[i] + '.'+ this.fi[i]+' + ';
+    this.formulaMedia += this.dados[0] + '.' + this.fi[0] + ' + ';
+    for (let i = 1; i < this.fi.length - 1; i++) {
+      this.formulaMedia += this.xi[i] + '.' + this.fi[i] + ' + ';
     }
-    this.formulaMedia += this.xi[this.xi.length - 1]+'.'+this.fi[this.fi.length-1];
+    this.formulaMedia += this.xi[this.xi.length - 1] + '.' + this.fi[this.fi.length - 1];
   }
 
   /**
@@ -387,27 +399,27 @@ export class EstMedidaAgrupadoComponent implements OnInit {
     }, 0);
   }
 
-  ordenaValoresMediana(){
+  ordenaValoresMediana() {
     this.numerosOrdenadosMediana = '';
     this.numerosOrdenadosMediana += this.dados[0];
     for (let i = 1; i < this.dados.length; i++) {
-      this.numerosOrdenadosMediana += ' -' + this.dados[i]; 
+      this.numerosOrdenadosMediana += ' -' + this.dados[i];
     }
   }
 
-  calculaSomatorioXi(){
+  calculaSomatorioXi() {
     this.xiQuadrado = 0;
     for (let i = 0; i < this.dados.length; i++) {
       this.xiQuadrado += (this.dados[i] * this.dados[i]);
     }
   }
 
-  criaValoresSomatorioXi(){
+  criaValoresSomatorioXi() {
     var valores = this.dados;
     this.somatorioXi = '';
     this.somatorioXi += valores[0];
     for (let i = 1; i < valores.length; i++) {
-     this.somatorioXi += '² +'+ valores[i];
+      this.somatorioXi += '² +' + valores[i];
     }
     this.somatorioXi += '²';
   }
@@ -418,8 +430,27 @@ export class EstMedidaAgrupadoComponent implements OnInit {
     }, 0);
   }
 
-  setRadio(isAmostra: boolean){
+  setRadio(isAmostra: boolean) {
     this.isAmostra = isAmostra;
+  }
+
+  verificaOrdem() {
+    var contMaiores = 0;
+    for (let i = 0; i < this.xi.length; i++) {
+
+      for (let j = 0; j < this.xi.length; j++) {
+
+        if ((this.xi[i] > this.xi[j]) && (i < j) && this.xi[j] != null) {
+          contMaiores += 1;
+        }
+      }
+    }
+    if (contMaiores > 0) {
+      this.errorOrdemXi = true;
+      this.msgErro = 'Os dados do campo Xi devem estar em ordem crescente.';
+    } else {
+      this.errorOrdemXi = false;
+    }
   }
 
 }

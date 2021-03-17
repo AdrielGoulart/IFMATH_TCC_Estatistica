@@ -52,8 +52,8 @@
 
       <!-- Entradas -->
       <div class="mt-4">
-        <div [className]="errorInput === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'" role="alert">
-          O número de elementos em xi deve ser igual ao número de elementos em fi.
+        <div [className]="errorInput === true || errorOrdemXi === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'" role="alert">
+          {{msgErro}}
         </div>
       </div>
 
