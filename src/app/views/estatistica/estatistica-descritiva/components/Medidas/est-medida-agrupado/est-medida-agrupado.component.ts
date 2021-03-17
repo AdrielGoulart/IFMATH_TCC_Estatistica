@@ -192,7 +192,7 @@ export class EstMedidaAgrupadoComponent implements OnInit {
   //Isolados/Populaçõa
   calculaMediana(){
     const dadosLength = this.aberto.length%2;
-    const dadosOrdenados: number[] = this.aberto.sort();
+    const dadosOrdenados: number[] = this.dados.sort(function(a, b){return a-b});
     const medianaTemp: number = dadosOrdenados.length/2;   
 
     if(dadosLength==0){
@@ -366,10 +366,10 @@ export class EstMedidaAgrupadoComponent implements OnInit {
     //var teste = [7,8,7,9,7,6]
     this.formulaMedia = '';
     this.formulaMedia += this.dados[0] + '.'+ this.fi[0]+' + ';
-    for (let i = 1; i < this.dados.length - 1; i++) {
-      this.formulaMedia += this.dados[i] + '.'+ this.fi[i]+' + ';
+    for (let i = 1; i < this.fi.length-1; i++) {
+      this.formulaMedia += this.xi[i] + '.'+ this.fi[i]+' + ';
     }
-    this.formulaMedia += this.dados[this.dados.length - 1]+'.'+this.fi[this.fi.length-1];
+    this.formulaMedia += this.xi[this.xi.length - 1]+'.'+this.fi[this.fi.length-1];
   }
 
   /**

@@ -49,11 +49,11 @@ export class EstMedidaClasseComponent implements OnInit {
   public Q3: number = 8.5;
   public P10: number = 6.6;
   public P90: number = 9.4;
-  public pearson1: number = 0;
-  public pearson2: number = 0;
-  public pearson1Pop: number = 0;
-  public pearson2Pop: number = 0;
-  public curtose: number = 0;
+  public pearson1: number = 0.3294;
+  public pearson2: number = 0.4926;
+  public pearson1Pop: number = 0.361;
+  public pearson2Pop: number = 0.542;
+  public curtose: number = 0.2380;
   public moda: number = 7.5;
 
   public repetidas: object = {};

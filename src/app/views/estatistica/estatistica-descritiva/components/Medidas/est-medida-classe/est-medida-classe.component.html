@@ -441,7 +441,7 @@
               </div>
               <div id="collapsePasso3Mediana" class="panel-collapse collapse">
                 <div class="panel-body">
-                  Calculando a divisão, temos a posição da mediana, que corresponde à classe .... da distribuição.
+                  Calculando a divisão, temos a posição da mediana da distribuição.
                 </div>
               </div>
             </div>
@@ -1573,7 +1573,7 @@
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso5Desvio" class="">
                     <p>
                       <ng-katex class="explicacao"
-                        equation="\textcolor{black}{ \sigma = \sqrt{ \dfrac{ {{somatorioDesvAmos.toFixed(3) | number:'':'pt'}} }{ {{qtdTotalfi - 1}} } } }">
+                        equation="\textcolor{black}{ s = \sqrt{ \dfrac{ {{somatorioDesvAmos.toFixed(3) | number:'':'pt'}} }{ {{qtdTotalfi - 1}} } } }">
                       </ng-katex>
                       <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                         data-target="#collapsePasso5Desvio"></i>
@@ -1596,7 +1596,7 @@
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso6Desvio" class="">
                     <p>
                       <ng-katex class="explicacao"
-                        equation="\textcolor{black}{ \sigma = \sqrt{  {{ (somatorioDesvAmos/(qtdTotalfi -1)).toFixed(3) | number:'':'pt'}} } }">
+                        equation="\textcolor{black}{ s = \sqrt{  {{ (somatorioDesvAmos/(qtdTotalfi -1)).toFixed(3) | number:'':'pt'}} } }">
                       </ng-katex>
                       <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                         data-target="#collapsePasso6Desvio"></i>
@@ -2249,7 +2249,7 @@
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Coef1Pearson" class="">
                           <p>
                             <ng-katex class="explicacao"
-                              equation="\color{black}{ e_1 = \dfrac{ {{media.toFixed(3) | number:'':'pt'}} - {{moda.toFixed(3) | number:'':'pt'}} } { {{desvio}} }  }">
+                              equation="\color{black}{ e_1 = \dfrac{ {{media.toFixed(3) | number:'':'pt'}} - {{moda.toFixed(3) | number:'':'pt'}} } { {{desvio | number:'':'pt'}} }  }">
                             </ng-katex>
                             <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                               data-target="#collapsePasso2Coef1Pearson"></i>
@@ -2272,7 +2272,7 @@
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Coef1Pearson" class="">
                           <p>
                             <ng-katex class="explicacao"
-                              equation="\color{black}{ e_1 = \dfrac{ {{(media - moda).toFixed(3) | number:'':'pt'}} } { {{desvio}} }  }">
+                              equation="\color{black}{ e_1 = \dfrac{ {{(media - moda).toFixed(3) | number:'':'pt'}} } { {{desvio | number:'':'pt'}} }  }">
                             </ng-katex>
                             <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                               data-target="#collapsePasso3Coef1Pearson"></i>
@@ -2386,7 +2386,7 @@
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Coef1Pearson" class="">
                           <p>
                             <ng-katex class="explicacao"
-                              equation="\color{black}{ e_1 = \dfrac{ {{media.toFixed(3) | number:'':'pt'}} - {{moda.toFixed(3) | number:'':'pt'}} } { {{desvioPop}} }  }">
+                              equation="\color{black}{ e_1 = \dfrac{ {{media.toFixed(3) | number:'':'pt'}} - {{moda.toFixed(3) | number:'':'pt'}} } { {{desvioPop | number:'':'pt'}} }  }">
                             </ng-katex>
                             <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                               data-target="#collapsePasso2Coef1Pearson"></i>
@@ -2409,7 +2409,7 @@
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Coef1Pearson" class="">
                           <p>
                             <ng-katex class="explicacao"
-                              equation="\color{black}{ e_1 = \dfrac{ {{(media - moda).toFixed(3) | number:'':'pt'}} } { {{desvioPop}} }  }">
+                              equation="\color{black}{ e_1 = \dfrac{ {{(media - moda).toFixed(3) | number:'':'pt'}} } { {{desvioPop | number:'':'pt'}} }  }">
                             </ng-katex>
                             <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                               data-target="#collapsePasso3Coef1Pearson"></i>
@@ -2455,7 +2455,7 @@
           </div>
         </div>
       </div>
-      <!-- end collapse 1 coeficiente de assimetria de pearson Amostra-->
+      <!-- end collapse 1 coeficiente de assimetria de pearson População-->
 
       <!-- 2 coeficiente de assimetria de pearson Amostra-->
       <div *ngIf="isAmostra" class="card">
@@ -2523,7 +2523,7 @@
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Coef2Pearson" class="">
                           <p>
                             <ng-katex class="explicacao"
-                              equation="\color{black}{ e_2 = \dfrac{ 3 \cdot \left( {{media.toFixed(3) | number:'':'pt'}} - {{mediana.toFixed(3) | number:'':'pt'}} \right) } { {{desvio}} }  }">
+                              equation="\color{black}{ e_2 = \dfrac{ 3 \cdot \left( {{media.toFixed(3) | number:'':'pt'}} - {{mediana.toFixed(3) | number:'':'pt'}} \right) } { {{desvio | number:'':'pt'}} }  }">
                             </ng-katex>
                             <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                               data-target="#collapsePasso2Coef2Pearson"></i>
@@ -2546,7 +2546,7 @@
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Coef2Pearson" class="">
                           <p>
                             <ng-katex class="explicacao"
-                              equation="\color{black}{ e_2 = \dfrac{ 3 \cdot {{(media - mediana).toFixed(3) | number:'':'pt'}} } { {{desvio}} }  }">
+                              equation="\color{black}{ e_2 = \dfrac{ 3 \cdot {{(media - mediana).toFixed(3) | number:'':'pt'}} } { {{desvio | number:'':'pt'}} }  }">
                             </ng-katex>
                             <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                               data-target="#collapsePasso3Coef2Pearson"></i>
@@ -2661,7 +2661,7 @@
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso2Coef2Pearson" class="">
                           <p>
                             <ng-katex class="explicacao"
-                              equation="\color{black}{ e_2 = \dfrac{ 3 \cdot \left( {{media.toFixed(3) | number:'':'pt'}} - {{mediana.toFixed(3) | number:'':'pt'}} \right)} { {{desvioPop}} } }">
+                              equation="\color{black}{ e_2 = \dfrac{ 3 \cdot \left( {{media.toFixed(3) | number:'':'pt'}} - {{mediana.toFixed(3) | number:'':'pt'}} \right)} { {{desvioPop | number:'':'pt'}} } }">
                             </ng-katex>
                             <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                               data-target="#collapsePasso2Coef2Pearson"></i>
@@ -2684,7 +2684,7 @@
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasso3Coef2Pearson" class="">
                           <p>
                             <ng-katex class="explicacao"
-                              equation="\color{black}{ e_2 = \dfrac{ 3 \cdot \left( {{(media - mediana).toFixed(3) | number:'':'pt'}} \right)} { {{desvioPop}}  } }">
+                              equation="\color{black}{ e_2 = \dfrac{ 3 \cdot \left( {{(media - mediana).toFixed(3) | number:'':'pt'}} \right)} { {{desvioPop | number:'':'pt'}}  } }">
                             </ng-katex>
                             <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
                               data-target="#collapsePasso3Coef2Pearson"></i>

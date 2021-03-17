@@ -171,7 +171,7 @@ export class EstMedidaIsoladoComponent implements OnInit {
   //Isolados/Populaçõa
   calculaMediana() {
     const dadosLength = this.dados.length % 2;
-    const dadosOrdenados: number[] = this.dados.sort();
+    const dadosOrdenados: number[] = this.dados.sort(function(a, b){return a-b});
     const medianaTemp: number = dadosOrdenados.length / 2;
 
     if (dadosLength == 0) {
