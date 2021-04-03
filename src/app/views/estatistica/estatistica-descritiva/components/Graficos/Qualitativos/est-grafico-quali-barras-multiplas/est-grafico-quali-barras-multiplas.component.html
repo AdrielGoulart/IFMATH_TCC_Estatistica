@@ -123,8 +123,8 @@
                       <tr *ngFor="let variables of classifVarVal1; let ind = index">
                         <td>{{variables}}</td>
                         <td *ngFor="let values of classifVarVal2; let i = index">
-                          {{chartSeries[i].data[ind] | number:'':'pt'}}</td>
-                        <td>{{qtdTotalSeries[ind]}}</td>
+                          {{chartSeries[i].data[ind].toFixed(2) | number:'':'pt'}}</td>
+                        <td>{{qtdTotalSeries[ind].toFixed(2) | number:'':'pt'}}</td>
                       </tr>
                     </tbody>
                     <caption>Fonte: {{fonteDados}}</caption>

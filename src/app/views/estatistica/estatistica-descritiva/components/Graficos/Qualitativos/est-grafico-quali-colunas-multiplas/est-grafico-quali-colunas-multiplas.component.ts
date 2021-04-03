@@ -129,7 +129,7 @@ export class EstGraficoQualiColunasMultiplasComponent implements OnInit {
       });
       this.qtdTotalSeries.push(soma);
     }
-    console.log(this.qtdTotalSeries);
+    //console.log(this.qtdTotalSeries);
   }
 
   updateChart() {
@@ -139,7 +139,7 @@ export class EstGraficoQualiColunasMultiplasComponent implements OnInit {
       series: this.series,
       chart: {
         type: "bar",
-        height: 600,
+        height: 650,
         width: "100%",
       },
       title: {
@@ -149,19 +149,14 @@ export class EstGraficoQualiColunasMultiplasComponent implements OnInit {
       colors: this.chartColors,
       plotOptions: {
         bar: {
-          horizontal: true,
+          horizontal: false,
           dataLabels: {
             position: "top"
           }
         }
       },
       dataLabels: {
-        enabled: true,
-        offsetX: -6,
-        style: {
-          fontSize: "15px",
-          colors: ["#fff"]
-        }
+        enabled: false,
       },
       stroke: {
         show: true,
@@ -194,6 +189,7 @@ export class EstGraficoQualiColunasMultiplasComponent implements OnInit {
   convertToChartSeries() {
     this.series = [];
     var copyOfChartSeries = this.chartSeries;
+    this.inputSeries = "";
     this.chartSeries = [];
     for (let index = 0; index < this.classifVarVal2.length; index++) {
       var seri = new Series();
@@ -212,7 +208,7 @@ export class EstGraficoQualiColunasMultiplasComponent implements OnInit {
           valor += 10;
           seri.data.push(valor);
           this.inputSeries += " - " + valor
-          console.log("Valor:", valor, " i: ", index);
+          //console.log("Valor:", valor, " i: ", index);
         }
         this.series.push(seri);
         this.chartSeries.push(seri);
@@ -224,8 +220,9 @@ export class EstGraficoQualiColunasMultiplasComponent implements OnInit {
 
   updateChartSeries(index: number) {
     this.series[index].data = this.chartDataSeries[index].split('-').map(function (item) {
-      return parseInt(item, 10);
+      return Number(item);
     });
+    this.sumQtdSeries();
     this.updateChart();
   }
 
