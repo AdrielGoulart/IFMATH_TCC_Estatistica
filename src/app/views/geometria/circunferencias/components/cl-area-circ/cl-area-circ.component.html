@@ -1,0 +1,57 @@
+<geo-base-view>
+  <!-- Botão para inserir a medida do ângulo-->
+  <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+    <h3 style="margin-top: 10px;">Área do Círculo</h3>
+    <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+      <div class=" mt-4">
+        <p class="text-center">
+          Entre com a medida do raio(<ng-katex equation="\color{red}{r}"></ng-katex>):
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="radius"
+            oninput="this.value = Math.abs(this.value)" (ngModelChange)="checkInput()" max="10" min="1" />
+        </p>
+        <div [className]="errorInputRadius === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'"
+          role="alert" style="text-align: center;">
+          O raio deve ser um valor inteiro contido entre <b>1</b> e <b>10</b>.
+        </div>
+      </div>
+
+      <geo-scene class="col-12 row px-0 bg-primary img-fluid" [hasOrbitControls]="false" [hasPerspective]="false">
+        <geo-circunferencemesh [radius]="radiusExt" [segmentCount]="92" [color]="'rgb(0,0,0)'"></geo-circunferencemesh>
+        <geo-circunferencemesh [radius]="radiusInt" [segmentCount]="92" [color]="'rgb(0, 149, 255)'">
+        </geo-circunferencemesh>
+      </geo-scene>
+    </div>
+  </div>
+
+  <!-- Propriedades -->
+  <div class="rightbar px-3 vh-100">
+    <h4>Propriedades:</h4>
+    <p>
+      Podemos determinar a medida aproximada da área de um círculo de centro O e raio r por:
+    </p>
+
+    <p class="text-center">
+      <ng-katex equation="A = \pi r^2"></ng-katex>
+    </p>
+
+    <p>
+      Exemplo:
+    </p>
+    <p>
+      <ng-katex equation="A = \pi \cdot {{ radius }}^2 "></ng-katex>
+    </p>
+    <p>
+      <ng-katex equation="A = {{ radius * radius }} \ \pi \ u.a. "></ng-katex>
+    </p>
+    <p>
+      Ou, utilizando a aproximação: <ng-katex equation="\pi = 3,14"></ng-katex>
+    </p>
+    <p>
+      <ng-katex equation="A = {{ radius }}^2 \cdot 3,14 "></ng-katex>
+    </p>
+    <p>
+      <ng-katex equation="A = {{ (radius * radius) * 3.14 | number:'':'pt' }} \ u.a. "></ng-katex>
+    </p>
+
+  </div>
+</geo-base-view>

@@ -1,0 +1,585 @@
+<geo-base-view>
+  <!-- Botões de navegação -->
+  <div class="btn-container mt-2 row">
+    <h5 class="mt-2 col-12 text-center">Escolha abaixo o tipo de quadrilátero</h5>
+    <geo-btn *ngFor="let button of buttons; let i = index" [name]="button.title" [route]="button.route"></geo-btn>
+  </div>
+
+  <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+
+    <!-- Botão para inserir a medida do ângulo-->
+    <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+      <div class=" mt-4">
+        <p class="text-center" style="margin-right: 100px;">
+          Entre com a medida da base (<b><i> b </i></b>):
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="base"
+            oninput="this.value = Math.abs(this.value)" (ngModelChange)="checkInput('base')" max="10" min="1" />
+          da altura (<b><i>h</i></b>):
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="height"
+            oninput="this.value = Math.abs(this.value)" (ngModelChange)="checkInput('height')" max="10" min="1" />
+          <label>e do ângulo (<i><b> α </b></i>):</label>
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="angle"
+            style="position: absolute; margin-left: 5px;" oninput="this.value = Math.round(Math.abs(this.value));"
+            (ngModelChange)="checkInput('angle')" max="180" min="0" />
+          <span style="position: absolute; margin-top: 2.5px; font-size: 20px; pointer-events: none;"
+            id="degree">°</span>
+        </p>
+
+        <div [className]="errorInputBase === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'"
+          role="alert" style="text-align: center;" id="err">
+          As medidas da base e altura devem ser valores entre <b>1</b> e <b>10</b>.
+        </div>
+        <div [className]="errorInputAngle === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'"
+          role="alert" style="text-align: center;">
+          O ângulo <i><b> α </b></i> deve ser um valor contido entre <b>0</b> e <b>180</b>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Cena -->
+    <geo-scene class="col-12 row px-0 bg-primary img-fluid" [hasOrbitControls]="false" [hasPerspective]="false"
+      (mousedown)="mouseDown($event)" (mouseup)="mouseUp($event)" (mousemove)="mouseMove($event)"></geo-scene>
+
+    <button class="btn btn-primary m-1 lock" *ngFor="let button of buttons_lock" (click)="vertexClick(button.value)"
+      [id]="button.id">
+      {{button.title}}
+    </button>
+
+  </div>
+
+  <!-- Propriedades -->
+  <div class="rightbar px-3 vh-100">
+    <h3>Paralelogramo</h3>
+    <h4>Propriedades</h4>
+
+    <p>
+      Um paralelogramo é um quadrilátero cujos lados opostos são paralelos.
+    </p>
+    <div *ngIf="angle90">
+      O paralelogramo cujos ângulos internos medem 90° é um retângulo.
+    </div>
+
+    <!-- Calculos -->
+
+    <!-- Inicio Calculo Area -->
+    <div class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingArea" data-toggle="collapse" data-target="#collapseArea">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseArea"
+              aria-expanded="false" aria-controls="collapseArea">
+              Área: <ng-katex class="explicacao" equation="A = {{base * height | number:'':'pt'}} \ u.a.">
+              </ng-katex>
+            </button>
+
+            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse" data-target="#collapseArea"></i>
+          </h2>
+        </div>
+        <div id="collapseArea" class="collapse" aria-labelledby="headingArea" data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="panel-group" id="accordion">
+              <!--Area - Passo 1-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{A = {{base}} \cdot {{height | number:'':'pt'}} } ">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Substituímos a medida da base <ng-katex equation="b = {{base}} "></ng-katex> e da altura <ng-katex
+                      equation="h = {{height | number:'':'pt'}} "></ng-katex> na fórmula:
+                    <ng-katex equation="A = b \cdot h "></ng-katex>
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <!--Area - Passo 2-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{A = {{base * height | number:'':'pt'}} \ u.a.}">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Resultado final.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fim Calculo Area -->
+
+      <!-- Inicio Calculo Lado -->
+      <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingLado" data-toggle="collapse" data-target="#collapseLado">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseLado"
+                aria-expanded="false" aria-controls="collapseLado">
+                Lado: <ng-katex class="explicacao" equation="a = {{ height / sinAngle | number:'':'pt' }} \ u.m. ">
+                </ng-katex>
+              </button>
+
+              <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                data-target="#collapseLado"></i>
+            </h2>
+          </div>
+          <div id="collapseLado" class="collapse" aria-labelledby="headingLado" data-parent="#accordionExample">
+            <div class="card-body">
+              <div class="panel-group" id="accordion">
+                <!--Lado - Passo 1-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                        <p>
+                          <ng-katex class="explicacao"
+                            equation="\textcolor{black}{sen \ {{angle}} \degree = \frac{ {{height | number:'':'pt' }} }{a} }">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Como obtemos um triângulo retângulo e temos a medida do ângulo <ng-katex
+                        equation="\alpha =  {{angle | number:'':'pt'}} \degree"></ng-katex>, podemos usar a relação
+                      <ng-katex equation="sen \ \alpha = \frac{CO}{Hip}"></ng-katex>
+                      ou <ng-katex equation="sen \ \alpha = \frac{b}{a}"></ng-katex>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <!--Lado - Passo 2-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
+                        <p>
+                          <ng-katex class="explicacao"
+                            equation="\textcolor{black}{ {{sinAngle | number:'':'pt'}} \approx \frac{ {{height | number:'':'pt' }} }{a} }">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Escrevemos o valor do seno do ângulo <ng-katex equation="\alpha = {{angle}} "></ng-katex>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <!--Lado - Passo 3-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="">
+                        <p>
+                          <ng-katex class="explicacao"
+                            equation="\textcolor{black}{a \approx \frac{3}{ {{sinAngle | number:'':'pt'}} } }">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Passamos o <b>a</b> para o lado esquerdo da igualdade multiplicando, e o <ng-katex
+                        equation="{{sinAngle | number:'':'pt'}}"></ng-katex> para o lado direito dividindo.
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <!--Lado - Passo 4-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="">
+                        <p>
+                          <ng-katex class="explicacao"
+                            equation="\textcolor{black}{a \approx {{ height / sinAngle | number:'':'pt' }} \ u.m. }">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseFour" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Resultado final.
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fim Calculo Lado -->
+
+      <!-- Inicio Calculo NrDiagonais -->
+      <div class="card">
+        <div class="card-header" id="headingNrDiagonais" data-toggle="collapse" data-target="#collapseNrDiagonais">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+              data-target="#collapseNrDiagonais" aria-expanded="false" aria-controls="collapseNrDiagonais">
+              Número de Diagonais: <ng-katex class="explicacao" equation="n = {{ (4 * (4-3)) / 2 }}">
+              </ng-katex>
+            </button>
+
+            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+              data-target="#collapseNrDiagonais"></i>
+          </h2>
+        </div>
+        <div id="collapseNrDiagonais" class="collapse" aria-labelledby="headingPrincipal"
+          data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="panel-group" id="accordion">
+              <!--NrDiagonais - Passo 1-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                      <p>
+                        <ng-katex class="explicacao" equation="\textcolor{black}{n = \frac{4 \cdot (4 - 3)}{2} } ">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Substituímos número de lados <ng-katex equation="N = 4"></ng-katex> do polígono na fórmula
+                    <ng-katex equation="n = \frac{N \cdot (N - 3)}{2} "></ng-katex>.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <!--NrDiagonais - Passo 2-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
+                      <p>
+                        <ng-katex class="explicacao" equation="\textcolor{black}{n = \frac{4 \cdot 1}{2} }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Resolvemos as operações entre parênteses.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <!--NrDiagonais - Passo 3-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="">
+                      <p>
+                        <ng-katex class="explicacao" equation="\textcolor{black}{n = {{ (4 * (4-3)) / 2 }} }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Resultado final, após resolvermos a multipliação e divisão.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fim Calculo NrDiagonais -->
+
+      <!-- Inicio Calculo SomaAngulosInt -->
+      <div class="card">
+        <div class="card-header" id="headingSomaAngulosInt" data-toggle="collapse"
+          data-target="#collapseSomaAngulosInt">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+              data-target="#collapseSomaAngulosInt" aria-expanded="false" aria-controls="collapseSomaAngulosInt">
+              Soma dos Ângulos Internos: <ng-katex class="explicacao" equation="S = 360\degree">
+              </ng-katex>
+            </button>
+
+            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+              data-target="#collapseSomaAngulosInt"></i>
+          </h2>
+        </div>
+        <div id="collapseSomaAngulosInt" class="collapse" aria-labelledby="headingPrincipal"
+          data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="panel-group" id="accordion">
+              <!--SomaAngulosInt - Passo 1-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                      <p>
+                        <ng-katex class="explicacao" equation="\textcolor{black}{S = 4 \cdot 90\degree } ">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    O quadrado possui quatro ângulos internos retos (90°). Logo, a soma dos ângulos internos é dada por
+                    <ng-katex equation="S = 4 \cdot 90\degree"></ng-katex>.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <!--SomaAngulosInt - Passo 2-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
+                      <p>
+                        <ng-katex class="explicacao" equation="\textcolor{black}{S = 360\degree}">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Resultado final.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fim Calculo SomaAngulosInt -->
+
+      <!-- Inicio Calculo AnguloB -->
+      <div class="card">
+        <div class="card-header" id="headingAnguloB" data-toggle="collapse" data-target="#collapseAnguloB">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseAnguloB"
+              aria-expanded="false" aria-controls="collapseAnguloB">
+              Ângulo β: <ng-katex class="explicacao" equation="\beta = {{ (360 - (2 * angle)) / 2}} \degree ">
+              </ng-katex>
+            </button>
+
+            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+              data-target="#collapseAnguloB"></i>
+          </h2>
+        </div>
+        <div id="collapseAnguloB" class="collapse" aria-labelledby="headingPrincipal" data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="panel-group" id="accordion">
+              <!--AnguloB - Passo 1-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{2 * {{angle}} \degree + 2\beta = 360\degree} ">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Como a Soma dos Ângulos Internos é igual a 360°, e temos
+                    <ng-katex equation="2 \alpha \ e \ 2 \beta">
+                    </ng-katex> como ângulos; temos que:
+                    <ng-katex equation="2 \alpha + 2 \beta = 360\degree"></ng-katex>.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <!--AnguloB - Passo 2-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{ {{2 * angle}} \degree + 2\beta = 360\degree }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Realizamos a multiplicação.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <!--AnguloB - Passo 3-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{2\beta = 360\degree - {{2 * angle}} \degree }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Passamos o <ng-katex equation="{{2 * angle}}"></ng-katex> para a direita subtraindo.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <!--AnguloB - Passo 4-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{2\beta = {{360 - (2 * angle)}}\degree }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Realizamos a subtração.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <!--AnguloB - Passo 5-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{\beta = \frac{ {{360 - (2 * angle)}}\degree }{2} }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Passamos o 2 dividindo.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <!--AnguloB - Passo 6-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{\beta = {{ (360 - (2 * angle)) / 2}} \degree }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseSix" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Resultado final.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fim Calculo AnguloB -->
+
+    </div>
+
+  </div>
+
+</geo-base-view>

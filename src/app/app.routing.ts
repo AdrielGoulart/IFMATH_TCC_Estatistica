@@ -6,7 +6,7 @@ import { SobreComponent } from './views/pagina-inicial/sobre/sobre.component';
 import { AlgebraFuncoesComponent } from './views/pagina-inicial/algebra-funcoes/algebra-funcoes.component';
 import { GeometriaComponent } from './views/pagina-inicial/geometria/geometria.component';
 import { NumerosOperacoesComponent } from './views/pagina-inicial/numeros-operacoes/numeros-operacoes.component';
-import { EstatisticaComponent } from './views/pagina-inicial/estatistica/estatistica.component'
+import { EstatisticaProbabilidadeComponent } from "./views/pagina-inicial/estatistica-probabilidade/estatistica-probabilidade.component";
 import { ErrorPagesComponent } from './views/pagina-inicial/error-pages/error-pages.component';
 
 const defaultColor = '#359d6e';
@@ -96,6 +96,16 @@ const routes: Routes = [
     },
   },
   {
+    path: 'algebra_e_funcoes/polinomios',
+    loadChildren: './views/algebra-funcoes/polinomios/polinomios.module#PolinomiosModule',
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: 'Polinômios',
+        params: { color: algebra },
+      },
+    },
+  },
+  {
     path: 'algebra_e_funcoes/analise_combinatoria',
     loadChildren: './views/algebra-funcoes/analise-combinatoria/analise-combinatoria.module#AnaliseCombinatoriaModule',
     data: {
@@ -155,7 +165,16 @@ const routes: Routes = [
       },
     },
   },
-
+  {
+    path: 'algebra_e_funcoes/produtos_notaveis_fatoracao',
+    loadChildren: './views/algebra-funcoes/produtos-notaveis-fatoracao/produtos-notaveis-fatoracao.module#ProdutosNotaveisFatoracaoModule',
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: 'Produtos Notáveis e Fatoração',
+        params: { color: algebra },
+      },
+    },
+  },
   //#endregion Algebra e Funções
 
   //#region Geometria
@@ -187,6 +206,28 @@ const routes: Routes = [
     data: {
       breadcrumbOptions: {
         breadcrumbLabel: 'Triangulo',
+        params: { color: geometria },
+      },
+    },
+  },
+
+  {
+    path: 'geometria/circunferencias',
+    loadChildren: './views/geometria/circunferencias/circunferencias.module#CircunferenciasModule',
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: 'Circunferência e Círculo',
+        params: { color: geometria },
+      },
+    },
+  },
+
+  {
+    path: 'geometria/poligonos',
+    loadChildren: './views/geometria/poligonos/poligonos.module#PoligonosModule',
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: 'Polígonos',
         params: { color: geometria },
       },
     },
@@ -236,31 +277,175 @@ const routes: Routes = [
         params: { color: numeros },
       },
     },
+  },{
+    path: 'numeros_operacoes/numeros_naturais',
+    loadChildren: './views/numeros-operacoes/numeros-naturais/numeros-naturais.module#NumerosNaturaisModule',
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: 'Números Naturais',
+        params: { color: numeros },
+      },
+    },
+  },
+  {
+    path: 'numeros_operacoes/multiplos_divisores',
+    loadChildren: './views/numeros-operacoes/multiplos-divisores/multiplos-divisores.module#MultiplosDivisoresModule',
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: 'Múltiplos e Divisores',
+        params: { color: numeros },
+      },
+    },
+  },
+  {
+    path: 'numeros_operacoes/sistemas_numeracao',
+    loadChildren: './views/numeros-operacoes/sistemas-numeracao/sistemas-numeracao.module#SistemasNumeracaoModule',
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: 'Sistemas de Numeração',
+        params: { color: numeros },
+      },
+    },
+  },
+  {
+    path: 'numeros_operacoes/fracoes',
+    loadChildren: './views/numeros-operacoes/fracoes/fracoes.module#FracoesModule',
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: 'Frações',
+        params: { color: numeros },
+      },
+    },
+  },
+  {
+    path: 'numeros_operacoes/numeros_decimais',
+    loadChildren: './views/numeros-operacoes/numeros-decimais/numeros-decimais.module#NumerosDecimaisModule',
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: 'Números Decimais',
+        params: { color: numeros },
+      },
+    },
+  },
+  {
+    path: 'numeros_operacoes/numeros_racionais',
+    loadChildren: './views/numeros-operacoes/numeros-racionais/numeros-racionais.module#NumerosRacionaisModule',
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: 'Números Racionais',
+        params: { color: numeros },
+      },
+    },
+  },
+  {
+    path: 'numeros_operacoes/numeros_reais',
+    loadChildren: './views/numeros-operacoes/numeros-reais/numeros-reais.module#NumerosReaisModule',
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: 'Números Reais',
+        params: { color: numeros },
+      },
+    },
+  },
+  {
+    path: 'numeros_operacoes/numeros_inteiros',
+    loadChildren: './views/numeros-operacoes/numeros-inteiros/numeros-inteiros.module#NumerosInteirosModule',
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: 'Números Inteiros',
+        params: { color: numeros },
+      },
+    },
   },
   //#endregion Numero e Operações
 
   //#region Estatística
   {
-    path: 'estatistica',
-    component: EstatisticaComponent,
+    path: "estatistica_probabilidade",
+    component: EstatisticaProbabilidadeComponent,
     data: {
       breadcrumbOptions: {
         params: { color: estatistica },
       },
     },
   },
-
   {
-    path: 'estatistica/estatistica_descritiva',
-    loadChildren: './views/estatistica/estatistica-descritiva/estatistica-descritiva.module#EstatisticaDescritivaModule',
+    path: "estatistica_probabilidade/estatistica_descritiva",
+    loadChildren:
+      "./views/estatistica-probabilidade/estatistica-descritiva/estatistica-descritiva.module#EstatisticaDescritivaModule",
     data: {
       breadcrumbOptions: {
-        breadcrumbLabel: 'Estatística Descritiva',
+        breadcrumbLabel: "Estatistica Descritiva",
         params: { color: estatistica },
       },
     },
   },
-
+  {
+    path: "estatistica_probabilidade/probabilidade",
+    loadChildren:
+      "./views/estatistica-probabilidade/probabilidade/probabilidade.module#ProbabilidadeModule",
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: "Probabilidade",
+        params: { color: estatistica },
+      },
+    },
+  },
+  {
+    path: "estatistica_probabilidade/distribuicao_probabilidade_discreta",
+    loadChildren:
+      "./views/estatistica-probabilidade/dist-prob-discreta/dist-prob-discreta.module#DistribuicaoProbabilidadeDiscretaModule",
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: "Distribuições de Probabilidades Discretas",
+        params: { color: estatistica },
+      },
+    },
+  },
+  {
+    path: "estatistica_probabilidade/distribuicao_probabilidade_continua",
+    loadChildren:
+      "./views/estatistica-probabilidade/dist-prob-continua/dist-prob-continua.module#DistribuicaoProbabilidadeContinuaModule",
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: "Distribuições de Probabilidades Contínuas",
+        params: { color: estatistica },
+      },
+    },
+  },
+  {
+    path: "estatistica_probabilidade/intervalo_confianca",
+    loadChildren:
+      "./views/estatistica-probabilidade/intervalo-confianca/intervalo-confianca.module#IntervaloConfiancaModule",
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: "Intervalo de Confiança",
+        params: { color: estatistica },
+      },
+    },
+  },
+  {
+    path: "estatistica_probabilidade/teste_hipotese",
+    loadChildren:
+      "./views/estatistica-probabilidade/teste-hipotese/teste-hipotese.module#TesteHipoteseModule",
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: "Teste de Hípotese",
+        params: { color: estatistica },
+      },
+    },
+  },
+  {
+    path: "estatistica_probabilidade/correlacao_regressao",
+    loadChildren:
+      "./views/estatistica-probabilidade/correlacao-regressao/correlacao-regressao.module#CorrelacaoRegressaoModule",
+    data: {
+      breadcrumbOptions: {
+        breadcrumbLabel: "Correlação e Regressão",
+        params: { color: estatistica },
+      },
+    },
+  },
   //#endregion Estatística
 ];
 

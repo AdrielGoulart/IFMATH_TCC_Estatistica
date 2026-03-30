@@ -1,0 +1,16 @@
+@import "../../shared/style/cf-conteudo.scss";
+@import "../../shared/style/cf-rightbar.scss";
+
+.centerMenu {
+    text-align: center;
+    margin-top: 10rem;
+    margin-left: 17.5rem;
+}
+
+.rowMod {
+    display: -webkit-box;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}

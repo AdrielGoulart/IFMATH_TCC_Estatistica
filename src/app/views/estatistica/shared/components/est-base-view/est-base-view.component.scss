@@ -1,0 +1,10 @@
+$height: 100%;
+$weight: 100%;
+$white_color: #f5f5f5;
+
+.ifmath-view {
+  height: $height;
+  width: $weight;
+  padding: 10px;
+  background-color: $white_color;
+}

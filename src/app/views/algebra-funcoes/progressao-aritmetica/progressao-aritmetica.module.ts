@@ -19,6 +19,8 @@ import { PaVerificarElementoComponent } from './components/pa-verificar-elemento
 import { PaCriarSequenciaComponent } from './components/pa-criar-sequencia/pa-criar-sequencia.component';
 import { PaFormulaComponent } from './components/pa-formula/pa-formula.component';
 import { PaRazao2TermosComponent } from './components/pa-razao-2termos/pa-razao-2termos.component';
+import { PaCuriosidadesComponent } from './components/pa-curiosidades/pa-curiosidades.component';
+import { PaPropriedadesComponent } from './components/pa-propriedades/pa-propriedades.component';
 
 
 @NgModule({
@@ -35,6 +37,8 @@ import { PaRazao2TermosComponent } from './components/pa-razao-2termos/pa-razao-
     declarations: [
       PaSidebarComponent,
       PaViewComponent,
+      PaPropriedadesComponent,
+      PaCuriosidadesComponent,
       PaTermogeralComponent,
       PaDefinicaoComponent,
       PaPrimeiroElementoComponent,

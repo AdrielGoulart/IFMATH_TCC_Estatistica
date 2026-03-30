@@ -1,0 +1,71 @@
+<!-- region formulario -->
+<section class="ifmath-form__contener__body">
+    <!-- Form -->
+    <form (ngSubmit)="onSubmit()" [formGroup]="form" #demoForm="ngForm">
+        <div class="row ifmath-conteudo__titulo">
+            <span class="ifmath-conteudo__txt-titulo"><br>
+                <h3>Encontra o MDC de dois números por decomposição:</h3>
+            </span>
+        </div>
+        <div class="row">
+
+            <div class="col-sm-12 col-md-8">
+                <!-- Fields -->
+                <div class="col-md-12 input-group">
+                    Digite os números para ser feita a decomposição e encontrar o máximo divisor comum:
+                </div>
+                <div class="col-md-12 input-group">
+                    <span class="input-group-addon input-group-addon--blackgrey" id="sizing-addon2">a</span>
+                    <input type="text" name="a" formControlName="a" class="form-control"
+                        aria-describedby="sizing-addon2">
+                </div>
+                <div>
+                    <span class="ifmath-form__label ifmath-form__label--error"
+                        *ngIf="form.get('a').hasError('required') && form.get('a').touched">Campo
+                        invalido!</span>
+                </div>
+                <br>
+                <div class="col-md-12 input-group">
+                    <span class="input-group-addon input-group-addon--blackgrey" id="sizing-addon2">b</span>
+                    <input type="text" name="b" formControlName="b" class="form-control"
+                        aria-describedby="sizing-addon2">
+                </div>
+                <div>
+                    <span class="ifmath-form__label ifmath-form__label--error"
+                        *ngIf="form.get('b').hasError('required') && form.get('b').touched">Campo
+                        invalido!</span>
+                </div>
+                <br>
+                
+                <div class="col-md-12 input-group">
+                    <span class="input-group-addon input-group-addon--blackgrey" id="sizing-addon2">c</span>
+                    <input type="text" name="c" formControlName="c" class="form-control"
+                        aria-describedby="sizing-addon2">
+                </div>
+                <div>
+                    <span class="ifmath-form__label ifmath-form__label--error"
+                        *ngIf="form.get('c').hasError('required') && form.get('c').touched">Campo
+                        invalido!</span>
+                </div>
+                <br>
+
+                <!-- buttons -->
+                <div class="col-sm-12 col-md-12 ifmath-form__button__group">
+                    <button type="submit" class="btn btn-success btn-success--blackgrey btn-success--semMargin"
+                        [disabled]='form.invalid' value="Calcular">Calcular</button>
+                    <button type="reset" class="btn btn-success btn-success--blackgrey btn-success--semMargin"
+                        value="Limpar">Limpar</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <!-- endregion -->
+    <div class="row">
+        <!-- region Resultados -->
+        <div class="col-sm-12 col-md-12">
+            <ifmath-ng-results [loading]="loading" [resultados]="resultados"></ifmath-ng-results>
+        </div>
+        <!-- endregion -->
+    </div>
+</section>

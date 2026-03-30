@@ -1,0 +1,158 @@
+<geo-base-view>
+  <!-- Botão para inserir a medida do ângulo-->
+  <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+    <h3 style="margin-top: 10px;">Área de uma coroa circular</h3>
+    <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+      <div class=" mt-4">
+        <p class="text-center">
+          Entre com a medida do raio maior (<ng-katex equation="\color{blue}{R}"></ng-katex>):
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="radius"
+            oninput="this.value = Math.abs(this.value)" (ngModelChange)="checkInput('max')" max="10" min="2" />
+        </p>
+        <p class="text-center">
+          Entre com a medida do raio menor (<ng-katex equation="\color{red}{r}"></ng-katex>):
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="radiusMn"
+            oninput="this.value = Math.abs(this.value)" (ngModelChange)="checkInput('min')" max="9" min="1" />
+        </p>
+        <div [className]="errorInputRadius === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'"
+          role="alert" style="text-align: center;">
+          Os raios devem ser valores inteiros diferentes, contidos entre <b>1</b> e <b>10</b>.
+        </div>
+      </div>
+
+      <geo-scene class="col-12 row px-0 bg-primary img-fluid" [hasOrbitControls]="false" [hasPerspective]="false">
+        <geo-circunferencemesh [radius]="radiusExt" [segmentCount]="92" [color]="'rgb(0,0,0)'"></geo-circunferencemesh>
+        <geo-circunferencemesh [radius]="radiusInt" [segmentCount]="92" [color]="'rgb(0, 149, 255)'">
+        </geo-circunferencemesh>
+      </geo-scene>
+    </div>
+  </div>
+      
+  <!-- Propriedades -->
+  <div class="rightbar px-3 vh-100">
+    <h4>Propriedades:</h4>
+
+    <p style="text-align: justify;">
+      Chamamos de coroa circular a região compreendida entre duas circunferências concêntricas (que possuam o mesmo
+      centro O), que estão em um mesmo plano e com raios de medidas diferentes.
+      A área da coroa circular (A) é dada pela diferença entre a área do círculo de raio maior (<ng-katex
+        equation="A_R"></ng-katex>) e a área do círculo
+      de raio menor (<ng-katex equation="A_r"></ng-katex>).
+      Assim, a área de uma coroa circular é dada por:
+    </p>
+    <p class="text-center">
+      <ng-katex equation="A = A_R - A_r"></ng-katex>
+    </p>
+    <p>
+      ou ainda:
+    </p>
+    <p class="text-center">
+      <ng-katex equation="A = \pi R^2 - \pi r^2"></ng-katex>
+    </p>
+
+    <!-- Calculos -->
+    <div class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingPrincipal" data-toggle="collapse" data-target="#collapsePrincipal">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsePrincipal"
+              aria-expanded="false" aria-controls="collapsePrincipal">
+              Cálculo: <ng-katex class="explicacao"
+                equation="A = {{ (radius * radius) - (radiusMn * radiusMn) }} \ \pi \ u.a. ">
+              </ng-katex>
+            </button>
+
+            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+              data-target="#collapsePrincipal"></i>
+          </h2>
+        </div>
+        <div id="collapsePrincipal" class="collapse" aria-labelledby="headingPrincipal" data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="panel-group" id="accordion">
+              <!--Passo 1-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{A = \pi \cdot {{radius}}^2 - \pi \cdot {{radiusMn}}^2 } ">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Substituindo os dados na fórmula.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <!--Passo 2-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{A = \pi \cdot {{radius * radius}} - \pi \cdot {{radiusMn * radiusMn}} }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Resolvendo a potências.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <!--Passo 3-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{A = {{ (radius * radius) - (radiusMn * radiusMn) }} \ \pi \ u.a. }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Resultado final.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      Ou, utilizando a aproximação: <ng-katex equation="\pi = 3,14"></ng-katex>
+    </p>
+    <p>
+      <ng-katex equation="A = {{ (radius * radius) - (radiusMn * radiusMn) }} \cdot 3,14"></ng-katex>
+    </p>
+    <p>
+      <ng-katex equation="A = {{ ( (radius * radius) - (radiusMn * radiusMn) ) * 3.14 | number:'':'pt' }} \ u.a."></ng-katex>
+    </p>
+
+  </div>
+</geo-base-view>

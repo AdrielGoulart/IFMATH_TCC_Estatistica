@@ -1,0 +1,404 @@
+<section class="ifmath-description">
+
+  <h3>Polinômio</h3>
+  <p class="ifmath-description__text ifmath-description__text--justify">
+    É uma expressão algébrica inteira em que <strong>há apenas multiplicação entre números e letras.</strong>
+    Essas letras devem ser expressas na forma de potência com expoentes naturais (0,1,2,3,...).
+    <br>
+    As operações envolvendo polinômios podem ser divididas em: Valor Numérico, Adição e Subtração e Multiplicação.
+  </p>
+
+  <h4>Valor Numérico</h4>
+  <p class="ifmath-description__text ifmath-description__text--justify">
+    Diz respeito ao valor obtido quando analisamos uma função polinomial (ou polinômio), com um determinado
+    valor para a variável x (ou qualquer outra variável presente no polinômio).
+  </p>
+
+  <h5>Como resolver um Valor Numérico?</h5>
+  <p class="ifmath-description__text ifmath-description__text--justify">
+    O propósito de se calcular o valor numérico de um polinômio é definir um valor para cada uma das incógnitas do polinômio,
+    e realizar os devidos cálculos afim de se obter um valor final para a expressão.
+  </p>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1:</h5>
+      <h6>
+      Sendo: <br>
+      Polinomio = 2x^2 + 5x − 2 <br>
+      x = 2 <br>
+      </h6>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationOne,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationOne = !isVisibleEquationOne">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationOne" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationOne,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Substituímos as variáveis pelo seu valor numérico respectivo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationOne,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> Realizamos a potência dos termos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 3:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationOne,3)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Realizamos a multiplicação dos termos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 4:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationOne,4)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Por fim, realizamos a soma e a subtração dos termos restantes.
+              </p>
+            </div>
+          </div>
+
+          <h5>Gráfico</h5>
+          <div class="row">
+            <div class="col-sm-12">
+              <img class="mx-auto d-block" src="assets/images/examples/pln_numeric_value.png"><br />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <br>
+
+  <h4>Adição e Subtração</h4>
+  <p class="ifmath-description__text ifmath-description__text--justify">
+    Para efetuarmos a adição (e subtração) de polinômios devemos agrupar termos semelhantes. Um termo é considerado semelhante a outro, 
+    quando possuem a mesma parte literal.
+  </p>
+
+  <h5>Como resolver uma Adição ou Subtração?</h5>
+  <p class="ifmath-description__text ifmath-description__text--justify">
+    O propósito de se calcular a adição ou subtração entre dois polinômios é a de agrupar o máximo de elementos possíveis que sejam semelhantes,
+    a fim de obter uma nova expressão como resultado final.
+  </p>
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1 (Adição):</h5>
+      <h6>
+      Sendo: <br>
+      Polinomio A = 3x^2 - 2x <br>
+      Operação = + (Adição) <br>
+      Polinomio B = 9 + 4x^2 + 4x <br>
+      </h6>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationTwo,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationTwo = !isVisibleEquationTwo">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationTwo" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationTwo,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Equação Inicial.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationTwo,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> Removendo os parênteses dos polinômios.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 3:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationTwo,3)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Ordenando os termos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 4:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationTwo,4)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Soma dos termos semelhantes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 2 (Subtração):</h5>
+      <h6>
+      Sendo: <br>
+      Polinomio A = 6y^5 - 5y + 4 <br>
+      Operação = - (Subtração) <br>
+      Polinomio B = 2y^5 - 8y + 4 <br>
+      </h6>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationThree,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationThree = !isVisibleEquationThree">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationThree" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationThree,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Equação Inicial.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationThree,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Aplicando a regra de troca de sinais em operações prioritárias, em duplas negações ou em somas de números negativos. 
+                E, removendo os parênteses dos polinômios.
+
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 3:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationThree,3)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Ordenando os termos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 4:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationThree,4)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Soma dos termos semelhantes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <br>
+
+  <h4>Multiplicação</h4>
+  <p class="ifmath-description__text ifmath-description__text--justify">
+    Para realizarmos essa operação, multiplicamos coeficiente com coeficiente e parte literal com parte literal de cada monômio, considerando sempre
+    a <b>regra de sinais*</b>.
+    Para isso, utilizamos a <b>propriedade distributiva**</b>, e caso haja termos semelhantes (com mesma parte literal) devemos reduzi-los.
+  </p>
+
+  <b>*Regra de sinais:</b> Se os dois números multiplicados possuírem o mesmo sinal, o resultado será positivo. E se os dois números possuírem sinais diferentes,
+  o resultado será negativo.<br>
+  <b>**Propriedade distributiva:</b> Essa propriedade indica que dois ou mais termos presentes numa expressão de soma ou subtração multiplicada por
+  outra, é igual à soma ou à diferença da multiplicação de cada um dos termos da adição ou da subtração pelo número. Ou ainda, pode ser
+  definida pela expressão algébrica: <b>a x (b + c) = a x b + a x c </b> ou <b>a x (b - c) = a x b - a x c </b>
+
+  <br><br>
+
+  <h5>Como resolver uma Multiplicação?</h5>
+  <p class="ifmath-description__text ifmath-description__text--justify">
+    O propósito de se calcular a multiplicação, é a de agrupar os elementos, sejam eles semelhantes ou não,
+    a fim de se obter uma nova expressão como resultado final.
+  </p>
+
+<!--Multiplica-se os coeficientes, considerando a regra dos sinais, e para as variáveis, somam-se os expoentes pela propriedade das potências.
+-->
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1 :</h5>
+      <h6>
+      Sendo: <br>
+      Polinomio A = x^2 - 25 <br>
+      Polinomio B = 3 - x <br>
+      </h6>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationFour,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationFour = !isVisibleEquationFour">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationFour" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationFour,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Equação Inicial.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationFour,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                 Aplicando a propriedade distributiva, onde cada elemento do primeiro termo é multiplicado por cada um dos elementos do segundo termo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 3:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationFour,3)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Multiplica-se os coeficientes, considerando a regra dos sinais, e para as variáveis, 
+                somam-se os expoentes pela propriedade das potências.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 4:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationFour,4)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Ordenando os termos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+</section>

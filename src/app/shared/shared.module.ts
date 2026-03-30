@@ -18,6 +18,7 @@ import {
 } from '@angular/material';
 
 import { ListaResultadoComponent } from './components/results/results.component';
+import { ListaResultadoComponentHtml } from './components/results-html/resultshtml.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { BaseViewComponent } from './components/base-view/base-view.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -56,6 +57,7 @@ import { MathPlotComponent } from './components/math-plot/math-plot.component';
     MatExpansionModule,
     MatSidenavModule,
     ListaResultadoComponent,
+    ListaResultadoComponentHtml,
     // SelecioneUmConteudoComponent,
     LoadingSpinnerComponent,
     ReactiveFormsModule,
@@ -68,6 +70,7 @@ import { MathPlotComponent } from './components/math-plot/math-plot.component';
 
   declarations: [
     ListaResultadoComponent,
+    ListaResultadoComponentHtml,
     LoadingSpinnerComponent,
     BaseViewComponent,
     ModalErrorComponent,

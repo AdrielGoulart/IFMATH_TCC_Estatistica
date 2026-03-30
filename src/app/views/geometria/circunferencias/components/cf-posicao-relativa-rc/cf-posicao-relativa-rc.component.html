@@ -1,0 +1,103 @@
+<geo-base-view>
+
+    <!-- Botões de navegação -->
+    <div class="btn-container mt-2 row">
+      <h5 class="mt-2 col-12 text-center">Escolha abaixo a posição de uma geometria em relação a uma circunferência</h5>
+      <geo-btn *ngFor="let button of buttons; let i = index" [name]="button.title" [route]="button.route"></geo-btn>
+    </div>
+
+    <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+      <!-- Cena -->
+      <geo-scene class="col-12 row px-0 bg-primary img-fluid" [hasOrbitControls]="false" [hasPerspective]="false" [pointsLimit]="10" [pointToDelete]="9" [hasLabel]="true" [hasPoint]="true" [hasLine]="true">
+        <geo-circunferencemesh [radius]="30" [segmentCount]="45" [color]="'rgb(0,0,0)'"></geo-circunferencemesh>
+        <geo-circunferencemesh [radius]="29" [segmentCount]="45" [color]="'rgb(255,255,255)'"></geo-circunferencemesh>
+        <geo-circunferencemesh [radius]="1" [segmentCount]="30" [color]="'rgb(0,0,0)'"></geo-circunferencemesh>
+      </geo-scene>
+      <div class="mt-1 alert alert-danger elementToFadeInAndOut" role="alert" style="text-align: center;" id="err">
+        Não foi possível verificar a posição do mouse, tente novamente.
+      </div>
+    </div>
+
+    <!-- Propriedades -->
+    <div class="rightbar px-3 vh-100">
+      <h4>
+        Posição relativa entre reta e circunferência
+      </h4>
+      <h5>
+        Exemplos:
+      </h5>
+      <button class="btn btn-primary m-1" *ngFor="let button of buttons_examples" (click)="loadExample($event, button.value)">
+        {{button.title}}
+      </button>
+      <hr/>
+      <h5>
+        Propriedades:
+      </h5>
+      <div *ngIf="relation == 0">
+          <div class="alert alert-primary" role="alert">
+              <h5 class="alert-heading">Reta Secante</h5>
+              <p>Uma reta é secante a uma circunferência quando tem dois pontos comuns com ela.</p>
+              <p>A palavra secante vem de seccionar, que significa "cortar".</p>
+              <p>
+                Pontos em comum: <span class="font-weight-bold">{{ p1 }}</span> e <span class="font-weight-bold">{{ p2 }}</span>
+              </p>
+              <p>
+                Distância do centro à reta secante:<br>
+                <span class="distance font-weight-bold">d</span> = {{ distanceCenter | number:'1.0-3':'pt' }}
+              </p>
+              <p>
+                Raio:<br>
+                <span class="font-weight-bold">r</span> = {{ radius }}
+              </p>
+              <h6 class="alert-heading">Exemplo</h6>
+              <p>A reta <span class="emphasize">s</span> é secante à circunferência C.</p>
+              <p class="text-center"><img class="img-fluid" src="../../../../../../assets/images/geometria/cincunferencia/cf-posicao-relativa/reta-secante.png"></p>
+              <h5 class="alert-heading text-center">d < r</h5>
+              <h5 class="alert-heading text-center">s ∩ C={{ '{' }}A, B{{ '}' }}</h5>
+          </div>
+      </div>
+      <div *ngIf="relation == 1">
+          <div class="alert alert-primary" role="alert">
+            <h5 class="alert-heading">Reta Tangente</h5>
+            
+            <p>Uma reta é tangente a uma circunferência quando tem apenas um ponto em comum com ela. </p>
+            <p>A palavra tangente vem de tanger, que significa "tocar".</p>
+            <p>
+              Distância do centro à reta tangente:<br>
+              <span class="distance font-weight-bold">d</span> = {{ distanceCenter | number:'1.0-3':'pt' }}
+            </p>
+            <p>
+              Raio:<br>
+              <span class="font-weight-bold">r</span> = {{ radius }}
+            </p>
+            <h6 class="alert-heading">Exemplo</h6>
+            <p>A reta <span class="emphasize">t</span> é tangente à circunferência C, e A é denominado <span class="font-weight-bold">ponto de tangência</span> (ou ponto de contato).</p>
+            <p class="text-center"><img class="img-fluid" src="../../../../../../assets/images/geometria/cincunferencia/cf-posicao-relativa/reta-tangente.png"></p>
+            <h5 class="alert-heading text-center">d = r</h5>
+            <h5 class="alert-heading text-center">t ∩ C={{ '{' }}A{{ '}' }}</h5>
+            <p>OBS: Observe que a distância do centro (O) à reta (<span class="emphasize">t</span>) é igual a medida do raio. Assim d = r.</p>
+          </div>
+      </div>
+      <div *ngIf="relation == 2">
+        <div class="alert alert-primary" role="alert">
+          <h5 class="alert-heading">Reta Externa</h5>
+          <p>Uma reta é externa a uma circunferência quando não tem nenhum ponto em comum com ela.
+          </p>
+          <p>
+            Distância do centro à reta externa:<br>
+            <span class="distance font-weight-bold">d</span> = {{ distanceCenter | number:'1.0-3':'pt' }}
+            </p>
+            <p>
+              Raio:<br>
+              <span class="font-weight-bold">r</span> = {{ radius }}
+            </p>
+          <p class="font-weight-bold">Exemplo</p>
+          <p>A reta <span class="emphasize">t</span> é externa à circunferência C.</p>
+          <p class="text-center"><img class="img-fluid" src="../../../../../../assets/images/geometria/cincunferencia/cf-posicao-relativa/reta-externa.png"></p>
+          <h5 class="alert-heading text-center">d > r</h5>
+          <p>OBS: Observe que a distância de uma reta externa ao centro de uma circunferência é maior que seu raio.</p>
+        </div>
+      </div>
+    </div>
+
+  </geo-base-view>

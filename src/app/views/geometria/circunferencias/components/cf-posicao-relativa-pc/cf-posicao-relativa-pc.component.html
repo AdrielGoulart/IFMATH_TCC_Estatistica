@@ -1,0 +1,102 @@
+<geo-base-view>
+
+  <!-- Botões de navegação -->
+  <div class="btn-container mt-2 row">
+      <h5 class="mt-2 col-12 text-center">Escolha abaixo a posição de uma geometria em relação a uma circunferência</h5>
+      <geo-btn *ngFor="let button of buttons" [name]="button.title" [route]="button.route"></geo-btn>
+    </div>
+
+    <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+
+      <div class=" mt-4">
+        <p class="text-center">
+          Entre com a medida do raio(<ng-katex equation="\color{red}{r}"></ng-katex>):
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="radius" oninput="this.value = Math.abs(this.value)"
+            (ngModelChange)="checkInput()" max="10" min="1" />
+           e da distância (<i><b> d </b></i>):
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="distancePointCenter" oninput="this.value = Math.abs(this.value)"
+            (ngModelChange)="checkInput()" max="20" min="0" />
+        </p>
+  
+        <div [className]="errorInputRadius === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'" role="alert" style="text-align: center;">
+          O raio deve ser um valor inteiro contido entre <b>1</b> e <b>10</b>.
+        </div>
+        <div [className]="errorInputDistance === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'" role="alert" style="text-align: center;">
+          A distância deve ser um valor contido entre <b>0</b> e <b>20</b>.
+        </div>
+      </div>
+
+      <!-- Cena -->
+      <geo-scene class="col-12 row px-0 bg-primary img-fluid" [hasOrbitControls]="false" [pointsLimit]="7" [pointToDelete]="4"
+       [hasPerspective]="false" [hasPointLine]="true" [sharedData]="data" [hasPoint]="true" [hasLabel]="true" [shorten]="true">
+        <geo-circunferencemesh [radius]="radiusExt" [segmentCount]="92" [color]="'rgb(0,0,0)'"></geo-circunferencemesh>
+        <geo-circunferencemesh [radius]="radiusInt" [segmentCount]="92" [color]="'rgb(255,255,255)'"></geo-circunferencemesh>
+      </geo-scene>
+    </div>
+
+    <!-- Propriedades -->
+    <div class="rightbar px-3 vh-100">
+      <h4>
+        Posição relativa entre ponto e circunferência
+      </h4>
+      <h5>
+        Exemplos:
+      </h5>
+      <button class="btn btn-primary m-1" *ngFor="let button of buttons_examples" (click)="loadExample($event, button.value)">
+        {{button.title}}
+      </button>
+      <hr/>
+      <h5>
+        Propriedades:
+      </h5>
+      <div *ngIf="relation == 0">
+          <div class="alert alert-primary" role="alert">
+              <h5 class="alert-heading">Interno</h5>
+              <p class="text-justify">A distância entre o centro da circunferência (O) e o ponto criado (A) é menor que a medida do raio
+                (OA < r), diremos que o ponto A é interno à circunferência.
+              </p>
+              <p>
+                Distância entre o ponto central da circunferência (O) e o ponto criado (A):<br>
+                <span class="distance font-weight-bold">OA</span> = {{distancePointCenter}}
+              </p>
+              <p>
+                Raio da circunferência:<br>
+                <span class="font-weight-bold">r</span> = {{radius}}
+              </p>
+          </div>
+      </div>
+      <div *ngIf="relation == 1">
+          <div class="alert alert-primary" role="alert">
+            <h5 class="alert-heading">Externo</h5>
+            <p class="text-justify">A distância entre o centro da circunferência e o ponto criado é maior que a medida do raio
+              (OA > r), diremos que o ponto A é externo à circunferência.
+            </p>
+            <p>
+              Distância entre o ponto central da circunferência (O) e o ponto criado (A):<br>
+              <span class="distance font-weight-bold">OA</span> = {{distancePointCenter}}
+            </p>
+            <p>
+              Raio da circunferência:<br>
+              <span class="font-weight-bold">r</span> = {{radius}}
+            </p>
+          </div>
+      </div>
+      <div *ngIf="relation == 2">
+        <div class="alert alert-primary" role="alert">
+          <h5 class="alert-heading">Pertence</h5>
+          <p class="text-justify">A distância entre o centro da circunferência e o ponto criado é igual a medida do raio
+            (OA = r), diremos que o ponto A pertence a circunferência.
+          </p>
+          <p>
+            Distância entre o ponto central da circunferência (O) e o ponto criado (A):<br>
+            <span class="distance font-weight-bold">OA</span> = {{distancePointCenter}}
+          </p>
+          <p>
+            Raio da circunferência:<br>
+            <span class="font-weight-bold">r</span> = {{radius}}
+          </p>
+        </div>
+      </div>
+    </div>
+
+</geo-base-view>

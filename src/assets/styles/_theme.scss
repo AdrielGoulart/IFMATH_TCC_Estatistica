@@ -1,14 +1,14 @@
 $background-color-blackgrey: #CFD5D2;
 $background-color-green: #359d6e;
-$background-color-purple: #8b67af;
-$background-color-blue: #4683b4;
+$background-color-purple: #d1a3ff;
+$background-color-blue: #5ca6e3;
 $background-color-blackgrey-houver: rgb(143, 146, 144);
-$background-color-orange: #f26528;
+$background-color-coral: #ff7f50;
 $background-color-green-houver:#53d89c;
 $background-color-blue-houver:#4683b4;
-$background-color-purple-houver: #b58fdb;
-$background-color-orange-houver: #f54e07;
-$button-color: white;
+$background-color-purple-houver: #9a4ee6;
+$background-color-coral-houver: #ff7f50;
+$button-color: rgb(0, 0, 0);
 $width: 100%;
 $height: 100%;
 
@@ -22,7 +22,7 @@ $height: 100%;
   }
 
   &__image__container {
-    margin-top: 0.5px;
+    margin-top: 0.0px;
     width: $width;
 
     &--blackblackgrey {
@@ -37,8 +37,8 @@ $height: 100%;
       background-color: $background-color-purple;
     }
 
-    &--orange {
-      background-color: $background-color-orange;
+    &--coral {
+      background-color: $background-color-coral;
     }
 
     &--blue {
@@ -100,6 +100,7 @@ $height: 100%;
   .btn {
     white-space: normal;
     margin-top: 15px;
+    padding: inherit;
 
     &-outline-success {
       height: 80px;
@@ -197,34 +198,34 @@ $height: 100%;
         }
       }
 
-      &--orange {
-        border-color: $background-color-orange-houver;
-        color: $background-color-orange;
+      &--coral {
+        border-color: $background-color-coral-houver;
+        color: $background-color-coral;
 
-          &:hover {
-            font-weight: bold;
-            color: $button-color;
-            background-color: $background-color-orange;
-            border-color: $background-color-orange-houver;
-          }
+        &:hover {
+          font-weight: bold;
+          color: $button-color;
+          background-color: $background-color-coral;
+          border-color: $background-color-coral-houver;
+        }
 
-          &:active,
-          &:focus {
-            color: $button-color;
-            outline: none !important;
-            box-shadow: none !important;
-            background-color: $background-color-orange !important;
-            border-color: $background-color-orange-houver !important;
-          }
+        &:active,
+        &:focus {
+          color: $button-color;
+          outline: none !important;
+          box-shadow: none !important;
+          background-color: $background-color-coral !important;
+          border-color: $background-color-coral-houver !important;
+        }
 
-          &.disabled,
-          &:disabled {
-            color: $background-color-orange
-          }
+        &.disabled,
+        &:disabled {
+          color: $background-color-coral;
+        }
 
-          &.disabled:hover {
-            color: $button-color;
-          }
+        &.disabled:hover {
+          color: $button-color;
+        }
       }
 
       &--blue {

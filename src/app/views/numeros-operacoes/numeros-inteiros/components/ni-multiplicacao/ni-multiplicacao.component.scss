@@ -1,0 +1,25 @@
+:host{
+    width: 100%;
+}
+
+.ifmath-form_img-formula{
+   margin-top: 12%;
+}
+
+:host ::ng-deep .expression{
+    font-size: 7.5vh;
+}
+
+:host ::ng-deep .aresults{
+    list-style: none;
+}
+
+:host ::ng-deep .showbutton{
+    float:right;
+    clear:both;
+    box-sizing:content-box;
+}
+
+:host ::ng-deep .desc{
+    font-size:2.3vh;
+}

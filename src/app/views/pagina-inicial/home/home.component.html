@@ -4,7 +4,7 @@
             <img class="img-fluid" src="assets/images/banners/banner_da_hora.jpg" alt="First slide">
         </div>
         <div class="carousel-item">
-            <img class="img-fluid" src="assets/images/banners/banner_da_hora.jpg" alt="Second slide">
+            <img class="img-fluid" src="assets/images/banners/banner_logo3.jpg" alt="Second slide">
         </div>
         <div class="carousel-item">
             <img class="img-fluid" src="assets/images/banners/banner_da_hora.jpg" alt="Third slide">
@@ -74,18 +74,18 @@
                 </mat-list-item>
             </mat-list>
         </div>
-        <div id="estatistica" class="col-lg-3">
-            <a [routerLink]="['/estatistica']">
-                <h4 class="text-center">Estatística</h4>
+        <div id="estatistica-probabilidade" class="col-lg-3">
+            <a [routerLink]="['/estatistica_probabilidade']">
+                <h4 class="text-center">Estatística e Probabilidade</h4>
             </a>
             <mat-list>
-                <mat-list-item *ngFor="let g of estatistica">
+                <mat-list-item *ngFor="let e of estatisticaEProbabilidade">
                     <div class="col-1">
                         <mat-icon svgIcon="estatistica" class="if-icon"></mat-icon>
                     </div>
                     <div class="col-11">
-                        <a [routerLink]="[g.routerLink]">
-                            <h4 class="home-subject">{{g.title}}</h4>
+                        <a [routerLink]="[e.routerLink]">
+                            <h4 class="home-subject">{{ e.title }}</h4>
                         </a>
                     </div>
                 </mat-list-item>

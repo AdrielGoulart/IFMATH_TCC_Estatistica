@@ -1,0 +1,25 @@
+.list-group-item:first-child {
+    border-radius: 0 !important;
+}
+
+.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #4683B4 !important;
+    border-color: #4683B4 !important;
+}
+
+#selecionado:hover {
+    color: #fff;
+    background-color: #4683B4;
+}
+
+// .title{
+//     color: #505050;
+//     background-color:#efefef;
+//     margin: 0px;
+//     padding: 10px;
+//     text-align: center;
+//     font-weight: normal;
+//     pointer-events: none;
+// }

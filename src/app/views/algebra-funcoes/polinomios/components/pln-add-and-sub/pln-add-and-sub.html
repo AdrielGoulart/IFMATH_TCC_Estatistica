@@ -1,0 +1,65 @@
+<!-- region fomrulario -->
+<section class="ifmath-form__contener__body">
+  <!-- Form -->
+  <form (ngSubmit)="onSubmit()" #demoForm="ngForm" [formGroup]="formModel">
+    <div class="row">
+      <!-- Title -->
+      <div class="col-sm-12 ifmath-form__title">
+        <h1 class="fmath-form__title__text">Adição e Subtração</h1>
+      </div>
+      <!-- Fields -->
+      <div class="col-sm-12 col-md-7">
+        <div class="input-group">
+          <span class="input-group-addon input-group-addon--blackgrey" style="width: 100px;" id="sizing-addon2">Polinômio A</span>
+          <input type="text" name="expression" formControlName="expressionA" class="form-control ifmath-form__contener__body__input" aria-describedby="sizing-addon2" placeholder="3x^2 + 9">
+        </div>
+        <div>
+          <span class="ifmath-form__label ifmath-form__label--error" *ngIf="formModel.get('expressionA').hasError('required') && formModel.get('expressionA').touched">Campo
+            invalido!</span>
+        </div>
+
+        <button type="button" class="btn btn-success btn-success--blackgrey btn-success--semMargin btn_sign" (click)="changeSign()">{{ sign }}</button>
+
+
+        <div class="input-group">
+          <span class="input-group-addon input-group-addon--blackgrey" style="width: 100px;" id="sizing-addon2">Polinômio B</span>
+          <input type="text" name="Input" formControlName="expressionB" class="form-control ifmath-form__contener__body__input" aria-describedby="sizing-addon2" placeholder="8x^5 - 3x^2">
+        </div>
+        <div>
+          <span class="ifmath-form__label ifmath-form__label--error" *ngIf="formModel.get('expressionB').hasError('required') && formModel.get('expressionB').touched">Campo
+            invalido!</span>
+        </div>
+
+      </div>
+
+      <!-- buttons -->
+
+      <div class="col-sm-12 col-md-5 ifmath-form__button__group">
+        <button type="submit" class="btn btn-success btn-success--blackgrey btn-success--semMargin" [disabled]="formModel.invalid" value="Calcular">Calcular</button>
+        <button type="reset" class="btn btn-success btn-success--blackgrey btn-success--semMargin" value="Limpar" (click)="onClear()">Limpar</button>
+      </div>
+    </div>
+
+  </form>
+
+
+  <!-- endregion -->
+
+  <!-- region Resultados -->
+  <div class="col-sm-12">
+    <ifmath-ng-results [loading]="loading" [resultados]="results"></ifmath-ng-results>
+  </div>
+
+  <!-- <div class="context-plot">
+    <ifmath-math-plot class="plot"></ifmath-math-plot>
+  </div> -->
+
+
+  <!-- endregion -->
+</section>
+
+<ifmath-ng-modal-error #modalError>
+  <div class="content">
+    <p> {{ errorMessage }} </p>
+  </div>
+</ifmath-ng-modal-error>

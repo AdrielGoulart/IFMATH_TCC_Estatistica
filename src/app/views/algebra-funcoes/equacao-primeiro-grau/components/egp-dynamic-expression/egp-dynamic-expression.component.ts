@@ -54,7 +54,7 @@ export class EgpDynamicExpressionComponent {
             console.log('Response body:', err.error);
             // Log errors if any
             this.loading = false;
-            this.errorMessage = 'Aconteceu alguns error de conexão com a internet, verifique a sua rede: ' +  err.message;
+            this.errorMessage = 'Aconteceu alguns erros de conexão com a internet, verifique a sua rede: ' +  err.message;
             this.modalError.show();
           }
         });

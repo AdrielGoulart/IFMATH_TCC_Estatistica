@@ -1,0 +1,64 @@
+<geo-base-view>
+  <!-- Botões de navegação -->
+  <div class="btn-container mt-2 row">
+    <h5 class="mt-2 col-12 text-center">Escolha abaixo a explicação de como chegar no pi ou ou calcular o comprimento de
+      uma circunferência</h5>
+    <geo-btn *ngFor="let button of buttons; let i = index" [name]="button.title" [route]="button.route"></geo-btn>
+  </div>
+
+  <!-- Botão para inserir a medida do ângulo-->
+  <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+    <div class=" mt-4">
+      <p class="text-center">
+        Entre com a medida do raio(<ng-katex equation="\color{red}{r}"></ng-katex>):
+        <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="diametro"
+          oninput="this.value = Math.abs(this.value)" (ngModelChange)="checkInput()" max="20" min="2" />
+      </p>
+      <div [className]="errorInputRadius === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'" role="alert" style="text-align: center;">
+          O diâmetro deve ser um valor inteiro contido entre <b>2</b> e <b>20</b>.
+        </div>
+    </div>
+  
+
+    <geo-scene class="col-12 row px-0 bg-primary img-fluid" [hasOrbitControls]="false" [hasPerspective]="false">
+      <geo-circunferencemesh [radius]="radiusExt" [segmentCount]="92" [color]="'rgb(0,0,0)'"></geo-circunferencemesh>
+      <geo-circunferencemesh [radius]="radiusInt" [segmentCount]="92" [color]="'rgb(255,255,255)'">
+      </geo-circunferencemesh>
+    </geo-scene>
+  </div>
+
+  <!-- Propriedades -->
+  <div class="rightbar px-3 vh-100">
+    <h4>
+      O Número PI (<ng-katex equation="\pi"></ng-katex>):
+    </h4>
+    <p>
+      Quando dividimos a medida do comprimento de qualquer circunferência
+      pela medida do seu diâmetro, obtemos sempre o mesmo resultado:
+      <ng-katex equation="3.141592"></ng-katex>...
+    </p>
+    <br />
+    <p>
+      Logo, <ng-katex equation="\frac{C}{\color{red}d}=\pi"></ng-katex>.
+    </p>
+    <br />
+    <p>
+      Sendo assim,
+      <ng-katex equation="{{equacao}}"></ng-katex>
+    </p>
+    <br />
+    <p>
+      <ng-katex equation="\pi = 3,14"></ng-katex>
+    </p>
+    <br />
+    <p>
+      Esse número é chamado de <b>pi</b> (<ng-katex equation="\pi"></ng-katex>,
+      no alfabeto grego).
+    </p>
+    <br />
+    <p>
+      Costuma-se considerar: <ng-katex equation="\pi = 3,14"></ng-katex>
+    </p>
+  </div>
+
+</geo-base-view>

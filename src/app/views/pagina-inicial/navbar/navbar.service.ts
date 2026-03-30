@@ -19,7 +19,7 @@ export class NavBarService {
 }
 export enum NavBarColores {
     Verde = '#359d6e',
-    Laranja = '#f26528',
+    Coral = '#ff7f50',
     Roxo = '#8b67af',
     Azul = '#4682B4'
 }

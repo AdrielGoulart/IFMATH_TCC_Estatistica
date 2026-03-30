@@ -1,0 +1,165 @@
+:host{
+    width: 100%;
+}
+
+:host ::ng-deep .clear{
+    clear:both;
+}
+.ifmath-form_img-formula{
+   margin-top: 12%;
+}
+:host ::ng-deep .resultnumber{
+   
+    clear:both;
+    font-size:7.5vh;
+    
+    width:inherit;
+}
+:host ::ng-deep .multresults{
+    box-sizing: content-box;
+    list-style:none;
+}
+:host ::ng-deep .multoperation{
+    box-sizing: content-box;
+    float:left;
+    clear:both;
+    width:100%;
+    padding-bottom: 2.3vh;
+    border-bottom:inset 0.3vh;
+}
+:host ::ng-deep .mresults{
+    list-style: none;
+    overflow: hidden;
+   
+}
+:host ::ng-deep .padme{
+    padding-top:4.4vh;
+    float:left;
+    clear:both;
+}
+:host ::ng-deep .sumresult{
+    border-top: solid 0.4vh;
+   
+    margin-bottom:0;
+    clear:both;
+    box-sizing: content-box;
+}
+:host ::ng-deep .multresult{
+    clear:both;
+    float:left;
+    font-size:7.5vh;
+    min-height:7.5vh ;
+    box-sizing: content-box;
+    margin-top:-4.4vh;
+}
+
+:host ::ng-deep .highlightr{
+    color:red;
+}
+:host ::ng-deep .highlightb{
+    color:blue;
+}
+:host ::ng-deep .showbutton{
+    float:right;
+    clear:both;
+    box-sizing:content-box;
+}
+:host ::ng-deep .digit{
+    float:left;
+    min-width:4.4vh;
+    max-width:4.4vh;
+    margin:0x;
+}
+:host ::ng-deep .plussign{
+    font-size:6vh;
+    float:left;
+}    
+:host ::ng-deep .operation{
+    float:left;
+    clear:both;
+    box-sizing: content-box;
+}
+
+:host ::ng-deep .topnumber{
+    font-size:7.5vh;
+    clear:both;
+    margin-bottom:0px;
+    box-sizing: content-box;
+    float:left;
+    height:7vh;
+    margin-top: -2.4vh;
+}
+
+
+
+:host ::ng-deep .bottomnumber{
+    font-size:7.5vh;
+    clear:both;
+    margin-top:0px;
+    border-bottom: solid 0.4vh;
+    box-sizing: content-box;
+    float:left;
+    height:auto;
+}
+:host ::ng-deep .finalresult{
+    font-size:8vh;
+    float:left;
+    box-sizing: content-box;
+}
+
+:host ::ng-deep .explicacao{
+    float:left;
+    margin-top:2vh;
+    clear:both;
+    font-size:2.7vh;
+    box-sizing: content-box;
+}
+
+:host ::ng-deep .leftovers{
+    font-size:3.5vh;
+    float:left;
+    color: grey;
+    
+    clear:both;
+}
+@media only screen and (max-width:500px){
+    :host ::ng-deep .leftovers{
+        font-size:1.2vh;
+    }
+    :host ::ng-deep .finalresult{
+        font-size: 3.2vh;
+    }
+    :host ::ng-deep .padme{
+        padding:0px;
+    }
+    :host ::ng-deep .plussign{
+        font-size:3vh;
+    
+    }    
+    :host ::ng-deep .multresult{
+        font-size: 2.7vh;
+        min-height:2.7vh;
+        margin:0px;
+    }
+    :host ::ng-deep .sumresult{
+        margin-top: 0px;
+    }
+    :host ::ng-deep .topnumber{
+        font-size: 2.7vh;
+        margin-top:0px;
+    }
+    :host ::ng-deep .bottomnumber{
+        font-size: 2.7vh;
+        margin-top: -3.1vh;
+    }
+    :host ::ng-deep .digit{
+        min-width: 1.7vh;
+        max-width: 1.7vh;
+    }
+    :host ::ng-deep .explicacao{
+        font-size:1.3vh;
+    }
+    :host ::ng-deep .resultnumber{
+        font-size: 2.7vh;
+    }
+}

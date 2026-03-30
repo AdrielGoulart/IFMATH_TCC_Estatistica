@@ -9,9 +9,11 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { PaginaInicialModule } from './views/pagina-inicial/pagina-inicial.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
+    
   ],
   imports: [
     BrowserModule,

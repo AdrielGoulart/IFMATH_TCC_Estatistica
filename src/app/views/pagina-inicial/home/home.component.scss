@@ -4,7 +4,7 @@ $padding: 15px;
 $blackgrey: rgb(143, 146, 144);
 $blue: #4683b4;
 $wisteria: #8b67af;
-$orange:#f54e07;
+$coral: #ff7f50;
 
 #home-container {
  // margin-top: 5px;
@@ -55,14 +55,13 @@ $orange:#f54e07;
   }
 }
 
-#estatistica {
+#estatistica-probabilidade {
   a:hover {
     text-decoration: none !important;
   }
 
-  a > h4,
-  .mat-icon {
-    color: $orange;
+  a > h4 {
+    color: $coral;
   }
 }
 
@@ -93,4 +92,5 @@ $orange:#f54e07;
 
 .carousel-item{
   width: 100%;
+  
 }

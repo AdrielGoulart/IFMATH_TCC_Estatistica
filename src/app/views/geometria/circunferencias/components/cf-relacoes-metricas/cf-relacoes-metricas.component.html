@@ -1,0 +1,11 @@
+<geo-base-view>
+
+  <!-- Botões de navegação -->
+  <div class="btn-container mt-2 rowMod">
+    <div class="container-sm border centerMenu">
+      <h5 class="mt-2 col-12 text-center">Escolha uma das relações</h5>
+      <geo-btn *ngFor="let button of buttons; let i = index" [name]="button.title" [route]="button.route"></geo-btn>
+    </div>
+  </div>
+
+</geo-base-view>

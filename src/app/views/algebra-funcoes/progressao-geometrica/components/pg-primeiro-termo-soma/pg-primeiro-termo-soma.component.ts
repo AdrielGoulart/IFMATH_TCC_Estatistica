@@ -8,7 +8,6 @@ import { IPGPrimeiroTermoSomaComand } from './../../shared/progressao-geometrica
 
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/do';
-
 @Component({
   templateUrl: './pg-primeiro-termo-soma.component.html',
   styleUrls: ['./pg-primeiro-termo-soma.component.scss']

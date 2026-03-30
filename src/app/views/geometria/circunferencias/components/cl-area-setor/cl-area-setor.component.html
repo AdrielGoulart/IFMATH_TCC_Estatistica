@@ -1,0 +1,159 @@
+<geo-base-view>
+  <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+
+    <h3 style="margin-top: 10px;">Área de um setor circular</h3>
+
+    <!-- Botão para inserir a medida do ângulo-->
+    <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+      <div class=" mt-4">
+        <p class="text-center" style="margin-right: 100px;">
+          Entre com a medida do raio(<ng-katex equation="\color{red}{r}"></ng-katex>):
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="radius"
+            oninput="this.value = Math.abs(this.value)" (ngModelChange)="checkInput()" max="10" min="1" />
+          <label>e do ângulo (<i><b> α </b></i>):</label>
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="angle"
+            oninput="this.value = Math.round(Math.abs(this.value));" (ngModelChange)="checkInput()" max="360" min="0"
+            style="position: absolute; margin-left: 5px;" />
+          <span style="position: absolute; margin-top: 2.5px; font-size: 20px; pointer-events: none;"
+            id="degree">°</span>
+        </p>
+
+        <div [className]="errorInputRadius === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'"
+          role="alert" style="text-align: center;">
+          O raio deve ser um valor inteiro contido entre <b>1</b> e <b>10</b>.
+        </div>
+        <div [className]="errorInputAngle === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'"
+          role="alert" style="text-align: center;">
+          O ângulo deve ser um valor contido entre <b>0°</b> e <b>360°</b>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Cena -->
+    <geo-scene (mousedown)="mouseDown($event)" (mouseup)="mouseUp($event)" (mousemove)="mouseMove($event)"
+      class="col-12 row px-0 bg-primary img-fluid" [hasOrbitControls]="false" [hasPerspective]="false">
+      <geo-circunferencemesh [radius]="radiusExt" [segmentCount]="90" [color]="'rgb(70,131,180)'">
+      </geo-circunferencemesh>
+      <geo-circunferencemesh [radius]="radiusInt" [segmentCount]="90" [color]="'rgb(255,255,255)'">
+      </geo-circunferencemesh>
+    </geo-scene>
+  </div>
+
+  <!-- Propriedades -->
+  <div class="rightbar px-3 vh-100">
+    <h4>Propriedades:</h4>
+
+    <p>
+      A área de um setor circular de raio r e ângulo central de medida alpha, em grau, é dada por:
+    </p>
+    <p class="text-center">
+      <ng-katex style="font-size: 25px;" equation="A = \frac{\alpha \cdot \pi \cdot r^2}{360 \degree}"></ng-katex>
+    </p>
+
+    <!-- Calculos -->
+    <div class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingPrincipal" data-toggle="collapse" data-target="#collapsePrincipal">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsePrincipal"
+              aria-expanded="false" aria-controls="collapsePrincipal">
+              Cálculo: <ng-katex class="explicacao"
+                equation="A = {{ angle * (radius * radius) / 360 | number:'':'pt' }} \ \pi \ u.a. ">
+              </ng-katex>
+            </button>
+
+            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+              data-target="#collapsePrincipal"></i>
+          </h2>
+        </div>
+        <div id="collapsePrincipal" class="collapse" aria-labelledby="headingPrincipal" data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="panel-group" id="accordion">
+              <!--Passo 1-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{A = \frac{ {{ angle }} \degree \cdot \pi \cdot {{ radius }}^2 }{360 \degree} } ">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Substituindo os dados na fórmula.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <!--Passo 2-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{A = \frac{ {{ angle }} \degree \cdot \pi \cdot {{ radius * radius }} }{360 \degree} }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Resolvendo a potência.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <!--Passo 3-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{ A = {{ angle * (radius * radius) / 360 | number:'':'pt' }} \ \pi \ u.a. }">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Resultado final. Após realizar as multiplicações e divisões.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      Ou, utilizando a aproximação: <ng-katex equation="\pi = 3,14"></ng-katex>
+    </p>
+    <p>
+      <ng-katex equation="A = {{ angle * (radius * radius) / 360 | number:'':'pt' }} \cdot 3,14 "></ng-katex>
+    </p>
+    <p>
+      <ng-katex equation="A = {{ (angle * (radius * radius) / 360) * 3.14 | number:'':'pt' }} \ u.a. "></ng-katex>
+    </p>
+
+  </div>
+
+</geo-base-view>

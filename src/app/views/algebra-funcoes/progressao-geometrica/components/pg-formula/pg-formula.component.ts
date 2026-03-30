@@ -8,7 +8,6 @@ import { IPGTermoGeralComand } from './../../shared/progressao-geometrica.model'
 
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/do';
-
 @Component({
   templateUrl: './pg-formula.component.html',
   styleUrls: ['./pg-formula.component.scss']

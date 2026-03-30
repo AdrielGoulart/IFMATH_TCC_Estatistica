@@ -1,0 +1,37 @@
+:host{
+    width: 100%;
+}
+:host ::ng-deep .number{
+    float:left;
+    font-size:6.5vh;
+}
+
+:host ::ng-deep .cresult{
+    list-style: none;
+    clear:both;
+}
+:host ::ng-deep .comparacaostep{
+    clear:both;
+    float:left;
+}
+:host ::ng-deep .explicacao{
+    float:left;
+    clear:both;
+}
+:host ::ng-deep .showbutton{
+    float:right;
+
+}
+
+:host ::ng-deep .title{
+   
+    font-size:5vh;
+    border: 2px solid black;
+    border-radius:35px;
+    
+    font-style: "Courier";
+   
+}
+:host ::ng-deep .forms{
+    float:left;
+}

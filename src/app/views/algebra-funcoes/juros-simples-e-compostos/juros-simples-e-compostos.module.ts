@@ -20,6 +20,7 @@ import { JscSimplesCapitalComponent } from './components/jsc-simples-capital/jsc
 import { JscSimplesMontanteComponent } from './components/jsc-simples-montante/jsc-simples-montante.component';
 import { JscSimplesTaxaComponent } from './components/jsc-simples-taxa/jsc-simples-taxa.component';
 import { JscSimplesTempoComponent } from './components/jsc-simples-tempo/jsc-simples-tempo.component';
+import { JscObservacoesComponent } from './components/jsc-observacoes/jsc-observacoes.component';
 
 @NgModule({
 
@@ -44,6 +45,7 @@ import { JscSimplesTempoComponent } from './components/jsc-simples-tempo/jsc-sim
         JscSimplesMontanteComponent,
         JscSimplesTaxaComponent,
         JscSimplesTempoComponent,
+        JscObservacoesComponent,
     ],
 
     providers: [ServicoJurosSimplesComposto]

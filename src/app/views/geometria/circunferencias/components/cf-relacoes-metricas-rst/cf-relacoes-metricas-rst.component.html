@@ -1,0 +1,115 @@
+<geo-base-view>
+
+  <!-- Botões de navegação -->
+  <div class="btn-container mt-2 row">
+    <h5 class="mt-2 col-12 text-center">Escolha abaixo a posição de uma geometria em relação a uma circunferência</h5>
+    <geo-btn *ngFor="let button of buttons; let i = index" [name]="button.title" [route]="button.route"></geo-btn>
+  </div>
+
+  <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+
+    <!-- Botão para inserir a medida do ângulo-->
+    <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+      <div class=" mt-4">
+        <p class="text-center">
+          Entre com a medida do raio(<ng-katex equation="\color{red}{r}"></ng-katex>):
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="radius"
+            oninput="this.value = Math.abs(this.value)" (ngModelChange)="checkInput()" max="10" min="1" />
+        </p>
+
+        <div [className]="errorInputRadius === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'"
+          role="alert" style="text-align: center;">
+          O raio deve ser um valor inteiro contido entre <b>1</b> e <b>10</b>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Cena -->
+    <geo-scene (mousedown)="mouseDown($event)" (mouseup)="mouseUp($event)" (mousemove)="mouseMove($event)"
+      class="col-12 row px-0 bg-primary img-fluid" [hasOrbitControls]="false" [hasPerspective]="false">
+      <geo-circunferencemesh [radius]="30" [segmentCount]="92" [color]="'rgb(70,131,180)'"></geo-circunferencemesh>
+      <geo-circunferencemesh [radius]="29" [segmentCount]="92" [color]="'rgb(255,255,255)'"></geo-circunferencemesh>
+    </geo-scene>
+  </div>
+
+  <!-- Propriedades -->
+  <div class="rightbar px-3 vh-100">
+    <h4>Relação entre Segmentos Secantes e Tangente</h4>
+    <h5>Propriedades:</h5>
+
+    <p>
+      Consideremos dois segmentos, um segmento secante e um segmento tangente, traçadas de um mesmo ponto externo P.
+    </p>
+    <ul>
+      <li>
+        <ng-katex equation="\overline{PA}"></ng-katex> é um segmento de reta secante e <ng-katex
+          equation="\overline{PC}"></ng-katex> é parte desse segmento externa à circunferência.
+      </li>
+      <li>
+        <ng-katex equation="\overline{PB}"></ng-katex> é um segmento de reta tangente.
+      </li>
+    </ul>
+
+    <p>
+      Considerando os triângulos PAB e PBC, temos:
+    </p>
+    <ul>
+      <li>
+        <ng-katex equation="\widehat{P} = \widehat{P}"></ng-katex> (ângulo comum)
+      </li>
+      <li>
+        <ng-katex equation="\widehat{A} \approxeq \widehat{B}"></ng-katex> (são ângulos inscritos no mesmo arco)
+      </li>
+    </ul>
+
+    <p>
+      Assim temos:
+    </p>
+    <ng-katex equation="\vartriangle PAB \approx \ \vartriangle PBC"></ng-katex>
+
+    <p>
+      E, portanto:
+    </p>
+    <ng-katex equation="\frac{\overline{PA}}{\overline{PB}}"></ng-katex> = <ng-katex
+      equation="\frac{\overline{PB}}{\overline{PC}} \to \overline{PB}^{2} = \overline{PA} \cdot \overline{PC}">
+    </ng-katex>
+
+    <p>
+      Exemplo:
+    </p>
+    <p>
+      Considerando a circunferência ao lado temos que:
+    </p>
+    <p>
+      <ng-katex equation="\overline{PA} = "></ng-katex>
+      <ng-katex equation=" {{ distancePA | number: '1.0-3':'pt' | noThousandDots }} \ u.m. "></ng-katex>
+    </p>
+    <p>
+      <ng-katex equation="\overline{PB} = "></ng-katex>
+      <ng-katex equation=" {{ distancePB | number: '1.0-3':'pt' | noThousandDots }} \ u.m. "></ng-katex>
+    </p>
+    <p>
+      <ng-katex equation="\overline{PC} = "></ng-katex>
+      <ng-katex equation=" {{ distancePC | number: '1.0-3':'pt' | noThousandDots }} \ u.m. "></ng-katex>
+    </p>
+
+    <p>
+      Então:
+    </p>
+    <p>
+      <ng-katex equation="\overline{PB}^{2} = \overline{PA} \cdot \overline{PC}"></ng-katex>
+    </p>
+
+    <p>
+      <ng-katex equation=" {{ distancePB | number: '1.0-3':'pt' | noThousandDots }}^{2} ="></ng-katex>
+      <ng-katex equation=" {{ distancePA | number: '1.0-3':'pt' | noThousandDots }} "></ng-katex>
+      <ng-katex equation=" \cdot "></ng-katex>
+      <ng-katex equation=" {{ distancePC | number: '1.0-3':'pt' | noThousandDots }} "></ng-katex>
+    </p>
+    <p>
+
+      <!-- <ng-katex equation=" {{ result1 }} = {{ result2 }} "></ng-katex> -->
+
+  </div>
+
+</geo-base-view>

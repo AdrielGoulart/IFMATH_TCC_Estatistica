@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   public numerosEOperacoes: Array<ILink>;
   public algebraEFuncoes: Array<ILink>;
   public geometria: Array<ILink>;
-  public estatistica: Array<ILink>;
+  public estatisticaEProbabilidade: Array<ILink>;
 
   public imageBannerOne: string;
   public imageBannerTwo: string;
@@ -36,31 +36,33 @@ export class HomeComponent implements OnInit {
     this.populaMumerosEOperacoes();
     this.populaAlgebraEFuncoes();
     this.populaGeometria();
-    this.populaEstatistica();
+    this.populaEstatisticaEProbabilidade();
   }
 
   public populaMumerosEOperacoes(): void {
     this.numerosEOperacoes = [
-      { title: 'Sistema de Numeração', routerLink: 'page-not-found' },
-      { title: 'Números Naturais', routerLink: 'page-not-found' },
-      { title: 'Múltiplos e Divisores', routerLink: 'page-not-found' },
-      { title: 'Frações', routerLink: 'page-not-found' },
-      { title: 'Número racionais', routerLink: 'page-not-found' },
-      { title: 'Números Naturais', routerLink: 'page-not-found' },
-      { title: 'Número reais', routerLink: 'page-not-found' },
-      { title: 'Potenciação e Radiciação', routerLink: 'page-not-found' }
+      /*{ title: 'Sistema de Numeração', routerLink: 'numeros_operacoes/sistemas_numeracao' },*/
+      { title: 'Números Naturais', routerLink: 'numeros_operacoes/numeros_naturais' },
+      { title: 'Múltiplos e Divisores', routerLink: 'numeros_operacoes/multiplos_divisores' },
+      /*{ title: 'Frações', routerLink: 'numeros_operacoes/fracoes' },*/
+      /*{ title: 'Número Racionais', routerLink: 'numeros_operacoes/numeros_racionais' },*/
+      /*{ title: 'Números Decimais', routerLink: 'numeros_operacoes/numeros_decimais' },*/
+      /*{ title: 'Números Reais', routerLink: 'numeros_operacoes/numeros_reais' },*/
+      { title: 'Números Inteiros', routerLink: 'numeros_operacoes/numeros_inteiros' },
+      /*{ title: 'Potenciação e Radiciação', routerLink: 'page-not-found' }*/
     ];
   }
 
   public populaAlgebraEFuncoes(): void {
     this.algebraEFuncoes = [
       { title: 'Equação do primeiro grau', routerLink: 'algebra_e_funcoes/equacao_primeiro_grau' },
-      { title: 'Sistemas de equações do 1º grau', routerLink: 'page-not-found' },
-      { title: 'Equação do 2º grau', routerLink: 'page-not-found' },
-      { title: 'Expressões Algébricas', routerLink: 'page-not-found' },
-      { title: 'Produtos notáveis', routerLink: 'page-not-found' },
-      { title: 'Funções', routerLink: 'algebra_e_funcoes/funcoes' },
-      { title: 'Funções Exponenciais e Logarítmicas', routerLink: 'page-not-found' },
+      /*{ title: 'Sistemas de equações do 1º grau', routerLink: 'page-not-found' },*/
+      /*{ title: 'Equação do 2º grau', routerLink: 'page-not-found' },*/
+      /*{ title: 'Expressões Algébricas', routerLink: 'page-not-found' },*/
+      { title: 'Produtos Notáveis e Fatoração', routerLink: 'algebra_e_funcoes/produtos_notaveis_fatoracao' },
+      { title: 'Função do 1º Grau e Funcão do 2º Grau', routerLink: 'algebra_e_funcoes/funcoes' },
+      /*{ title: 'Funções Exponenciais e Logarítmicas', routerLink: 'page-not-found' },*/
+      { title: 'Polinômios', routerLink: 'algebra_e_funcoes/polinomios' },
       { title: 'Trigonometria', routerLink: 'algebra_e_funcoes/trigonometria' },
       { title: 'Análise Combinatória', routerLink: 'algebra_e_funcoes/analise_combinatoria' },
       { title: 'Razão e proporção', routerLink: 'algebra_e_funcoes/razao_e_proporcao' },
@@ -77,9 +79,9 @@ export class HomeComponent implements OnInit {
       { title: 'Ponto, reta e plano', routerLink: 'geometria/ponto' },
       { title: 'Ângulos', routerLink: 'geometria/angulo' },
       { title: 'Triângulos', routerLink: 'geometria/triangulo' },
-      { title: 'Polígonos', routerLink: 'page-not-found' },
+      { title: 'Polígonos', routerLink: 'geometria/poligonos' },
       { title: 'Quadriláteros', routerLink: 'page-not-found' },
-      { title: 'Circunferências', routerLink: 'page-not-found' },
+      { title: 'Circunferências', routerLink: 'geometria/circunferencias' },
       { title: 'Círculos', routerLink: 'page-not-found' },
       { title: 'Polígonos regulares', routerLink: 'page-not-found' },
       { title: 'Prismas', routerLink: 'page-not-found' },
@@ -90,15 +92,27 @@ export class HomeComponent implements OnInit {
     ];
   }
 
-  public populaEstatistica(): void {
-    this.estatistica = [
-      { title: 'Estatística Descritiva', routerLink: 'estatistica/estatistica_descritiva' },
-      { title: 'Probabilidade', routerLink: 'page-not-found' },
-      { title: 'Distribuição de Probabilidades Discretas', routerLink: 'page-not-found' },
-      { title: 'Distribuição de Probabilidades Contínuas', routerLink: 'page-not-found' },
-      { title: 'Intervalos de Confiança', routerLink: 'page-not-found' },
-      { title: 'Teste de Hipóteses', routerLink: 'page-not-found' },
-      { title: 'Correlação e Regressão', routerLink: 'page-not-found' },
+  public populaEstatisticaEProbabilidade(): void {
+    this.estatisticaEProbabilidade = [
+      {
+        title: "Estatística Descritiva",
+        routerLink: "estatistica_probabilidade/estatistica_descritiva",
+      },
+      { title: "Probabilidade", routerLink: "page-not-found" },
+      {
+        title: "Distribuição de Probabilidades Discretas",
+        routerLink: "page-not-found",
+      },
+      {
+        title: "Distribuição de Probabilidades Contínuas",
+        routerLink: "page-not-found",
+      },
+      { title: "Intervalos de Confiança", routerLink: "page-not-found" },
+      { title: "Teste de Hipóteses", routerLink: "page-not-found" },
+      {
+        title: "Correlação e Regressão",
+        routerLink: "estatistica_probabilidade/correlacao_regressao",
+      },
     ];
   }
 

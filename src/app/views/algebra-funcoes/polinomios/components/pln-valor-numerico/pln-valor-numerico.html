@@ -1,0 +1,70 @@
+<!-- region fomrulario -->
+<section class="ifmath-form__contener__body">
+
+  <!-- Form -->
+  <form (ngSubmit)="onSubmit()" #demoForm="ngForm" [formGroup]="formModel">
+    <div class="row">
+
+      
+      <h3>Valor Numérico</h3>
+      <p class="ifmath-description__text ifmath-description__text--justify">
+        É uma expressão algébrica inteira em que <strong>há apenas multiplicação entre números e letras.</strong>
+        Essas letras devem ser expressas na forma de potência com expoentes naturais (0,1,2,3,...).
+        <br>
+        As operações envolvendo polinômios podem ser divididas em: Valor Numérico, Adição e Subtração e Multiplicação.
+      </p>
+
+      <!-- Fields -->
+      <div class="col-sm-12 col-md-7">
+        <div class="input-group">
+          <span class="input-group-addon input-group-addon--blackgrey"  style="width: 100px;" id="sizing-addon2">P(x)</span>
+          <input type="text" name="expression" formControlName="expression" class="form-control ifmath-form__contener__body__input"
+            aria-describedby="sizing-addon2" placeholder="3x^2 + 4x + 9">
+        </div>
+        <div>
+          <span class="ifmath-form__label ifmath-form__label--error" *ngIf="formModel.get('expression').hasError('required') && formModel.get('expression').touched">Campo
+            invalido!</span>
+        </div>
+
+        <!-- Variable Inputs -->
+        <div class="input-group">
+            <span class="input-group-addon input-group-addon--blackgrey"  style="width: 100px;"  id="sizing-addon2">x</span>
+            <input type="text" name="Input" formControlName="userInput" class="form-control ifmath-form__contener__body__input"
+              aria-describedby="sizing-addon2">
+          </div>
+          <div>
+            <span class="ifmath-form__label ifmath-form__label--error" *ngIf="formModel.get('expression').hasError('required') && formModel.get('expression').touched">Campo
+              invalido!</span>
+          </div>
+
+      </div>
+
+      <!-- buttons -->
+      <div class="col-sm-12 col-md-5 ifmath-form__button__group">
+        <button type="submit" class="btn btn-success btn-success--blackgrey btn-success--semMargin" [disabled]="formModel.invalid" value="Calcular">Calcular</button>
+        <button type="reset" class="btn btn-success btn-success--blackgrey btn-success--semMargin" value="Limpar" (click)="onClear()">Limpar</button>
+      </div>
+    </div>
+
+  </form>
+
+  <!-- endregion -->
+
+  <!-- region Resultados -->
+  <div class="col-sm-12">
+    <ifmath-ng-results [loading]="loading" [resultados]="results"></ifmath-ng-results>
+  </div>
+
+  <!-- <div class="context-plot">
+    <ifmath-math-plot class="plot"></ifmath-math-plot>
+  </div> -->
+
+
+  <!-- endregion -->
+</section>
+
+<ifmath-ng-modal-error #modalError>
+  <div class="content">
+    <p> {{ errorMessage }} </p>
+  </div>
+</ifmath-ng-modal-error>

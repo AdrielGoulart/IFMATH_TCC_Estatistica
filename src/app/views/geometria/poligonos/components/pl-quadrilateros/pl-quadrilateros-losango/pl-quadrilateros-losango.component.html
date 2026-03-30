@@ -1,0 +1,474 @@
+<geo-base-view>
+  <!-- Botões de navegação -->
+  <div class="btn-container mt-2 row">
+    <h5 class="mt-2 col-12 text-center">Escolha abaixo o tipo de quadrilátero</h5>
+    <geo-btn *ngFor="let button of buttons; let i = index" [name]="button.title" [route]="button.route"></geo-btn>
+  </div>
+
+  <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+
+    <!-- Botão para inserir a medida do ângulo-->
+    <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+      <div class=" mt-4">
+        <p class="text-center">
+          Entre com a medida da diagonal (<b><i>d</i></b>):
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="diagonalX"
+            oninput="this.value = Math.abs(this.value)" (ngModelChange)="checkInput('x')" max="10" min="1" />
+          e da diagonal (<b><i>D</i></b>):
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="diagonalY"
+            oninput="this.value = Math.abs(this.value)" (ngModelChange)="checkInput('y')" max="10" min="1" />
+        </p>
+
+        <div [className]="errorInput === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'" role="alert"
+          style="text-align: center;">
+          A medida das diagonais devem ser valores entre <b>1</b> e <b>10</b>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Cena -->
+    <!-- <geo-scene class="col-12 row px-0 bg-primary img-fluid" [hasOrbitControls]="false" [hasPerspective]="false"
+      (mousedown)="mouseDown($event)" (mouseup)="mouseUp($event)" (mousemove)="mouseMove($event)"></geo-scene> -->
+  </div>
+
+  <!-- Propriedades -->
+  <div class="rightbar px-3 vh-100">
+    <h3>Losango</h3>
+    <h4>Propriedades:</h4>
+    <div>
+      Um losango é um quadrilátero que possui quatro lados congruentes (mesma medida) e ângulos congruentes dois a dois.
+    </div>
+    <div *ngIf="quadrado">
+      Quando um losango possui todos os ângulos internos retos, pode ser classificado como um quadrado.
+    </div>
+
+    <!-- Calculos -->
+
+    <!-- Inicio Calculo Area -->
+    <div class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingArea" data-toggle="collapse" data-target="#collapseArea">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseArea"
+              aria-expanded="false" aria-controls="collapseArea">
+              Área: <ng-katex class="explicacao" equation="A = {{ (diagonalX * diagonalY) / 2 | number:'':'pt' }} \ u.a.">
+              </ng-katex>
+            </button>
+
+            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse" data-target="#collapseArea"></i>
+          </h2>
+        </div>
+        <div id="collapseArea" class="collapse" aria-labelledby="headingArea" data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="panel-group" id="accordion">
+              <!--Area - Passo 1-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{A = \frac{ {{ diagonalY }} \cdot {{ diagonalX }} }{ 2 } } ">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Substituímos a medida das diagonais <b>D</b> e <b>d</b> na fórmula:
+                    <ng-katex equation="A = \frac{D \cdot d}{2}"></ng-katex>
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <!--Area - Passo 2-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
+                      <p>
+                        <ng-katex class="explicacao"
+                          equation="\textcolor{black}{A = {{ (diagonalY * diagonalX) / 2 | number:'':'pt' }} \ u.a.}">
+                        </ng-katex>
+                        <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                          data-target="#collapseGeratriz"></i>
+                      </p>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Resultado final após realizar as multiplicação e divisão.
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fim Calculo Area -->
+
+      <!-- Inicio Calculo Lado -->
+      <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingLado" data-toggle="collapse" data-target="#collapseLado">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseLado"
+                aria-expanded="false" aria-controls="collapseLado">
+                Lado: <ng-katex class="explicacao" equation="l \approx {{conta_sqrt | number:'':'pt' }} \ u.m. ">
+                </ng-katex>
+              </button>
+
+              <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                data-target="#collapseLado"></i>
+            </h2>
+          </div>
+          <div id="collapseLado" class="collapse" aria-labelledby="headingLado" data-parent="#accordionExample">
+            <div class="card-body">
+              <div class="panel-group" id="accordion">
+                <!--Lado - Passo 1-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                        <p>
+                          <ng-katex class="explicacao"
+                            equation="\textcolor{black}{l^2 = (\frac{ {{diagonalY}} }{2})^2 + (\frac{ {{diagonalX}} }{2})^2 } ">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Conseguimos dividir um losango em quatro triângulos-retângulo, onde a medida do lado é a
+                      hipotenusa e a metade de cada uma das diagonais é um dos catetos. Portanto, usamos o Teorema de
+                      Pitágoras:
+                      <ng-katex equation="l^2 = \frac{D}{2}^2 + \frac{d}{2}^2 "></ng-katex>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <!--Lado - Passo 2-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
+                        <p>
+                          <ng-katex class="explicacao"
+                            equation="\textcolor{black}{l^2 = {{diagonalY / 2 | number:'':'pt' }}^2 + {{diagonalX / 2 | number:'':'pt' }}^2 }">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Resolvemos as divisões entre parênteses.
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <!--Lado - Passo 3-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="">
+                        <p>
+                          <ng-katex class="explicacao"
+                            equation="\textcolor{black}{l^2 = {{ (diagonalY / 2) * (diagonalY / 2) | number:'':'pt' }} + {{ (diagonalX / 2) * (diagonalX / 2) | number:'':'pt' }}  }">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Resolvemos as potências.
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <!--Lado - Passo 4-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="">
+                        <p>
+                          <ng-katex class="explicacao"
+                            equation="\textcolor{black}{l^2 = {{ ((diagonalY / 2) * (diagonalY / 2)) + ((diagonalX / 2) * (diagonalX / 2)) | number:'':'pt' }} }">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseFour" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Somamos as parcelas.
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <!--Lado - Passo 5-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" class="">
+                        <p>
+                          <ng-katex class="explicacao"
+                            equation="\textcolor{black}{l = \sqrt{{ ((diagonalY / 2) * (diagonalY / 2)) + ((diagonalX / 2) * (diagonalX / 2)) | number:'':'pt' }} }">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseFive" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Aplicamos a operação de radiciação inversa que é inversa à potência.
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <!--Lado - Passo 6-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" class="">
+                        <p>
+                          <ng-katex class="explicacao"
+                            equation="\textcolor{black}{l \approx {{conta_sqrt | number:'':'pt' }} \ u.m. }">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseSix" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Resultado final.
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fim Calculo Lado -->
+
+      <!-- Inicio Calculo NrDiagonais -->
+      <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingNrDiagonais" data-toggle="collapse" data-target="#collapseNrDiagonais">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                data-target="#collapseNrDiagonais" aria-expanded="false" aria-controls="collapseNrDiagonais">
+                Número de Diagonais: <ng-katex class="explicacao" equation="n = {{ (4 * (4-3)) / 2 }} ">
+                </ng-katex>
+              </button>
+
+              <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                data-target="#collapseNrDiagonais"></i>
+            </h2>
+          </div>
+          <div id="collapseNrDiagonais" class="collapse" aria-labelledby="headingNrDiagonais"
+            data-parent="#accordionExample">
+            <div class="card-body">
+              <div class="panel-group" id="accordion">
+                <!--NrDiagonais - Passo 1-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                        <p>
+                          <ng-katex class="explicacao" equation="\textcolor{black}{n = \frac{4 \cdot (4 - 3)}{2} } ">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Substituímos número de lados <ng-katex equation="N = 4"></ng-katex> do polígono na fórmula
+                      <ng-katex equation="n = \frac{N \cdot (N - 3)}{2} "></ng-katex>.
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <!--NrDiagonais - Passo 2-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
+                        <p>
+                          <ng-katex class="explicacao" equation="\textcolor{black}{n = \frac{4 \cdot 1}{2} }">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Resolvemos as operações entre parênteses.
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <!--NrDiagonais - Passo 3-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="">
+                        <p>
+                          <ng-katex class="explicacao" equation="\textcolor{black}{n = {{ (4 * (4-3)) / 2 }} }">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Resultado final, após resolvermos a multipliação e divisão.
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fim Calculo NrDiagonais -->
+
+      <!-- Inicio Calculo SomaAngulosInt -->
+      <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingSomaAngulosInt" data-toggle="collapse"
+            data-target="#collapseSomaAngulosInt">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                data-target="#collapseSomaAngulosInt" aria-expanded="false" aria-controls="collapseSomaAngulosInt">
+                Soma dos Ângulos Internos: <ng-katex class="explicacao" equation="S = 360\degree">
+                </ng-katex>
+              </button>
+
+              <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                data-target="#collapseSomaAngulosInt"></i>
+            </h2>
+          </div>
+          <div id="collapseSomaAngulosInt" class="collapse" aria-labelledby="headingSomaAngulosInt"
+            data-parent="#accordionExample">
+            <div class="card-body">
+              <div class="panel-group" id="accordion">
+                <!--SomaAngulosInt - Passo 1-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                        <p>
+                          <ng-katex class="explicacao" equation="\textcolor{black}{S = (4 - 2) \cdot 180\degree } ">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Substituímos o número de lados <ng-katex equation="N = 4"></ng-katex> na fórmula
+                      <ng-katex equation="S = (N - 2) \cdot 180\degree "></ng-katex>.
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <!--SomaAngulosInt - Passo 2-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
+                        <p>
+                          <ng-katex class="explicacao" equation="\textcolor{black}{S = 2 \cdot 180\degree }">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Resolvemos as operações entre parênteses.
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <!--SomaAngulosInt - Passo 3-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="">
+                        <p>
+                          <ng-katex class="explicacao" equation="\textcolor{black}{S = 360\degree }">
+                          </ng-katex>
+                          <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                            data-target="#collapseGeratriz"></i>
+                        </p>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      Resultado final.
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fim Calculo SomaAngulosInt -->
+
+    </div>
+
+  </div>
+
+</geo-base-view>

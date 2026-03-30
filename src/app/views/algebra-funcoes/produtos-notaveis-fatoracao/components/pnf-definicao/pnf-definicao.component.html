@@ -1,0 +1,1067 @@
+<section class="ifmath-description">
+  <h3>Produtos‌ ‌Notáveis‌ ‌</h3>
+  
+  <p class="p-justify">
+    Os‌ ‌‌produtos‌ ‌notáveis‌ nada mais ‌são ‌do que multiplicações em que os fatores são polinômios.
+    Essas ‌expressões‌ ‌algébricas podem ser‌ ‌utilizadas‌ ‌em‌
+    ‌muitos‌ ‌cálculos‌ ‌matemáticos,‌ ‌por‌ ‌exemplo,‌ ‌nas‌ ‌equações‌ ‌de‌
+    ‌primeiro‌ ‌e‌ ‌de‌ ‌segundo‌ ‌grau.‌ São cinco os produtos notáveis com maior destaque:
+    Quadrado‌ ‌da‌ ‌Soma‌ ‌de‌ ‌Dois‌ ‌Termos‌, Quadrado‌ ‌da‌ ‌Diferença‌ ‌de‌ ‌Dois‌ ‌Termos‌, 
+    Produto‌ ‌da‌ ‌Soma‌ ‌pela‌ ‌Diferença‌ ‌de‌ ‌Dois‌ ‌Termos‌, ‌Cubo‌ ‌da‌ ‌Soma‌ ‌de‌ ‌Dois‌ ‌Termos‌ e
+    ‌Cubo‌ ‌da‌ ‌Diferença‌ ‌de‌ ‌Dois‌ ‌Termos.<br>
+  </p>
+  <p class="p-justify">
+    Como as expressões são representadas por multiplicações entre múltiplos fatores, a 
+    <b>propriedade distributiva</b> geralmente está associada a elas, e pode ser
+    definida como:<br> Propriedade indicando que dois ou mais termos presentes numa expressão de soma ou subtração multiplicada por
+    outra, é igual à soma ou à diferença da multiplicação de cada um dos termos da adição ou da subtração pelo número. Ou ainda, pode ser
+    definida pela expressão algébrica: <b>a x (b + c) = a x b + a x c </b> ou <b>a x (b - c) = a x b - a x c </b> 
+  </p>
+
+  <hr>
+
+  <h4>Quadrado‌ ‌da‌ ‌Soma‌ ‌de‌ ‌Dois‌ ‌Termos‌</h4>
+  <p class="p-justify">
+    ‌‌O quadrado‌ ‌da‌ ‌soma‌‌ ‌dos‌ ‌dois‌ ‌termos‌ ‌é‌ ‌representado‌ ‌pela‌
+    ‌seguinte‌ ‌expressão:‌ <b>(a‌ ‌+‌ ‌b)²‌ ‌=‌ ‌(a‌ ‌+‌ ‌b)‌ * (a‌ ‌+‌ ‌b)‌ </b>.
+    ‌ Logo,‌ ‌ao‌ ‌aplicar‌ ‌a‌ ‌propriedade‌ ‌distributiva‌ ‌temos‌:‌ ‌
+    <b>(a‌ ‌+‌ ‌b)²‌ ‌=‌ ‌a²‌ ‌+‌ ‌2ab‌ ‌+‌ ‌b²‌</b>. Assim,‌ ‌o‌ ‌quadrado‌ ‌do‌
+    ‌primeiro‌ ‌termo‌ ‌é‌ ‌somado‌ ‌ao‌ ‌dobro‌ ‌do‌ ‌primeiro‌ ‌termo‌ ‌pelo‌
+    ‌segundo‌ ‌termo,‌ ‌e‌ ‌por‌ ‌fim,‌ ‌somado‌ ‌ao‌ ‌quadrado‌ ‌do‌ ‌segundo‌
+    ‌termo.‌
+  </p>
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1:</h5>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationOne,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationOne = !isVisibleEquationOne">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationOne" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationOne,0)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Identificação do tipo de produto notável a partir da equação inicial: Quadrado da soma de dois termos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationOne,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Aplicando o produto notável fazendo o quadrado do primeiro termo, mais o dobro do produto do primeiro 
+                pelo segundo termo, mais o quadrado do segundo termo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 3:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationOne,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Resolvendo as operações de potência.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 4:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationOne,3)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Resolvendo as multiplicações.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 5 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 5:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationOne,4)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Ou ainda, colocando em ordem decrescente.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <h4>Quadrado‌ ‌da‌ ‌Diferença‌ ‌de‌ ‌Dois‌ ‌Termos‌</h4>
+  <p class="p-justify">
+    O‌ ‌‌quadrado‌ ‌da‌ ‌diferença‌ ‌‌dos‌ ‌dois‌ ‌termos‌ ‌é‌ ‌representado‌
+    ‌pela‌ ‌seguinte‌ ‌expressão:‌‌ <b>(a‌ ‌–‌ ‌b)²‌ ‌=‌ ‌(a‌ ‌–‌ ‌b)‌ ‌* ‌(a‌
+    ‌–‌ ‌b)‌</b>. Assim,‌ ‌ao‌ ‌aplicar‌ ‌a‌ ‌propriedade‌ ‌distributiva‌ ‌temos‌
+    ‌que:‌ <b>(a‌ ‌–‌ ‌b)²‌ ‌=‌ ‌a²‌ ‌-‌ ‌2ab‌ ‌+‌ ‌b²</b>.‌ ‌ Logo,‌ ‌o‌ ‌quadrado‌
+    ‌do‌ ‌primeiro‌ ‌termo‌ ‌é‌ ‌subtraído‌ ‌ao‌ ‌dobro‌ ‌do‌ ‌produto‌ ‌do‌
+    ‌primeiro‌ ‌termo‌ ‌pelo‌ ‌segundo‌ ‌termo‌ ‌e,‌ ‌por‌ ‌fim,‌ ‌somado‌ ‌ao‌
+    ‌quadrado‌ ‌do‌ ‌segundo‌ ‌termo.‌ ‌
+  </p>
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1:</h5>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationTwo,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationTwo = !isVisibleEquationTwo">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationTwo" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationTwo,0)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Identificação do tipo de produto notável a partir da equação inicial: Quadrado da diferença de dois termos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationTwo,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Aplicando o produto notável fazendo o quadrado do primeiro termo, menos o dobro do produto do primeiro 
+                pelo segundo termo, mais o quadrado do segundo termo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 3:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationTwo,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Resolvendo as operações de potência.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 4:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationTwo,3)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Resolvendo as multiplicações.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <h4>Produto‌ ‌da‌ ‌Soma‌ ‌pela‌ ‌Diferença‌ ‌de‌ ‌Dois‌ ‌Termos‌</h4>
+
+  <p class="p-justify">
+
+    O‌ ‌‌produto‌ ‌da‌ ‌soma‌ ‌pela‌ ‌diferença‌ ‌dois‌ ‌termos‌ ‌é‌
+    ‌representado‌ ‌pela‌ ‌seguinte‌ ‌ expressão:‌ <b>(a‌ ‌+‌ ‌b)‌ ‌* ‌(a‌ ‌–‌
+    ‌b)‌ ‌=‌ ‌a²‌ ‌-‌ ‌b²‌ </b>. Nota-se‌ ‌que‌ ‌ao‌ ‌aplicar‌ ‌a‌ ‌propriedade‌
+    ‌distributiva‌ ‌da‌ ‌multiplicação,‌ ‌o‌ ‌resultado‌ ‌da‌ ‌expressão‌ ‌é‌
+    ‌a‌ ‌subtração‌ ‌do‌ ‌quadrado‌ ‌do‌ ‌primeiro‌ ‌e‌ ‌do‌ ‌segundo‌ ‌termo.‌
+  </p>
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1:</h5>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationThree,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationThree = !isVisibleEquationThree">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationThree" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationThree,0)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Identificação do tipo de produto notável a partir da equação inicial: Produto da soma pela diferença de dois termos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationThree,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Aplicando o produto notável fazendo o quadrado do primeiro termo, menos o quadrado do segundo termo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 3:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationThree,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Resolvendo as operações de potência.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 4:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationThree,3)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Ou ainda, colocando em ordem decrescente.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <h4>Cubo‌ ‌da‌ ‌Soma‌ ‌de‌ ‌Dois‌ ‌Termos‌</h4>
+  <p class="p-justify">
+    O‌ ‌‌cubo‌ ‌da‌ ‌soma‌‌ ‌de‌ ‌dois‌ ‌termos‌ ‌é‌ ‌representado‌ ‌pela‌
+    ‌seguinte‌ ‌expressão:‌ <b>(a‌ ‌+‌ ‌b)³‌ ‌=‌ ‌(a‌ ‌+‌ ‌b)‌ ‌* ‌(a‌ ‌+‌ ‌b)‌
+    ‌* ‌(a‌ ‌+‌ ‌b)</b>‌. ‌Logo,‌ ‌ao‌ ‌aplicar‌ ‌a‌ ‌propriedade‌ ‌distributiva‌
+    ‌temos:‌ <b>a³‌ ‌+‌ ‌3a²b‌ ‌+‌ ‌3ab²‌ ‌+‌ ‌b³‌</b>. ‌Dessa‌ ‌forma,‌ ‌o‌ ‌cubo‌
+    ‌do‌ ‌primeiro‌ ‌termo‌ ‌é‌ ‌somado‌ ‌ao‌ ‌triplo‌ ‌do‌ ‌produto‌ ‌do‌
+    ‌quadrado‌ ‌ do‌ ‌primeiro‌ ‌termo‌ ‌pelo‌ ‌segundo‌ ‌termo‌ ‌e‌ ‌o‌
+    ‌triplo‌ ‌do‌ ‌produto‌ ‌do‌ ‌primeiro‌ ‌termo‌ ‌pelo‌ quadrado‌ ‌do‌
+    ‌segundo‌ ‌termo.‌ ‌Por‌ ‌fim,‌ ‌ele‌ ‌é‌ ‌somado‌ ‌ao‌ ‌cubo‌ ‌do‌
+    ‌segundo‌ ‌termo.‌ ‌
+  </p>
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1:</h5>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationFour,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationFour = !isVisibleEquationFour">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationFour" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationFour,0)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Identificação do tipo de produto notável a partir da equação inicial: Cubo da soma de dois termos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationFour,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Aplicando o produto notável fazendo o cubo do primeiro termo, mais o triplo do produto do quadrado
+                do primeiro termo pelo segundo termo, mais o triplo do produto do primeiro pelo quadrado do segundo termo,
+                mais o cubo do segundo termo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 3:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationFour,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Resolvendo as operações de potência.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 4:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationFour,3)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Resolvendo as multiplicações.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <h4>‌Cubo‌ ‌da‌ ‌Diferença‌ ‌de‌ ‌Dois‌ ‌Termos‌</h4>
+  <p class="p-justify">
+
+    O‌ ‌‌cubo‌ ‌da‌ ‌diferença‌‌ ‌de‌ ‌dois‌ ‌termos‌ ‌é‌ ‌representado‌ ‌pela‌
+    ‌seguinte‌ ‌expressão:‌ <b>(a‌ ‌–‌ ‌b)³‌ ‌=‌ ‌(a‌ ‌–‌ ‌b)‌ ‌*‌ ‌(a‌ ‌–‌ ‌b)‌
+    ‌* ‌(a‌ ‌–‌ ‌b)‌</b>. Logo,‌ ‌ao‌ ‌aplicar‌ ‌a‌ ‌propriedade‌ ‌distributiva‌
+    ‌temos:‌ ‌<b>a³‌ ‌-‌ ‌3a²b‌ ‌+‌ ‌3ab²‌ ‌-‌ ‌b³‌</b>. Assim,‌ ‌o‌ ‌cubo‌ ‌do‌
+    ‌primeiro‌ ‌termo‌ ‌é‌ ‌subtraído‌ ‌ao‌ ‌triplo‌ ‌do‌ ‌produto‌ ‌do‌
+    ‌quadrado‌ ‌do‌ primeiro‌ ‌termo‌ ‌pelo‌ ‌segundo‌ ‌termo.‌ ‌Por‌
+    ‌conseguinte,‌ ‌ele‌ ‌é‌ ‌somado‌ ‌ao‌ ‌triplo‌ ‌do‌ ‌ produto‌ ‌do‌
+    ‌primeiro‌ ‌termo‌ ‌pelo‌ ‌quadrado‌ ‌do‌ ‌segundo‌ ‌termo.‌ ‌E,‌ ‌por‌
+    ‌fim,‌ ‌é‌ ‌subtraído ao‌ ‌cubo‌ ‌do‌ ‌segundo‌ ‌termo.
+  </p>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1:</h5>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationFive,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationFive = !isVisibleEquationFive">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationFive" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationFive,0)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Identificação do tipo de produto notável a partir da equação inicial: Cubo da diferença de dois termos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationFive,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Aplicando o produto notável fazendo o cubo do primeiro termo, menos o triplo do produto do quadrado
+                do primeiro termo pelo segundo termo, mais o triplo do produto do primeiro pelo quadrado do segundo termo,
+                menos o cubo do segundo termo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 3:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationFive,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Resolvendo as operações de potência.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 4:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationFive,3)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Resolvendo as multiplicações.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 5 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 4:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationFive,4)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Ou ainda, colocando em ordem decrescente.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <hr>
+
+  <h3>Fatoração</h3>
+  
+  <p class="p-justify">
+    A fatoração é responsável por transformar a soma e a subtração de 
+    expressões algébricas ou equações em um produto com fatores. Também
+    pode ser entendido como a simplificação de expressões.<br>
+  </p>
+  <p class="p-justify">
+    As fatorações abordadas são: Fator Comum em Evidência, Agrupamento,
+    Trinômio Quadrado Perfeito, Diferença de Dois Quadrados, Cubo perfeito 
+     (adição e subtração) e Produto de Dois Binômios.
+  </p>
+
+  <hr>
+  <h4>‌Fator Comum em Evidência</h4>
+  <p class="p-justify">
+
+  Podemos aplicar a fatoração de polinômios utilizando o inverso da propriedade 
+  distributiva, colocando fatores comuns em evidência, como na fórmula: 
+  <b>ax + bx = x. (a + b)</b>. A variável <b>x</b> é comum aos dois termos, assim podemos
+   usar da propriedade da multiplicação e colocá-la em evidência sem alterar o resultado.
+  </p>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1:</h5>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationSix,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationSix = !isVisibleEquationSix">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationSix" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationSix,0)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Identificação do tipo de fatoração a partir da equação inicial: Fator comum em evidência.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationSix,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Verificamos o elemento que temos em comum e colocamos em evidência.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <h4>Agrupamento</h4>
+  
+  <p class="p-justify">
+    Consiste em fazer a junção dos termos e variáveis em comum, como
+    na fórmula: <b>ax + bx + ay + by = x . (a + b) + y . (a + b) = (x + y) . (a + b)</b>.
+    Com a multiplicação de termos e variáveis em comum, podemos agrupar as 
+    variáveis e os coeficientes em comum, fazendo o produto da soma sem 
+    alterar o resultado final.
+  </p>
+<br>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1:</h5>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationSeven,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationSeven = !isVisibleEquationSeven">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationSeven" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationSeven,0)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Identificação do tipo de fatoração a partir da equação inicial: Agrupamento.
+                 Note que nesse caso temos um elemento em comum nos primeiros termos e 
+                 um elemento comum nos últimos termos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationSeven,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Colocamos em evidência o elemento que temos em comum nos primeiros termos 
+                e somamos ao elemento que possuímos em comum nos últimos termos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationSeven,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Escrevemos a expressão como o produto da soma de dois termos, sem alterar 
+                o resultado final.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <h4>Trinômio Quadrado Perfeito</h4>
+  
+  <p class="p-justify">
+    São polinômios formados por três monômios em que o primeiro e o último termos
+    são quadrados e o termo central é o dobro do produto entre o primeiro termo e o
+    segundo termo, como na fórmula: <b>a² + 2ab + b² = (a + b)²</b>. 
+    Assim, podemos simplificar reescrevendo o polinômio como o quadrado da soma dos dois termos.
+    Caso o sinal do termo central seja negativo, podemos reescrever o polinômio como 
+    o quadrado da diferença dos dois termos: <b>a² - 2ab + b² = (a - b)²</b>.
+  </p>
+<br>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1:</h5>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationEight,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationEight = !isVisibleEquationEight">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationEight" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationEight,0)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Identificação do tipo de fatoração a partir da equação inicial: Trinômio quadrado perfeito. 
+                Note que a expressão é formada por três monômios em que o primeiro e o último termo são quadrados 
+                e o termo cental é o dobro do produto entre o primeiro termo e o segundo termo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationEight,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Escrevemos a expressão no formato 𝒶² + 2 · 𝒶 · 𝒷 + 𝒷², identificando os elementos que estão 
+                elevados ao quadrado e os respectivos produtos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationEight,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Identificamos os elementos 𝒶 e 𝒷, e escrevemos o resultado como o quadrado da soma, 
+                no formato (𝒶 + 𝒷)².
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  
+  <h4>Diferença de dois quadrados</h4>
+  
+  <p class="p-justify">
+     Quando temos uma expressão algébrica que apresenta a diferença entre os
+     quadrados de dois termos, podemos reescrevê-los como o produto de uma 
+     soma por uma subtração entre os dois termos, como na fórmula:
+     <b>a² – b² = (a + b) . (a – b)</b>. Para verificar essa 
+     propriedade, basta realizar a <b>distributiva</b>:
+    <b>(a + b) . (a – b) = a² – ab + ab – b² = a² – b²</b>
+  </p>
+<br>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1:</h5>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationNine,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationNine = !isVisibleEquationNine">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationNine" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationNine,0)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Identificação do tipo de fatoração a partir da equação inicial: Diferença de dois quadrados.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationNine,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Escrevemos a expressão no formato 𝒶² − 𝒷², identificando os elementos que estão elevados ao quadrado.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationNine,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Escrevemos a expressão como o produto da soma pela diferença de dois termos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <h4>Cubo Perfeito</h4>
+  
+  <p class="p-justify">
+    É uma expressão algébrica em que dois termos são o cubo de um número e os 
+    outros dois termos são múltiplos de 3. Podemos encontrar o
+    cubo perfeito de duas formas: cubo da adição ou cubo da subtração.
+  </p>
+
+  <h4>Cubo da Adição</h4>
+  
+  <p class="p-justify">
+    É quando temos um polinômio com o primeiro termo ao cubo (a³), 
+    mais o segundo termo, igual a três vezes o quadrado do primeiro, 
+    vezes o segundo termo (3 * a² * b), mais três vezes o primeiro termo,
+    vezes o quadrado do segundo termo (3 * a * b²), mais o cubo do segundo termo (b³).
+    Assim, podemos escrevê-lo como o cubo da soma: <b>a³ + 3a²b + 3ab² + b³ = (a + b)³</b>.
+  </p>
+<br>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1:</h5>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationTen,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationTen = !isVisibleEquationTen">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationTen" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationTen,0)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Identificação do tipo de fatoração a partir da equação inicial: Cubo perfeito (cubo da soma).
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationTen,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Escrevemos a expressão no formato 𝒶³ + 3 · 𝒶² · 𝒷 + 3 · 𝒶 · 𝒷² + 𝒷³, identificando 
+                os elementos que estão elevados ao cubo, ao quadrado e os respectivos produtos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationTen,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Identificamos os elementos 𝒶 e 𝒷, e escrevemos o resultado como o quadrado da soma, 
+                no formato (𝒶 + 𝒷)³.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <h4>Cubo da Subtração</h4>
+  
+  <p class="p-justify">
+    É quando temos um polinômio com o primeiro termo ao cubo (a³), 
+    menos o segundo termo, igual a três vezes o quadrado do primeiro, 
+    vezes o segundo termo (3 * a² * b), mais três vezes o primeiro termo, 
+    vezes o quadrado do segundo termo (3 * a * b²), menos o cubo do segundo termo (b³).
+    Então, podemos reescrevê-lo como o cubo da diferença:
+    <b>a³ – 3a²b + 3ab² – b³ = (a – b)³</b>.    
+  </p>
+<br>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1:</h5>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationEleven,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationEleven = !isVisibleEquationEleven">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationEleven" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationEleven,0)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Identificação do tipo de fatoração a partir da equação inicial: Cubo perfeito (cubo da diferença).
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationEleven,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Escrevemos a expressão no formato 𝒶³ − 3 · 𝒶² · 𝒷 + 3 · 𝒶 · 𝒷² − 𝒷³,
+                identificando os elementos que estão elevados ao cubo, ao quadrado e os respectivos produtos.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationEleven,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Identificamos os elementos 𝒶 e 𝒷, e escrevemos o resultado como o quadrado da diferença, 
+                no formato (𝒶 − 𝒷)³.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  
+  <h4>Produto de dois binômios</h4>
+  
+  <p class="p-justify">
+    É a representação de uma equação do segundo grau, 
+    no formato: <b>ax^2 + bx + c</b>. No qual é aplicada
+    a <b>fórmula de bháskara</b>, que é representada pela fórmula:
+    <b>-b +- (√ b^2 - 4 * a * c) / 2</b>; ou ainda pela <b>soma e produto</b>.
+    A partir disso são descobertos as duas raízes (x' e x'', ou x¹ e x²) e 
+    apresentado o valor de <b>a</b> multiplicado pela variável <b>x</b> menos
+    o valor da primeira raiz, multiplicado pela variável <b>x</b> menos
+    o valor da segunda raiz.
+  </p>
+<br>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h5>Exemplo 1:</h5>
+      <div class="row">
+        <div class="col-sm-12">
+          <ng-katex [equation]="getArrayItem(equationTwelve,0)" [options]="options"></ng-katex>
+        </div>
+        <div class="col-sm-12">
+          <button class="ifmath-description__button__solution ifmath-description__button__solution--blackgrey" (click)="isVisibleEquationTwelve = !isVisibleEquationTwelve">Solução
+            da Equação</button>
+        </div>
+        <div *ngIf="isVisibleEquationTwelve" class="col-sm-12">
+          <h3>Solução:</h3>
+
+          <!-- Passo 1 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 1:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationTwelve,0)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify">
+                Identificação do tipo de fatoração a partir da equação inicial: Trinômio do segundo grau. 
+                Note que a expressão é um trinômio no formato 𝒶𝓍² + 𝒷𝓍 + 𝒸.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationTwelve,1)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Escrevemos a expressão no formato 𝓍² + (𝒷/𝒶)𝓍 + (𝒸/𝒶), 
+                identificando os elementos que estão elevados ao quadrado e as respectivas divisões.
+              </p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="ifmath-description__step__title">Passo 2:</h3>
+            </div>
+            <div class="col-sm-12">
+              <ng-katex [equation]="getArrayItem(equationTwelve,2)" [options]="options"></ng-katex>
+            </div>
+            <div class="col-sm-12">
+              <p class="ifmath-description__text ifmath-description__text--justify"> 
+                Identificamos dois elementos 𝓍' e 𝓍'' tal que 𝓍' + 𝓍'' = −(𝒷/𝒶) e 𝓍' · 𝓍'' = 𝒸/𝒶 
+                ou utilizando a fórmula de Bháskara e escrevemos o resultado como um 
+                produto 𝒶 · (𝓍 − 𝓍') · (𝓍 − 𝓍'').
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+</section>

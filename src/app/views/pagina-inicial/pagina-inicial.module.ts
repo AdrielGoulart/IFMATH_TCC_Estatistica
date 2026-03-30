@@ -12,10 +12,9 @@ import { AppRoutingModule } from '../../app.routing';
 import { AlgebraFuncoesComponent } from './algebra-funcoes/algebra-funcoes.component';
 import { GeometriaComponent } from './geometria/geometria.component';
 import { NumerosOperacoesComponent } from './numeros-operacoes/numeros-operacoes.component';
-import { EstatisticaComponent } from './estatistica/estatistica.component';
+import { EstatisticaProbabilidadeComponent } from "./estatistica-probabilidade/estatistica-probabilidade.component";
 import { ErrorPagesComponent } from './error-pages/error-pages.component';
 import { FooterComponent } from './footer/footer.component';
-
 
 @NgModule({
   imports: [
@@ -30,9 +29,9 @@ import { FooterComponent } from './footer/footer.component';
     AlgebraFuncoesComponent,
     GeometriaComponent,
     NumerosOperacoesComponent,
+    EstatisticaProbabilidadeComponent,
     ErrorPagesComponent,
     FooterComponent,
-    EstatisticaComponent,
   ],
 
   exports: [
@@ -42,7 +41,9 @@ import { FooterComponent } from './footer/footer.component';
     AlgebraFuncoesComponent,
     GeometriaComponent,
     NumerosOperacoesComponent,
+    EstatisticaProbabilidadeComponent,
     FooterComponent,
+
   ],
 
   providers: [NavBarService]

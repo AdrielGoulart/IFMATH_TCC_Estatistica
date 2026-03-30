@@ -1,0 +1,82 @@
+<geo-base-view>
+  <!-- Botões de navegação -->
+  <div class="btn-container mt-2 row">
+    <h5 class="mt-2 col-12 text-center">Escolha abaixo a explicação de como chegar no pi ou ou calcular o comprimento de
+      uma circunferência</h5>
+    <geo-btn *ngFor="let button of buttons; let i = index" [name]="button.title" [route]="button.route"></geo-btn>
+  </div>
+
+  <!-- Botão para inserir a medida do ângulo-->
+  <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+    <div class=" mt-4">
+      <p class="text-center">
+        Entre com a medida do raio(<ng-katex equation="\color{red}{r}"></ng-katex>):
+        <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="radius"
+          oninput="this.value = Math.abs(this.value)" (ngModelChange)="checkInput()" max="10" min="1" />
+      </p>
+      <div [className]="errorInputRadius === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'"
+        role="alert" style="text-align: center;">
+        O raio deve ser um valor inteiro contido entre <b>1</b> e <b>10</b>.
+      </div>
+    </div>
+
+
+    <geo-scene class="col-12 row px-0 bg-primary img-fluid" [hasOrbitControls]="false" [hasPerspective]="false">
+      <geo-circunferencemesh [radius]="radiusExt" [segmentCount]="92" [color]="'rgb(0,0,0)'"></geo-circunferencemesh>
+      <geo-circunferencemesh [radius]="radiusInt" [segmentCount]="92" [color]="'rgb(255,255,255)'">
+      </geo-circunferencemesh>
+    </geo-scene>
+  </div>
+
+  <!-- Propriedades -->
+  <div class="rightbar px-3 vh-100">
+    <h4>
+      Comprimento da circunferência:
+    </h4>
+    <p>
+      Podemos determinar a medida aproximada do comprimento da circunferência,
+      envolvendo-a com um cordão e, em seguida, medindo-o.
+    </p>
+    <br />
+    <p>
+      A relação entre a medida do Comprimento (<ng-katex equation="C"></ng-katex>) e a medida do diâmetro (<ng-katex
+        equation="d"></ng-katex>) da circunferência é:
+      <ng-katex equation="\frac{C}{d}=\pi"></ng-katex>
+    </p>
+    <br />
+    <p>
+      Logo: <ng-katex equation="C = d \cdot \pi"></ng-katex>
+    </p>
+    <br />
+    <p>
+      Sabendo que a medida do diâmetro é o dobro da medida do raio: <ng-katex equation="d = 2\color{red}{r}"></ng-katex>
+      .
+      Então: <ng-katex equation="C = 2 \cdot \color{red}{r} \cdot \pi"></ng-katex>
+    </p>
+    <br />
+    <p>
+      <ng-katex equation="C = 2\pi \cdot \color{red}{r}"></ng-katex>
+    </p>
+
+    <hr />
+    <h5>Exemplo: </h5>
+    <p>
+      <ng-katex [equation]="equacao"></ng-katex>
+    </p>
+    <p>
+      <ng-katex equation="C = {{ 2 * radius }} \ \pi \ u.c. "></ng-katex>
+    </p>
+
+    <p>
+      Ou, utilizando a aproximação: <ng-katex equation="\pi = \color{blue}{3,14}"></ng-katex>
+    </p>
+    <p>
+      <ng-katex equation="C = {{ 2 * radius }} \cdot \color{blue}{3,14} "></ng-katex>
+    </p>
+    <p>
+      <ng-katex equation="C = {{ 2 * radius * 3.14 | number:'':'pt' }} "></ng-katex>
+    </p>
+
+  </div>
+
+</geo-base-view>

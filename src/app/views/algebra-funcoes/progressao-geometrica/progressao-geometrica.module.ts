@@ -1,3 +1,4 @@
+import { PgPropiedadesComponent } from './components/pg-propiedades/pg-propiedades.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +23,7 @@ import { PgSomaElementosFinitaComponent } from './components/pg-soma-elementos-f
 import { PgSomaElementosInfinitaComponent } from './components/pg-soma-elementos-infinita/pg-soma-elementos-infinita.component';
 import { PgVerificarElementoComponent } from './components/pg-verificar-elemento/pg-verificar-elemento.component';
 import { PgCriarSequenciaComponent } from './components/pg-criar-sequencia/pg-criar-sequencia.component';
+import { PgSomaComponent } from './components/pg-soma/pg-soma.component';
 
 
 @NgModule({
@@ -47,6 +49,8 @@ import { PgCriarSequenciaComponent } from './components/pg-criar-sequencia/pg-cr
     PgSomaElementosInfinitaComponent,
     PgVerificarElementoComponent,
     PgCriarSequenciaComponent,
+    PgSomaComponent,
+    PgPropiedadesComponent
   ],
 
   providers: [ServicoProgressaoGeometrica]

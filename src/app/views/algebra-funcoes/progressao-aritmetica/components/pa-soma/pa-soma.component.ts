@@ -14,7 +14,6 @@ import 'rxjs/add/operator/do';
   styleUrls: ['./pa-soma.component.scss']
 })
 export class PaSomaComponent implements OnInit {
-
   public form: FormGroup = this.fb.group({
     a1: ['', Validators.required],
     an: ['', Validators.required],

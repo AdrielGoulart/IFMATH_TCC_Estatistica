@@ -9,22 +9,28 @@ h2, h5 {
   border-color: #32a041;
   margin-top: 1%;
   margin-bottom: 1%;
-  background-color: rgba(108, 213, 108, 0.41);
+  background-color: rgba(77, 215, 39, 0.41);
   padding: 1% 0 1% 0;
 }
 
 p {
     text-align: justify;
     margin-left: 2%;
-    margin-right: 2%
+    margin-right: 2%;
+    margin-top: -7%;
 }
 
 img {
     width: 40%;
     display: block;
-    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 6%;
+    margin-left: auto;
+    margin-right: auto;
     padding: 1% 0 1% 0;
 }
+
+
 
 #ori {
     text-align: center;
@@ -38,9 +44,7 @@ img {
     padding-right: 2%;
 }
 
-/deep/ nav{
-    background-color: #359d6e !important;
-  }
+
   
 
 @media screen and (max-width: 992px) {
@@ -48,7 +52,7 @@ img {
         text-align: center;
         border-style: solid;
         border-width: 0.1em;
-        border-color: green;
+        border-color: #32a041;
         border-right: none;
         border-left: none;
         margin: 4% 2% 4% 2%;
@@ -61,8 +65,9 @@ img {
         text-align: center;
         border-style: solid;
         border-width: 0.1em;
-        border-color: green;
+        border-color: #32a041;
         border-bottom: none;
         border-top: none;
     }
+   
   }

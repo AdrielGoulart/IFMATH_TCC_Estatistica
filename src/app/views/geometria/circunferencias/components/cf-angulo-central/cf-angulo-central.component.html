@@ -1,0 +1,268 @@
+<geo-base-view>
+  <!-- Botões de navegação -->
+  <div class="btn-container mt-2 row">
+    <h5 class="mt-2 col-12 text-center">Escolha abaixo o ângulo da circunferência em relação a um vértice</h5>
+    <geo-btn *ngFor="let button of buttons; let i = index" [name]="button.title" [route]="button.route"></geo-btn>
+  </div>
+
+  <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+
+    <!-- Botão para inserir a medida do ângulo-->
+    <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+      <div class=" mt-4">
+        <p class="text-center" style="margin-right: 100px;">
+          Entre com a medida do raio(<ng-katex equation="\color{red}{r}"></ng-katex>):
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="radius"
+            oninput="this.value = Math.abs(this.value)" (ngModelChange)="checkInput()" max="10" min="1" />
+          <label>e do ângulo (<i><b> α </b></i>):</label>
+          <input class="btn btn-secondary bg-white text-body" type="number" [(ngModel)]="angle" style="position: absolute; margin-left: 10px;"
+          oninput="this.value = Math.round(Math.abs(this.value))" (ngModelChange)="checkInput()" max="360" min="0" />
+          <span style="position: absolute; margin-top: -7.5px; font-size: 20px; pointer-events: none;" id="degree">°</span>
+        </p>
+
+        <div [className]="errorInputRadius === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'"
+          role="alert" style="text-align: center;">
+          O raio deve ser um valor inteiro contido entre <b>1</b> e <b>10</b>.
+        </div>
+        <div [className]="errorInputAngle === true ? ' mt-1 alert alert-danger' : ' mt-1 alert alert-primary'"
+          role="alert" style="text-align: center;">
+          O ângulo deve ser um valor contido entre <b>0°</b> e <b>360°</b>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Cena -->
+    <geo-scene (mousedown)="mouseDown($event)" (mouseup)="mouseUp($event)" (mousemove)="mouseMove($event)"
+      class="col-12 row px-0 bg-primary img-fluid" [hasOrbitControls]="false" [hasPerspective]="false">
+      <geo-circunferencemesh [radius]="radiusExt" [segmentCount]="90" [color]="'rgb(70,131,180)'">
+      </geo-circunferencemesh>
+      <geo-circunferencemesh [radius]="radiusInt" [segmentCount]="90" [color]="'rgb(255,255,255)'">
+      </geo-circunferencemesh>
+    </geo-scene>
+  </div>
+
+  <!-- Propriedades -->
+  <div class="rightbar px-3 vh-100">
+    <h4>
+      Ângulo Central
+    </h4>
+    <button class="btn btn-primary m-1" *ngFor="let button of buttons_examples"
+      (click)="loadExample($event, button.value)">
+      {{button.title}}
+    </button>
+    <hr />
+    <h5>
+      Propriedades:
+    </h5>
+    <div *ngIf="relation == 0">
+      <div class="alert alert-primary" role="alert">
+        <p>Um ângulo central é um ângulo cujo vértice se encontra no centro da circunferência.</p>
+        <p>Duas semirretas o compõem e interceptam a circunferência em dois pontos distintos.</p>
+        <br>
+        <h5>Exemplo</h5>
+        <p class="text-center"><img class="img-fluid" style="width: 275px;"
+            src="../../../../../../assets/images/geometria/cincunferencia/cf-angulos/Angulo_central.svg"></p>
+        <h5 class="text-center"><strong>
+            <ng-katex equation="\alpha = A\widehat{O}B"></ng-katex>
+          </strong></h5>
+        <h5 class="text-center"><strong>
+            <ng-katex equation="\alpha = {{ showAngle }}\degree"></ng-katex>
+          </strong></h5>
+      </div>
+    </div>
+    <div *ngIf="relation == 1">
+      <!-- Puxar do backend -->
+      <div class="alert alert-primary" role="alert">
+        <p>O ângulo central entre A e B determina um arco <ng-katex equation="\ \overgroup{AB}"></ng-katex>
+        </p>
+
+        <p>O comprimento do arco, é a distância percorrida sobre a circunferência de A até B.
+          Sua medida é igual à do próprio ângulo central multiplicada pelo tamanho do raio da circunferência:</p>
+        <ng-katex equation="Med\ \overgroup{AB} = \alpha * r"></ng-katex>
+        <br>
+        <h5>Exemplo:</h5>
+        <p class="text-center"><img class="img-fluid" style="width: 275px;"
+            src="../../../../../../assets/images/geometria/cincunferencia/cf-angulos/Angulo_central_comprimento_arco.svg">
+        </p>
+
+        <!-- Calculos -->
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header" id="headingPrincipal" data-toggle="collapse" data-target="#collapsePrincipal">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                  data-target="#collapsePrincipal" aria-expanded="false" aria-controls="collapsePrincipal">
+                  Cálculo = <ng-katex class="explicacao"
+                    equation="{{ (showAngle * radius)/180 | number:'1.0-3':'pt'}} \ \pi  \ u.m ">
+                  </ng-katex>
+                </button>
+
+                <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                  data-target="#collapsePrincipal"></i>
+              </h2>
+            </div>
+            <div id="collapsePrincipal" class="collapse" aria-labelledby="headingPrincipal"
+              data-parent="#accordionExample">
+              <div class="card-body">
+                <div class="panel-group" id="accordion">
+                  <!--Passo 1-->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                          <p>
+                            <ng-katex class="explicacao" equation="
+                            \textcolor{black}{
+                            \begin{array}{cc}
+                              180\degree & \pi \\
+                              {{showAngle}}\degree & x
+                           \end{array}}">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapseGeratriz"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Precisamos converter a medida do ângulo em radianos, usando regra de três.
+                        <ul>
+                          <li>
+                            Medidas da Esquerda em Graus
+                          </li>
+                          <li>
+                            Medidas da Direita em Radianos
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <!--Passo 2-->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="">
+                          <p>
+                            <ng-katex class="explicacao" equation="\textcolor{black}{180\degree x = {{ showAngle }}\degree \pi }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapseGeratriz"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Multiplicando em X, temos os valores acima.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <!--Passo 3-->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="">
+                          <p>
+                            <ng-katex class="explicacao" equation="\textcolor{black}{x = {{ showAngle }}\degree \pi / 180\degree }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapseGeratriz"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Agora, passamos o 180 dividindo.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <!--Passo 4-->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{x = {{showAngle / 180 | number:'1.0-3':'pt'}} \pi }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapseGeratriz"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Realizando a divisão, obtemos o ângulo em radianos.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!--Passo 5-->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" class="">
+                          <p>
+                            <ng-katex class="explicacao" equation="\textcolor{black}{Med\ \overgroup{AB} = ">
+                            </ng-katex>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{Med\ \overgroup{AB} = {{(showAngle / 180) | number:'1.0-3':'pt' }} \pi * {{radius}} }">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapseGeratriz"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseFive" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Substituindo o ângulo e o raio na fórmula:
+                        <ng-katex equation="Med\ \overgroup{AB} = \alpha * r"></ng-katex>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!--Passo 6-->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" class="">
+                          <p>
+                            <ng-katex class="explicacao"
+                              equation="\textcolor{black}{Med\ \overgroup{AB} = {{ (showAngle * radius)/180 | number:'1.0-3':'pt'}} \ \pi \ u.m}">
+                            </ng-katex>
+                            <i class="fa fa-arrow-circle-down float-right mt-2" data-toggle="collapse"
+                              data-target="#collapseGeratriz"></i>
+                          </p>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseSix" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        Efetuamos as respectivas multiplicações e divisões e obtivemos o resultado.
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+  </div>
+
+</geo-base-view>

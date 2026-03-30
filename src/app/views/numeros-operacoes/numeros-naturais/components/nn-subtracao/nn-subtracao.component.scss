@@ -1,0 +1,109 @@
+:host{
+    width: 100%;
+}
+
+.ifmath-form_img-formula{
+   margin-top: 12%;
+}
+:host ::ng-deep .resultnumber{
+   
+    clear:both;
+    font-size:3.5vh;
+    
+    width:inherit;
+}
+:host ::ng-deep .digit{
+    float:left;
+    min-width:4.4vh;
+    max-width:4.4vh;
+    margin:0x;
+    
+}
+:host ::ng-deep .seta-4{
+    border-top: 20px solid rgb(0, 0, 0);
+    border-left: 25px solid transparent; 
+    border-right: 25px solid transparent;
+    margin:20px 0px 10px 15%; float:left;
+}
+:host ::ng-deep .fa{
+    clear: both;
+}
+:host ::ng-deep .addoperation{
+    display: inline-block;
+    box-sizing: content-box;
+    clear:left;
+}
+:host ::ng-deep .addoperation2{
+    box-sizing: content-box;
+    float:left;
+}
+:host ::ng-deep .step{
+    clear:both;
+    box-sizing: content-box;
+}
+:host ::ng-deep .halfnumber{
+    font-size: 2.35vh;
+}
+:host ::ng-deep .topnumber{
+    font-size:3.5vh;
+    clear:both;
+    box-sizing: content-box;
+    float:left;
+    height:auto;
+    margin-top: 0;
+}
+
+:host ::ng-deep .topUnity{
+    font-size:3.5vh;
+    clear:both;
+    margin-bottom:0px;
+    box-sizing: content-box;
+    float:left;
+    height:7vh;
+    margin-top: -2.4vh;
+}
+
+
+
+:host ::ng-deep .downnumber{
+    font-size:3.5vh;
+    clear:both;
+    margin-top:0px;
+    border-bottom: solid 0.4vh;
+    box-sizing: content-box;
+    float:left;
+    height:auto;
+}
+:host ::ng-deep .finalresult{
+    font-size:8vh;
+    
+}
+
+:host ::ng-deep .leftover{
+    font-size:3.5vh;
+    float:left;
+    color: grey;
+    margin-bottom: -4vh;
+}
+@media only screen and (max-width:500px){
+    :host ::ng-deep .leftover{
+        font-size:1.2vh;
+    }
+    :host ::ng-deep .finalresult{
+        font-size: 3.2vh;
+    }
+    :host ::ng-deep .topnumber{
+        font-size: 2.7vh;
+    }
+    :host ::ng-deep .downnumber{
+        font-size: 2.7vh;
+        margin-top: -3.1vh;
+    }
+    :host ::ng-deep .digit{
+        min-width: 1.7vh;
+        max-width: 1.7vh;
+    }
+    :host ::ng-deep .resultnumber{
+        font-size: 2.7vh;
+    }
+}

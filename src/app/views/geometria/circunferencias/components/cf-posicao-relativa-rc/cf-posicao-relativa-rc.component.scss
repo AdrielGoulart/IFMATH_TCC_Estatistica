@@ -1,0 +1,16 @@
+@import '../../../shared/style/geo-conteudo.scss';
+@import '../../../shared/style/geo-rightbar.scss';
+
+.emphasize{
+    color: red; 
+    font-style: italic;
+}
+
+.elementToFadeInAndOut {
+    opacity: 0;
+}
+
+@keyframes fade {
+  0%,100% { opacity: 0 }
+  20%,80% { opacity: 1 }
+}

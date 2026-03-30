@@ -1,0 +1,78 @@
+<geo-base-view>
+  <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+
+    <h3 style="margin-top: 10px;">Polígonos</h3>
+    <div class="content-container col-12 row px-0 align-items-center justify-content-center">
+      <div class=" mt-4">
+        <p class="text-center">
+          Clique na tela para definir os vértices do polígono:
+        </p>
+      </div>
+    </div>
+
+    <!-- Cena -->
+    <geo-scene class="col-12 row px-0 bg-primary img-fluid" [hasOrbitControls]="false" [hasPerspective]="false"
+      (mousedown)="mouseDown($event)" (mouseup)="mouseUp($event)" (mousemove)="mouseMove($event)"
+      (contextmenu)="$event.preventDefault();"></geo-scene>
+
+    <button class="btn btn-primary m-1 lock" (click)="removePoints()">Limpar tela</button>
+
+    <!-- Observação para o usuário -->
+    <div style="display: flex;">
+      <div class="alert alert-primary alert-dismissible obs" role="alert"
+        style="text-align: center; margin-top: 10px; margin-right: 5px;" id="obs">
+        Clique com o botão esquerdo para adicionar um vértice
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-primary alert-dismissible obs" role="alert" style="text-align: center; margin-top: 10px;"
+        id="obs">
+        Clique e arraste com o botão esquerdo para mover um vértice
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-primary alert-dismissible obs" role="alert"
+        style="text-align: center; margin-top: 10px; margin-left: 5px;" id="obs">
+        Clique com o botão direito para remover um vértice.
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="rightbar px-3 vh-100">
+    <h4>Propriedades:</h4>
+    <p>
+      Polígonos são linhas fechadas formadas apenas por segmentos de reta que não se cruzam.
+    </p>
+
+    <div [ngSwitch]="type">
+      <div *ngSwitchCase="'not closed'">
+        <p>Este não é um polígono pois não é uma figura fechada.</p>
+      </div>
+
+      <div *ngSwitchCase="'concave'">
+        <p>Classificação quanto ao número de lados:</p>
+        <p>{{polygon}} {{ vertices.length }} lados </p>
+        <p>Note que este é um polígono <b>côncavo</b>.</p>
+      </div>
+
+      <div *ngSwitchCase="'convex'">
+        <p>Classificação quanto ao número de lados:</p>
+        <p>{{polygon}} {{ vertices.length }} lados </p>
+        <p>Note que este é um polígono <b>convexo</b>.</p>
+      </div>
+
+      <div *ngSwitchCase="'crossed lines'">
+        <p>Este não é um polígono pois as linhas se cruzam.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</geo-base-view>

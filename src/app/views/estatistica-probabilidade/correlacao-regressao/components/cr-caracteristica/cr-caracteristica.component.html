@@ -1,0 +1,35 @@
+<section class="ifmath-theme">
+  <div class="container">
+    <br />
+    <h3 style="text-align: center">Características</h3>
+    <div class="row">
+      <div class="col-lg-6 col-sm-6">
+        <a (click)="abrirCorrelacao()">
+          <button
+            type="button"
+            class="btn btn-lg btn-outline-success btn-outline-success--coral"
+          >
+            Correlação
+          </button>
+        </a>
+      </div>
+
+      <div class="col-lg-6 col-sm-6">
+        <a (click)="abrirRegressao()">
+          <button
+            type="button"
+            class="btn btn-lg btn-outline-success btn-outline-success--coral"
+          >
+            Regressão Linear
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <ng-template [ngIf]="mostrarCorrelacao">
+    <cr-correlacao></cr-correlacao>
+  </ng-template>
+  <ng-template [ngIf]="mostrarRegressao">
+    <cr-regressao></cr-regressao>
+  </ng-template>
+</section>

@@ -14,6 +14,7 @@ import { RdtSidebarComponent } from './components/rdt-sidebar/rdt-sidebar.compon
 import { RdtDescricaoComponent } from './components/rdt-descricao/rdt-descricao.component';
 import { RdtDiretamenteProporcionalComponent } from './components/rdt-diretamente-proporcional/rdt-diretamente-proporcional.component';
 import { RdtInversamenteProporcionalComponent } from './components/rdt-inversamente-proporcional/rdt-inversamente-proporcional.component';
+import { RdtGrandezasProporcionaisComponent } from './components/rdt-grandezas-proporcionais/rdt-grandezas-proporcionais.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { RdtInversamenteProporcionalComponent } from './components/rdt-inversame
   RdtDescricaoComponent,
   RdtDiretamenteProporcionalComponent,
   RdtInversamenteProporcionalComponent,
+  RdtGrandezasProporcionaisComponent,
   ],
   providers: [ServicoRdt]
 })

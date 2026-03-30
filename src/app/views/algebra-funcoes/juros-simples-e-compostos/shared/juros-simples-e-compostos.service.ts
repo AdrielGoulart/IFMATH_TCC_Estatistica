@@ -21,7 +21,7 @@ export class ServicoJurosSimplesComposto {
 
     private data: Observable<RespostaJson>;
     private httpHeaders: HttpHeaders;
-    private baseUrl: string;
+    baseUrl: string;
 
   constructor(public _http: HttpClient) {
       this.httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
